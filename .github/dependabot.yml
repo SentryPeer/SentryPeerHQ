@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: mix
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    target-branch: master
+    labels:
+      - "dependencies"
+      - "mix"
+  - package-ecosystem: npm
+    directory: "/assets"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    target-branch: master
+    labels:
+      - "dependencies"
+      - "npm"
