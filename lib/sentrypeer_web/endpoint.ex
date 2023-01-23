@@ -25,7 +25,8 @@ defmodule SentrypeerWeb.Endpoint do
     only: SentrypeerWeb.static_paths()
 
   plug Plug.Static,
-    at: "/kaffy", # or "/path/to/your/static/kaffy"
+    # or "/path/to/your/static/kaffy"
+    at: "/kaffy",
     from: :kaffy,
     gzip: false,
     only: ~w(assets)

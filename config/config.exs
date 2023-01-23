@@ -33,7 +33,7 @@ config :sentrypeer, SentrypeerWeb.Endpoint,
   pubsub_server: Sentrypeer.PubSub,
   live_view: [signing_salt: "+CZDbTTY"]
 
-#config :kaffy,
+# config :kaffy,
 #  otp_app: :pento,
 #  ecto_repo: Sentrypeer.Repo,
 #  router: SentrypeerWeb.Router

@@ -32,6 +32,10 @@ defmodule SentrypeerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/dashboard", CustomerDashboardLive.Index, :index
+
+    # Auth
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout
   end

@@ -45,7 +45,7 @@ defmodule Sentrypeer.MixProject do
       {:gettext, "~> 0.20"},
       {:heroicons, "~> 0.5"},
       {:jason, "~> 1.2"},
-      #{:kaffy, "~> 0.9.2"},
+      # {:kaffy, "~> 0.9.2"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.7.0-rc.2", override: true},
       {:phoenix_ecto, "~> 4.4"},
