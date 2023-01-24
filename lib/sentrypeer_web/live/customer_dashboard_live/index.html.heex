@@ -1,3 +1,16 @@
 <h2>
   It's <%= @current_time %>
 </h2>
+
+<.button phx-click={show_modal("confirm_logout")} class="ml-2">Logout</.button>
+
+<.modal
+  id="confirm_logout"
+  on_confirm={JS.navigate(~p"/logout")}
+  on_cancel={JS.navigate(~p"/logout")}
+>
+  Are you sure you?
+  <:confirm>OK</:confirm>
+  <:cancel>Cancel</:cancel>
+</.modal>
+<!-- Path: lib/sentrypeer_web/live/customer_dashboard_live/index.html.heex -->

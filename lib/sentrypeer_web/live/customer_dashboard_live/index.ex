@@ -1,16 +1,13 @@
 defmodule SentrypeerWeb.CustomerDashboardLive.Index do
   use SentrypeerWeb, :live_view
 
-  alias Sentrypeer.CustomersDashboard
-  alias Sentrypeer.CustomersDashboard.CustomerDashboard
-
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     {:ok,
      assign(socket,
        current_time: time(),
        # .avatar is in there too
-       current_user: _session["current_user"],
+       current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        page_title: "Dashboard"
      )}

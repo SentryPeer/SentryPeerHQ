@@ -19,7 +19,7 @@ defmodule Sentrypeer.MixProject do
   def application do
     [
       mod: {Sentrypeer.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
