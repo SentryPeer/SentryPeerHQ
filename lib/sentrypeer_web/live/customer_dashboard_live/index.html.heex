@@ -2,12 +2,15 @@
   It's <%= @current_time %>
 </h2>
 
+<p>Hi <%= @current_user.name %></p>
+<p>Your avatar is: <img src={ @current_user.avatar }></p>
+
 <.button phx-click={show_modal("confirm_logout")} class="ml-2">Logout</.button>
 
 <.modal
   id="confirm_logout"
   on_confirm={JS.navigate(~p"/logout")}
-  on_cancel={JS.navigate(~p"/logout")}
+  on_cancel={JS.navigate(~p"/dashboard")}
 >
   Are you sure you?
   <:confirm>OK</:confirm>

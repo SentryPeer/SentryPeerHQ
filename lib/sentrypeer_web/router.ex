@@ -1,5 +1,6 @@
 defmodule SentrypeerWeb.Router do
   use SentrypeerWeb, :router
+  import SentrypeerWeb.AuthPlug
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -12,6 +13,11 @@ defmodule SentrypeerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :customer_auth do
+    plug :browser
+    plug :authenticate_user
   end
 
   pipeline :admins_only do
@@ -29,11 +35,14 @@ defmodule SentrypeerWeb.Router do
   # use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
 
   scope "/", SentrypeerWeb do
+    pipe_through [:browser, :customer_auth]
+    live "/dashboard", CustomerDashboardLive.Index, :index
+  end
+
+  scope "/", SentrypeerWeb do
     pipe_through :browser
 
     get "/", PageController, :home
-
-    live "/dashboard", CustomerDashboardLive.Index, :index
 
     # Auth
     get "/login", AuthController, :login
