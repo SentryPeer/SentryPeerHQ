@@ -11,7 +11,7 @@ defmodule SentrypeerWeb.AuthPlug do
     |> authenticate_user(opts)
   end
 
-  def authenticate_user(conn, _opts) do
+  defp authenticate_user(conn, _opts) do
     user = get_session(conn, :current_user)
 
     case user do
