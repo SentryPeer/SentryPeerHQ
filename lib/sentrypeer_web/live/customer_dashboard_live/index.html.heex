@@ -97,6 +97,15 @@
             class="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-400 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
             aria-controls="mobile-menu"
             aria-expanded="false"
+            phx-click={
+              JS.toggle(
+                to: "#mobile-menu",
+                in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
+                out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
+              )
+              |> JS.toggle(to: "#mobile-menu-open",)
+              |> JS.toggle(to: "#mobile-menu-close")
+            }
           >
             <span class="sr-only">Open main menu</span>
             <!--
@@ -114,6 +123,7 @@
               stroke-width="1.5"
               stroke="currentColor"
               aria-hidden="true"
+              id="mobile-menu-open"
             >
               <path
                 stroke-linecap="round"
@@ -136,6 +146,7 @@
               stroke-width="1.5"
               stroke="currentColor"
               aria-hidden="true"
+              id="mobile-menu-close"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -167,12 +178,21 @@
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
+                  phx-click={
+                    JS.toggle(
+                      to: "#user-menu",
+                      in:
+                        {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
+                      out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
+                    )
+                  }
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                    alt=""
+                    src={@current_user.avatar}
+                    alt={ @current_user.name <> "'s avatar" }
+                    title={ @current_user.name <> "'s avatar" }
                   />
                 </button>
               </div>
@@ -187,10 +207,11 @@
                   To: "transform opacity-0 scale-95"
               -->
               <div
-                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute hidden right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
+                id="user-menu"
                 tabindex="-1"
               >
                 <!-- Active: "bg-gray-100", Not Active: "" -->
@@ -228,7 +249,7 @@
       </div>
     </div>
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="lg:hidden" id="mobile-menu">
+    <div class="hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3">
         <a
           href="#"
@@ -286,29 +307,18 @@
                         <div class="h-12 w-12 flex-shrink-0">
                           <img
                             class="h-12 w-12 rounded-full"
-                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                            alt=""
+                            src={@current_user.avatar}
+                            alt={ @current_user.name <> "'s avatar" }
+                            title={ @current_user.name <> "'s avatar" }
                           />
                         </div>
                         <div class="space-y-1">
-                          <div class="text-sm font-medium text-gray-900">Debbie Lewis</div>
-                          <a href="#" class="group flex items-center space-x-2.5">
-                            <svg
-                              class="h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              aria-hidden="true"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                            <span class="text-sm font-medium text-gray-500 group-hover:text-gray-900">
-                              debbielewis
-                            </span>
-                          </a>
+                          <div class="text-sm font-medium text-gray-900">
+                            <%= @current_user.name %>
+                          </div>
+                          <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
+                            v<%= @app_version %>
+                          </div>
                         </div>
                       </div>
                       <!-- Action buttons -->
@@ -316,9 +326,8 @@
                         <button
                           type="button"
                           title="Create a new SentryPeer node"
-                          class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
+                          class="inline-flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
                         >
-                          New node
                           <!-- Heroicon name: plus/circle -->
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -326,7 +335,7 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="ml-1 h-5 w-5"
+                            class="mr-1 h-5 w-5"
                           >
                             <path
                               stroke-linecap="round"
@@ -334,6 +343,7 @@
                               d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
+                          New node
                         </button>
                       </div>
                     </div>
@@ -360,8 +370,17 @@
                         <!-- Heroicon name: mini/rectangle-stack -->
                         <svg
                           class="h-5 w-5 text-gray-400"
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                          />
                         </svg>
 
                         <span class="text-sm font-medium text-gray-500">8 Nodes</span>
@@ -389,6 +408,14 @@
                   id="sort-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
+                  phx-click={
+                    JS.toggle(
+                      to: "#sort-menu",
+                      in:
+                        {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
+                      out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
+                    )
+                  }
                 >
                   <!-- Heroicon name: mini/bars-arrow-up -->
                   <svg
@@ -422,11 +449,12 @@
                 </button>
                 <!-- Dropdown menu, show/hide based on menu state. -->
                 <div
-                  class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="sort-menu-button"
                   tabindex="-1"
+                  id="sort-menu"
                 >
                   <div class="py-1" role="none">
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
@@ -581,8 +609,9 @@
               <div class="flex space-x-3">
                 <img
                   class="h-6 w-6 rounded-full"
-                  src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                  alt=""
+                  src={@current_user.avatar}
+                  alt={ @current_user.name <> "'s avatar" }
+                  title={ @current_user.name <> "'s avatar" }
                 />
                 <div class="flex-1 space-y-1">
                   <div class="flex items-center justify-between">
