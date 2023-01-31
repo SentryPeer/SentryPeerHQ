@@ -3,3 +3,8 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+/* For our Tailwindui theme */
+.phx-connected, .phx-loading, .phx-error {
+    height: 100%;
+}

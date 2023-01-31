@@ -33,7 +33,7 @@ defmodule SentrypeerWeb.Router do
 
   # use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
 
-  #live_session :default, on_mount: SentrypeerWeb.UserLiveAuth do
+  # live_session :default, on_mount: SentrypeerWeb.UserLiveAuth do
   live_session :default do
     scope "/", SentrypeerWeb do
       pipe_through [:browser, :ensure_authenticated_user]

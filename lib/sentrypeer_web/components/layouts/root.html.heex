@@ -47,7 +47,9 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white antialiased w-full min-h-full">
+  <body class="bg-white antialiased h-full">
+    <!-- This is the start of the root component for the live view -->
     <%= @inner_content %>
+    <!-- This is the end of the root component for the live view -->
   </body>
 </html>
