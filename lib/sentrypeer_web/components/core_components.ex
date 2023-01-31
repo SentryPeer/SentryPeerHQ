@@ -51,9 +51,13 @@ defmodule SentrypeerWeb.CoreComponents do
       id={@id}
       phx-mounted={@show && show_modal(@id)}
       phx-remove={hide_modal(@id)}
-      class="relative z-50 hidden"
+      class="relative z-10 hidden"
     >
-      <div id={"#{@id}-bg"} class="fixed inset-0 bg-zinc-50/90 transition-opacity" aria-hidden="true" />
+      <div
+        id={"#{@id}-bg"}
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      />
       <div
         class="fixed inset-0 overflow-y-auto"
         aria-labelledby={"#{@id}-title"}
@@ -62,60 +66,71 @@ defmodule SentrypeerWeb.CoreComponents do
         aria-modal="true"
         tabindex="0"
       >
-        <div class="flex min-h-full items-center justify-center">
-          <div class="w-full max-w-3xl p-4 sm:p-6 lg:py-8">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <.focus_wrap
               id={"#{@id}-container"}
               phx-mounted={@show && show_modal(@id)}
               phx-window-keydown={hide_modal(@on_cancel, @id)}
               phx-key="escape"
               phx-click-away={hide_modal(@on_cancel, @id)}
-              class="hidden relative rounded-2xl bg-white p-14 shadow-lg shadow-zinc-700/10 ring-1 ring-zinc-700/10 transition"
+              class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
             >
-              <div class="absolute top-6 right-5">
+              <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
                 <button
                   phx-click={hide_modal(@on_cancel, @id)}
                   type="button"
-                  class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
+                  class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   aria-label={gettext("close")}
                 >
-                  <Heroicons.x_mark solid class="h-5 w-5 stroke-current" />
+                  <span class="sr-only">Close</span>
+                  <Heroicons.x_mark solid class="h-6 w-6 stroke-current" />
                 </button>
               </div>
-              <div id={"#{@id}-content"}>
-                <header :if={@title != []}>
-                  <h1 id={"#{@id}-title"} class="text-lg font-semibold leading-8 text-zinc-800">
+              <div id={"#{@id}-content"} class="sm:flex sm:items-start">
+                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                  <!-- Heroicon name: outline/exclamation-triangle -->
+                  <Heroicons.exclamation_triangle outline class="h-6 w-6 text-red-600" />
+                </div>
+                <div :if={@title != []} class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 id={"#{@id}-title"} class="text-lg font-medium leading-6 text-gray-900">
                     <%= render_slot(@title) %>
-                  </h1>
+                  </h3>
                   <p
                     :if={@subtitle != []}
                     id={"#{@id}-description"}
-                    class="mt-2 text-sm leading-6 text-zinc-600"
+                    class="text-sm leading-6 text-zinc-600"
                   >
                     <%= render_slot(@subtitle) %>
                   </p>
-                </header>
-                <%= render_slot(@inner_block) %>
-                <div :if={@confirm != [] or @cancel != []} class="ml-6 mb-4 flex items-center gap-5">
-                  <.button
-                    :for={confirm <- @confirm}
-                    id={"#{@id}-confirm"}
-                    phx-click={@on_confirm}
-                    phx-disable-with
-                    class="py-2 px-3"
-                  >
-                    <%= render_slot(confirm) %>
-                  </.button>
-                  <.link
-                    :for={cancel <- @cancel}
-                    phx-click={hide_modal(@on_cancel, @id)}
-                    class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
-                  >
-                    <%= render_slot(cancel) %>
-                  </.link>
+                  <div class="mt-2">
+                    <p class="text-sm text-gray-500"><%= render_slot(@inner_block) %></p>
+                  </div>
                 </div>
               </div>
             </.focus_wrap>
+
+            <div
+              :if={@confirm != [] or @cancel != []}
+              class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+            >
+              <.button
+                :for={confirm <- @confirm}
+                id={"#{@id}-confirm"}
+                phx-click={@on_confirm}
+                phx-disable-with
+                class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                <%= render_slot(confirm) %>
+              </.button>
+              <.link
+                :for={cancel <- @cancel}
+                phx-click={hide_modal(@on_cancel, @id)}
+                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                <%= render_slot(cancel) %>
+              </.link>
+            </div>
           </div>
         </div>
       </div>
@@ -629,5 +644,18 @@ defmodule SentrypeerWeb.CoreComponents do
 
   defp input_equals?(val1, val2) do
     Phoenix.HTML.html_escape(val1) == Phoenix.HTML.html_escape(val2)
+  end
+
+  @doc """
+  Toggle dropdown menus with the SentryPeer style.
+  """
+
+  def toggle_dropdown_menu(js \\ %JS{}, id) when is_binary(id) do
+    js
+    |> JS.toggle(
+      to: "#{id}",
+      in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
+      out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
+    )
   end
 end

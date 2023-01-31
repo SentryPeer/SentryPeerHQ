@@ -98,14 +98,11 @@
             aria-controls="mobile-menu"
             aria-expanded="false"
             phx-click={
-              JS.toggle(
-                to: "#mobile-menu",
-                in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
-                out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
-              )
+              toggle_dropdown_menu("#mobile-menu")
               |> JS.toggle(to: "#mobile-menu-open")
               |> JS.toggle(to: "#mobile-menu-close")
             }
+            phx-click-away={JS.hide(to: "#mobile-menu")}
           >
             <span class="sr-only">Open main menu</span>
             <!--
@@ -178,14 +175,8 @@
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
-                  phx-click={
-                    JS.toggle(
-                      to: "#user-menu",
-                      in:
-                        {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
-                      out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
-                    )
-                  }
+                  phx-click={toggle_dropdown_menu("#user-menu")}
+                  phx-click-away={JS.hide(to: "#user-menu")}
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
@@ -234,11 +225,12 @@
                   Settings
                 </a>
                 <a
-                  href={~p"/logout"}
+                  href="#"
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
                   id="user-menu-item-2"
+                  phx-click={show_modal("confirm_logout")}
                 >
                   Logout
                 </a>
@@ -248,6 +240,17 @@
         </div>
       </div>
     </div>
+    <!-- Logout confirmation modal -->
+    <.modal
+      id="confirm_logout"
+      on_confirm={JS.navigate(~p"/logout")}
+      on_cancel={JS.hide(to: "#confirm_logout")}
+    >
+      <:title>Logout</:title>
+      Are you sure you?
+      <:confirm>Logout</:confirm>
+      <:cancel>Cancel</:cancel>
+    </.modal>
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pt-2 pb-3">
@@ -279,10 +282,11 @@
             Settings
           </a>
           <.link
-            href={~p"/logout"}
+            href="#"
+            phx-click={show_modal("confirm_logout")}
             class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
           >
-            Sign out
+            Logout
           </.link>
         </div>
       </div>
@@ -398,13 +402,8 @@
                 id="sort-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
-                phx-click={
-                  JS.toggle(
-                    to: "#sort-menu",
-                    in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
-                    out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
-                  )
-                }
+                phx-click={toggle_dropdown_menu("#sort-menu")}
+                phx-click-away={JS.hide(to: "#sort-menu")}
               >
                 <!-- Heroicon name: mini/bars-arrow-up -->
                 <svg
@@ -620,5 +619,12 @@
         </div>
       </div>
     </div>
+    <footer class="bg-white fixed bottom-0">
+      <div class="mx-auto max-w-7xl py-12 px-6 md:flex md:items-center md:justify-between lg:px-8">
+        <p class="text-center text-xs leading-5 text-gray-500">
+          © Ant Networks Ltd. <%= DateTime.utc_now().year %>. SentryPeer is a trading name of Ant Networks Ltd. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </div>
 </div>

@@ -43,7 +43,7 @@ defmodule Sentrypeer.MixProject do
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
-      {:heroicons, "~> 0.5"},
+      {:heroicons, "~> 0.5.2"},
       {:jason, "~> 1.2"},
       # {:kaffy, "~> 0.9.2"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
