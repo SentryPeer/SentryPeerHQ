@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  postgres:
+    image: timescale/timescaledb:2.9.2-pg14
+    ports:
+      - '5434:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    security_opt:
+      - seccomp:unconfined
+
+volumes:
+  postgres-data: {}

@@ -53,6 +53,8 @@ defmodule SentrypeerWeb.Router do
 
   scope "/api", SentrypeerWeb do
     pipe_through :api
+
+    resources "/events", SentrypeerEventController, only: [:create]
   end
 
   # Enables a password protected LiveDashboard
