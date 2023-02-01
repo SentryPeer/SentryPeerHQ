@@ -7,7 +7,7 @@ defmodule Sentrypeer.Repo.Migrations.CreateSentrypeerevents do
     create table(:sentrypeerevents, primary_key: false) do
       add :app_name, :text, null: false
       add :app_version, :text, null: false
-      add :event_timestamp, :naive_datetime, null: false
+      add :event_timestamp, :timestamptz, null: false
       add :event_uuid, :uuid, null: false
       add :created_by_node_id, :uuid, null: false
       add :collected_method, :text, null: false
@@ -19,7 +19,7 @@ defmodule Sentrypeer.Repo.Migrations.CreateSentrypeerevents do
       add :sip_user_agent, :text, null: false
       add :sip_message, :text, null: false
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     execute("SELECT create_hypertable('sentrypeerevents', 'event_timestamp')")

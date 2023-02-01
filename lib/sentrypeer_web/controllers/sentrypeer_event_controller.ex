@@ -11,7 +11,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
            SentrypeerEvents.create_sentrypeer_event(sentrypeer_event_params) do
       conn
       |> put_status(:created)
-      |> text("Thanks for using SentryPeer!")
+      |> json(%{message: "Thanks for using SentryPeer!"})
     end
   end
 end

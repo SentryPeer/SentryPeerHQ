@@ -28,7 +28,7 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     field :collected_method, :string
     field :created_by_node_id, Ecto.UUID
     field :destination_ip, :string
-    field :event_timestamp, :naive_datetime
+    field :event_timestamp, :utc_datetime_usec
     field :event_uuid, Ecto.UUID
     field :sip_message, :string
     field :sip_method, :string
@@ -36,13 +36,11 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     field :source_ip, :string
     field :transport_type, :string
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
   end
 
   @doc false
   def changeset(sentrypeer_event, attrs) do
-    IO.inspect(attrs, label: "attrs")
-
     # Due to TimescaleDB's unique constraint, we need to cast the event_uuid and
     # event_timestamp to Ecto.UUID and Ecto.NaiveDateTime, respectively.
     # See https://hexdocs.pm/ecto/Ecto.Changeset.html#unique_constraint/3-partitioning
