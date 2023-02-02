@@ -39,6 +39,17 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     timestamps(type: :utc_datetime_usec)
   end
 
+  defp cast_uuid(uuid) do
+    case Ecto.UUID.cast(uuid) do
+      {:ok, valid_uuid} ->
+        {Ecto.UUID.cast(uuid)}
+        valid_uuid
+
+      :error ->
+        {:error, "Invalid UUID"}
+    end
+  end
+
   @doc false
   def changeset(sentrypeer_event, attrs) do
     # Due to TimescaleDB's unique constraint, we need to cast the event_uuid and
@@ -47,8 +58,8 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     sentrypeer_event
     |> cast(attrs, @allowed_fields)
     |> validate_required(@allowed_fields)
-    |> put_change(:created_by_node_id, Ecto.UUID.cast!(attrs["created_by_node_id"]))
-    |> put_change(:event_uuid, Ecto.UUID.cast!(attrs["event_uuid"]))
+    |> put_change(:created_by_node_id, cast_uuid(attrs["created_by_node_id"]))
+    |> put_change(:event_uuid, cast_uuid(attrs["event_uuid"]))
     |> unique_constraint([:event_uuid, :event_timestamp],
       name: :sentrypeerevents_event_uuid_event_timestamp_in,
       match: :suffix

@@ -2,6 +2,8 @@ defmodule SentrypeerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :sentrypeer
   use Appsignal.Phoenix
 
+  plug SentrypeerWeb.HealthCheck
+
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
@@ -55,5 +57,18 @@ defmodule SentrypeerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+
+  plug CORSPlug,
+    origin: &SentrypeerWeb.Endpoint.allowed_origins/0,
+    max_age: 86400,
+    methods: ["GET"],
+    headers: ["Authorization", "Content-Type"]
+
+  plug SentrypeerWeb.Plugs.SecurityHeaders
+
   plug SentrypeerWeb.Router
+
+  def allowed_origins do
+    ["*"]
+  end
 end
