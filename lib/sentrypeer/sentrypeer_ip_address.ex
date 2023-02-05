@@ -3,7 +3,7 @@ defmodule Sentrypeer.SentrypeerIpAddress do
   import Ecto.Changeset
   alias Sentrypeer.SentrypeerIpAddress
 
-  embedded_schema do 
+  embedded_schema do
     field :ip_address, :string
   end
 

@@ -3,7 +3,7 @@ defmodule Sentrypeer.SentrypeerPhoneNumber do
   import Ecto.Changeset
   alias Sentrypeer.SentrypeerPhoneNumber
 
-  embedded_schema do 
+  embedded_schema do
     field :phone_number, :string
   end
 

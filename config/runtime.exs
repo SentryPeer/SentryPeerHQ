@@ -20,6 +20,14 @@ if System.get_env("PHX_SERVER") do
   config :sentrypeer, SentrypeerWeb.Endpoint, server: true
 end
 
+config :sentrypeer,
+  auth0_domain:
+    System.get_env("AUTH0_DOMAIN") ||
+      raise("The required environment variable AUTH0_DOMAIN is missing. Check ENV."),
+  auth0_audience:
+    System.get_env("AUTH0_AUDIENCE") ||
+      raise("The required environment variable AUTH0_AUDIENCE is missing. Check ENV.")
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

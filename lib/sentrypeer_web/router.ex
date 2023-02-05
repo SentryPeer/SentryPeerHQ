@@ -19,6 +19,10 @@ defmodule SentrypeerWeb.Router do
     plug SentrypeerWeb.AuthPlug
   end
 
+  pipeline :api_authorization do
+    plug Sentrypeer.Auth.Authorize
+  end
+
   pipeline :admins_only do
     plug :admin_basic_auth
   end
@@ -52,7 +56,7 @@ defmodule SentrypeerWeb.Router do
   end
 
   scope "/api", SentrypeerWeb do
-    pipe_through :api
+    pipe_through [:api, :api_authorization]
 
     resources "/events", SentrypeerEventController, only: [:create]
     get "/numbers/:number", NumberController, :search

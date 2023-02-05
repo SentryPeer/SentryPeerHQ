@@ -17,9 +17,10 @@ defmodule Sentrypeer.Application do
       # Start Finch
       {Finch, name: Sentrypeer.Finch},
       # Start the Endpoint (http/https)
-      SentrypeerWeb.Endpoint
+      SentrypeerWeb.Endpoint,
       # Start a worker by calling: Sentrypeer.Worker.start_link(arg)
       # {Sentrypeer.Worker, arg}
+      Sentrypeer.Auth.Auth0Strategy
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

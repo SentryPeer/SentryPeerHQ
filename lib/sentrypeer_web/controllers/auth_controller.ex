@@ -1,5 +1,6 @@
 defmodule SentrypeerWeb.AuthController do
   use SentrypeerWeb, :controller
+  alias Sentrypeer.Accounts.UserFromAuth
 
   plug Ueberauth
 
@@ -21,7 +22,7 @@ defmodule SentrypeerWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case Accounts.UserFromAuth.find_or_create(auth) do
+    case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated as " <> user.name <> ".")
