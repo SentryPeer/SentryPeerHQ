@@ -59,8 +59,8 @@ defmodule SentrypeerWeb.Router do
     pipe_through [:api, :api_authorization]
 
     resources "/events", SentrypeerEventController, only: [:create]
-    get "/numbers/:number", NumberController, :search
-    get "/ip-addresses/:ip_address", IpAddressController, :search
+    get "/phone-numbers/:phone_number", SentrypeerEventController, :check_phone_number
+    get "/ip-addresses/:ip_address", SentrypeerEventController, :check_ip_address
   end
 
   # Enables a password protected LiveDashboard

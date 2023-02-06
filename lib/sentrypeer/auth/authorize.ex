@@ -5,7 +5,7 @@ defmodule Sentrypeer.Auth.Authorize do
   @behaviour Plug
 
   import Plug.Conn
-  import Phoenix.Controller, only: [json: 2, put_view: 2, render: 3]
+  import Phoenix.Controller, only: [json: 2]
 
   alias Sentrypeer.Auth.Token
 

@@ -7,6 +7,8 @@ defmodule Sentrypeer.SentrypeerEvents do
   alias Sentrypeer.Repo
 
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
+  alias Sentrypeer.SentrypeerIpAddress
+  alias Sentrypeer.SentrypeerPhoneNumber
 
   @doc """
   Returns the list of sentrypeerevents.
@@ -100,5 +102,56 @@ defmodule Sentrypeer.SentrypeerEvents do
   """
   def change_sentrypeer_event(%SentrypeerEvent{} = sentrypeer_event, attrs \\ %{}) do
     SentrypeerEvent.changeset(sentrypeer_event, attrs)
+  end
+
+  @doc """
+  Check a phone number that has been submitted via a sentrypeer_event exists
+
+  Returns true if exists, false if it does not
+
+  ## Examples
+
+      iex> check_phone_number_sentrypeer_event?("0800800800")
+      true
+
+      iex> check_phone_number_sentrypeer_event?("0800800800")
+      false
+
+  """
+  def check_phone_number_sentrypeer_event?(phone_number) do
+    changeset =
+      SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
+
+    if changeset.valid? do
+      query = from e in SentrypeerEvent, where: e.called_number == ^phone_number
+      Repo.exists?(query)
+    else
+      false
+    end
+  end
+
+  @doc """
+  Check an ip_address that has been submitted via a sentrypeer_event exists
+
+  Returns true if exists, false if it does not
+
+  ## Examples
+
+      iex> check_ip_address_sentrypeer_event?("127.0.0.1")
+      true
+
+      iex> check_ip_address_sentrypeer_event?("127.0.0.1")
+      false
+
+  """
+  def check_ip_address_sentrypeer_event?(ip_address) do
+    changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
+
+    if changeset.valid? do
+      query = from e in SentrypeerEvent, where: e.source_ip == ^ip_address
+      Repo.exists?(query)
+    else
+      false
+    end
   end
 end
