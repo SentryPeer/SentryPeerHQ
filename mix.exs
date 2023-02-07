@@ -1,3 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0
+# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+#
+#   _____            _              _____
+#  / ____|          | |            |  __ \
+# | (___   ___ _ __ | |_ _ __ _   _| |__) |__  ___ _ __
+#  \___ \ / _ \ '_ \| __| '__| | | |  ___/ _ \/ _ \ '__|
+#  ____) |  __/ | | | |_| |  | |_| | |  |  __/  __/ |
+# |_____/ \___|_| |_|\__|_|   \__, |_|   \___|\___|_|
+#                              __/ |
+#                             |___/
+#
 defmodule Sentrypeer.MixProject do
   use Mix.Project
 
@@ -41,7 +53,7 @@ defmodule Sentrypeer.MixProject do
       {:ecto_psql_extras, "~> 0.7"},
       {:ecto_sql, "~> 3.6"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
-      {:finch, "~> 0.13"},
+      {:finch, "~> 0.14"},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
       {:heroicons, "~> 0.5.2"},

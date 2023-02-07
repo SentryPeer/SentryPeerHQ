@@ -123,7 +123,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.called_number == ^phone_number
+      query = from e in SentrypeerEvent, where: e.called_number == ^changeset.data.phone_number
       Repo.exists?(query)
     else
       false
@@ -148,7 +148,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.source_ip == ^ip_address
+      query = from e in SentrypeerEvent, where: e.source_ip == ^changeset.data.ip_address
       Repo.exists?(query)
     else
       false
