@@ -31,6 +31,7 @@ defmodule Sentrypeer.Repo.Migrations.CreateSentrypeerevents do
       add :sip_method, :text, null: false
       add :sip_user_agent, :text, null: false
       add :sip_message, :text, null: false
+      add :username, :text, null: false
 
       timestamps(type: :timestamptz)
     end
@@ -44,6 +45,7 @@ defmodule Sentrypeer.Repo.Migrations.CreateSentrypeerevents do
 
     create index(:sentrypeerevents, [:source_ip])
     create index(:sentrypeerevents, [:called_number])
+    create index(:sentrypeerevents, [:username])
   end
 
   def down do

@@ -32,6 +32,7 @@ defmodule Sentrypeer.Auth.Authorize do
   def call(conn, _default) do
     with {:ok, token} when is_binary(token) <- get_token(conn),
          {:ok, _claims} <- Token.verify_and_validate(token) do
+      IO.inspect(_claims)
       conn
     else
       {:error, error} -> handle_error_response(conn, error)
