@@ -19,6 +19,7 @@ defmodule Sentrypeer.Auth.Authorize do
 
   import Plug.Conn
   import Phoenix.Controller, only: [json: 2]
+  require Logger
 
   alias Sentrypeer.Auth.Token
 
@@ -31,9 +32,9 @@ defmodule Sentrypeer.Auth.Authorize do
   @spec call(Plug.Conn.t(), any) :: Plug.Conn.t()
   def call(conn, _default) do
     with {:ok, token} when is_binary(token) <- get_token(conn),
-         {:ok, _claims} <- Token.verify_and_validate(token) do
-      IO.inspect(_claims)
+         {:ok, claims} <- Token.verify_and_validate(token) do
       conn
+      |> assign(:claims, claims)
     else
       {:error, error} -> handle_error_response(conn, error)
     end
@@ -50,9 +51,16 @@ defmodule Sentrypeer.Auth.Authorize do
   end
 
   defp handle_error_response(conn, error) do
-    conn
-    |> put_status(401)
-    |> json(%{error: error})
-    |> halt()
+    if is_atom(error) do
+      conn
+      |> put_status(401)
+      |> json(%{error: error})
+      |> halt()
+    else
+      conn
+      |> put_status(401)
+      |> json(%{error: error[:message], reason: error[:claim]})
+      |> halt()
+    end
   end
 end

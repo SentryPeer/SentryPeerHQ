@@ -58,7 +58,7 @@ defmodule Sentrypeer.MixProject do
       {:gettext, "~> 0.20"},
       {:heroicons, "~> 0.5.2"},
       {:jason, "~> 1.3"},
-      {:joken, "~> 2.5"},
+      {:joken, "~> 2.6.0"},
       {:joken_jwks, "~> 1.6.0"},
       # {:kaffy, "~> 0.9.2"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
