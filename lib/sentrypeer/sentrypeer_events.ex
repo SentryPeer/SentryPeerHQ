@@ -82,12 +82,17 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_phone_number_sentrypeer_event?(phone_number) do
+  def check_phone_number_sentrypeer_event?(phone_number, client_id) do
     changeset =
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.called_number == ^changeset.changes.phone_number
+      query =
+        from e in SentrypeerEvent,
+          where:
+            e.called_number == ^changeset.changes.phone_number and
+              e.client_id == ^client_id
+
       Repo.exists?(query)
     else
       false
@@ -108,11 +113,16 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_ip_address_sentrypeer_event?(ip_address) do
+  def check_ip_address_sentrypeer_event?(ip_address, client_id) do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.source_ip == ^changeset.changes.ip_address
+      query =
+        from e in SentrypeerEvent,
+          where:
+            e.source_ip == ^changeset.changes.ip_address and
+              e.client_id == ^client_id
+
       Repo.exists?(query)
     else
       false
