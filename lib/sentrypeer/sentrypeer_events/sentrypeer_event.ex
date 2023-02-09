@@ -48,6 +48,8 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     field :sip_user_agent, :string
     field :source_ip, :string
     field :transport_type, :string
+    # Used to look up user IDs in Auth0 management API
+    field :client_id, :string
 
     timestamps(type: :utc_datetime_usec)
   end
@@ -64,13 +66,15 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
   end
 
   @doc false
-  def changeset(sentrypeer_event, attrs) do
+  def changeset(sentrypeer_event, attrs, client_id) do
     # Due to TimescaleDB's unique constraint, we need to cast the event_uuid and
     # event_timestamp to Ecto.UUID and Ecto.NaiveDateTime, respectively.
     # See https://hexdocs.pm/ecto/Ecto.Changeset.html#unique_constraint/3-partitioning
     sentrypeer_event
     |> cast(attrs, @allowed_fields)
     |> validate_required(@allowed_fields)
+    # Manually add client_id that we add in from the controller
+    |> put_change(:client_id, client_id)
     |> put_change(:created_by_node_id, cast_uuid(attrs["created_by_node_id"]))
     |> put_change(:event_uuid, cast_uuid(attrs["event_uuid"]))
     |> unique_constraint([:event_uuid, :event_timestamp],

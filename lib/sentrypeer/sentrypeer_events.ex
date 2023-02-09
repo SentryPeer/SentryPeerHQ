@@ -51,28 +51,10 @@ defmodule Sentrypeer.SentrypeerEvents do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_sentrypeer_event(attrs \\ %{}) do
+  def create_sentrypeer_event(attrs \\ %{}, client_id) do
     %SentrypeerEvent{}
-    |> SentrypeerEvent.changeset(attrs)
+    |> SentrypeerEvent.changeset(attrs, client_id)
     |> Repo.insert()
-  end
-
-  @doc """
-  Updates a sentrypeer_event.
-
-  ## Examples
-
-      iex> update_sentrypeer_event(sentrypeer_event, %{field: new_value})
-      {:ok, %SentrypeerEvent{}}
-
-      iex> update_sentrypeer_event(sentrypeer_event, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_sentrypeer_event(%SentrypeerEvent{} = sentrypeer_event, attrs) do
-    sentrypeer_event
-    |> SentrypeerEvent.changeset(attrs)
-    |> Repo.update()
   end
 
   @doc """
@@ -86,25 +68,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       iex> delete_sentrypeer_event(sentrypeer_event)
       {:error, %Ecto.Changeset{}}
 
-  """
-  def delete_sentrypeer_event(%SentrypeerEvent{} = sentrypeer_event) do
-    Repo.delete(sentrypeer_event)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking sentrypeer_event changes.
-
-  ## Examples
-
-      iex> change_sentrypeer_event(sentrypeer_event)
-      %Ecto.Changeset{data: %SentrypeerEvent{}}
-
-  """
-  def change_sentrypeer_event(%SentrypeerEvent{} = sentrypeer_event, attrs \\ %{}) do
-    SentrypeerEvent.changeset(sentrypeer_event, attrs)
-  end
-
-  @doc """
+  @doc \"""
   Check a phone number that has been submitted via a sentrypeer_event exists
 
   Returns true if exists, false if it does not
@@ -123,7 +87,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.called_number == ^changeset.data.phone_number
+      query = from e in SentrypeerEvent, where: e.called_number == ^changeset.changes.phone_number
       Repo.exists?(query)
     else
       false
@@ -148,7 +112,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
-      query = from e in SentrypeerEvent, where: e.source_ip == ^changeset.data.ip_address
+      query = from e in SentrypeerEvent, where: e.source_ip == ^changeset.changes.ip_address
       Repo.exists?(query)
     else
       false

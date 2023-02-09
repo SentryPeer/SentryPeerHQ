@@ -17,6 +17,7 @@ defmodule Sentrypeer.SentrypeerIpAddress do
   alias Sentrypeer.SentrypeerIpAddress
   alias IP
 
+  @primary_key false
   embedded_schema do
     field :ip_address, :string
   end

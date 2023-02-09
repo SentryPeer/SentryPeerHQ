@@ -16,6 +16,7 @@ defmodule Sentrypeer.SentrypeerPhoneNumber do
   import Ecto.Changeset
   alias Sentrypeer.SentrypeerPhoneNumber
 
+  @primary_key false
   embedded_schema do
     field :phone_number, :string
   end

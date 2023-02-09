@@ -23,7 +23,10 @@ defmodule SentrypeerWeb.SentrypeerEventController do
 
   def create(conn, sentrypeer_event_params) do
     with {:ok, %SentrypeerEvent{} = _sentrypeer_event} <-
-           SentrypeerEvents.create_sentrypeer_event(sentrypeer_event_params) do
+           SentrypeerEvents.create_sentrypeer_event(
+             sentrypeer_event_params,
+             conn.assigns.client_id
+           ) do
       conn
       |> put_status(:created)
       |> json(%{message: "Thanks for using SentryPeer!"})

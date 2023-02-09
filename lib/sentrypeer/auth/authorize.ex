@@ -34,7 +34,8 @@ defmodule Sentrypeer.Auth.Authorize do
     with {:ok, token} when is_binary(token) <- get_token(conn),
          {:ok, claims} <- Token.verify_and_validate(token) do
       conn
-      |> assign(:claims, claims)
+      # Used to identify the client to a user via Auth0 Management API
+      |> assign(:client_id, claims["azp"])
     else
       {:error, error} -> handle_error_response(conn, error)
     end
