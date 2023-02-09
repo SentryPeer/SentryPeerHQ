@@ -3,10 +3,10 @@ name: CI
 on:
   pull_request:
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
 
 jobs:
   setup:
@@ -38,15 +38,9 @@ jobs:
             deps-${{ runner.os }}-${{ matrix.otp_version }}-${{ matrix.elixir_version }}
 
       - run: mix deps.get
-
       - run: mix format --check-formatted
-
       - run: mix deps.unlock --check-unused
-
       - run: mix deps.compile
-
       - run: mix compile --warnings-as-errors
-
       - run: mix credo --strict --format=oneline
-
       - run: mix test --warnings-as-errors --cover
