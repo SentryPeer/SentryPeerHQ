@@ -73,7 +73,7 @@ defmodule SentrypeerWeb.Endpoint do
 
   plug CORSPlug,
     origin: &SentrypeerWeb.Endpoint.allowed_origins/0,
-    max_age: 86400,
+    max_age: 86_400,
     methods: ["GET"],
     headers: ["Authorization", "Content-Type"]
 

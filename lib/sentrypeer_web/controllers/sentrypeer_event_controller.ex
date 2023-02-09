@@ -51,7 +51,10 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   def check_ip_address(conn, %{"ip_address" => ip_address}) do
-    case SentrypeerEvents.check_ip_address_sentrypeer_event?(ip_address, conn.assigns.client_id) do
+    case SentrypeerEvents.check_ip_address_sentrypeer_event?(
+           ip_address,
+           conn.assigns.client_id
+         ) do
       true ->
         conn
         |> put_status(:found)
