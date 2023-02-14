@@ -78,7 +78,11 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   def list_clients do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.get!(auth0_management_url() <> "clients", headers(access_token), options())
+      HTTPoison.get!(
+        (auth0_management_url() <> "clients") |> list_clients_query_params(),
+        headers(access_token),
+        options()
+      )
     end
   end
 
@@ -114,6 +118,23 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
+  @doc """
+    https://auth0.com/docs/api/management/v2#!/Clients/get_clients
+  """
+  defp list_clients_query_params(url) do
+    url
+    |> URI.new!()
+    |> URI.append_query(
+      URI.encode_query(%{
+        fields:
+          "name,client_id,client_secret,client_metadata,description,app_type,is_first_party",
+        is_first_party: "false",
+        app_type: "non_interactive"
+      })
+    )
+    |> URI.to_string()
+  end
+
   defp get_auth_token do
     case HTTPoison.post(
            auth0_management_token_request_url(),
@@ -141,12 +162,31 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     })
   end
 
+  defp create_client_json(auth_id, name, description) do
+    Jason.encode!(%{
+      "name" => name,
+      "description" => description,
+      "grant_types" => [
+        "client_credentials"
+      ],
+      "is_first_party" => false,
+      "app_type" => "non_interactive",
+      "oidc_conformant" => true,
+      "jwt_configuration" => %{"alg" => "RS256"},
+      "client_metadata" => %{"auth_id" => auth_id}
+    })
+  end
+
   defp auth0_management_url do
     Auth0Config.auth0_base_url() <> "api/v2/"
   end
 
   defp headers(access_token) do
-    [Authorization: "Bearer #{access_token}", Accept: "application/json; Charset=utf-8"]
+    [
+      Authorization: "Bearer #{access_token}",
+      Accept: "application/json; Charset=utf-8",
+      "Content-Type": "application/json"
+    ]
   end
 
   defp json_content_type do
