@@ -76,6 +76,9 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
+  @doc """
+    https://auth0.com/docs/api/management/v2#!/Clients/get_clients
+  """
   def list_clients do
     with {:ok, access_token} <- get_auth_token() do
       HTTPoison.get!(
@@ -96,11 +99,11 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  def create_client(client) do
+  def create_client(auth_id, name, description) do
     with {:ok, access_token} <- get_auth_token() do
       HTTPoison.post!(
         auth0_management_url() <> "clients",
-        client,
+        create_client_json(auth_id, name, description) |> Jason.encode!(),
         headers(access_token),
         options()
       )
@@ -118,9 +121,6 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  @doc """
-    https://auth0.com/docs/api/management/v2#!/Clients/get_clients
-  """
   defp list_clients_query_params(url) do
     url
     |> URI.new!()
