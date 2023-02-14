@@ -159,12 +159,14 @@
             <div class="flex">
               <a
                 href="#"
+                title="SentryPeer Documentation"
                 class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
               >
                 Documentation
               </a>
               <a
                 href="#"
+                title="SentryPeer Support"
                 class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
               >
                 Support
@@ -212,6 +214,7 @@
                 <!-- Active: "bg-gray-100", Not Active: "" -->
                 <a
                   href="#"
+                  title="View your profile"
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
@@ -221,6 +224,7 @@
                 </a>
                 <a
                   href="#"
+                  title="Change your settings"
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
@@ -230,6 +234,7 @@
                 </a>
                 <a
                   href="#"
+                  title="Logout from SentryPeer"
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
@@ -403,6 +408,7 @@
             <div class="relative">
               <button
                 type="button"
+                title="Sort nodes by name and date"
                 class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 id="sort-menu-button"
                 aria-expanded="false"
@@ -487,7 +493,10 @@
         <%= if @no_nodes do %>
           <button
             type="button"
-            class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            phx-click="validate"
+            title="Create a new SentryPeer node"
+            value="Create"
+            class="relative block w-full rounded-lg mt-2 border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <svg
               class="mx-auto h-12 w-12 text-gray-400"
@@ -642,7 +651,11 @@
             <!-- More items... -->
           </ul>
           <div class="border-t border-gray-200 py-4 text-sm">
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-900">
+            <a
+              href="#"
+              title="View all your account activity"
+              class="font-semibold text-indigo-600 hover:text-indigo-900"
+            >
               View all activity <span aria-hidden="true"> &rarr;</span>
             </a>
           </div>

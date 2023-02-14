@@ -13,7 +13,6 @@
 
 defmodule SentrypeerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :sentrypeer
-  use Appsignal.Phoenix
 
   plug SentrypeerWeb.HealthCheck
 

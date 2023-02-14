@@ -1,0 +1,163 @@
+# SPDX-License-Identifier: AGPL-3.0
+# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+#
+#   _____            _              _____
+#  / ____|          | |            |  __ \
+# | (___   ___ _ __ | |_ _ __ _   _| |__) |__  ___ _ __
+#  \___ \ / _ \ '_ \| __| '__| | | |  ___/ _ \/ _ \ '__|
+#  ____) |  __/ | | | |_| |  | |_| | |  |  __/  __/ |
+# |_____/ \___|_| |_|\__|_|   \__, |_|   \___|\___|_|
+#                              __/ |
+#                             |___/
+#
+
+defmodule Sentrypeer.Auth.Auth0ManagementAPI do
+  alias Sentrypeer.Auth.Auth0Config
+  use HTTPoison.Base
+
+  @moduledoc """
+  This module is used to interact with the Auth0 Management API:
+    https://auth0.com/docs/api/management/v2
+
+  Token requests do not count towards the rate limit/quota of m2m tokens:
+    https://auth0.com/docs/secure/tokens/access-tokens/management-api-access-tokens#token-quotas
+  """
+
+  def list_users do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.get!(auth0_management_url() <> "users", headers(access_token), options())
+    end
+  end
+
+  def get_user(id) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.get!(
+        auth0_management_url() <> "users/" <> id,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def get_user_by_email(email) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.get!(
+        auth0_management_url() <> "users-by-email?email=" <> email,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def create_user(user) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.post!(auth0_management_url() <> "users", user, headers(access_token), options())
+    end
+  end
+
+  def update_user(id, user) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.patch!(
+        auth0_management_url() <> "users/" <> id,
+        user,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def delete_user(id) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.delete!(
+        auth0_management_url() <> "users/" <> id,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def list_clients do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.get!(auth0_management_url() <> "clients", headers(access_token), options())
+    end
+  end
+
+  def get_client(id) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.get!(
+        auth0_management_url() <> "clients/" <> id,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def create_client(client) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.post!(
+        auth0_management_url() <> "clients",
+        client,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def update_client(id, client) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.patch!(
+        auth0_management_url() <> "clients/" <> id,
+        client,
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  defp get_auth_token do
+    case HTTPoison.post(
+           auth0_management_token_request_url(),
+           auth_token_json(),
+           json_content_type(),
+           options()
+         ) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, Jason.decode!(body)["access_token"]}
+
+      {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+        {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+  defp auth_token_json do
+    Jason.encode!(%{
+      "client_id" => Auth0Config.auth0_management_api_client_id(),
+      "client_secret" => Auth0Config.auth0_management_api_client_secret(),
+      "audience" => Auth0Config.auth0_base_url() <> "api/v2/",
+      "grant_type" => "client_credentials"
+    })
+  end
+
+  defp auth0_management_url do
+    Auth0Config.auth0_base_url() <> "api/v2/"
+  end
+
+  defp headers(access_token) do
+    [Authorization: "Bearer #{access_token}", Accept: "application/json; Charset=utf-8"]
+  end
+
+  defp json_content_type do
+    [{"Content-Type", "application/json"}]
+  end
+
+  defp options do
+    [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 500]
+  end
+
+  defp auth0_management_token_request_url do
+    Auth0Config.auth0_base_url() <> "oauth/token"
+  end
+end

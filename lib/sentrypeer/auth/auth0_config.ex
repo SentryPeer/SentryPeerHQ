@@ -18,4 +18,14 @@ defmodule Sentrypeer.Auth.Auth0Config do
     auth0_domain = Application.get_env(:sentrypeer, :auth0_domain)
     "https://#{auth0_domain}/"
   end
+
+  def auth0_management_api_client_id,
+    do:
+      System.get_env("AUTH0_MANAGEMENT_API_CLIENT_ID") ||
+        raise("AUTH0_MANAGEMENT_API_CLIENT_ID not set")
+
+  def auth0_management_api_client_secret,
+    do:
+      System.get_env("AUTH0_MANAGEMENT_API_CLIENT_SECRET") ||
+        raise("AUTH0_MANAGEMENT_API_CLIENT_SECRET not set")
 end

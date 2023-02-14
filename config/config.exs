@@ -29,7 +29,7 @@ config :sentrypeer,
     |> URI.new!()
     |> URI.append_query(
       URI.encode_query(%{
-        client_id: System.get_env("AUTH0_CLIENT_ID"),
+        client_id: System.get_env("AUTH0_CLIENT_ID") || raise("AUTH0_CLIENT_ID is not set"),
         returnTo: System.get_env("AUTH0_LOGOUT_REDIRECT_URL", "http://localhost:4000")
       })
     )
@@ -97,9 +97,9 @@ config :ueberauth, Ueberauth,
 
 # Configures Ueberauth's Auth0 auth provider
 config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
-  domain: System.get_env("AUTH0_DOMAIN"),
-  client_id: System.get_env("AUTH0_CLIENT_ID"),
-  client_secret: System.get_env("AUTH0_CLIENT_SECRET")
+  domain: System.get_env("AUTH0_DOMAIN") || raise("AUTH0_DOMAIN is not set"),
+  client_id: System.get_env("AUTH0_CLIENT_ID") || raise("AUTH0_CLIENT_ID is not set"),
+  client_secret: System.get_env("AUTH0_CLIENT_SECRET") || raise("AUTH0_CLIENT_SECRET is not set")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

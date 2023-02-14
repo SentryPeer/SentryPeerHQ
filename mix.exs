@@ -16,7 +16,7 @@ defmodule Sentrypeer.MixProject do
   def project do
     [
       app: :sentrypeer,
-      version: "0.1.0",
+      version: "1.0.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -57,6 +57,7 @@ defmodule Sentrypeer.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
       {:heroicons, "~> 0.5.2"},
+      {:httpoison, "~> 2.0"},
       {:jason, "~> 1.3"},
       {:joken, "~> 2.6.0"},
       {:joken_jwks, "~> 1.6.0"},
