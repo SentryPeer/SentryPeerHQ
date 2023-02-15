@@ -191,7 +191,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   defp create_client_grant_json(client_id) do
     Jason.encode!(%{
       "client_id" => client_id,
-      "audience" => Auth0Config.auth0_audience()
+      "audience" => Auth0Config.auth0_audience(),
+      "scope" => [] # empty array means all scopes, but we'll add some read/write scopes later
     })
   end
 
