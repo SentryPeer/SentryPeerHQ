@@ -103,7 +103,18 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     with {:ok, access_token} <- get_auth_token() do
       HTTPoison.post!(
         auth0_management_url() <> "clients",
-        create_client_json(auth_id, name, description) |> Jason.encode!(),
+        create_client_json(auth_id, name, description),
+        headers(access_token),
+        options()
+      )
+    end
+  end
+
+  def create_client_grant(client_id) do
+    with {:ok, access_token} <- get_auth_token() do
+      HTTPoison.post!(
+        auth0_management_url() <> "client-grants",
+        create_client_grant_json(client_id),
         headers(access_token),
         options()
       )
@@ -174,6 +185,13 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
       "oidc_conformant" => true,
       "jwt_configuration" => %{"alg" => "RS256"},
       "client_metadata" => %{"auth_id" => auth_id}
+    })
+  end
+
+  defp create_client_grant_json(client_id) do
+    Jason.encode!(%{
+      "client_id" => client_id,
+      "audience" => Auth0Config.auth0_audience()
     })
   end
 
