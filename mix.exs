@@ -64,7 +64,7 @@ defmodule Sentrypeer.MixProject do
       # {:kaffy, "~> 0.9.2"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
-      {:phoenix, "~> 1.7.0-rc.2", override: true},
+      {:phoenix, "~> 1.7.0-rc.3", override: true},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.7.2"},

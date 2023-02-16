@@ -91,7 +91,7 @@ defmodule SentrypeerWeb.Router do
     Plug.BasicAuth.basic_auth(conn,
       username: username,
       password: password,
-      realm: "Sentrypeer Demo"
+      realm: "SentryPeer Demo"
     )
   end
 

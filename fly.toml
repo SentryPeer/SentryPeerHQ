@@ -21,7 +21,7 @@ processes = []
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "sentrypeer-hq.fly.dev"
+  PHX_HOST = "sentrypeer.com"
   PORT = "8080"
 
 [experimental]
