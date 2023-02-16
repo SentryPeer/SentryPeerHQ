@@ -192,7 +192,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     Jason.encode!(%{
       "client_id" => client_id,
       "audience" => Auth0Config.auth0_audience(),
-      "scope" => [] # empty array means all scopes, but we'll add some read/write scopes later
+      # empty array means all scopes, but we'll add some read/write scopes later
+      "scope" => []
     })
   end
 

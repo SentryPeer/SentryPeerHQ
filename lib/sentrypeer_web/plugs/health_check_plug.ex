@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.HealthCheck do
   import Plug.Conn
 
+  @moduledoc """
+  A plug that returns a 200 OK response for health checks that lives at /health-check
+  """
+
   def init(opts), do: opts
 
   def call(%Plug.Conn{request_path: "/health-check"} = conn, _opts) do

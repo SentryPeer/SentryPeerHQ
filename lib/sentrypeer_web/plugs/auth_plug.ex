@@ -15,6 +15,10 @@ defmodule SentrypeerWeb.AuthPlug do
   import Plug.Conn
   use SentrypeerWeb, :controller
 
+  @moduledoc """
+  This plug is used to authenticate a user via their browser session.
+  """
+
   def init(options) do
     options
   end

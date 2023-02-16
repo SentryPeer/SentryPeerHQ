@@ -53,13 +53,13 @@ defmodule SentrypeerWeb.Router do
   # live_session :default, on_mount: SentrypeerWeb.UserLiveAuth do
   live_session :default do
     scope "/", SentrypeerWeb do
-      pipe_through [:browser, :ensure_authenticated_user]
+      pipe_through [:browser, :admins_only, :ensure_authenticated_user]
       live "/dashboard", CustomerDashboardLive.Index, :index
     end
   end
 
   scope "/", SentrypeerWeb do
-    pipe_through :browser
+    pipe_through [:browser, :admins_only]
 
     get "/", PageController, :home
 
@@ -87,7 +87,12 @@ defmodule SentrypeerWeb.Router do
   defp admin_basic_auth(conn, _opts) do
     username = System.fetch_env!("SENTRYPEER_ADMIN_AUTH_USERNAME")
     password = System.fetch_env!("SENTRYPEER_ADMIN_AUTH_PASSWORD")
-    Plug.BasicAuth.basic_auth(conn, username: username, password: password)
+
+    Plug.BasicAuth.basic_auth(conn,
+      username: username,
+      password: password,
+      realm: "Sentrypeer Demo"
+    )
   end
 
   # Enable Swoosh mailbox preview in development

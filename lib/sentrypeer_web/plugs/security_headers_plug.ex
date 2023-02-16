@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.Plugs.SecurityHeaders do
   import Plug.Conn
 
+  @moduledoc """
+  This plug adds security headers to the response.
+  """
+
   def init(opts), do: opts
 
   def call(conn, _opts) do

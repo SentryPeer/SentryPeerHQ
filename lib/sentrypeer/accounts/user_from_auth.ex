@@ -20,6 +20,10 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
 
   alias Ueberauth.Auth
 
+  @moduledoc """
+  Retrieve the user information from an auth request
+  """
+
   def find_or_create(%Auth{provider: :identity} = auth) do
     case validate_pass(auth.credentials) do
       :ok ->
