@@ -14,6 +14,7 @@
 defmodule SentrypeerWeb.AuthController do
   use SentrypeerWeb, :controller
   alias Sentrypeer.Accounts.UserFromAuth
+  require Logger
 
   plug Ueberauth
 
@@ -21,10 +22,16 @@ defmodule SentrypeerWeb.AuthController do
     conn |> redirect(to: "/auth/auth0") |> halt
   end
 
+  # See https://hexdocs.pm/phoenix_live_view/security-model.html#mounting-considerations
   def logout(conn, _params) do
+    if live_socket_id = get_session(conn, :live_socket_id) do
+      Logger.debug("Logging out live socket: #{live_socket_id}")
+      SentrypeerWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    end
+
     conn
     |> put_flash(:info, "You have been logged out!")
-    |> configure_session(drop: true)
+    |> renew_session()
     |> redirect(external: Application.get_env(:sentrypeer, :auth0_logout_url))
   end
 
@@ -38,14 +45,38 @@ defmodule SentrypeerWeb.AuthController do
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
+        |> renew_session()
         |> put_flash(:info, "Successfully authenticated as " <> user.name <> ".")
         |> put_session(:current_user, user)
+        |> put_session(:live_socket_id, "users_socket:#{Base.url_encode64(user.id)}")
         |> redirect(to: "/dashboard")
 
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
+        |> renew_session()
         |> redirect(to: "/")
     end
+  end
+
+  # This function renews the session ID and erases the whole
+  # session to avoid fixation attacks. If there is any data
+  # in the session you may want to preserve after log in/log out,
+  # you must explicitly fetch the session data before clearing
+  # and then immediately set it after clearing, for example:
+  #
+  #     defp renew_session(conn) do
+  #       preferred_locale = get_session(conn, :preferred_locale)
+  #
+  #       conn
+  #       |> configure_session(renew: true)
+  #       |> clear_session()
+  #       |> put_session(:preferred_locale, preferred_locale)
+  #     end
+  #
+  defp renew_session(conn) do
+    conn
+    |> configure_session(renew: true)
+    |> clear_session()
   end
 end

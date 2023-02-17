@@ -50,8 +50,7 @@ defmodule SentrypeerWeb.Router do
 
   # use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
 
-  # live_session :default, on_mount: SentrypeerWeb.UserLiveAuth do
-  live_session :default do
+  live_session :default, on_mount: SentrypeerWeb.UserLiveAuth do
     scope "/", SentrypeerWeb do
       pipe_through [:browser, :admins_only, :ensure_authenticated_user]
       live "/dashboard", CustomerDashboardLive.Index, :index

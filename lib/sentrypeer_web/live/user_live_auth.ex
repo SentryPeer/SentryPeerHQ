@@ -15,16 +15,19 @@ defmodule SentrypeerWeb.UserLiveAuth do
   import Phoenix.Component
   import Phoenix.LiveView
 
-  def on_mount(:default, _params, %{"user_token" => user_token} = _session, socket) do
+  @moduledoc """
+   See https://hexdocs.pm/phoenix_live_view/security-model.html#mounting-considerations
+  """
+  def on_mount(:default, _params, %{"current_user" => current_user} = _session, socket) do
     socket =
       assign_new(socket, :current_user, fn ->
-        Sentrypeer.Accounts.UserFromAuth.get_user_by_session_token(user_token)
+        current_user
       end)
 
-    if socket.assigns.current_user.confirmed_at do
+    if socket.assigns.current_user do
       {:cont, socket}
     else
-      {:halt, redirect(socket, to: "/login")}
+      {:halt, redirect(socket, to: "/")}
     end
   end
 end
