@@ -12,9 +12,6 @@
 #
 
 defmodule Sentrypeer.Accounts.UserFromAuth do
-  @moduledoc """
-  Retrieve the user information from an auth request
-  """
   require Logger
   require Poison
 
