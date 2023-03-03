@@ -26,7 +26,10 @@ config :sentrypeer,
       raise("The required environment variable AUTH0_DOMAIN is missing. Check ENV."),
   auth0_audience:
     System.get_env("AUTH0_AUDIENCE") ||
-      raise("The required environment variable AUTH0_AUDIENCE is missing. Check ENV.")
+      raise("The required environment variable AUTH0_AUDIENCE is missing. Check ENV."),
+  git_rev:
+    System.get_env("GIT_REV") ||
+      System.cmd("git", ["rev-parse", "--short", "HEAD"]) |> elem(0) |> String.trim()
 
 if config_env() == :prod do
   database_url =

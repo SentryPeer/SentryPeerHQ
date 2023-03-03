@@ -33,8 +33,7 @@ config :sentrypeer,
         returnTo: System.get_env("AUTH0_LOGOUT_REDIRECT_URL", "http://localhost:4000")
       })
     )
-    |> URI.to_string(),
-  git_rev: System.cmd("git", ["rev-parse", "--short", "HEAD"]) |> elem(0) |> String.trim()
+    |> URI.to_string()
 
 # Configures the endpoint
 config :sentrypeer, SentrypeerWeb.Endpoint,
