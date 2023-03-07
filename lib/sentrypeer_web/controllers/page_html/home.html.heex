@@ -89,13 +89,29 @@
                     <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Company</a>
                 </nav>
                 <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+                    <%= if @current_user do %>
                     <a
-                            href={~p"/login"}
-                            title="Login to SentryPeer"
-                            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
+                            href={~p"/dashboard"}
+                            title="Go to the SentryPeer Dashboard"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                     >
                         Dashboard
                     </a>
+                    <% else %>
+                    <a
+                            href={~p"/login"}
+                            title="Login to SentryPeer"
+                            class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 mr-4">
+                        Sign in
+                    </a>
+                    <a
+                            href={~p"/register"}
+                            title="Sign up for SentryPeer"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
+                    >
+                        Sign up
+                    </a>
+                    <% end %>
                 </div>
             </div>
             <!--
@@ -205,15 +221,36 @@
                                 Company
                             </a>
                         </div>
+                        <%= if @current_user do %>
+                        <div class="mt-6">
+                            <a
+                                    href={~p"/dashboard"}
+                                    title="Go to the SentryPeer Dashboard"
+                                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
+                            >
+                                Dashboard
+                            </a>
+                        </div>
+                        <% else %>
                         <div class="mt-6">
                             <a
                                     href={~p"/login"}
                                     title="Login to SentryPeer"
                                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                             >
-                                Dashboard
+                                Sign in
                             </a>
                         </div>
+                        <div class="mt-6">
+                            <a
+                                    href={~p"/register"}
+                                    title="Sign up for SentryPeer"
+                                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
+                            >
+                                Sign up
+                            </a>
+                        </div>
+                        <% end %>
                     </div>
                 </div>
             </div>

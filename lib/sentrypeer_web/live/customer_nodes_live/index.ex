@@ -11,7 +11,7 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.CustomerDashboardLive.Index do
+defmodule SentrypeerWeb.CustomerNodesLive.Index do
   use SentrypeerWeb, :live_view
 
   @impl true
@@ -20,9 +20,10 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
      assign(socket,
        # .avatar is in there too
        current_user: session["current_user"],
+       no_nodes: true,
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Dashboard"
+       page_title: "Nodes"
      )}
   end
 end

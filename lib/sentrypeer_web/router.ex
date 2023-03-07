@@ -54,6 +54,7 @@ defmodule SentrypeerWeb.Router do
     scope "/", SentrypeerWeb do
       pipe_through [:browser, :admins_only, :ensure_authenticated_user]
       live "/dashboard", CustomerDashboardLive.Index, :index
+      live "/nodes", CustomerNodesLive.Index, :index
     end
   end
 

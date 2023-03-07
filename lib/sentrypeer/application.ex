@@ -33,7 +33,9 @@ defmodule Sentrypeer.Application do
       SentrypeerWeb.Endpoint,
       # Start a worker by calling: Sentrypeer.Worker.start_link(arg)
       # {Sentrypeer.Worker, arg}
-      Sentrypeer.Auth.Auth0Strategy
+      Sentrypeer.Auth.Auth0Strategy,
+      # Our Cache
+      {Cachex, name: :sentrypeer_cache}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

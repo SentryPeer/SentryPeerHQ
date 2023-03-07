@@ -20,7 +20,8 @@ defmodule SentrypeerWeb.PageController do
     render(conn, :home,
       current_user: get_session(conn, :current_user),
       app_version: Application.spec(:sentrypeer, :vsn),
-      layout: false
+      layout: false,
+      page_title: "Home"
     )
   end
 end
