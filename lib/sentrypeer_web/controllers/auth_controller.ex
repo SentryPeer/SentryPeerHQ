@@ -22,6 +22,10 @@ defmodule SentrypeerWeb.AuthController do
     conn |> redirect(to: "/auth/auth0") |> halt
   end
 
+  def signup(conn, _params) do
+    conn |> redirect(to: "/auth/auth0?screen_hint=signup") |> halt
+  end
+
   # See https://hexdocs.pm/phoenix_live_view/security-model.html#mounting-considerations
   def logout(conn, _params) do
     if live_socket_id = get_session(conn, :live_socket_id) do

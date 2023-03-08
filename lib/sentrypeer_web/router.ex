@@ -66,6 +66,7 @@ defmodule SentrypeerWeb.Router do
     # Auth
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout
+    get "/signup", AuthController, :signup
   end
 
   scope "/api", SentrypeerWeb do
