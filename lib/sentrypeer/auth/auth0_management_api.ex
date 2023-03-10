@@ -15,6 +15,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   alias Sentrypeer.Auth.Auth0Config
   use HTTPoison.Base
 
+  require Logger
+
   @moduledoc """
   This module is used to interact with the Auth0 Management API:
     https://auth0.com/docs/api/management/v2
@@ -81,11 +83,37 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   """
   def list_clients do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.get!(
-        (auth0_management_url() <> "clients") |> list_clients_query_params(),
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.get(
+             (auth0_management_url() <> "clients") |> list_clients_query_params(),
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          {:ok, body}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
+    end
+  end
+
+  def list_clients_by_user(user) do
+    Logger.debug("Listing Auth0 clients for user #{user}")
+
+    list_clients()
+    |> case do
+      {:ok, body} ->
+        {:ok,
+         Jason.decode!(body)
+         |> Enum.filter(fn client ->
+           client["client_metadata"]["auth_id"] == user
+         end)}
+
+      {:error, error} ->
+        {:error, error}
     end
   end
 
@@ -99,14 +127,72 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
+  def get_client_for_user(user, id) do
+    Logger.debug("Listing clients for user #{user}")
+
+    get_client(id)
+    |> case do
+      {:ok, body} ->
+        {:ok,
+         Jason.decode!(body)
+         |> Enum.filter(fn client ->
+           client["client_metadata"]["auth_id"] == user
+         end)}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
   def create_client(auth_id, name, description) do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.post!(
-        auth0_management_url() <> "clients",
-        create_client_json(auth_id, name, description),
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.post!(
+             auth0_management_url() <> "clients",
+             create_client_json(auth_id, name, description),
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
+          {:ok, body}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
+    end
+  end
+
+  def delete_client(id) do
+    with {:ok, access_token} <- get_auth_token() do
+      case HTTPoison.delete(
+             auth0_management_url() <> "clients/" <> id,
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 204}} ->
+          {:ok, "Client deleted"}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
+    end
+  end
+
+  def delete_client_for_user(user, id) do
+    Logger.debug("Deleting client #{id} for user #{user}")
+
+    get_client_for_user(user, id)
+    |> case do
+      {:ok, _body} ->
+        delete_client(id)
+
+      {:error, error} ->
+        {:error, error}
     end
   end
 
