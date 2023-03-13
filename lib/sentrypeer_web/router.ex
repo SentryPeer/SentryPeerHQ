@@ -57,7 +57,7 @@ defmodule SentrypeerWeb.Router do
 
       live "/nodes", CustomerNodesLive.Index, :index
       live "/nodes/new", CustomerNodesLive.Index, :new
-      live "/nodes/:id", CustomerNodesLive.Index, :overview
+      live "/nodes/:client_id", CustomerNodesLive.Overview, :overview
       live "/nodes/:id/edit", CustomerNodesLive.Index, :edit
       live "/nodes/:id/delete", CustomerNodesLive.Index, :delete
     end

@@ -18,6 +18,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   alias Sentrypeer.CustomerNodes.Node
 
   import Sentrypeer.TimeAgo
+  import SentrypeerWeb.NavigationComponents
 
   @impl true
   def mount(_params, session, socket) do
