@@ -101,6 +101,10 @@ config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
   client_id: System.get_env("AUTH0_CLIENT_ID") || raise("AUTH0_CLIENT_ID is not set"),
   client_secret: System.get_env("AUTH0_CLIENT_SECRET") || raise("AUTH0_CLIENT_SECRET is not set")
 
+# Configure Cldr for localization and use of timeago/1
+config :ex_cldr,
+       default_backend: Sentrypeer.Cldr
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

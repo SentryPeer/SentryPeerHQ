@@ -83,7 +83,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
   end
 
   defp save_node(socket, :new, node_params) do
-    case CustomerNodes.create_node(socket.session.current_user.id, node_params) do
+    case CustomerNodes.create_node(socket.assigns.current_user.id, node_params) do
       {:ok, node} ->
         notify_parent({:saved, node})
 
@@ -94,6 +94,12 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
+
+      {:error, _} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Failed to create node")
+         |> push_patch(to: socket.assigns.patch)}
     end
   end
 

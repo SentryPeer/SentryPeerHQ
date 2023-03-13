@@ -23,7 +23,7 @@ defmodule Sentrypeer.CustomerNodes.Node do
     {node, @types}
     |> cast(attrs, Map.keys(@types))
     |> validate_required([:node_name, :description])
-    |> validate_format(:node_name, ~r/^[a-z0-9_]+$/)
+    |> validate_format(:node_name, ~r/^[a-zA-Z0-9_-]+$/)
     |> validate_length(:node_name, min: 3, max: 20)
     |> validate_length(:description, min: 3, max: 100)
   end

@@ -17,8 +17,12 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.CustomerNodes.Node
 
+  import Sentrypeer.TimeAgo
+
   @impl true
   def mount(_params, session, socket) do
+    nodes = list_clients(session["current_user"].id)
+
     {:ok,
      assign(socket,
        # .avatar is in there too
@@ -26,7 +30,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Nodes",
-       nodes: list_clients(session["current_user"].id)
+       nodes: nodes
      )}
   end
 
@@ -36,11 +40,11 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    case Auth0ManagementAPI.get_client_for_user(socket.current_user.id, id) do
+    case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
       nil ->
         {:noreply, socket}
 
-      node ->
+      {:ok, node} ->
         {:noreply,
          socket
          |> assign(:page_title, "Edit Node")
@@ -62,7 +66,10 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   @impl true
   def handle_info({SentrypeerWeb.CustomerNodesLive.FormComponent, {:saved, node}}, socket) do
-    {:noreply, stream_insert(socket, :node_collection, node)}
+    {:noreply,
+     socket
+     |> assign(:nodes, list_clients(socket.assigns.current_user.id))
+     |> assign(:node, node)}
   end
 
   @impl true
