@@ -140,11 +140,16 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     get_client(id)
     |> case do
       {:ok, body} ->
-        {:ok,
-         Jason.decode!(body)
-         |> Enum.filter(fn client ->
-           client["client_metadata"]["auth_id"] == user
-         end)}
+        {:ok, client} = Jason.decode(body)
+
+        case check_client_belongs_to_user(client, user) do
+          true ->
+            {:ok, client}
+
+          false ->
+            Logger.info("Client #{id} does not belong to user #{user}")
+            {:error, "Client #{id} does not belong to user #{user}"}
+        end
 
       {:error, error} ->
         {:error, error}
@@ -225,6 +230,10 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
+  defp check_client_belongs_to_user(client, user) do
+    client["client_metadata"]["auth_id"] == user
+  end
+
   defp list_clients_query_params(url) do
     url
     |> URI.new!()
@@ -241,7 +250,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   defp get_auth_token do
     case HTTPoison.post(
-           auth0_management_token_request_url(),
+           Auth0Config.auth0_token_url(),
            auth_token_json(),
            json_content_type(),
            options()
@@ -314,9 +323,5 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   defp options do
     [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 500]
-  end
-
-  defp auth0_management_token_request_url do
-    Auth0Config.auth0_base_url() <> "oauth/token"
   end
 end

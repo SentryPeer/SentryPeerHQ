@@ -14,6 +14,8 @@
 defmodule SentrypeerWeb.CustomerDashboardLive.Index do
   use SentrypeerWeb, :live_view
 
+  import SentrypeerWeb.NavigationComponents
+
   @impl true
   def mount(_params, session, socket) do
     {:ok,

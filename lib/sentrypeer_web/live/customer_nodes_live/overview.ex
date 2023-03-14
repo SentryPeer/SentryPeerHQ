@@ -14,19 +14,31 @@
 defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   use SentrypeerWeb, :live_view
 
+  alias Sentrypeer.Auth.Auth0ManagementAPI
+  alias Sentrypeer.Auth.Auth0Config
+
+  import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket |> assign(:token_url, Auth0Config.auth0_token_url())}
   end
 
   @impl true
-  def handle_params(%{"client_id" => _id}, _url, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))}
-  end
+  def handle_params(%{"client_id" => id}, _url, socket) do
+    case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
+      nil ->
+        {:noreply, socket |> assign(:page_title, "Node not found")}
 
-  defp page_title(:overview), do: "SentryPeer Node Overview"
+      {:ok, node} ->
+        {:noreply,
+         socket
+         |> assign(:page_title, "SentryPeer Node Overview")
+         |> assign(:node, node)}
+
+      {:error, _} ->
+        {:noreply, redirect(socket, to: "/not_found")}
+    end
+  end
 end
