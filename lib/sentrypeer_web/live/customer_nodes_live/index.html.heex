@@ -2,31 +2,8 @@
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
-    <!-- Navbar -->
     <%= nav_top_menu(assigns) %>
-
-<nav class="flex border-b border-gray-200 bg-white" aria-label="Breadcrumb">
-    <ol role="list" class="mx-auto flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-12">
-        <li class="flex">
-            <div class="flex items-center">
-                <.link navigate={~p"/dashboard"} title="SentryPeer Dashboard" class="ml-4 text-sm text-gray-500 hover:text-gray-700">
-                    Dashboard
-                    <span class="sr-only">Dashboard</span>
-                </.link>
-            </div>
-        </li>
-
-        <li class="flex">
-            <div class="flex items-center">
-                <svg class="h-full w-6 flex-shrink-0 text-gray-200" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" aria-hidden="true">
-                    <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                </svg>
-                <.link navigate={~p"/nodes"} title="SentryPeer Nodes" class={"#{if @active_tab == :nodes,
-                do: "ml-4 text-sm font-medium hover:text-gray-700", else: "ml-4 text-sm text-gray-500 hover:text-gray-700"}"}>Nodes</.link>
-            </div>
-        </li>
-    </ol>
-</nav>
+    <%= breadcrumbs(assigns) %>
 
 <!-- 3 column wrapper -->
 <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
@@ -61,7 +38,7 @@
                                 </div>
                             </div>
                             <!-- Action buttons -->
-                            <div class="flex flex-col sm:flex-row xl:flex-col">
+                            <div class="flex flex-col sm:flex-col xl:flex-col">
                                 <.link patch={~p"/nodes/new"}>
                                 <button
                                         type="button"
@@ -90,42 +67,7 @@
                     </div>
                     <!-- Meta info -->
                     <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                        <div class="flex items-center space-x-2">
-                            <!-- Heroicon name: mini/check-badge -->
-                            <svg
-                                    class="h-5 w-5 text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                            >
-                                <path
-                                        fill-rule="evenodd"
-                                        d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                        clip-rule="evenodd"
-                                />
-                            </svg>
-                            <span class="text-sm font-medium text-gray-500">Paid Member</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <!-- Heroicon name: mini/rectangle-stack -->
-                            <svg
-                                    class="h-5 w-5 text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                            >
-                                <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                                />
-                            </svg>
-
-                            <span class="text-sm font-medium text-gray-500">8 Nodes</span>
-                        </div>
+                        <%= in_app_menu(assigns) %>
                     </div>
                 </div>
             </div>
@@ -279,21 +221,21 @@
                     </span>
 
                     <h2 class="text-sm font-medium">
-                        <a href={~p"/nodes/#{node["client_id"]}"}
+                        <.link navigate={~p"/nodes/#{node["client_id"]}"}
                            title="View all details about this node">
                             <span class="truncate absolute inset-0" aria-hidden="true"></span>
                             <%= node["name"] %> <span class="sr-only">Running</span>
-                        </a>
+                        </.link>
                     </h2>
                 </div>
-                <a href={~p"/nodes/#{node["client_id"]}/edit"}
+                <.link navigate={~p"/nodes/#{node["client_id"]}/edit"}
                    title="Edit the Name and Description of this node"
                    class="group relative flex items-center space-x-2.5">
                     <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"/>
                     <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">
                       <%= node["description"] %>
                     </span>
-                </a>
+                </.link>
             </div>
             <div class="sm:hidden">
                 <!-- Heroicon name: mini/chevron-right -->

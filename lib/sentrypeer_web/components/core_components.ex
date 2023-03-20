@@ -838,4 +838,8 @@ defmodule SentrypeerWeb.CoreComponents do
          out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
        )
   end
+
+  def sentrypeer_toolip(text) do
+
+  end
 end

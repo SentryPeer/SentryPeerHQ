@@ -51,6 +51,11 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     # Used to look up user IDs in Auth0 management API
     field :client_id, :string
 
+    belongs_to :client, Sentrypeer.Clients.Client,
+      foreign_key: :client_id,
+      define_field: false,
+      references: :client_id
+
     timestamps(type: :utc_datetime_usec)
   end
 

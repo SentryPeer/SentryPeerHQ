@@ -8,3 +8,11 @@
 .phx-connected, .phx-loading, .phx-error {
     height: 100%;
 }
+
+.tooltip {
+    @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+    @apply visible z-50;
+}

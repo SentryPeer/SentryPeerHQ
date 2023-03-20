@@ -19,6 +19,9 @@ defmodule Sentrypeer.CustomerNodes do
   import Ecto.Query, warn: false
   alias Sentrypeer.CustomerNodes.Node
   alias Sentrypeer.Auth.Auth0ManagementAPI
+  alias Sentrypeer.Clients
+
+  require Logger
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking node changes.
@@ -35,13 +38,22 @@ defmodule Sentrypeer.CustomerNodes do
 
   def create_node(auth_id, attrs \\ %{}) do
     changeset = Node.changeset(%Node{}, attrs)
+    Logger.debug("Create node changeset: #{inspect(changeset)}")
 
     if changeset.valid? do
-      Auth0ManagementAPI.create_client(
-        auth_id,
-        changeset.changes.node_name,
-        changeset.changes.description
-      )
+      case Auth0ManagementAPI.create_client(
+             auth_id,
+             changeset.changes.node_name,
+             changeset.changes.description
+           ) do
+        {:ok, body} ->
+          {:ok, client} = Jason.decode(body)
+          Logger.debug("Saving client user association: #{inspect(client)}")
+          Clients.create_client(%{client_id: client["client_id"], auth_id: auth_id})
+
+        {:error, error} ->
+          {:error, error}
+      end
     else
       changeset
     end

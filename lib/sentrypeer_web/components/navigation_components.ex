@@ -16,8 +16,224 @@ defmodule SentrypeerWeb.NavigationComponents do
 
   import SentrypeerWeb.CoreComponents
 
+  def breadcrumbs(assigns) do
+    ~H"""
+    <!-- Breadcrumbs -->
+    <nav class="flex border-b border-gray-200 bg-white" aria-label="Breadcrumb">
+      <ol role="list" class="mx-auto flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-12">
+        <li class="flex">
+          <div class="flex items-center">
+            <.link
+              navigate={~p"/dashboard"}
+              title="SentryPeer Dashboard"
+              class={"#{if @active_tab == :dashboard,
+                do: "ml-4 text-sm font-medium hover:text-gray-700", else: "ml-4 text-sm text-gray-500 hover:text-gray-700"}"}
+            >
+              Dashboard <span class="sr-only">Dashboard</span>
+            </.link>
+          </div>
+        </li>
+
+        <%= if @active_tab == :dashboard do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if (@active_tab == :nodes || @active_tab == :node_overview ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/nodes"}
+                title="SentryPeer Nodes"
+                class={"#{if @active_tab == :nodes,
+                do: "ml-4 text-sm font-medium hover:text-gray-700", else: "ml-4 text-sm text-gray-500 hover:text-gray-700"}"}
+              >
+                Nodes
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if @active_tab == :node_overview do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/nodes/#{@node["client_id"]}"}
+                title="SentryPeer Node"
+                class="hidden md:block truncate ml-4 text-sm font-medium hover:text-gray-700"
+              >
+                <%= @node["client_id"] %>
+              </.link>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </nav>
+    """
+  end
+
+  def in_app_menu(assigns) do
+    ~H"""
+    <!-- In App Menu Action Buttons -->
+    <nav class="space-y-1">
+      <!-- Current: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
+      <a
+        href="#"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+        aria-current="page"
+      >
+        <!-- Current: "text-indigo-500 group-hover:text-indigo-500", Default: "text-gray-400 group-hover:text-gray-500" -->
+        <Heroicons.chart_pie
+          outline
+          class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+        />
+        <span class="truncate">Analytics</span>
+      </a>
+
+      <a
+        href="#"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <Heroicons.sparkles
+          outline
+          class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+        />
+        <span class="truncate">Insights</span>
+      </a>
+
+      <.link
+        navigate={~p"/nodes"}
+        class={"#{if (@active_tab == :nodes || @active_tab == :node_overview ),
+                do: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+        title="SentryPeer Nodes"
+      >
+        <svg
+          class={"#{if (@active_tab == :nodes || @active_tab == :node_overview ),
+                do: "text-indigo-500 group-hover:text-indigo-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+          />
+        </svg>
+        <span class="truncate">Nodes</span>
+      </.link>
+
+      <a
+        href="#"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <svg
+          class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+          />
+        </svg>
+        <span class="truncate">Plan &#38; Billing</span>
+      </a>
+
+      <a
+        href="#"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <svg
+          class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+          />
+        </svg>
+        <span class="truncate">Team</span>
+      </a>
+
+      <a
+        href="#"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <svg
+          class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+          />
+        </svg>
+        <span class="truncate">Integrations</span>
+      </a>
+
+      <a
+        href="https://status.sentrypeer.com/"
+        target="_blank"
+        title="Visit the SentryPeer Status Page"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <Heroicons.megaphone class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" />
+        <span class="truncate">Status</span>
+        <Heroicons.arrow_top_right_on_square class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-500" />
+      </a>
+    </nav>
+    """
+  end
+
   def nav_top_menu(assigns) do
     ~H"""
+    <!-- Top Navbar -->
     <nav class="flex-shrink-0 bg-gradient-to-r from-brand to-indigo-600">
       <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">

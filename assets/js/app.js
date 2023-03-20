@@ -1,3 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0                      
+// Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org> 
+//   _____            _              _____                
+//  / ____|          | |            |  __ \               
+// | (___   ___ _ __ | |_ _ __ _   _| |__) |__  ___ _ __  
+//  \___ \ / _ \ '_ \| __| '__| | | |  ___/ _ \/ _ \ '__| 
+//  ____) |  __/ | | | |_| |  | |_| | |  |  __/  __/ |    
+// |_____/ \___|_| |_|\__|_|   \__, |_|   \___|\___|_|    
+//                              __/ |                     
+//                             |___/
+//
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
 // import "./user_socket.js"
@@ -38,4 +49,18 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
+// SentryPeerHQ JavaScript
+//
+// Copy to clipboard 
+window.addEventListener("sentrypeerhq:copy_client_secret", (event) => {
+    if ("clipboard" in navigator) {
+        const text = event.target.value;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Copied to clipboard!");
+        });
+    } else {
+        alert("Sorry, your browser does not support the clipboard copy feature.");
+    }
+});
 

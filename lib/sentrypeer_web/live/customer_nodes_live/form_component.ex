@@ -16,6 +16,8 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
 
   alias Sentrypeer.CustomerNodes
 
+  require Logger
+
   @impl true
   def render(assigns) do
     ~H"""
@@ -95,7 +97,9 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
 
-      {:error, _} ->
+      {:error, error} ->
+        Logger.error("Failed to create node: #{inspect(error)}")
+
         {:noreply,
          socket
          |> put_flash(:error, "Failed to create node")
