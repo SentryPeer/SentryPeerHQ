@@ -1,6 +1,6 @@
 <!-- Background color split screen for large screens -->
-<div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
     <%= nav_top_menu(assigns) %>
     <%= breadcrumbs(assigns) %>
@@ -8,9 +8,9 @@
 <!-- 3 column wrapper -->
 <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
-    <div class="min-w-0 flex-1 bg-white xl:flex">
+    <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
         <!-- Account profile -->
-        <div class="bg-white xl:w-64 xl:flex-shrink-0">
+        <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0">
             <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
                 <div class="flex items-center justify-between">
                     <div class="flex-1 space-y-8">
@@ -26,7 +26,7 @@
                                     />
                                 </div>
                                 <div class="space-y-1">
-                                    <div class="text-sm font-medium text-gray-900">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
                                         <%= @current_user.name %>
                                     </div>
                                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
@@ -47,16 +47,16 @@
             </div>
         </div>
         <!-- Nodes List -->
-        <div class="bg-white lg:min-w-0 lg:flex-1">
-            <div class="border-b border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
+        <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+            <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
                 <div class="flex items-center">
-                    <h1 class="flex-1 text-lg font-medium">Overview</h1>
+                    <h1 class="flex-1 text-lg font-medium dark:text-white">Overview</h1>
                 </div>
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-6 text-gray-900">Last 30 days</h3>
-                <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
+                <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-slate-400">Last 30 days</h3>
+                <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
                     <div class="px-4 py-5 sm:p-6">
                         <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
                         <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">

@@ -1,6 +1,6 @@
 <!-- Background color split screen for large screens -->
-<div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
     <%= nav_top_menu(assigns) %>
     <%= breadcrumbs(assigns) %>
@@ -8,9 +8,9 @@
 <!-- 3 column wrapper -->
 <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
-    <div class="min-w-0 flex-1 bg-white xl:flex">
+    <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
         <!-- Account profile -->
-        <div class="bg-white xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200">
+        <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
             <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
                 <div class="flex items-center justify-between">
                     <div class="flex-1 space-y-8">
@@ -26,7 +26,7 @@
                                     />
                                 </div>
                                 <div class="space-y-1">
-                                    <div class="text-sm font-medium text-gray-900">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
                                         <%= @current_user.name %>
                                     </div>
                                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
@@ -74,15 +74,15 @@
         </div>
     </div>
     <!-- Nodes List -->
-    <div class="bg-white lg:min-w-0 lg:flex-1">
-        <div class="border-b border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
+    <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+        <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
             <div class="flex items-center">
-                <h1 class="flex-1 text-lg font-medium">SentryPeer Nodes</h1>
+                <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Nodes</h1>
                 <div class="relative">
                     <button
                             type="button"
                             title="Sort nodes by name and date"
-                            class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            class="inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-slate-400 bg-white dark:bg-slate-800 dark:text-white px-4 py-2 text-sm font-medium text-gray-700 dark:text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             id="sort-menu-button"
                             aria-expanded="false"
                             aria-haspopup="true"
@@ -92,7 +92,7 @@
                     >
                     <!-- Heroicon name: mini/bars-arrow-up -->
                     <svg
-                            class="mr-3 h-5 w-5 text-gray-400"
+                            class="mr-3 h-5 w-5 text-gray-400 dark:text-slate-400"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -107,7 +107,7 @@
                     Sort
                     <!-- Heroicon name: mini/chevron-down -->
                     <svg
-                            class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400"
+                            class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400 dark:text-slate-400"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -122,7 +122,7 @@
                     </button>
                     <!-- Dropdown menu, show/hide based on menu state. -->
                     <div
-                            class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu"
                             aria-orientation="vertical"
                             aria-labelledby="sort-menu-button"
@@ -133,7 +133,7 @@
                             <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                             <a
                                     href="#"
-                                    class="text-gray-700 block px-4 py-2 text-sm"
+                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
                                     role="menuitem"
                                     tabindex="-1"
                                     id="sort-menu-item-0"
@@ -142,7 +142,7 @@
                             </a>
                             <a
                                     href="#"
-                                    class="text-gray-700 block px-4 py-2 text-sm"
+                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
                                     role="menuitem"
                                     tabindex="-1"
                                     id="sort-menu-item-1"
@@ -151,7 +151,7 @@
                             </a>
                             <a
                                     href="#"
-                                    class="text-gray-700 block px-4 py-2 text-sm"
+                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
                                     role="menuitem"
                                     tabindex="-1"
                                     id="sort-menu-item-2"
@@ -202,13 +202,13 @@
                     d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
             />
         </svg>
-        <span class="mt-2 block text-sm font-medium text-gray-900">Create a new node</span>
+        <span class="mt-2 block text-sm font-medium text-gray-900 ">Create a new node</span>
     </button>
 </.link>
 <% else %>
 <%= for node <- @nodes do %>
-<ul role="list" class="divide-y divide-gray-200 border-b border-gray-200">
-    <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+<ul role="list" class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400">
+    <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 dark:hover:bg-slate-600 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
         <div class="flex items-center justify-between space-x-4">
             <!-- Repo name and link -->
             <div class="min-w-0 space-y-3">
@@ -220,7 +220,7 @@
                       <span class="h-2 w-2 bg-green-400 rounded-full"></span>
                     </span>
 
-                    <h2 class="text-sm font-medium">
+                    <h2 class="text-sm font-medium dark:text-white">
                         <.link navigate={~p"/nodes/#{node["client_id"]}"}
                            title="View all details about this node">
                             <span class="truncate absolute inset-0" aria-hidden="true"></span>
@@ -231,8 +231,8 @@
                 <.link navigate={~p"/nodes/#{node["client_id"]}/edit"}
                    title="Edit the Name and Description of this node"
                    class="group relative flex items-center space-x-2.5">
-                    <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"/>
-                    <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">
+                    <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900"/>
+                    <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
                       <%= node["description"] %>
                     </span>
                 </.link>
@@ -258,7 +258,7 @@
                 <p class="flex items-center space-x-4">
                     <button
                             type="button"
-                            class="relative rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            class="relative rounded-full bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         <span class="sr-only">Add to favorites</span>
                         <!--
@@ -281,7 +281,7 @@
                         </svg>
                     </button>
                 </p>
-                <p class="flex space-x-2 text-sm text-gray-500">
+                <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
                     <span><%= time_ago(node["client_metadata"]["created_at"] ) %></span>
                     <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
@@ -297,10 +297,10 @@
 </div>
 </div>
 <!-- Activity feed -->
-<div class="bg-gray-50 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
+<div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
     <div class="pl-6 lg:w-80">
         <div class="pt-6 pb-2">
-            <h2 class="text-sm font-semibold">Activity</h2>
+            <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
         </div>
         <div>
             <ul role="list" class="divide-y divide-gray-200">
@@ -313,11 +313,11 @@
                         title={ @current_user.name <> "'s avatar" }
                         />
                         <div class="flex-1 space-y-1">
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between dark:text-white">
                                 <h3 class="text-sm font-medium">You</h3>
                                 <p class="text-sm text-gray-500">1h</p>
                             </div>
-                            <p class="text-sm text-gray-500">
+                            <p class="text-sm text-gray-500 dark:text-slate-400">
                                 Deployed Workcation (2d89f0c8 in master) to production
                             </p>
                         </div>
