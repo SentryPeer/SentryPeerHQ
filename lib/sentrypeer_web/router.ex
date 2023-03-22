@@ -52,6 +52,7 @@ defmodule SentrypeerWeb.Router do
   # layout: {SentrypeerWeb.Layouts, :main_app}
 
   live_session :default,
+    root_layout: {SentrypeerWeb.Layouts, :liveview_root},
     on_mount: [SentrypeerWeb.UserLiveAuth, SentrypeerWeb.ActiveNav] do
     scope "/", SentrypeerWeb do
       pipe_through [:browser, :admins_only, :ensure_authenticated_user]

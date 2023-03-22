@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en" style="scrollbar-gutter: stable;">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="author" content="Gavin Henry." />
+    <meta name="copyright" content="Gavin Henry, Ant Networks Limited." />
+    <meta name="robots" content="index,follow" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title>
+      <%= assigns[:page_title] <> " · SentryPeer" %>
+    </.live_title>
+    <!-- SPDX-License-Identifier: AGPL-3.0                      -->
+    <!-- Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org> -->
+    <!--   _____            _              _____                -->
+    <!--  / ____|          | |            |  __ \               -->
+    <!-- | (___   ___ _ __ | |_ _ __ _   _| |__) |__  ___ _ __  -->
+    <!--  \___ \ / _ \ '_ \| __| '__| | | |  ___/ _ \/ _ \ '__| -->
+    <!--  ____) |  __/ | | | |_| |  | |_| | |  |  __/  __/ |    -->
+    <!-- |_____/ \___|_| |_|\__|_|   \__, |_|   \___|\___|_|    -->
+    <!--                              __/ |                     -->
+    <!--                             |___/                      -->
+    <meta
+      name="description"
+      content="Use SentryPeer to help prevent VoIP cyberattacks, fraudulent phone calls and improve cybersecurity by detecting early stage reconnaissance attempts."
+    />
+    <link rel="icon" type="image/png" href={~p"/images/favicon.png"} />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+    <%= if @active_page == :dashboard do %>
+      <!-- Cal-Heatmap -->
+      <script src="https://d3js.org/d3.v7.min.js">
+      </script>
+      <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js">
+      </script>
+      <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css" />
+    <% end %>
+  </head>
+  <body class="bg-white antialiased h-full">
+    <!-- This is the start of the root component for the live view -->
+    <%= @inner_content %>
+    <!-- This is the end of the root component for the live view -->
+  </body>
+</html>

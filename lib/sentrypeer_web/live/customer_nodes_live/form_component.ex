@@ -36,7 +36,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:node_name]} type="text" label="Name" />
-        <.input field={@form[:description]} type="textarea" label="Description" />
+        <.input field={@form[:description]} type="textarea" label="Description" phx-debounce="blur" />
         <:actions>
           <.button phx-disable-with="Building...">Create Node</.button>
         </:actions>

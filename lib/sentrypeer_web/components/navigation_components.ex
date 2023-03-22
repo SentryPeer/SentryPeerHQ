@@ -30,7 +30,7 @@ defmodule SentrypeerWeb.NavigationComponents do
             <.link
               navigate={~p"/dashboard"}
               title="SentryPeer Dashboard"
-              class={"#{if @active_tab == :dashboard,
+              class={"#{if @active_page == :dashboard,
                 do: "ml-4 text-sm font-medium hover:text-gray-700 dark:hover:text-white dark:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
             >
               Dashboard <span class="sr-only">Dashboard</span>
@@ -38,7 +38,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           </div>
         </li>
 
-        <%= if @active_tab == :dashboard do %>
+        <%= if @active_page == :dashboard do %>
           <li class="flex">
             <div class="flex items-center">
               <svg
@@ -54,7 +54,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
-        <%= if (@active_tab == :nodes || @active_tab == :node_overview ) do %>
+        <%= if (@active_page == :nodes || @active_page == :node_overview ) do %>
           <li class="flex">
             <div class="flex items-center">
               <svg
@@ -69,7 +69,7 @@ defmodule SentrypeerWeb.NavigationComponents do
               <.link
                 navigate={~p"/nodes"}
                 title="SentryPeer Nodes"
-                class={"#{if @active_tab == :nodes,
+                class={"#{if @active_page == :nodes,
                 do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
               >
                 Nodes
@@ -78,7 +78,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
-        <%= if @active_tab == :node_overview do %>
+        <%= if @active_page == :node_overview do %>
           <li class="flex">
             <div class="flex items-center">
               <svg
@@ -142,12 +142,12 @@ defmodule SentrypeerWeb.NavigationComponents do
 
       <.link
         navigate={~p"/nodes"}
-        class={"#{if (@active_tab == :nodes || @active_tab == :node_overview ),
+        class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
                 do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="SentryPeer Nodes"
       >
         <svg
-          class={"#{if (@active_tab == :nodes || @active_tab == :node_overview ),
+          class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
                 do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

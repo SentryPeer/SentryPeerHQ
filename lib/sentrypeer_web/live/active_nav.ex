@@ -25,11 +25,11 @@ defmodule SentrypeerWeb.ActiveNav do
   def on_mount(:default, _params, _session, socket) do
     {:cont,
      socket
-     |> attach_hook(:active_tab, :handle_params, &set_active_tab/3)}
+     |> attach_hook(:active_page, :handle_params, &set_active_page/3)}
   end
 
-  defp set_active_tab(params, _url, socket) do
-    active_tab =
+  defp set_active_page(_params, _url, socket) do
+    active_page =
       case {socket.view, socket.assigns.live_action} do
         {SentrypeerWeb.CustomerDashboardLive.Index, _} ->
           :dashboard
@@ -44,12 +44,8 @@ defmodule SentrypeerWeb.ActiveNav do
           nil
       end
 
-    Logger.debug("Active tab: #{inspect(active_tab)}")
+    Logger.debug("Active tab: #{inspect(active_page)}")
 
-    {:cont, assign(socket, active_tab: active_tab)}
-  end
-
-  defp current_user(socket) do
-    socket.assigns.current_user.id
+    {:cont, assign(socket, active_page: active_page)}
   end
 end

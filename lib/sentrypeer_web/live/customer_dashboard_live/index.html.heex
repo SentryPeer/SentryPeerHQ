@@ -2,147 +2,126 @@
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
 <div class="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
-  <!-- 3 column wrapper -->
-  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+    <%= nav_top_menu(assigns) %>
+    <%= breadcrumbs(assigns) %>
+
+<!-- 3 column wrapper -->
+<div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
     <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
-      <!-- Account profile -->
-      <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0">
-        <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
-          <div class="flex items-center justify-between">
-            <div class="flex-1 space-y-8">
-              <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
-                <!-- Profile -->
-                <div class="flex items-center space-x-3">
-                  <div class="h-12 w-12 flex-shrink-0">
-                    <img
-                      class="h-12 w-12 rounded-full"
-                      src={@current_user.avatar}
-                      alt={ @current_user.name <> "'s avatar" }
-                      title={ @current_user.name <> "'s avatar" }
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
-                      <%= @current_user.name %>
+        <!-- Account profile -->
+        <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0">
+            <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+                <div class="flex items-center justify-between">
+                    <div class="flex-1 space-y-8">
+                        <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
+                            <!-- Profile -->
+                            <div class="flex items-center space-x-3">
+                                <div class="h-12 w-12 flex-shrink-0">
+                                    <img
+                                            class="h-12 w-12 rounded-full"
+                                            src={@current_user.avatar}
+                                            alt={ @current_user.name <> "'s avatar" }
+                                    title={ @current_user.name <> "'s avatar" }
+                                    />
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
+                                        <%= @current_user.name %>
+                                    </div>
+                                    <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
+                                        v<%= @app_version %> <a
+                                            href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
+                                            target="_blank" title="Browse this deployed version of SentryPeerHQ"
+                                            class="ml-1"><%= @git_rev %></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Meta info -->
+                            <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+                                <%= in_app_menu(assigns) %>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
-                      <a
-                        href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
-                        target="_blank"
-                        title="Browse this deployed version of SentryPeerHQ"
-                        class="ml-1"
-                      >
-                        <%= @git_rev %>
-                      </a>
+                </div>
+            </div>
+        </div>
+        <!-- Nodes List -->
+        <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+            <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
+                <div class="flex items-center">
+                    <h1 class="flex-1 text-lg font-medium dark:text-white">Overview</h1>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-slate-400">Last 30 days</h3>
+                <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
+                        <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                            <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                71,897
+                                <span class="ml-2 text-sm font-medium text-gray-500">from 70,946</span>
+                            </div>
+
+                            <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
+                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
+                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span class="sr-only"> Increased by </span>
+                                12%
+                            </div>
+                        </dd>
                     </div>
-                  </div>
-                </div>
-                <!-- Meta info -->
-                <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                  <%= in_app_menu(assigns) %>
-                </div>
-              </div>
+
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-base font-normal text-gray-900">Avg. Open Rate</dt>
+                        <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                            <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                58.16%
+                                <span class="ml-2 text-sm font-medium text-gray-500">from 56.14%</span>
+                            </div>
+
+                            <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
+                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
+                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span class="sr-only"> Increased by </span>
+                                2.02%
+                            </div>
+                        </dd>
+                    </div>
+
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-base font-normal text-gray-900">Avg. Click Rate</dt>
+                        <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                            <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                24.57%
+                                <span class="ml-2 text-sm font-medium text-gray-500">from 28.62%</span>
+                            </div>
+
+                            <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-red-100 text-red-800 md:mt-2 lg:mt-0">
+                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
+                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span class="sr-only"> Decreased by </span>
+                                4.05%
+                            </div>
+                        </dd>
+                    </div>
+                </dl>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Nodes List -->
-      <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
-        <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
-          <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium dark:text-white">Overview</h1>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-slate-400">
-            Last 30 days
-          </h3>
-          <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
-            <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
-              <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  71,897 <span class="ml-2 text-sm font-medium text-gray-500">from 70,946</span>
-                </div>
-
-                <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                  <svg
-                    class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span class="sr-only"> Increased by </span>
-                  12%
-                </div>
-              </dd>
-            </div>
-
-            <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">Avg. Open Rate</dt>
-              <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  58.16% <span class="ml-2 text-sm font-medium text-gray-500">from 56.14%</span>
-                </div>
-
-                <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                  <svg
-                    class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span class="sr-only"> Increased by </span>
-                  2.02%
-                </div>
-              </dd>
-            </div>
-
-            <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">Avg. Click Rate</dt>
-              <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  24.57% <span class="ml-2 text-sm font-medium text-gray-500">from 28.62%</span>
-                </div>
-
-                <div class="inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium bg-red-100 text-red-800 md:mt-2 lg:mt-0">
-                  <svg
-                    class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span class="sr-only"> Decreased by </span>
-                  4.05%
-                </div>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 </div>
