@@ -20,7 +20,10 @@ defmodule SentrypeerWeb.NavigationComponents do
   def breadcrumbs(assigns) do
     ~H"""
     <!-- Breadcrumbs -->
-    <nav class="flex border-b border-gray-200 dark:border-slate-400 bg-white dark:bg-slate-800" aria-label="Breadcrumb">
+    <nav
+      class="flex border-b border-gray-200 dark:border-slate-400 bg-white dark:bg-slate-800"
+      aria-label="Breadcrumb"
+    >
       <ol role="list" class="mx-auto flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-12">
         <li class="flex">
           <div class="flex items-center">

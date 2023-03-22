@@ -8,7 +8,9 @@ defmodule Sentrypeer.Clients.Client do
     field :auth_id, :string
     field :client_id, :string
 
-    has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent, foreign_key: :client_id, references: :client_id
+    has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent,
+      foreign_key: :client_id,
+      references: :client_id
 
     timestamps()
   end

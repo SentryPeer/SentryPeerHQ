@@ -355,8 +355,8 @@ defmodule SentrypeerWeb.CoreComponents do
   attr :as, :any, default: nil, doc: "the server side parameter to collect all input under"
 
   attr :rest, :global,
-       include: ~w(autocomplete name rel action enctype method novalidate target),
-       doc: "the arbitrary HTML attributes to apply to the form tag"
+    include: ~w(autocomplete name rel action enctype method novalidate target),
+    doc: "the arbitrary HTML attributes to apply to the form tag"
 
   slot :inner_block, required: true
   slot :actions, doc: "the slot for form actions, such as a submit button"
@@ -422,12 +422,12 @@ defmodule SentrypeerWeb.CoreComponents do
   attr :value, :any
 
   attr :type, :string,
-       default: "text",
-       values: ~w(checkbox color date datetime-local email file hidden month number password
+    default: "text",
+    values: ~w(checkbox color date datetime-local email file hidden month number password
                range radio search select tel text textarea time url week)
 
   attr :field, Phoenix.HTML.FormField,
-       doc: "a form field struct retrieved from the form, for example: @form[:email]"
+    doc: "a form field struct retrieved from the form, for example: @form[:email]"
 
   attr :errors, :list, default: []
   attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
@@ -603,8 +603,8 @@ defmodule SentrypeerWeb.CoreComponents do
   attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
 
   attr :row_item, :any,
-       default: &Function.identity/1,
-       doc: "the function for mapping each row before calling the :col and :action slots"
+    default: &Function.identity/1,
+    doc: "the function for mapping each row before calling the :col and :action slots"
 
   slot :col, required: true do
     attr :label, :string
@@ -750,8 +750,8 @@ defmodule SentrypeerWeb.CoreComponents do
       to: selector,
       transition:
         {"transition-all transform ease-out duration-300",
-        "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
-        "opacity-100 translate-y-0 sm:scale-100"}
+         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
+         "opacity-100 translate-y-0 sm:scale-100"}
     )
   end
 
@@ -761,8 +761,8 @@ defmodule SentrypeerWeb.CoreComponents do
       time: 200,
       transition:
         {"transition-all transform ease-in duration-200",
-        "opacity-100 translate-y-0 sm:scale-100",
-        "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
+         "opacity-100 translate-y-0 sm:scale-100",
+         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
     )
   end
 
@@ -770,9 +770,9 @@ defmodule SentrypeerWeb.CoreComponents do
     js
     |> JS.show(to: "##{id}")
     |> JS.show(
-         to: "##{id}-bg",
-         transition: {"transition-all transform ease-out duration-300", "opacity-0", "opacity-100"}
-       )
+      to: "##{id}-bg",
+      transition: {"transition-all transform ease-out duration-300", "opacity-0", "opacity-100"}
+    )
     |> show("##{id}-container")
     |> JS.add_class("overflow-hidden", to: "body")
     |> JS.focus_first(to: "##{id}-content")
@@ -781,9 +781,9 @@ defmodule SentrypeerWeb.CoreComponents do
   def hide_modal(js \\ %JS{}, id) do
     js
     |> JS.hide(
-         to: "##{id}-bg",
-         transition: {"transition-all transform ease-in duration-200", "opacity-100", "opacity-0"}
-       )
+      to: "##{id}-bg",
+      transition: {"transition-all transform ease-in duration-200", "opacity-100", "opacity-0"}
+    )
     |> hide("##{id}-container")
     |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})
     |> JS.remove_class("overflow-hidden", to: "body")
@@ -833,13 +833,12 @@ defmodule SentrypeerWeb.CoreComponents do
   def toggle_dropdown_menu(js \\ %JS{}, id) when is_binary(id) do
     js
     |> JS.toggle(
-         to: "#{id}",
-         in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
-         out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
-       )
+      to: "#{id}",
+      in: {"duration-200 ease-out", "opacity-0 scale-95", "opacity-100 scale-100"},
+      out: {"duration-100 ease-in", "opacity-100 scale-100", "opacity-0 scale-95"}
+    )
   end
 
   def sentrypeer_toolip(text) do
-
   end
 end

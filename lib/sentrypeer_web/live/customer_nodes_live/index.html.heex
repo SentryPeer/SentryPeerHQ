@@ -1,265 +1,276 @@
 <!-- Background color split screen for large screens -->
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
+</div>
 <div class="relative flex min-h-full flex-col">
-    <%= nav_top_menu(assigns) %>
-    <%= breadcrumbs(assigns) %>
-
-<!-- 3 column wrapper -->
-<div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+  <%= nav_top_menu(assigns) %>
+  <%= breadcrumbs(assigns) %>
+  <!-- 3 column wrapper -->
+  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
     <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
-        <!-- Account profile -->
-        <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
-            <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
-                <div class="flex items-center justify-between">
-                    <div class="flex-1 space-y-8">
-                        <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
-                            <!-- Profile -->
-                            <div class="flex items-center space-x-3">
-                                <div class="h-12 w-12 flex-shrink-0">
-                                    <img
-                                            class="h-12 w-12 rounded-full"
-                                            src={@current_user.avatar}
-                                            alt={ @current_user.name <> "'s avatar" }
-                                    title={ @current_user.name <> "'s avatar" }
-                                    />
-                                </div>
-                                <div class="space-y-1">
-                                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
-                                        <%= @current_user.name %>
-                                    </div>
-                                    <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                                        v<%= @app_version %> <a
-                                            href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
-                                            target="_blank" title="Browse this deployed version of SentryPeerHQ"
-                                            class="ml-1"><%= @git_rev %></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Action buttons -->
-                            <div class="flex flex-col sm:flex-col xl:flex-col">
-                                <.link patch={~p"/nodes/new"}>
-                                <button
-                                        type="button"
-                                        title="Create a new SentryPeer node"
-                                        class="inline-flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
-                                >
-                                    <!-- Heroicon name: plus/circle -->
-                                    <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="mr-1 h-5 w-5"
-                                    >
-                                        <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    New node
-                                </button>
-                            </.link>
-                        </div>
+      <!-- Account profile -->
+      <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
+        <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 space-y-8">
+              <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
+                <!-- Profile -->
+                <div class="flex items-center space-x-3">
+                  <div class="h-12 w-12 flex-shrink-0">
+                    <img
+                      class="h-12 w-12 rounded-full"
+                      src={@current_user.avatar}
+                      alt={ @current_user.name <> "'s avatar" }
+                      title={ @current_user.name <> "'s avatar" }
+                    />
+                  </div>
+                  <div class="space-y-1">
+                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
+                      <%= @current_user.name %>
                     </div>
-                    <!-- Meta info -->
-                    <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                        <%= in_app_menu(assigns) %>
+                    <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
+                      v<%= @app_version %>
+                      <a
+                        href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
+                        target="_blank"
+                        title="Browse this deployed version of SentryPeerHQ"
+                        class="ml-1"
+                      >
+                        <%= @git_rev %>
+                      </a>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Nodes List -->
-    <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
-        <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
-            <div class="flex items-center">
-                <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Nodes</h1>
-                <div class="relative">
+                <!-- Action buttons -->
+                <div class="flex flex-col sm:flex-col xl:flex-col">
+                  <.link patch={~p"/nodes/new"}>
                     <button
-                            type="button"
-                            title="Sort nodes by name and date"
-                            class="inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-slate-400 bg-white dark:bg-slate-800 dark:text-white px-4 py-2 text-sm font-medium text-gray-700 dark:text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            id="sort-menu-button"
-                            aria-expanded="false"
-                            aria-haspopup="true"
-                            phx-click={toggle_dropdown_menu("#sort-menu")}
-                            phx-click-away={JS.hide(to:
-                    "#sort-menu")}
+                      type="button"
+                      title="Create a new SentryPeer node"
+                      class="inline-flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
                     >
-                    <!-- Heroicon name: mini/bars-arrow-up -->
-                    <svg
-                            class="mr-3 h-5 w-5 text-gray-400 dark:text-slate-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                    >
+                      <!-- Heroicon name: plus/circle -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="mr-1 h-5 w-5"
+                      >
                         <path
-                                fill-rule="evenodd"
-                                d="M2 3.75A.75.75 0 012.75 3h11.5a.75.75 0 010 1.5H2.75A.75.75 0 012 3.75zM2 7.5a.75.75 0 01.75-.75h6.365a.75.75 0 010 1.5H2.75A.75.75 0 012 7.5zM14 7a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02l-1.95-2.1v6.59a.75.75 0 01-1.5 0V9.66l-1.95 2.1a.75.75 0 11-1.1-1.02l3.25-3.5A.75.75 0 0114 7zM2 11.25a.75.75 0 01.75-.75H7A.75.75 0 017 12H2.75a.75.75 0 01-.75-.75z"
-                                clip-rule="evenodd"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
-                    </svg>
-                    Sort
-                    <!-- Heroicon name: mini/chevron-down -->
-                    <svg
-                            class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400 dark:text-slate-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                    >
-                        <path
-                                fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd"
-                        />
-                    </svg>
+                      </svg>
+                      New node
                     </button>
-                    <!-- Dropdown menu, show/hide based on menu state. -->
-                    <div
-                            class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu"
-                            aria-orientation="vertical"
-                            aria-labelledby="sort-menu-button"
-                            tabindex="-1"
-                            id="sort-menu"
-                    >
-                        <div class="py-1" role="none">
-                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                            <a
-                                    href="#"
-                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                                    role="menuitem"
-                                    tabindex="-1"
-                                    id="sort-menu-item-0"
-                            >
-                                Name
-                            </a>
-                            <a
-                                    href="#"
-                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                                    role="menuitem"
-                                    tabindex="-1"
-                                    id="sort-menu-item-1"
-                            >
-                                Date modified
-                            </a>
-                            <a
-                                    href="#"
-                                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                                    role="menuitem"
-                                    tabindex="-1"
-                                    id="sort-menu-item-2"
-                            >
-                                Date created
-                            </a>
-                        </div>
-                    </div>
+                  </.link>
                 </div>
+              </div>
+              <!-- Meta info -->
+              <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+                <%= in_app_menu(assigns) %>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- Nodes List -->
+      <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+        <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
+          <div class="flex items-center">
+            <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Nodes</h1>
+            <div class="relative">
+              <button
+                type="button"
+                title="Sort nodes by name and date"
+                class="inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-slate-400 bg-white dark:bg-slate-800 dark:text-white px-4 py-2 text-sm font-medium text-gray-700 dark:text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                id="sort-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                phx-click={toggle_dropdown_menu("#sort-menu")}
+                phx-click-away={JS.hide(to: "#sort-menu")}
+              >
+                <!-- Heroicon name: mini/bars-arrow-up -->
+                <svg
+                  class="mr-3 h-5 w-5 text-gray-400 dark:text-slate-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 3.75A.75.75 0 012.75 3h11.5a.75.75 0 010 1.5H2.75A.75.75 0 012 3.75zM2 7.5a.75.75 0 01.75-.75h6.365a.75.75 0 010 1.5H2.75A.75.75 0 012 7.5zM14 7a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02l-1.95-2.1v6.59a.75.75 0 01-1.5 0V9.66l-1.95 2.1a.75.75 0 11-1.1-1.02l3.25-3.5A.75.75 0 0114 7zM2 11.25a.75.75 0 01.75-.75H7A.75.75 0 017 12H2.75a.75.75 0 01-.75-.75z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Sort
+                    <!-- Heroicon name: mini/chevron-down -->
+                <svg
+                  class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400 dark:text-slate-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <!-- Dropdown menu, show/hide based on menu state. -->
+              <div
+                class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="sort-menu-button"
+                tabindex="-1"
+                id="sort-menu"
+              >
+                <div class="py-1" role="none">
+                  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                  <a
+                    href="#"
+                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="sort-menu-item-0"
+                  >
+                    Name
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="sort-menu-item-1"
+                  >
+                    Date modified
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="sort-menu-item-2"
+                  >
+                    Date created
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <.modal
-        :if={@live_action in [:new, :edit]}
-        id="node_modal"
-        show
-        on_cancel={JS.navigate(~p"/nodes")}
+          :if={@live_action in [:new, :edit]}
+          id="node_modal"
+          show
+          on_cancel={JS.navigate(~p"/nodes")}
         >
-        <.live_component
-        module={SentrypeerWeb.CustomerNodesLive.FormComponent}
-        id={:new}
-        current_user={@current_user}
-        title={@page_title}
-        action={@live_action}
-        node={@node}
-        patch={~p"/nodes"}
-        />
-    </.modal>
-    <%= if @nodes == nil do %>
-    <.link patch={~p"/nodes/new"}>
-    <button
-            type="button"
-            title="Create a new SentryPeer node"
-            class="relative block w-full rounded-lg mt-2 border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-    >
-        <svg
+          <.live_component
+            module={SentrypeerWeb.CustomerNodesLive.FormComponent}
+            id={:new}
+            current_user={@current_user}
+            title={@page_title}
+            action={@live_action}
+            node={@node}
+            patch={~p"/nodes"}
+          />
+        </.modal>
+        <%= if @nodes == nil do %>
+          <.link patch={~p"/nodes/new"}>
+            <button
+              type="button"
+              title="Create a new SentryPeer node"
+              class="relative block w-full rounded-lg mt-2 border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              <svg
                 class="mx-auto h-12 w-12 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 48 48"
                 aria-hidden="true"
-        >
-            <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
-            />
-        </svg>
-        <span class="mt-2 block text-sm font-medium text-gray-900 ">Create a new node</span>
-    </button>
-</.link>
-<% else %>
-<%= for node <- @nodes do %>
-<ul role="list" class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400">
-    <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 dark:hover:bg-slate-600 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
-        <div class="flex items-center justify-between space-x-4">
-            <!-- Repo name and link -->
-            <div class="min-w-0 space-y-3">
-                <div class="flex items-center space-x-3">
-                    <span
-                            class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center"
-                            aria-hidden="true"
-                    >
-                      <span class="h-2 w-2 bg-green-400 rounded-full"></span>
-                    </span>
-
-                    <h2 class="text-sm font-medium dark:text-white">
-                        <.link navigate={~p"/nodes/#{node["client_id"]}"}
-                           title="View all details about this node">
-                            <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                            <%= node["name"] %> <span class="sr-only">Running</span>
-                        </.link>
-                    </h2>
-                </div>
-                <.link navigate={~p"/nodes/#{node["client_id"]}/edit"}
-                   title="Edit the Name and Description of this node"
-                   class="group relative flex items-center space-x-2.5">
-                    <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900"/>
-                    <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                      <%= node["description"] %>
-                    </span>
-                </.link>
-            </div>
-            <div class="sm:hidden">
-                <!-- Heroicon name: mini/chevron-right -->
-                <svg
-                        class="h-5 w-5 text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
+                />
+              </svg>
+              <span class="mt-2 block text-sm font-medium text-gray-900 ">Create a new node</span>
+            </button>
+          </.link>
+        <% else %>
+          <%= for node <- @nodes do %>
+            <ul
+              role="list"
+              class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"
+            >
+              <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 dark:hover:bg-slate-600 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+                <div class="flex items-center justify-between space-x-4">
+                  <!-- Repo name and link -->
+                  <div class="min-w-0 space-y-3">
+                    <div class="flex items-center space-x-3">
+                      <span
+                        class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center"
                         aria-hidden="true"
-                >
-                    <path
-                            fill-rule="evenodd"
-                            d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                            clip-rule="evenodd"
-                    />
-                </svg>
-            </div>
-            <!-- Repo meta info -->
-            <div class="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex">
-                <p class="flex items-center space-x-4">
-                    <button
-                            type="button"
-                            class="relative rounded-full bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
+                        <span class="h-2 w-2 bg-green-400 rounded-full"></span>
+                      </span>
+
+                      <h2 class="text-sm font-medium dark:text-white">
+                        <.link
+                          navigate={~p"/nodes/#{node["client_id"]}"}
+                          title="View all details about this node"
+                        >
+                          <span class="truncate absolute inset-0" aria-hidden="true"></span>
+                          <%= node["name"] %> <span class="sr-only">Running</span>
+                        </.link>
+                      </h2>
+                    </div>
+                    <.link
+                      navigate={~p"/nodes/#{node["client_id"]}/edit"}
+                      title="Edit the Name and Description of this node"
+                      class="group relative flex items-center space-x-2.5"
                     >
+                      <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
+                      <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
+                        <%= node["description"] %>
+                      </span>
+                    </.link>
+                  </div>
+                  <div class="sm:hidden">
+                    <!-- Heroicon name: mini/chevron-right -->
+                    <svg
+                      class="h-5 w-5 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <!-- Repo meta info -->
+                  <div class="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex">
+                    <p class="flex items-center space-x-4">
+                      <button
+                        type="button"
+                        class="relative rounded-full bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
                         <span class="sr-only">Add to favorites</span>
                         <!--
                             Heroicon name: mini/star
@@ -267,75 +278,75 @@
                             Starred: "text-yellow-300 hover:text-yellow-400", Not Starred: "text-gray-300 hover:text-gray-400"
                           -->
                         <svg
-                                class="text-gray-300 hover:text-gray-400 h-5 w-5"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                aria-hidden="true"
+                          class="text-gray-300 hover:text-gray-400 h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
                         >
-                            <path
-                                    fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd"
-                            />
+                          <path
+                            fill-rule="evenodd"
+                            d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                            clip-rule="evenodd"
+                          />
                         </svg>
-                    </button>
-                </p>
-                <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                    <span><%= time_ago(node["client_metadata"]["created_at"] ) %></span>
-                    <!-- Add more details later
+                      </button>
+                    </p>
+                    <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
+                      <span><%= time_ago(node["client_metadata"]["created_at"]) %></span>
+                      <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->
-                </p>
-            </div>
-        </div>
-    </li>
-    <!-- More nodes... -->
-</ul>
-<% end %>
-<% end %>
-</div>
-</div>
-<!-- Activity feed -->
-<div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-    <div class="pl-6 lg:w-80">
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- More nodes... -->
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <!-- Activity feed -->
+    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
+      <div class="pl-6 lg:w-80">
         <div class="pt-6 pb-2">
-            <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
+          <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
         </div>
         <div>
-            <ul role="list" class="divide-y divide-gray-200">
-                <li class="py-4">
-                    <div class="flex space-x-3">
-                        <img
-                                class="h-6 w-6 rounded-full"
-                                src={@current_user.avatar}
-                                alt={ @current_user.name <> "'s avatar" }
-                        title={ @current_user.name <> "'s avatar" }
-                        />
-                        <div class="flex-1 space-y-1">
-                            <div class="flex items-center justify-between dark:text-white">
-                                <h3 class="text-sm font-medium">You</h3>
-                                <p class="text-sm text-gray-500">1h</p>
-                            </div>
-                            <p class="text-sm text-gray-500 dark:text-slate-400">
-                                Deployed Workcation (2d89f0c8 in master) to production
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <!-- More items... -->
-            </ul>
-            <div class="border-t border-gray-200 py-4 text-sm">
-                <a
-                        href="#"
-                        title="View all your account activity"
-                        class="font-semibold text-indigo-600 hover:text-indigo-900"
-                >
-                    View all activity <span aria-hidden="true"> &rarr;</span>
-                </a>
-            </div>
+          <ul role="list" class="divide-y divide-gray-200">
+            <li class="py-4">
+              <div class="flex space-x-3">
+                <img
+                  class="h-6 w-6 rounded-full"
+                  src={@current_user.avatar}
+                  alt={ @current_user.name <> "'s avatar" }
+                  title={ @current_user.name <> "'s avatar" }
+                />
+                <div class="flex-1 space-y-1">
+                  <div class="flex items-center justify-between dark:text-white">
+                    <h3 class="text-sm font-medium">You</h3>
+                    <p class="text-sm text-gray-500">1h</p>
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-slate-400">
+                    Deployed Workcation (2d89f0c8 in master) to production
+                  </p>
+                </div>
+              </div>
+            </li>
+            <!-- More items... -->
+          </ul>
+          <div class="border-t border-gray-200 py-4 text-sm">
+            <a
+              href="#"
+              title="View all your account activity"
+              class="font-semibold text-indigo-600 hover:text-indigo-900"
+            >
+              View all activity <span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>

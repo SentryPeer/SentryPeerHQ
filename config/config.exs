@@ -52,12 +52,20 @@ config :sentrypeer, SentrypeerWeb.Endpoint,
 
 # Configures the mailer
 #
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
 # For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :sentrypeer, Sentrypeer.Mailer, adapter: Swoosh.Adapters.Local
+# at the `config/runtime.exs`. We use the SMTP adapter for development.
+config :sentrypeer, Sentrypeer.Mailer,
+  adapter: Swoosh.Adapters.SMTP,
+  relay: System.get_env("SENTRYPEER_SMTP_RELAY") || raise("SENTRYPEER_SMTP_RELAY is not set"),
+  username:
+    System.get_env("SENTRYPEER_SMTP_USERNAME") || raise("SENTRYPEER_SMTP_USERNAME is not set"),
+  password:
+    System.get_env("SENTRYPEER_SMTP_PASSWORD") || raise("SENTRYPEER_SMTP_PASSWORD is not set"),
+  tls: :always,
+  auth: :always,
+  port: System.get_env("SENTRYPEER_SMTP_PORT") || raise("SENTRYPEER_SMTP_PORT is not set"),
+  retries: 2,
+  no_mx_lookups: false
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -103,7 +111,7 @@ config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
 
 # Configure Cldr for localization and use of timeago/1
 config :ex_cldr,
-       default_backend: Sentrypeer.Cldr
+  default_backend: Sentrypeer.Cldr
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

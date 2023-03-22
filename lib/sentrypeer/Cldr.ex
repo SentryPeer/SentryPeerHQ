@@ -13,7 +13,7 @@
 
 defmodule Sentrypeer.Cldr do
   use Cldr,
-      locales: ["en"],
-      default_locale: "en",
-      providers: [Cldr.Calendar, Cldr.Number, Cldr.DateTime]
+    locales: ["en"],
+    default_locale: "en",
+    providers: [Cldr.Calendar, Cldr.Number, Cldr.DateTime]
 end
