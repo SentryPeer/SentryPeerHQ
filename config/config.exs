@@ -56,14 +56,12 @@ config :sentrypeer, SentrypeerWeb.Endpoint,
 # at the `config/runtime.exs`. We use the SMTP adapter for development.
 config :sentrypeer, Sentrypeer.Mailer,
   adapter: Swoosh.Adapters.SMTP,
-  relay: System.get_env("SENTRYPEER_SMTP_RELAY") || raise("SENTRYPEER_SMTP_RELAY is not set"),
-  username:
-    System.get_env("SENTRYPEER_SMTP_USERNAME") || raise("SENTRYPEER_SMTP_USERNAME is not set"),
-  password:
-    System.get_env("SENTRYPEER_SMTP_PASSWORD") || raise("SENTRYPEER_SMTP_PASSWORD is not set"),
+  relay: System.get_env("SENTRYPEER_SMTP_RELAY"),
+  username: System.get_env("SENTRYPEER_SMTP_USERNAME"),
+  password: System.get_env("SENTRYPEER_SMTP_PASSWORD"),
   tls: :always,
   auth: :always,
-  port: System.get_env("SENTRYPEER_SMTP_PORT") || raise("SENTRYPEER_SMTP_PORT is not set"),
+  port: System.get_env("SENTRYPEER_SMTP_PORT"),
   retries: 2,
   no_mx_lookups: false
 

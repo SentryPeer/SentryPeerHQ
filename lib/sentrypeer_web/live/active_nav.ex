@@ -44,7 +44,7 @@ defmodule SentrypeerWeb.ActiveNav do
           nil
       end
 
-    Logger.debug("Active tab: #{inspect(active_page)}")
+    Logger.debug("Active page: #{inspect(active_page)}")
 
     {:cont, assign(socket, active_page: active_page)}
   end
