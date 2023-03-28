@@ -56,8 +56,13 @@ window.liveSocket = liveSocket
 window.addEventListener("sentrypeerhq:copy_client_secret", (event) => {
     if ("clipboard" in navigator) {
         const text = event.target.value;
+        const copy_button = document.getElementById("copy_client_secret_button");
         navigator.clipboard.writeText(text).then(() => {
-            alert("Copied to clipboard!");
+            copy_button.classList.add("has-tooltip");
+            setTimeout(() => {
+                copy_button.classList.remove("has-tooltip");
+
+            }, 2000);
         });
     } else {
         alert("Sorry, your browser does not support the clipboard copy feature.");

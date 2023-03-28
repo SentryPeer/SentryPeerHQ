@@ -50,7 +50,6 @@
           </div>
         </div>
       </div>
-      <!-- Nodes List -->
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
@@ -91,10 +90,107 @@
             </div>
           </dl>
         </div>
-        <div id="cal-heatmap"></div>
+        <div phx-update="ignore" class="hidden lg:block mt-10" id="event-heatmap"></div>
+        <div phx-update="ignore" class="hidden lg:block" id="event-heatmap-legend">
+          <div class="mt-2" id="ex-ghDay"></div>
+          <a
+            class="text-slate-700 text-xs"
+            href="#"
+            onclick="
+                                event.preventDefault();
+                                cal.previous();
+                            "
+          >
+            ← Previous
+          </a>
+          <a
+            class="text-slate-700 text-xs"
+            href="#"
+            onclick="
+                                event.preventDefault();
+                                cal.next();
+                            "
+          >
+            Next →
+          </a>
+          <div class="hidden lg:block float-right text-xs mt-2">
+            <span class="text-slate-700">Less</span>
+            <div id="ex-ghDay-legend" class="inline-block ml-1 mr-1"></div>
+            <span class="text-slate-700 text-xs">More</span>
+          </div>
+        </div>
         <script>
+          const data = [
+              {date: '2012-01-01', value: 30},
+              {date: '2012-01-01', value: 3},
+              {date: '2012-01-02', value: 6},
+              {date: '2012-02-03', value: 6},
+              {date: '2012-05-04', value: 9},
+              {date: '2012-07-05', value: 9},
+              {date: '2012-10-10', value: 9},
+
+          ];
           const cal = new CalHeatmap();
-          cal.paint({});
+          cal.paint({
+              data: {
+                  source: data,
+                  x: 'date',
+                  y: d => +d['value'],
+                  groupY: 'max',
+              },
+              date: {start: new Date('2012-01-01')},
+              range: 12,
+              itemSelector: '#event-heatmap',
+              scale: {
+                  color: {
+                      type: 'threshold',
+                      range: ['#6d50a0', '#73168c', '#c617f6', '#eca7ff'],
+                      domain: [10, 20, 30],
+                  },
+              },
+              domain: {
+                  type: 'month',
+                  gutter: 4,
+                  label: {text: 'MMM', textAlign: 'start', position: 'top'},
+              },
+              subDomain: {type: 'day', radius: 2, width: 11, height: 11, gutter: 4},
+
+          },
+              [
+                  [
+                      Tooltip,
+                      {
+                          text: function (date, value, dayjsDate) {
+                              return (
+                                  (value ? value : 'No') +
+                                  ' events received on ' +
+                                  dayjsDate.format('dddd, MMMM Do YYYY')
+                              );
+                          },
+                      },
+                  ],
+                  [
+                      LegendLite,
+                      {
+                          includeBlank: true,
+                          itemSelector: '#ex-ghDay-legend',
+                          radius: 2,
+                          width: 11,
+                          height: 11,
+                          gutter: 4,
+                      },
+                  ],
+                  [
+                      CalendarLabel,
+                      {
+                          width: 30,
+                          textAlign: 'start',
+                          text: () => dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? '' : d)),
+                          padding: [25, 0, 0, 0],
+                      },
+                  ],
+              ]
+          );
         </script>
       </div>
     </div>

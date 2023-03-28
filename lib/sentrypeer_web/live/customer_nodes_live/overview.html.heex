@@ -81,6 +81,7 @@
                       <div class="absolute inset-y-0 right-0 flex items-center px-2">
                         <input class="hidden" id="toggle_client_secret" type="checkbox" />
                         <button
+                          id="reveal_client_secret_button"
                           title="Reveal Client Secret"
                           phx-click={
                             JS.set_attribute({"type", "text"},
@@ -95,6 +96,7 @@
                         </button>
                         <input class="hidden" id="copy_client_secret" type="checkbox" />
                         <button
+                          id="copy_client_secret_button"
                           title="Copy"
                           phx-click={
                             JS.dispatch("sentrypeerhq:copy_client_secret", to: "#client_secret")
@@ -104,6 +106,9 @@
                           for="toggle_client_secret"
                         >
                           <Heroicons.document_duplicate class="h-5 w-5 flex-shrink-0" />
+                          <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-16">
+                            Copied!
+                          </span>
                         </button>
                       </div>
                       <input

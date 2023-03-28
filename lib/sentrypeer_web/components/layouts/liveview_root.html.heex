@@ -31,9 +31,26 @@
     </script>
     <%= if @active_page == :dashboard do %>
       <!-- Cal-Heatmap -->
-      <script src="https://d3js.org/d3.v7.min.js">
+      <script type="text/javascript" src="https://d3js.org/d3.v7.min.js">
       </script>
-      <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js">
+      <script type="text/javascript" src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js">
+      </script>
+      <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2">
+      </script>
+      <script
+        type="text/javascript"
+        src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"
+      >
+      </script>
+      <script
+        type="text/javascript"
+        src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"
+      >
+      </script>
+      <script
+        type="text/javascript"
+        src="https://unpkg.com/cal-heatmap/dist/plugins/CalendarLabel.min.js"
+      >
       </script>
       <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css" />
     <% end %>
