@@ -11,7 +11,7 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.CustomerNodesLive.Index do
+defmodule SentrypeerWeb.CustomerSettingsApiLive.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
@@ -73,7 +73,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", %{"client_id" => id}, socket) do
     case delete_node(socket.assigns.current_user.id, id) do
       {:ok, _} ->
         {:noreply, socket}

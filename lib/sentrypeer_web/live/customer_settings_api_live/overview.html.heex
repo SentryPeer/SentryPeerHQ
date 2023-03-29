@@ -1,0 +1,385 @@
+<!-- Background color split screen for large screens -->
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
+</div>
+<div class="relative flex min-h-full flex-col">
+  <%= nav_top_menu(assigns) %>
+  <%= breadcrumbs(assigns) %>
+  <!-- 3 column wrapper -->
+  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+    <!-- Left sidebar & main wrapper -->
+    <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
+      <div class="border-b border-gray-200 dark:border-slate-400 bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-b-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
+        <div class="h-full py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+          <%= in_app_menu(assigns) %>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+        <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+          <!-- Main area -->
+          <div class="py-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Last 30 days
+            </h3>
+            <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
+              <div class="px-4 py-5 sm:p-6">
+                <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
+                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                  <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                    71,897
+                  </div>
+                </dd>
+              </div>
+
+              <div class="px-4 py-5 sm:p-6">
+                <dt class="text-base font-normal text-gray-900">Avg. Open Rate</dt>
+                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                  <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                    58.16%
+                  </div>
+                </dd>
+              </div>
+
+              <div class="px-4 py-5 sm:p-6">
+                <dt class="text-base font-normal text-gray-900">Avg. Click Rate</dt>
+                <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                  <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                    24.57%
+                  </div>
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <!-- Overview of SentryPeer node -->
+          <section aria-labelledby="node-title">
+            <div class="bg-white dark:bg-slate-800 shadow sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h2
+                  id="node-title"
+                  class="text-lg font-medium leading-6 text-gray-900 dark:text-white"
+                >
+                  <%= @node["name"] %>
+                </h2>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-slate-400">
+                  <%= @node["description"] %>
+                </p>
+              </div>
+              <div class="border-t border-gray-200 dark:border-slate-400 px-4 py-5 sm:px-6">
+                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                  <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-white">Client ID</dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400">
+                      <%= @node["client_id"] %>
+                    </dd>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <dt class=" text-sm font-medium text-gray-500 dark:text-white">
+                      Client Secret
+                    </dt>
+                    <div class="relative w-full">
+                      <div class="absolute inset-y-0 right-0 flex items-center px-2">
+                        <input class="hidden" id="toggle_client_secret" type="checkbox" />
+                        <button
+                          id="reveal_client_secret_button"
+                          title="Reveal Client Secret"
+                          phx-click={
+                            JS.set_attribute({"type", "text"},
+                              to: "#client_secret"
+                            )
+                          }
+                          class="bg-slate-50 dark:bg-slate-400 hover:bg-gray-400
+                                                rounded px-2 py-1 text-sm text-indigo-600 font-mono cursor-pointer"
+                          for="toggle_client_secret"
+                        >
+                          <Heroicons.eye class="h-5 w-5 flex-shrink-0" />
+                        </button>
+                        <input class="hidden" id="copy_client_secret" type="checkbox" />
+                        <button
+                          id="copy_client_secret_button"
+                          title="Copy"
+                          phx-click={
+                            JS.dispatch("sentrypeerhq:copy_client_secret", to: "#client_secret")
+                          }
+                          class="bg-slate-50 dark:bg-slate-400 hover:bg-gray-400
+                                                rounded px-2 py-1 text-sm text-indigo-600 font-mono cursor-pointer"
+                          for="toggle_client_secret"
+                        >
+                          <Heroicons.document_duplicate class="h-5 w-5 flex-shrink-0" />
+                          <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-16">
+                            Copied!
+                          </span>
+                        </button>
+                      </div>
+                      <input
+                        id="client_secret"
+                        type="password"
+                        autocomplete="off"
+                        value={@node["client_secret"]}
+                        disabled
+                        class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-400 border border-slate-300 dark:border-slate-400
+                                            rounded-md text-sm shadow-sm placeholder-slate-400 disabled:bg-slate-50
+                                            disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                                            "
+                      />
+                    </div>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-white">
+                      Token Endpoint
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400">
+                      <a
+                        href={@token_url}
+                        target="_blank"
+                        title="URL where you POST your client_id and client_secret to get a JWT bearer token"
+                      >
+                        <%= @token_url %>
+                      </a>
+                    </dd>
+                  </div>
+                  <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-white">Created</dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400 has-tooltip">
+                      <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-8">
+                        <%= @node["client_metadata"]["created_at"] %>
+                      </span>
+                      <%= time_ago(@node["client_metadata"]["created_at"]) %>
+                    </dd>
+                  </div>
+                  <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-white">Updated</dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400 has-tooltip">
+                      <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-8">
+                        <%= @node["client_metadata"]["updated_at"] %>
+                      </span>
+                      <%= time_ago(@node["client_metadata"]["updated_at"]) %>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
+      <div class="h-full py-3 pl-3 lg:w-80">
+        <!-- Right column area -->
+        <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
+          <div class="bg-white dark:bg-slate-800 px-4 py-5 shadow sm:rounded-lg sm:px-6">
+            <h2 id="timeline-title" class="text-lg font-medium text-gray-900 dark:text-white">
+              Activity
+            </h2>
+            <!-- Activity Feed -->
+            <div class="mt-6 flow-root">
+              <ul role="list" class="-mb-8">
+                <li>
+                  <div class="relative pb-8">
+                    <span
+                      class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                      aria-hidden="true"
+                    >
+                    </span>
+                    <div class="relative flex space-x-3">
+                      <div>
+                        <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white dark:ring-slate-400">
+                          <svg
+                            class="h-5 w-5 text-white"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                        <div>
+                          <p class="text-sm text-gray-500 dark:text-white">
+                            Applied to
+                            <a href="#" class="font-medium text-gray-900 dark:text-slate-400">
+                              Front
+                              End Developer
+                            </a>
+                          </p>
+                        </div>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <time datetime="2020-09-20">Sep 20</time>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="relative pb-8">
+                    <span
+                      class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                      aria-hidden="true"
+                    >
+                    </span>
+                    <div class="relative flex space-x-3">
+                      <div>
+                        <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white dark:ring-slate-400">
+                          <svg
+                            class="h-5 w-5 text-white"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                        <div>
+                          <p class="text-sm text-gray-500 dark:text-white">
+                            Advanced to phone screening by
+                            <a href="#" class="font-medium text-gray-900 dark:text-slate-400">
+                              Bethany
+                              Blake
+                            </a>
+                          </p>
+                        </div>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <time datetime="2020-09-22">Sep 22</time>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="relative pb-8">
+                    <span
+                      class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                      aria-hidden="true"
+                    >
+                    </span>
+                    <div class="relative flex space-x-3">
+                      <div>
+                        <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white dark:ring-slate-400">
+                          <svg
+                            class="h-5 w-5 text-white"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                        <div>
+                          <p class="text-sm text-gray-500 dark:text-white">
+                            Completed phone screening with
+                            <a href="#" class="font-medium text-gray-900 dark:text-slate-400">
+                              Martha
+                              Gardner
+                            </a>
+                          </p>
+                        </div>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <time datetime="2020-09-28">Sep 28</time>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="relative pb-8">
+                    <span
+                      class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
+                      aria-hidden="true"
+                    >
+                    </span>
+                    <div class="relative flex space-x-3">
+                      <div>
+                        <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white dark:ring-slate-400">
+                          <svg
+                            class="h-5 w-5 text-white"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                        <div>
+                          <p class="text-sm text-gray-500 dark:text-white">
+                            Advanced to interview by
+                            <a href="#" class="font-medium text-gray-900 dark:text-slate-400">
+                              Bethany
+                              Blake
+                            </a>
+                          </p>
+                        </div>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <time datetime="2020-09-30">Sep 30</time>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="relative pb-8">
+                    <div class="relative flex space-x-3  dark:text-slate-400">
+                      <div>
+                        <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white dark:ring-slate-400">
+                          <svg
+                            class="h-5 w-5 text-white"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                        <div>
+                          <p class="text-sm text-gray-500 dark:text-white">
+                            Completed interview with
+                            <a href="#" class="font-medium text-gray-900 dark:text-slate-400">
+                              Katherine
+                              Snyder
+                            </a>
+                          </p>
+                        </div>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <time datetime="2020-10-04">Oct 4</time>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="justify-stretch mt-6 flex flex-col">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                See all
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

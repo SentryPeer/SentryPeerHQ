@@ -480,8 +480,8 @@ defmodule SentrypeerWeb.NavigationComponents do
                   >
                     View Profile
                   </a>
-                  <a
-                    href="#"
+                  <.link
+                    navigate={~p"/settings"}
                     title="Change your settings"
                     class="block px-4 py-2 text-sm font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
@@ -489,7 +489,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                     id="user-menu-item-1"
                   >
                     Settings
-                  </a>
+                  </.link>
                   <a
                     href="#"
                     title="Logout from SentryPeer"

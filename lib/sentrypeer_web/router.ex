@@ -58,11 +58,19 @@ defmodule SentrypeerWeb.Router do
       pipe_through [:browser, :admins_only, :ensure_authenticated_user]
       live "/dashboard", CustomerDashboardLive.Index, :index
 
+      # SentryPeer nodes that the user owns - https://sentrypeer.org is the node software used to contribute their
+      # own data
       live "/nodes", CustomerNodesLive.Index, :index
       live "/nodes/new", CustomerNodesLive.Index, :new
       live "/nodes/:client_id", CustomerNodesLive.Overview, :overview
-      live "/nodes/:id/edit", CustomerNodesLive.Index, :edit
-      live "/nodes/:id/delete", CustomerNodesLive.Index, :delete
+      live "/nodes/:client_id/edit", CustomerNodesLive.Index, :edit
+      live "/nodes/:client_id/delete", CustomerNodesLive.Index, :delete
+
+      live "/settings", CustomerSettingsApiLive.Index, :index
+      live "/settings/api/new", CustomerSettingsApiLive.Index, :new
+      live "/settings/api/:client_id", CustomerSettingsApiLive.Overview, :overview
+      live "/settings/api/:client_id/edit", CustomerSettingsApiLive.Index, :edit
+      live "/settings/api/:client_id/delete", CustomerSettingsApiLive.Index, :delete
     end
   end
 
