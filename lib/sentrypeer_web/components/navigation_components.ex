@@ -28,7 +28,7 @@ defmodule SentrypeerWeb.NavigationComponents do
         <li class="flex">
           <div class="flex items-center">
             <.link
-              navigate={~p"/dashboard"}
+              href={~p"/dashboard"}
               title="SentryPeer Dashboard"
               class={"#{if @active_page == :dashboard,
                 do: "ml-4 text-sm font-medium hover:text-gray-700 dark:hover:text-white dark:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
@@ -96,6 +96,30 @@ defmodule SentrypeerWeb.NavigationComponents do
                 class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
               >
                 <%= @node["client_id"] %>
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if (@active_page == :settings || @active_page == :settings_overview ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/settings"}
+                title="SentryPeer Settings"
+                class={"#{if @active_page == :settings,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Settings
               </.link>
             </div>
           </li>
@@ -229,6 +253,15 @@ defmodule SentrypeerWeb.NavigationComponents do
         </svg>
         <span class="truncate">Integrations</span>
       </a>
+
+      <.link
+        navigate={~p"/settings"}
+        title="Manage your API client credentials and other settings"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      >
+        <Heroicons.cog_8_tooth class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6" />
+        <span class="truncate">Settings</span>
+      </.link>
 
       <a
         href="https://status.sentrypeer.com/"
@@ -470,37 +503,40 @@ defmodule SentrypeerWeb.NavigationComponents do
                   tabindex="-1"
                 >
                   <!-- Active: "bg-gray-100", Not Active: "" -->
-                  <a
-                    href="#"
+                  <.link
+                    navigate={~p"/users/profile"}
                     title="View your profile"
-                    class="block px-4 py-2 text-sm font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
+                    class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-0"
                   >
+                    <Heroicons.user class="mr-3 h-5 w-5 text-gray-400 dark:text-black group-hover:text-gray-500 dark:group-hover:text-black" />
                     View Profile
-                  </a>
+                  </.link>
                   <.link
-                    navigate={~p"/settings"}
-                    title="Change your settings"
-                    class="block px-4 py-2 text-sm font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
+                    navigate={~p"/users/settings"}
+                    title="Manage your user settings"
+                    class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
                   >
+                    <Heroicons.cog_6_tooth class="mr-3 h-5 w-5 text-gray-400 dark:text-black group-hover:text-gray-500 dark:group-hover:text-black" />
                     Settings
                   </.link>
-                  <a
+                  <.link
                     href="#"
                     title="Logout from SentryPeer"
-                    class="block px-4 py-2 text-sm font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
+                    class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-2"
                     phx-click={show_modal("confirm_logout")}
                   >
+                    <Heroicons.arrow_left_on_rectangle class="mr-3 h-5 w-5 text-gray-400 dark:text-black group-hover:text-gray-500 dark:group-hover:text-black" />
                     Logout
-                  </a>
+                  </.link>
                 </div>
               </div>
             </div>
@@ -537,20 +573,23 @@ defmodule SentrypeerWeb.NavigationComponents do
         </div>
         <div class="border-t border-indigo-800 pt-4 pb-3">
           <div class="space-y-1 px-2">
-            <a
-              href="#"
+            <.link
+              navigate={~p"/users/profile"}
+              title="View your profile"
               class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
             >
-              Your Profile
-            </a>
-            <a
-              href="#"
+              View Profile
+            </.link>
+            <.link
+              navigate={~p"/users/settings"}
+              title="Manage your user settings"
               class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
             >
               Settings
-            </a>
+            </.link>
             <.link
               href="#"
+              title="Logout from SentryPeer"
               phx-click={show_modal("confirm_logout")}
               class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600
                     hover:text-indigo-100"

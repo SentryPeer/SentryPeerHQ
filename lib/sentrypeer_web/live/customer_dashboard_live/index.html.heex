@@ -90,11 +90,16 @@
             </div>
           </dl>
         </div>
-        <div phx-update="ignore" class="hidden lg:block mt-10" id="event-heatmap"></div>
+        <div
+          phx-update="ignore"
+          class="hidden lg:block mt-10 dark:text-slate-400"
+          id="event-heatmap"
+        >
+        </div>
         <div phx-update="ignore" class="hidden lg:block" id="event-heatmap-legend">
           <div class="mt-2" id="ex-ghDay"></div>
           <a
-            class="text-slate-700 text-xs"
+            class="text-slate-700 dark:text-slate-400 text-xs"
             href="#"
             onclick="
                                 event.preventDefault();
@@ -104,7 +109,7 @@
             ← Previous
           </a>
           <a
-            class="text-slate-700 text-xs"
+            class="text-slate-700 dark:text-slate-400 text-xs"
             href="#"
             onclick="
                                 event.preventDefault();
@@ -113,10 +118,10 @@
           >
             Next →
           </a>
-          <div class="hidden lg:block float-right text-xs mt-2">
-            <span class="text-slate-700">Less</span>
-            <div id="ex-ghDay-legend" class="inline-block ml-1 mr-1"></div>
-            <span class="text-slate-700 text-xs">More</span>
+          <div class="hidden lg:block float-right mt-2">
+            <span class="text-slate-700 dark:text-slate-400 text-xs">Less</span>
+            <div id="ex-ghDay-legend" class="inline-block ml-1 mr-1 dark:text-slate-400"></div>
+            <span class="text-slate-700 dark:text-slate-400 text-xs">More</span>
           </div>
         </div>
         <script>

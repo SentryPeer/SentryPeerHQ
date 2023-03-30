@@ -40,6 +40,9 @@ defmodule SentrypeerWeb.ActiveNav do
         {SentrypeerWeb.CustomerNodesLive.Overview, _} ->
           :node_overview
 
+        {SentrypeerWeb.CustomerSettingsLive.Index, _} ->
+          :settings
+
         {_, _} ->
           nil
       end

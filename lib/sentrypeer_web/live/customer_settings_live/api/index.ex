@@ -11,7 +11,7 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.CustomerSettingsApiLive.Index do
+defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
