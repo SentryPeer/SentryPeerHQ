@@ -11,20 +11,20 @@
 #                             |___/
 #
 
-defmodule Sentrypeer.CustomerNodes.Node do
+defmodule Sentrypeer.CustomerClients.Client do
   @moduledoc false
 
-  defstruct [:node_name, :description]
-  @types %{node_name: :string, description: :string}
+  defstruct [:client_name, :client_description]
+  @types %{client_name: :string, client_description: :string}
 
   import Ecto.Changeset
 
-  def changeset(%__MODULE__{} = node, attrs) do
-    {node, @types}
+  def changeset(%__MODULE__{} = client, attrs) do
+    {client, @types}
     |> cast(attrs, Map.keys(@types))
-    |> validate_required([:node_name, :description])
-    |> validate_format(:node_name, ~r/^[a-zA-Z0-9_-]+$/)
-    |> validate_length(:node_name, min: 3, max: 20)
-    |> validate_length(:description, min: 3, max: 100)
+    |> validate_required([:client_name, :client_description])
+    |> validate_format(:client_name, ~r/^[a-zA-Z0-9_-]+$/)
+    |> validate_length(:client_name, min: 3, max: 20)
+    |> validate_length(:client_description, min: 3, max: 100)
   end
 end

@@ -66,7 +66,7 @@
               <dt class="text-base font-normal text-gray-900">Phone Numbers</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  71,897
+                  202,772
                 </div>
               </dd>
             </div>
@@ -75,7 +75,7 @@
               <dt class="text-base font-normal text-gray-900">IP Addresses</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  58.16%
+                  730
                 </div>
               </dd>
             </div>
@@ -84,7 +84,7 @@
               <dt class="text-base font-normal text-gray-900">Total Events</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  24.57%
+                  598,809
                 </div>
               </dd>
             </div>
@@ -126,41 +126,76 @@
         </div>
         <script>
           const data = [
-              {date: '2012-01-01', value: 30},
-              {date: '2012-01-01', value: 3},
-              {date: '2012-01-02', value: 6},
-              {date: '2012-02-03', value: 6},
-              {date: '2012-05-04', value: 9},
-              {date: '2012-07-05', value: 9},
-              {date: '2012-10-10', value: 9},
-
+              {date: '2023-02-20', value: 8},
+              {date: '2023-02-21', value: 40573},
+              {date: '2023-02-22', value: 16051},
+              {date: '2023-02-23', value: 34111},
+              {date: '2023-02-24', value: 49770},
+              {date: '2023-02-25', value: 21616},
+              {date: '2023-02-26', value: 22106},
+              {date: '2023-02-27', value: 11871},
+              {date: '2023-02-28', value: 11571},
+              {date: '2023-03-01', value: 7857},
+              {date: '2023-03-02', value: 3171},
+              {date: '2023-03-03', value: 17771},
+              {date: '2023-03-04', value: 13344},
+              {date: '2023-03-05', value: 3875},
+              {date: '2023-03-06', value: 4119},
+              {date: '2023-03-07', value: 1834},
+              {date: '2023-03-08', value: 6792},
+              {date: '2023-03-09', value: 4684},
+              {date: '2023-03-10', value: 6641},
+              {date: '2023-03-11', value: 9496},
+              {date: '2023-03-12', value: 9783},
+              {date: '2023-03-13', value: 9138},
+              {date: '2023-03-14', value: 1118},
+              {date: '2023-03-15', value: 1393},
+              {date: '2023-03-16', value: 39623},
+              {date: '2023-03-17', value: 36199},
+              {date: '2023-03-18', value: 20064},
+              {date: '2023-03-19', value: 15579},
+              {date: '2023-03-20', value: 24819},
+              {date: '2023-03-21', value: 12860},
+              {date: '2023-03-22', value: 16190},
+              {date: '2023-03-23', value: 11399},
+              {date: '2023-03-24', value: 8828},
+              {date: '2023-03-25', value: 10650},
+              {date: '2023-03-26', value: 5557},
+              {date: '2023-03-27', value: 8427},
+              {date: '2023-03-28', value: 7631},
+              {date: '2023-03-29', value: 8304},
+              {date: '2023-03-30', value: 16581},
+              {date: '2023-03-31', value: 13432},
+              {date: '2023-04-01', value: 15426},
+              {date: '2023-04-02', value: 12557},
+              {date: '2023-04-03', value: 5970}
           ];
           const cal = new CalHeatmap();
           cal.paint({
-              data: {
-                  source: data,
-                  x: 'date',
-                  y: d => +d['value'],
-                  groupY: 'max',
-              },
-              date: {start: new Date('2012-01-01')},
-              range: 12,
-              itemSelector: '#event-heatmap',
-              scale: {
-                  color: {
-                      type: 'threshold',
-                      range: ['#6d50a0', '#73168c', '#c617f6', '#eca7ff'],
-                      domain: [10, 20, 30],
+                  data: {
+                      source: data,
+                      x: 'date',
+                      y: d => +d['value'],
+                      groupY: 'max',
                   },
-              },
-              domain: {
-                  type: 'month',
-                  gutter: 4,
-                  label: {text: 'MMM', textAlign: 'start', position: 'top'},
-              },
-              subDomain: {type: 'day', radius: 2, width: 11, height: 11, gutter: 4},
+                  date: {start: new Date('2023-01-01')},
+                  range: 12,
+                  itemSelector: '#event-heatmap',
+                  scale: {
+                      color: {
+                          type: 'threshold',
+                          range: ['#6d50a0', '#73168c', '#c617f6', '#eca7ff'],
+                          domain: [10000, 20000, 30000, 40000],
+                      },
+                  },
+                  domain: {
+                      type: 'month',
+                      gutter: 4,
+                      label: {text: 'MMM', textAlign: 'start', position: 'top'},
+                  },
+                  subDomain: {type: 'day', radius: 2, width: 11, height: 11, gutter: 4},
 
-          },
+              },
               [
                   [
                       Tooltip,

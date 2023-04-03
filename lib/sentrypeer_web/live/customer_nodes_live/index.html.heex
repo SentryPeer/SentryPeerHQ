@@ -175,16 +175,17 @@
           on_cancel={JS.navigate(~p"/nodes")}
         >
           <.live_component
-            module={SentrypeerWeb.CustomerNodesLive.FormComponent}
+            module={SentrypeerWeb.Live.APIClientFormComponent}
             id={:new}
             current_user={@current_user}
             title={@page_title}
             action={@live_action}
-            node={@node}
+            client={@client}
+            client_type="node"
             patch={~p"/nodes"}
           />
         </.modal>
-        <%= if @nodes == nil do %>
+        <%= if @clients == [] do %>
           <.link patch={~p"/nodes/new"}>
             <button
               type="button"
@@ -206,11 +207,13 @@
                   d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
                 />
               </svg>
-              <span class="mt-2 block text-sm font-medium text-gray-900 ">Create a new node</span>
+              <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-slate-400">
+                Create a new node
+              </span>
             </button>
           </.link>
         <% else %>
-          <%= for node <- @nodes do %>
+          <%= for client <- @clients do %>
             <ul
               role="list"
               class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"
@@ -229,22 +232,22 @@
 
                       <h2 class="text-sm font-medium dark:text-white">
                         <.link
-                          navigate={~p"/nodes/#{node["client_id"]}"}
+                          navigate={~p"/nodes/#{client["client_id"]}"}
                           title="View all details about this node"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= node["name"] %> <span class="sr-only">Running</span>
+                          <%= client["client_name"] %> <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
                     <.link
-                      navigate={~p"/nodes/#{node["client_id"]}/edit"}
+                      navigate={~p"/nodes/#{client["client_id"]}/edit"}
                       title="Edit the Name and Description of this node"
                       class="group relative flex items-center space-x-2.5"
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= node["description"] %>
+                        <%= client["client_description"] %>
                       </span>
                     </.link>
                   </div>
@@ -293,7 +296,7 @@
                       </button>
                     </p>
                     <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                      <span><%= time_ago(node["client_metadata"]["created_at"]) %></span>
+                      <span><%= time_ago(client["client_metadata"]["created_at"]) %></span>
                       <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->
@@ -326,10 +329,10 @@
                 <div class="flex-1 space-y-1">
                   <div class="flex items-center justify-between dark:text-white">
                     <h3 class="text-sm font-medium">You</h3>
-                    <p class="text-sm text-gray-500">1h</p>
+                    <p class="text-sm text-gray-500">1 hour ago</p>
                   </div>
                   <p class="text-sm text-gray-500 dark:text-slate-400">
-                    Deployed Workcation (2d89f0c8 in master) to production
+                    Logged in
                   </p>
                 </div>
               </div>

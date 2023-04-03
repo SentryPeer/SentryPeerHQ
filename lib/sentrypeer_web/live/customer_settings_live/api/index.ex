@@ -15,7 +15,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
-  alias Sentrypeer.CustomerNodes.Node
+  alias Sentrypeer.CustomerClients.Client
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
@@ -47,20 +47,20 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
 
       {:ok, node} ->
         socket
-        |> assign(:page_title, "Edit Node")
+        |> assign(:page_title, "Edit Client")
         |> assign(:node, node)
     end
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "Create a new SentryPeer Node")
-    |> assign(:node, %Node{})
+    |> assign(:page_title, "Create a new SentryPeer API client")
+    |> assign(:node, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "SentryPeer Nodes")
+    |> assign(:page_title, "SentryPeer API clients")
     |> assign(:node, nil)
   end
 

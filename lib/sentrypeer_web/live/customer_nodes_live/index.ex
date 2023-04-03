@@ -15,14 +15,14 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
-  alias Sentrypeer.CustomerNodes.Node
+  alias Sentrypeer.CustomerClients.Client
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
 
   @impl true
   def mount(_params, session, socket) do
-    nodes = list_clients(session["current_user"].id)
+    clients = list_clients(session["current_user"].id)
 
     {:ok,
      assign(socket,
@@ -31,7 +31,8 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Nodes",
-       nodes: nodes
+       client_type: "node",
+       clients: clients
      )}
   end
 
@@ -45,31 +46,32 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
       nil ->
         socket |> assign(:page_title, "Node not found")
 
-      {:ok, node} ->
+      {:ok, client} ->
         socket
         |> assign(:page_title, "Edit Node")
-        |> assign(:node, node)
+        |> assign(:client, client)
     end
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create a new SentryPeer Node")
-    |> assign(:node, %Node{})
+    |> assign(:client_type, "node")
+    |> assign(:client, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "SentryPeer Nodes")
-    |> assign(:node, nil)
+    |> assign(:client, nil)
   end
 
   @impl true
-  def handle_info({SentrypeerWeb.CustomerNodesLive.FormComponent, {:saved, node}}, socket) do
+  def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:nodes, list_clients(socket.assigns.current_user.id))
-     |> assign(:node, node)}
+     |> assign(:clients, list_clients(socket.assigns.current_user.id))
+     |> assign(:client, client)}
   end
 
   @impl true
@@ -79,7 +81,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
         {:noreply, socket}
 
       {:error, _} ->
-        {:noreply, socket |> push_event("error", "Node not deleted")}
+        {:noreply, socket |> push_event("error", "Client not deleted")}
     end
   end
 

@@ -11,10 +11,10 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
+defmodule SentrypeerWeb.Live.APIClientFormComponent do
   use SentrypeerWeb, :live_component
 
-  alias Sentrypeer.CustomerNodes
+  alias Sentrypeer.CustomerClients
 
   require Logger
 
@@ -24,21 +24,21 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Give your node some memorable details</:subtitle>
+        <:subtitle>Give your <%= @client_type %> some memorable details</:subtitle>
       </.header>
 
       <.simple_form
         for={@form}
-        id="node-form"
+        id="client-form"
         autocomplete="off"
         phx-target={@myself}
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:node_name]} type="text" label="Name" />
-        <.input field={@form[:description]} type="textarea" label="Description" phx-debounce="blur" />
+        <.input field={@form[:client_name]} type="text" label="Name" />
+        <.input field={@form[:client_description]} type="textarea" label="Description" />
         <:actions>
-          <.button phx-disable-with="Building...">Create Node</.button>
+          <.button phx-disable-with="Building...">Create <%= @client_type %></.button>
         </:actions>
       </.simple_form>
     </div>
@@ -46,8 +46,8 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
   end
 
   @impl true
-  def update(%{node: node} = assigns, socket) do
-    changeset = CustomerNodes.change_node(node)
+  def update(%{client: client} = assigns, socket) do
+    changeset = CustomerClients.change_client(client)
 
     {:ok,
      socket
@@ -56,27 +56,28 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"node" => node_params}, socket) do
+  def handle_event("validate", %{"client" => client_params}, socket) do
     changeset =
-      socket.assigns.node
-      |> CustomerNodes.change_node(node_params)
+      socket.assigns.client
+      |> CustomerClients.change_client(client_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign_form(socket, changeset)}
   end
 
-  def handle_event("save", %{"node" => node_params}, socket) do
-    save_node(socket, socket.assigns.action, node_params)
+  def handle_event("save", %{"client" => client_params}, socket) do
+    Logger.debug("Live action is: #{inspect(socket.assigns.action)}")
+    save_client(socket, socket.assigns.action, client_params)
   end
 
-  defp save_node(socket, :edit, node_params) do
-    case CustomerNodes.update_node(socket.assigns.node, node_params) do
-      {:ok, node} ->
-        notify_parent({:saved, node})
+  defp save_client(socket, :edit, client_params) do
+    case CustomerClients.update_client(socket.assigns.client, client_params) do
+      {:ok, client} ->
+        notify_parent({:saved, client})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Node updated successfully")
+         |> put_flash(:info, "client updated successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -84,25 +85,27 @@ defmodule SentrypeerWeb.CustomerNodesLive.FormComponent do
     end
   end
 
-  defp save_node(socket, :new, node_params) do
-    case CustomerNodes.create_node(socket.assigns.current_user.id, node_params) do
-      {:ok, node} ->
-        notify_parent({:saved, node})
+  defp save_client(socket, :new, client_params) do
+    Logger.debug("Client type is: #{inspect(socket.assigns.client_type)}")
+
+    case CustomerClients.create_client(socket.assigns.current_user.id, client_params) do
+      {:ok, client} ->
+        notify_parent({:saved, client})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Node created successfully")
+         |> put_flash(:info, "Client created successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
 
       {:error, error} ->
-        Logger.error("Failed to create node: #{inspect(error)}")
+        Logger.error("Failed to create client: #{inspect(error)}")
 
         {:noreply,
          socket
-         |> put_flash(:error, "Failed to create node")
+         |> put_flash(:error, "Failed to create client")
          |> push_patch(to: socket.assigns.patch)}
     end
   end

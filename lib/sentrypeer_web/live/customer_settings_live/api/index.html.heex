@@ -44,7 +44,7 @@
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <.link patch={~p"/settings/api/new"}>
+                  <.link patch={~p"/settings/api-clients/new"}>
                     <button
                       type="button"
                       title="Create a new SentryPeer API Client"
@@ -175,7 +175,7 @@
           on_cancel={JS.navigate(~p"/nodes")}
         >
           <.live_component
-            module={SentrypeerWeb.CustomerNodesLive.FormComponent}
+            module={SentrypeerWeb.Live.APIClientFormComponent}
             id={:new}
             current_user={@current_user}
             title={@page_title}

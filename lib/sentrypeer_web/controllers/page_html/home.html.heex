@@ -1,6 +1,6 @@
 <div class="bg-white">
   <header>
-    <div class="relative bg-white">
+    <div class="relative bg-white dark:bg-slate-800">
       <div class="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="/" title="SentryPeer Home">
@@ -83,9 +83,24 @@
           </button>
         </div>
         <nav class="hidden space-x-10 md:flex">
-          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Pricing</a>
-          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Partners</a>
-          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Company</a>
+          <a
+            href="#"
+            class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+          >
+            Pricing
+          </a>
+          <a
+            href="#"
+            class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+          >
+            Partners
+          </a>
+          <a
+            href="#"
+            class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+          >
+            Company
+          </a>
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <%= if @current_user do %>
@@ -100,7 +115,7 @@
             <a
               href={~p"/login"}
               title="Login to SentryPeer"
-              class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 mr-4"
+              class="whitespace-nowrap text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900 mr-4"
             >
               Sign in
             </a>
@@ -128,7 +143,7 @@
         id="mobile-menu"
         class="absolute hidden inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
       >
-        <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div class="divide-y-2 divide-gray-50 dark:divide-slate-800 rounded-lg bg-white dark:bg-slate-400 shadow-lg ring-1 ring-black ring-opacity-5">
           <div class="px-5 pt-5 pb-6">
             <div class="flex items-center justify-between">
               <div>
@@ -256,10 +271,10 @@
     </div>
   </header>
 
-  <main>
+  <main class="dark:bg-slate-800">
     <!-- Hero section -->
     <div class="relative">
-      <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100 dark:bg-slate-400"></div>
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
           <div class="absolute inset-0">
@@ -304,8 +319,11 @@
       </div>
     </div>
     <!-- Alternating Feature Sections -->
-    <div class="relative overflow-hidden pt-16 pb-32">
-      <div aria-hidden="true" class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100">
+    <div class="relative overflow-hidden pt-16 pb-32 dark:bg-slate-400">
+      <div
+        aria-hidden="true"
+        class="absolute inset-x-0 top-0 h-48 dark:from-slate-400 bg-gradient-to-b from-gray-100"
+      >
       </div>
       <div class="relative">
         <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
@@ -334,11 +352,11 @@
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900">
                   Stay on top of VoIP fraud
                 </h2>
-                <p class="mt-4 text-lg text-gray-500">
+                <p class="mt-4 text-lg text-gray-500 dark:text-slate-800">
                   With early notification of potential VoIP fraud attempts, you can stay on top of
                   customer fraud and help prevent it from happening.
                 </p>
-                <p class="mt-4 text-lg text-gray-500">
+                <p class="mt-4 text-lg text-gray-500 dark:text-slate-800">
                   Use SentryPeer<sup>&reg;</sup> to detect early stage potential VoIP fraud
                   reconnaissance attempts.
                 </p>
@@ -356,7 +374,7 @@
             <div class="mt-8 border-t border-gray-200 pt-6">
               <blockquote>
                 <div>
-                  <p class="text-base text-gray-500">
+                  <p class="text-base text-gray-500 dark:text-slate-800">
                     &ldquo;Being able to detect and be instantly notified of potential VoIP fraud
                     probes really helps us deal with fraud before it has a major impact.&rdquo;
                   </p>
@@ -382,8 +400,8 @@
             <div class="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
               <img
                 class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg"
-                alt="Inbox user interface"
+                src={~p"/images/sentrypeer-app-screenshot-overview.png"}
+                alt="SentryPeer overview screenshot"
               />
             </div>
           </div>
@@ -417,11 +435,11 @@
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900">
                   Better understand your customer VoIP traffic
                 </h2>
-                <p class="mt-4 text-lg text-gray-500">
+                <p class="mt-4 text-lg text-gray-500 dark:text-slate-800">
                   Being able to detect and alert on customer traffic anomalies helps you deal with
                   potential VoIP fraud.
                 </p>
-                <p class="mt-4 text-lg text-gray-500">
+                <p class="mt-4 text-lg text-gray-500 dark:text-slate-800">
                   When a customer or customer account is flagged, you can take action to help prevent
                   VoIP fraud and notify them about a potential handset or PBX security issue.
                 </p>
@@ -441,8 +459,8 @@
             <div class="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
               <img
                 class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg"
-                alt="Customer profile user interface"
+                src={~p"/images/sentrypeer-app-screenshot-api-clients.png"}
+                alt="Create a SentryPeer API client screenshot"
               />
             </div>
           </div>
@@ -544,9 +562,9 @@
       </div>
     </div>
     <!-- CTA Section -->
-    <div class="bg-white">
+    <div class="bg-white dark:bg-slate-800">
       <div class="mx-auto max-w-4xl py-16 px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
-        <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
           <span class="block">Ready to get started?</span>
           <span class="-mb-1 block bg-gradient-to-r from-brand to-indigo-600 bg-clip-text pb-1 text-transparent">
             Get in touch or create an account.
@@ -571,47 +589,63 @@
     </div>
   </main>
 
-  <footer class="bg-gray-50" aria-labelledby="footer-heading">
+  <footer class="bg-gray-50 dark:bg-slate-600" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-8 lg:pt-24">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="grid grid-cols-2 gap-8 xl:col-span-2">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">Solutions</h3>
+              <h3 class="text-base font-medium text-gray-900 dark:text-white">Sectors</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Marketing</a>
+                  <a
+                    href="#"
+                    class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                    title="Internet Telephony Service Providers"
+                  >
+                    ITSPs
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Analytics</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Security Analysts
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Commerce</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Telecom Resellers
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Insights</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Network Operators
+                  </a>
                 </li>
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">Support</h3>
+              <h3 class="text-base font-medium text-gray-900 dark:text-white">Support</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Pricing</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Pricing
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
                     Documentation
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Guides</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Guides
+                  </a>
                 </li>
 
                 <li>
@@ -619,7 +653,7 @@
                     href="https://status.sentrypeer.com/"
                     title="SentryPeer Service Status Page"
                     target="_blank"
-                    class="text-base text-gray-500 hover:text-gray-900"
+                    class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                   >
                     Service
                     Status
@@ -630,36 +664,44 @@
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-base font-medium text-gray-900">Company</h3>
+              <h3 class="text-base font-medium text-gray-900 dark:text-white">Company</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">About</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    About
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Blog</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Blog
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Jobs</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Jobs
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">Partners</a>
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    Partners
+                  </a>
                 </li>
               </ul>
             </div>
             <div class="mt-12 md:mt-0">
-              <h3 class="text-base font-medium text-gray-900">Legal</h3>
+              <h3 class="text-base font-medium text-gray-900 dark:text-white">Legal</h3>
               <ul role="list" class="mt-4 space-y-4">
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
                     Privacy Policy
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                  <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
                     Terms & Conditions
                   </a>
                 </li>
@@ -668,8 +710,10 @@
           </div>
         </div>
         <div class="mt-12 xl:mt-0">
-          <h3 class="text-base font-medium text-gray-900">Subscribe to our newsletter</h3>
-          <p class="mt-4 text-base text-gray-500">
+          <h3 class="text-base font-medium text-gray-900 dark:text-white">
+            Subscribe to our newsletter
+          </h3>
+          <p class="mt-4 text-base text-gray-500 dark:text-black">
             The latest news, articles, and resources, sent to your inbox weekly.
           </p>
           <form class="mt-4 sm:flex sm:max-w-md">
@@ -724,7 +768,7 @@
             </svg>
           </a>
         </div>
-        <p class="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
+        <p class="mt-8 text-sm text-gray-400 dark:text-black md:order-1 md:mt-0">
           © Ant Networks Ltd. <%= DateTime.utc_now().year %>. SentryPeer is a trading name of Ant Networks
           Ltd. The
           <a

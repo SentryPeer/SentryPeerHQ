@@ -257,10 +257,12 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/settings"}
         title="Manage your API client credentials and other settings"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+        class={"#{if (@active_page == :settings ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
       >
-        <Heroicons.cog_8_tooth class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6" />
-        <span class="truncate">Settings</span>
+        <Heroicons.code_bracket class={"#{if (@active_page == :settings ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"} />
+        <span class="truncate">Developer Settings</span>
       </.link>
 
       <a
@@ -286,60 +288,62 @@ defmodule SentrypeerWeb.NavigationComponents do
           <!-- Logo section -->
           <div class="flex items-center px-2 lg:px-0 xl:w-64">
             <div class="flex-shrink-0">
-              <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
-                <g id="layer1" transform="translate(-53.112717,-43.907589)">
-                  <g
-                    id="g12"
-                    transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
-                    style="fill:#ffffff;fill-opacity:1"
-                  >
-                    <path
-                      d="M 0,0 H -17.647 L 0,-70.805 Z"
-                      style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                      id="path14"
-                    />
+              <.link navigate={~p"/"} class="flex items-center" title="SentryPeer Home Page">
+                <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
+                  <g id="layer1" transform="translate(-53.112717,-43.907589)">
+                    <g
+                      id="g12"
+                      transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
+                      style="fill:#ffffff;fill-opacity:1"
+                    >
+                      <path
+                        d="M 0,0 H -17.647 L 0,-70.805 Z"
+                        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path14"
+                      />
+                    </g>
+                    <g
+                      id="g16"
+                      transform="matrix(0.35277777,0,0,-0.35277777,65.564008,47.738649)"
+                      style="fill:#ffffff;fill-opacity:1"
+                    >
+                      <path
+                        d="m 0,0 21.827,-79.059 v -40.398 l -11.946,53.864 -26.6,33.448 v -39.963 l 26.472,-21.285 3.25,-47.349 -48.298,38.661 v 86.009 z"
+                        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path18"
+                      />
+                    </g>
+                    <g
+                      id="g20"
+                      transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
+                      style="fill:#ffffff;fill-opacity:1"
+                    >
+                      <path
+                        d="M 0,0 H 17.647 L 0,-70.805 Z"
+                        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path22"
+                      />
+                    </g>
+                    <g
+                      id="g24"
+                      transform="matrix(0.35277777,0,0,-0.35277777,80.96424,47.738649)"
+                      style="fill:#ffffff;fill-opacity:1"
+                    >
+                      <path
+                        d="m 0,0 -21.827,-79.059 v -40.398 l 11.946,53.864 26.6,33.448 v -39.963 l -26.472,-21.285 -3.25,-47.349 48.298,38.661 v 86.009 z"
+                        style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path26"
+                      />
+                    </g>
                   </g>
-                  <g
-                    id="g16"
-                    transform="matrix(0.35277777,0,0,-0.35277777,65.564008,47.738649)"
-                    style="fill:#ffffff;fill-opacity:1"
-                  >
-                    <path
-                      d="m 0,0 21.827,-79.059 v -40.398 l -11.946,53.864 -26.6,33.448 v -39.963 l 26.472,-21.285 3.25,-47.349 -48.298,38.661 v 86.009 z"
-                      style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                      id="path18"
-                    />
-                  </g>
-                  <g
-                    id="g20"
-                    transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
-                    style="fill:#ffffff;fill-opacity:1"
-                  >
-                    <path
-                      d="M 0,0 H 17.647 L 0,-70.805 Z"
-                      style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                      id="path22"
-                    />
-                  </g>
-                  <g
-                    id="g24"
-                    transform="matrix(0.35277777,0,0,-0.35277777,80.96424,47.738649)"
-                    style="fill:#ffffff;fill-opacity:1"
-                  >
-                    <path
-                      d="m 0,0 -21.827,-79.059 v -40.398 l 11.946,53.864 26.6,33.448 v -39.963 l -26.472,-21.285 -3.25,-47.349 48.298,38.661 v 86.009 z"
-                      style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                      id="path26"
-                    />
-                  </g>
-                </g>
-              </svg>
+                </svg>
+              </.link>
             </div>
           </div>
           <!-- Search section -->
           <div class="flex flex-1 justify-center lg:justify-end">
             <div class="w-full px-2 lg:px-6">
-              <label for="search" class="sr-only">Search nodes</label>
+              <label for="search" class="sr-only">Search</label>
               <div class="relative text-indigo-200 focus-within:text-gray-400">
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <!-- Heroicon name: mini/magnifying-glass -->
@@ -361,7 +365,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                   id="search"
                   name="search"
                   class="block w-full rounded-md border border-transparent bg-indigo-400 bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-indigo-100 placeholder-indigo-200 focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                  placeholder="Search nodes"
+                  placeholder="Search"
                   type="search"
                 />
               </div>

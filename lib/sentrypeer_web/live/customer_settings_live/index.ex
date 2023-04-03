@@ -15,14 +15,17 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
-  alias Sentrypeer.CustomerNodes.Node
+  alias Sentrypeer.CustomerClients.Client
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
 
+  require Logger
+
   @impl true
   def mount(_params, session, socket) do
-    nodes = list_clients(session["current_user"].id)
+    api_clients = list_clients(session["current_user"].id)
+    Logger.debug("API Clients: #{inspect(api_clients)}")
 
     {:ok,
      assign(socket,
@@ -31,7 +34,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Nodes",
-       nodes: nodes
+       api_clients: api_clients
      )}
   end
 
@@ -55,7 +58,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create a new SentryPeer Node")
-    |> assign(:node, %Node{})
+    |> assign(:node, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do
@@ -65,7 +68,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
   end
 
   @impl true
-  def handle_info({SentrypeerWeb.CustomerNodesLive.FormComponent, {:saved, node}}, socket) do
+  def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, node}}, socket) do
     {:noreply,
      socket
      |> assign(:nodes, list_clients(socket.assigns.current_user.id))

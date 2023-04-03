@@ -15,8 +15,6 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   use SentrypeerWeb, :controller
 
   alias Sentrypeer.SentrypeerEvents
-  alias Sentrypeer.SentrypeerIpAddress
-  alias Sentrypeer.SentrypeerPhoneNumber
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
   action_fallback SentrypeerWeb.FallbackController

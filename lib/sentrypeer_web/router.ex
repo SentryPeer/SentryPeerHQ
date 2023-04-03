@@ -67,10 +67,10 @@ defmodule SentrypeerWeb.Router do
       live "/nodes/:client_id/delete", CustomerNodesLive.Index, :delete
 
       live "/settings", CustomerSettingsLive.Index, :index
-      live "/settings/api/new", CustomerSettingsLive.Api.Index, :new
-      live "/settings/api/:client_id", CustomerSettingsLive.Api.Overview, :overview
-      live "/settings/api/:client_id/edit", CustomerSettingsLive.Api.Index, :edit
-      live "/settings/api/:client_id/delete", CustomerSettingsLive.Api.Index, :delete
+      live "/settings/api-clients/new", CustomerSettingsLive.Api.Index, :new
+      live "/settings/api-clients/:client_id", CustomerSettingsLive.Api.Overview, :overview
+      live "/settings/api-clients/:client_id/edit", CustomerSettingsLive.Api.Index, :edit
+      live "/settings/api-clients/:client_id/delete", CustomerSettingsLive.Api.Index, :delete
     end
   end
 

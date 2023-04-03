@@ -80,20 +80,20 @@ defmodule SentrypeerWeb.CoreComponents do
         tabindex="0"
       >
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+          <div class="relative transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <.focus_wrap
               id={"#{@id}-container"}
               phx-mounted={@show && show_modal(@id)}
               phx-window-keydown={hide_modal(@on_cancel, @id)}
               phx-key="escape"
               phx-click-away={hide_modal(@on_cancel, @id)}
-              class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+              class="bg-white dark:bg-slate-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
             >
               <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
                 <button
                   phx-click={hide_modal(@on_cancel, @id)}
                   type="button"
-                  class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="rounded-md bg-white dark:bg-slate-400 text-gray-400 dark:text-slate-800 dark:hover:dark:text-slate-500 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   aria-label={gettext("close")}
                 >
                   <span class="sr-only">Close</span>
@@ -101,23 +101,28 @@ defmodule SentrypeerWeb.CoreComponents do
                 </button>
               </div>
               <div id={"#{@id}-content"} class="sm:flex sm:items-start">
-                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-slate-400 sm:mx-0 sm:h-10 sm:w-10">
                   <!-- Heroicon name: outline/exclamation-triangle -->
                   <Heroicons.exclamation_triangle outline class="h-6 w-6 text-red-600" />
                 </div>
                 <div :if={@title != []} class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <h3 id={"#{@id}-title"} class="text-lg font-medium leading-6 text-gray-900">
+                  <h3
+                    id={"#{@id}-title"}
+                    class="text-lg font-medium leading-6 dark:text-white text-gray-900"
+                  >
                     <%= render_slot(@title) %>
                   </h3>
                   <p
                     :if={@subtitle != []}
                     id={"#{@id}-description"}
-                    class="text-sm leading-6 text-zinc-600"
+                    class="text-sm leading-6 text-zinc-600 dark:text-slate-400"
                   >
                     <%= render_slot(@subtitle) %>
                   </p>
                   <div class="mt-2">
-                    <p class="text-sm text-gray-500"><%= render_slot(@inner_block) %></p>
+                    <p class="text-sm dark:text-slate-400 text-gray-500">
+                      <%= render_slot(@inner_block) %>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -125,7 +130,7 @@ defmodule SentrypeerWeb.CoreComponents do
 
             <div
               :if={@confirm != [] or @cancel != []}
-              class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+              class="dark:bg-slate-800 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
             >
               <.button
                 :for={confirm <- @confirm}
@@ -139,7 +144,7 @@ defmodule SentrypeerWeb.CoreComponents do
               <.link
                 :for={cancel <- @cancel}
                 phx-click={hide_modal(@on_cancel, @id)}
-                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white dark:hover:bg-slate-500 dark:bg-slate-400 px-4 py-2 text-base font-medium dark:text-slate-800 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 <%= render_slot(cancel) %>
               </.link>
@@ -190,7 +195,11 @@ defmodule SentrypeerWeb.CoreComponents do
       phx-remove={hide_modal(@id)}
       class="relative z-50 hidden"
     >
-      <div id={"#{@id}-bg"} class="fixed inset-0 bg-zinc-50/90 transition-opacity" aria-hidden="true" />
+      <div
+        id={"#{@id}-bg"}
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      />
       <div
         class="fixed inset-0 overflow-y-auto"
         aria-labelledby={"#{@id}-title"}
@@ -207,13 +216,13 @@ defmodule SentrypeerWeb.CoreComponents do
               phx-window-keydown={hide_modal(@on_cancel, @id)}
               phx-key="escape"
               phx-click-away={hide_modal(@on_cancel, @id)}
-              class="hidden relative rounded-2xl bg-white p-14 shadow-lg shadow-zinc-700/10 ring-1 ring-zinc-700/10 transition"
+              class="hidden relative rounded-2xl bg-white dark:bg-slate-800 p-14 shadow-lg shadow-zinc-700/10 ring-1 ring-zinc-700/10 transition"
             >
               <div class="absolute top-6 right-5">
                 <button
                   phx-click={hide_modal(@on_cancel, @id)}
                   type="button"
-                  class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
+                  class="-m-3 flex-none p-3 hover:opacity-40 dark:text-white"
                   aria-label={gettext("close")}
                 >
                   <.icon name="hero-x-mark-solid" class="w-5 h-5" />
@@ -221,13 +230,16 @@ defmodule SentrypeerWeb.CoreComponents do
               </div>
               <div id={"#{@id}-content"}>
                 <header :if={@title != []}>
-                  <h1 id={"#{@id}-title"} class="text-lg font-semibold leading-8 text-zinc-800">
+                  <h1
+                    id={"#{@id}-title"}
+                    class="text-lg font-semibold leading-8 text-zinc-800 dark:text-white"
+                  >
                     <%= render_slot(@title) %>
                   </h1>
                   <p
                     :if={@subtitle != []}
                     id={"#{@id}-description"}
-                    class="mt-2 text-sm leading-6 text-zinc-600"
+                    class="mt-2 text-sm leading-6 text-zinc-600 dark:text-slate-400"
                   >
                     <%= render_slot(@subtitle) %>
                   </p>
@@ -364,7 +376,7 @@ defmodule SentrypeerWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="space-y-8 bg-white mt-10">
+      <div class="space-y-8 bg-white dark:bg-slate-800 mt-10">
         <%= render_slot(@inner_block, f) %>
         <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           <%= render_slot(action, f) %>
@@ -453,7 +465,7 @@ defmodule SentrypeerWeb.CoreComponents do
 
     ~H"""
     <div phx-feedback-for={@name}>
-      <label class="flex items-center gap-4 text-sm leading-6 text-zinc-600">
+      <label class="flex items-center gap-4 text-sm leading-6 text-zinc-600 dark:text-slate-400">
         <input type="hidden" name={@name} value="false" />
         <input
           type="checkbox"
@@ -461,7 +473,7 @@ defmodule SentrypeerWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
+          class="rounded border-zinc-300 text-zinc-900 dark:text-slate-400 focus:ring-zinc-900"
           {@rest}
         />
         <%= @label %>
@@ -498,7 +510,7 @@ defmodule SentrypeerWeb.CoreComponents do
         id={@id || @name}
         name={@name}
         class={[
-          "mt-2 block min-h-[6rem] w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
+          "mt-2 block min-h-[6rem] w-full rounded-lg border-zinc-300 py-[7px] px-[11px] dark:bg-slate-400",
           "text-zinc-900 focus:border-zinc-400 focus:outline-none focus:ring-4 focus:ring-zinc-800/5 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
           "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5",
@@ -521,7 +533,7 @@ defmodule SentrypeerWeb.CoreComponents do
         id={@id || @name}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
+          "mt-2 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px] dark:bg-slate-400",
           "text-zinc-900 focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
           "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5",
@@ -542,7 +554,7 @@ defmodule SentrypeerWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800 dark:text-slate-400">
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -575,10 +587,10 @@ defmodule SentrypeerWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-zinc-800">
+        <h1 class="text-lg font-semibold leading-8 text-zinc-800 dark:text-white">
           <%= render_slot(@inner_block) %>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600 dark:text-slate-400">
           <%= render_slot(@subtitle) %>
         </p>
       </div>
@@ -839,6 +851,7 @@ defmodule SentrypeerWeb.CoreComponents do
     )
   end
 
-  def sentrypeer_toolip(text) do
-  end
+  #  TODO - add tooltip
+  #  def sentrypeer_toolip(text) do
+  #  end
 end

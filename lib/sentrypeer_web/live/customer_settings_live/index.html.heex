@@ -44,7 +44,7 @@
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <.link patch={~p"/nodes/new"}>
+                  <.link patch={~p"/settings/api-clients/new"}>
                     <button
                       type="button"
                       title="Create a new SentryPeer API client"
@@ -78,7 +78,7 @@
           </div>
         </div>
       </div>
-      <!-- Nodes List -->
+      <!-- API client List -->
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
@@ -88,47 +88,36 @@
 
         <.modal
           :if={@live_action in [:new, :edit]}
-          id="node_modal"
+          id="api_client_modal"
           show
-          on_cancel={JS.navigate(~p"/nodes")}
+          on_cancel={JS.navigate(~p"/settings")}
         >
           <.live_component
-            module={SentrypeerWeb.CustomerNodesLive.FormComponent}
+            module={SentrypeerWeb.Live.APIClientFormComponent}
             id={:new}
             current_user={@current_user}
             title={@page_title}
             action={@live_action}
-            node={@node}
-            patch={~p"/nodes"}
+            client={@client}
+            client_type="api"
+            patch={~p"/settings"}
           />
         </.modal>
-        <%= if @nodes == nil do %>
-          <.link patch={~p"/nodes/new"}>
+        <%= if @api_clients == [] do %>
+          <.link patch={~p"/settings/api-clients/new"}>
             <button
               type="button"
-              title="Create a new SentryPeer node"
+              title="Create a new SentryPeer API Client"
               class="relative block w-full rounded-lg mt-2 border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <svg
-                class="mx-auto h-12 w-12 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 48 48"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
-                />
-              </svg>
-              <span class="mt-2 block text-sm font-medium text-gray-900 ">Create a new node</span>
+              <Heroicons.command_line class="mx-auto h-12 w-12 text-gray-400" />
+              <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-slate-400">
+                Create a new SentryPeer API client
+              </span>
             </button>
           </.link>
         <% else %>
-          <%= for node <- @nodes do %>
+          <%= for api_client <- @api_clients do %>
             <ul
               role="list"
               class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"
@@ -147,22 +136,22 @@
 
                       <h2 class="text-sm font-medium dark:text-white">
                         <.link
-                          navigate={~p"/nodes/#{node["client_id"]}"}
-                          title="View all details about this node"
+                          navigate={~p"/settings/api-clients/#{api_client["client_id"]}"}
+                          title="View all details about this API client"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= node["name"] %> <span class="sr-only">Running</span>
+                          <%= api_client["name"] %> <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
                     <.link
-                      navigate={~p"/nodes/#{node["client_id"]}/edit"}
-                      title="Edit the Name and Description of this node"
+                      navigate={~p"/settings/api-clients/#{api_client["client_id"]}/edit"}
+                      title="Edit the Name and Description of this API client"
                       class="group relative flex items-center space-x-2.5"
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= node["description"] %>
+                        <%= api_client["description"] %>
                       </span>
                     </.link>
                   </div>
@@ -211,7 +200,7 @@
                       </button>
                     </p>
                     <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                      <span><%= time_ago(node["client_metadata"]["created_at"]) %></span>
+                      <span><%= time_ago(api_client["client_metadata"]["created_at"]) %></span>
                       <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->
@@ -219,7 +208,7 @@
                   </div>
                 </div>
               </li>
-              <!-- More nodes... -->
+              <!-- More API clients... -->
             </ul>
           <% end %>
         <% end %>

@@ -11,40 +11,39 @@
 #                             |___/
 #
 
-defmodule Sentrypeer.CustomerNodes do
+defmodule Sentrypeer.CustomerClients do
   @moduledoc """
-  The Nodes context.
+  The clients context.
   """
 
   import Ecto.Query, warn: false
-  alias Sentrypeer.CustomerNodes.Node
+  alias Sentrypeer.CustomerClients.Client
   alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Clients
 
   require Logger
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking node changes.
+  Returns an `%Ecto.Changeset{}` for tracking client changes.
 
   ## Examples
 
-      iex> change_node(node)
-      %Ecto.Changeset{data: %Node{}}
+      iex> change_client(client)
+      %Ecto.Changeset{data: %Client{}}
 
   """
-  def change_node(%Node{} = node, attrs \\ %{}) do
-    Node.changeset(node, attrs)
+  def change_client(%Client{} = client, attrs \\ %{}) do
+    Client.changeset(client, attrs)
   end
 
-  def create_node(auth_id, attrs \\ %{}) do
-    changeset = Node.changeset(%Node{}, attrs)
-    Logger.debug("Create node changeset: #{inspect(changeset)}")
+  def create_client(auth_id, attrs \\ %{}) do
+    changeset = Client.changeset(%Client{}, attrs)
 
     if changeset.valid? do
       case Auth0ManagementAPI.create_client(
              auth_id,
-             changeset.changes.node_name,
-             changeset.changes.description
+             changeset.changes.client_name,
+             changeset.changes.client_description
            ) do
         {:ok, body} ->
           {:ok, client} = Jason.decode(body)
@@ -55,7 +54,7 @@ defmodule Sentrypeer.CustomerNodes do
           {:error, error}
       end
     else
-      changeset
+      {:error, changeset}
     end
   end
 end
