@@ -54,6 +54,12 @@ defmodule Sentrypeer.CustomerClients do
           {:error, error}
       end
     else
+      # We have to manually set the action to :validate (or any other value to show errors)
+      # https://hexdocs.pm/phoenix_live_view/Phoenix.Component.html#form/1-a-note-on-errors
+      #
+      # Or use, but then we need to import Ecto.Changeset
+      # https://hexdocs.pm/ecto/Ecto.Changeset.html#apply_action/2
+      changeset = changeset |> Map.put(:action, :validate)
       {:error, changeset}
     end
   end

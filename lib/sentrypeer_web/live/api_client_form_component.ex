@@ -111,7 +111,8 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
-    assign(socket, :form, to_form(changeset))
+    Logger.debug("Assigning form with changeset: #{inspect(changeset)}")
+    assign(socket, form: to_form(changeset))
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
