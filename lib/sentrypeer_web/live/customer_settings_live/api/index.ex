@@ -22,7 +22,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    nodes = list_clients(session["current_user"].id)
+    clients = list_clients(session["current_user"].id)
 
     {:ok,
      assign(socket,
@@ -30,8 +30,8 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Nodes",
-       nodes: nodes
+       page_title: "Clients",
+       clients: clients
      )}
   end
 
@@ -43,43 +43,43 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
   defp apply_action(socket, :edit, %{"client_id" => id}) do
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
       nil ->
-        socket |> assign(:page_title, "Node not found")
+        socket |> assign(:page_title, "Client not found")
 
-      {:ok, node} ->
+      {:ok, client} ->
         socket
         |> assign(:page_title, "Edit Client")
-        |> assign(:node, node)
+        |> assign(:client, client)
     end
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create a new SentryPeer API client")
-    |> assign(:node, %Client{})
+    |> assign(:client, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "SentryPeer API clients")
-    |> assign(:node, nil)
+    |> assign(:client, nil)
   end
 
   @impl true
-  def handle_info({SentrypeerWeb.CustomerNodesLive.FormComponent, {:saved, node}}, socket) do
+  def handle_info({SentrypeerWeb.CustomerClientsLive.FormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:nodes, list_clients(socket.assigns.current_user.id))
-     |> assign(:node, node)}
+     |> assign(:clients, list_clients(socket.assigns.current_user.id))
+     |> assign(:client, client)}
   end
 
   @impl true
   def handle_event("delete", %{"client_id" => id}, socket) do
-    case delete_node(socket.assigns.current_user.id, id) do
+    case delete_client(socket.assigns.current_user.id, id) do
       {:ok, _} ->
         {:noreply, socket}
 
       {:error, _} ->
-        {:noreply, socket |> push_event("error", "Node not deleted")}
+        {:noreply, socket |> push_event("error", "Client not deleted")}
     end
   end
 
@@ -93,13 +93,13 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
     end
   end
 
-  defp delete_node(user, id) do
+  defp delete_client(user, id) do
     case Auth0ManagementAPI.delete_client_for_user(user, id) do
       {:ok, _} ->
-        {:ok, "Node deleted"}
+        {:ok, "Client deleted"}
 
       {:error, _} ->
-        {:error, "Node not deleted"}
+        {:error, "Client not deleted"}
     end
   end
 end

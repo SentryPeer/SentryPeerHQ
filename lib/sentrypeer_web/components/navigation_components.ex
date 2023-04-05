@@ -91,11 +91,11 @@ defmodule SentrypeerWeb.NavigationComponents do
                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
               </svg>
               <.link
-                navigate={~p"/nodes/#{@node["client_id"]}"}
+                navigate={~p"/nodes/#{@client["client_id"]}"}
                 title="SentryPeer Node"
                 class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
               >
-                <%= @node["client_id"] %>
+                <%= @client["client_id"] %>
               </.link>
             </div>
           </li>

@@ -172,7 +172,7 @@
           :if={@live_action in [:new, :edit]}
           id="node_modal"
           show
-          on_cancel={JS.navigate(~p"/nodes")}
+          on_cancel={JS.navigate(~p"/settings")}
         >
           <.live_component
             module={SentrypeerWeb.Live.APIClientFormComponent}
@@ -180,8 +180,8 @@
             current_user={@current_user}
             title={@page_title}
             action={@live_action}
-            node={@node}
-            patch={~p"/nodes"}
+            client={@client}
+            patch={~p"/settings"}
           />
         </.modal>
         <%= if @nodes == nil do %>

@@ -236,7 +236,7 @@
                           title="View all details about this node"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= client["client_name"] %> <span class="sr-only">Running</span>
+                          <%= client["name"] %> <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
@@ -247,7 +247,7 @@
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= client["client_description"] %>
+                        <%= client["description"] %>
                       </span>
                     </.link>
                   </div>
@@ -304,7 +304,6 @@
                   </div>
                 </div>
               </li>
-              <!-- More nodes... -->
             </ul>
           <% end %>
         <% end %>
