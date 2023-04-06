@@ -48,7 +48,7 @@ defmodule SentrypeerWeb.Router do
     post "/:provider/callback", AuthController, :callback
   end
 
-  # use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
   # layout: {SentrypeerWeb.Layouts, :main_app}
 
   live_session :default,

@@ -59,10 +59,17 @@
                   id="node-title"
                   class="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                 >
-                  <%= @client["client_name"] %>
+                  <%= @client["name"] %>
+                  <.link
+                    patch={~p"/nodes/#{@client["client_id"]}/edit"}
+                    title="Edit the Name and Description of this node"
+                    class="group relative inline-flex items-center float-right space-x-2.5"
+                  >
+                    <Heroicons.pencil_square class="h-5 h-5 flex-shrink-0" />
+                  </.link>
                 </h2>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-slate-400">
-                  <%= @client["client_description"] %>
+                  <%= @client["description"] %>
                 </p>
               </div>
               <div class="border-t border-gray-200 dark:border-slate-400 px-4 py-5 sm:px-6">

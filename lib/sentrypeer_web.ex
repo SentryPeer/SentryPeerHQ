@@ -34,7 +34,8 @@ defmodule SentrypeerWeb do
 
   def router do
     quote do
-      use Phoenix.Router, helpers: false
+      # For kaffy as per https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
+      use Phoenix.Router, helpers: true
 
       # Import common connection and controller functions to use in pipelines
       import Plug.Conn

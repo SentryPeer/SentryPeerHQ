@@ -100,8 +100,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  def list_clients_by_user(user) do
-    Logger.debug("Listing Auth0 clients for user #{user}")
+  def list_clients_by_user(user, client_type) do
+    Logger.debug("Listing Auth0 clients for user #{user} of type #{client_type}")
 
     list_clients()
     |> case do
@@ -109,7 +109,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
         {:ok,
          Jason.decode!(body)
          |> Enum.filter(fn client ->
-           client["client_metadata"]["auth_id"] == user
+           client["client_metadata"]["auth_id"] == user &&
+             client["client_metadata"]["client_type"] == client_type
          end)}
 
       {:error, error} ->
@@ -137,6 +138,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   end
 
   def get_client_for_user(user, id) do
+    Logger.debug("Getting Auth0 client #{id} for user #{user}")
+
     get_client(id)
     |> case do
       {:ok, body} ->
@@ -156,11 +159,11 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  def create_client(auth_id, name, description) do
+  def create_client(auth_id, name, description, client_type) do
     with {:ok, access_token} <- get_auth_token() do
       case HTTPoison.post(
              auth0_management_url() <> "clients",
-             create_client_json(auth_id, name, description),
+             create_client_json(auth_id, name, description, client_type),
              headers(access_token),
              options()
            ) do
@@ -219,14 +222,37 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  def update_client(id, client) do
+  def update_client_for_user(user, id, name, description) do
+    Logger.debug("Updating client #{id} for user #{user}")
+
+    get_client_for_user(user, id)
+    |> case do
+      {:ok, _body} ->
+        update_client(user, id, name, description)
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+  def update_client(auth_id, id, name, description) do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.patch!(
-        auth0_management_url() <> "clients/" <> id,
-        client,
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.patch(
+             auth0_management_url() <> "clients/" <> id,
+             update_client_json(auth_id, name, description),
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          Logger.debug("Auth0 returned body #{body}")
+          {:ok, body}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
     end
   end
 
@@ -275,7 +301,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     })
   end
 
-  defp create_client_json(auth_id, name, description) do
+  defp create_client_json(auth_id, name, description, client_type) do
     Jason.encode!(%{
       "name" => name,
       "description" => description,
@@ -288,8 +314,21 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
       "jwt_configuration" => %{"alg" => "RS256"},
       "client_metadata" => %{
         "auth_id" => auth_id,
+        "client_type" => client_type,
         created_at: DateTime.utc_now(),
         created_by: auth_id,
+        updated_at: DateTime.utc_now(),
+        updated_by: auth_id
+      }
+    })
+  end
+
+  defp update_client_json(auth_id, name, description) do
+    Jason.encode!(%{
+      "name" => name,
+      "description" => description,
+      "client_metadata" => %{
+        "auth_id" => auth_id,
         updated_at: DateTime.utc_now(),
         updated_by: auth_id
       }

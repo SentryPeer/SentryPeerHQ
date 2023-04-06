@@ -22,9 +22,11 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
 
   require Logger
 
+  @client_type "api_client"
+
   @impl true
   def mount(_params, session, socket) do
-    api_clients = list_clients(session["current_user"].id)
+    api_clients = list_clients(session["current_user"].id, @client_type)
     Logger.debug("API Clients: #{inspect(api_clients)}")
 
     {:ok,
@@ -71,7 +73,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
   def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, node}}, socket) do
     {:noreply,
      socket
-     |> assign(:nodes, list_clients(socket.assigns.current_user.id))
+     |> assign(:nodes, list_clients(socket.assigns.current_user.id, @client_type))
      |> assign(:node, node)}
   end
 
@@ -86,8 +88,8 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
     end
   end
 
-  defp list_clients(user) do
-    case Auth0ManagementAPI.list_clients_by_user(user) do
+  defp list_clients(user, @client_type) do
+    case Auth0ManagementAPI.list_clients_by_user(user, @client_type) do
       {:ok, clients} ->
         clients
 

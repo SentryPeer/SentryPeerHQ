@@ -66,7 +66,7 @@ defmodule Sentrypeer.MixProject do
       {:jason, "~> 1.3"},
       {:joken, "~> 2.6.0"},
       {:joken_jwks, "~> 1.6.0"},
-      # {:kaffy, "~> 0.9.2"},
+      {:kaffy, "~> 0.9.4"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
       {:phoenix, "~> 1.7.2"},
@@ -76,6 +76,8 @@ defmodule Sentrypeer.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_swoosh, "~> 1.0"},
+      # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
+      {:phoenix_view, "~> 2.0.2"},
       {:plug_cowboy, "~> 2.5"},
       {:poison, "~> 5.0"},
       {:postgrex, ">= 0.0.0"},

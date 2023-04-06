@@ -19,10 +19,13 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
+  import Logger
+
+  @client_type "node_client"
 
   @impl true
   def mount(_params, session, socket) do
-    clients = list_clients(session["current_user"].id)
+    clients = list_clients(session["current_user"].id, @client_type)
 
     {:ok,
      assign(socket,
@@ -38,10 +41,15 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
+    Logger.debug("handle_params: #{inspect(params)}")
+    Logger.debug("live_action: #{inspect(socket.assigns.live_action)}")
+
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :edit, %{"client_id" => id}) do
+    Logger.debug("Editing client #{id}")
+
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
       nil ->
         socket |> assign(:page_title, "Node not found")
@@ -54,10 +62,13 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
+    client = %Client{} |> Map.put(:client_id, nil)
+    Logger.debug("New client: #{inspect(client)}")
+
     socket
     |> assign(:page_title, "Create a new SentryPeer Node")
     |> assign(:client_type, "node")
-    |> assign(:client, %Client{})
+    |> assign(:client, client)
   end
 
   defp apply_action(socket, :index, _params) do
@@ -70,7 +81,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:clients, list_clients(socket.assigns.current_user.id))
+     |> assign(:clients, list_clients(socket.assigns.current_user.id, @client_type))
      |> assign(:client, client)}
   end
 
@@ -85,8 +96,8 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
     end
   end
 
-  defp list_clients(user) do
-    case Auth0ManagementAPI.list_clients_by_user(user) do
+  defp list_clients(user, @client_type) do
+    case Auth0ManagementAPI.list_clients_by_user(user, @client_type) do
       {:ok, clients} ->
         clients
 

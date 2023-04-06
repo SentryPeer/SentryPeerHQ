@@ -516,7 +516,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                     id="user-menu-item-0"
                   >
                     <Heroicons.user class="mr-3 h-5 w-5 text-gray-400 dark:text-black group-hover:text-gray-500 dark:group-hover:text-black" />
-                    View Profile
+                    Profile
                   </.link>
                   <.link
                     navigate={~p"/users/settings"}

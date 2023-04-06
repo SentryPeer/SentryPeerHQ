@@ -305,12 +305,12 @@ defmodule SentrypeerWeb.CoreComponents do
       ]}
       {@rest}
     >
-      <p :if={@title} class="flex items-center gap-1.5 text-[0.8125rem] font-semibold leading-6">
-        <.icon :if={@kind == :info} name="hero-information-circle-mini" class="w-4 h-4" />
-        <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="w-4 h-4" />
+      <p :if={@title} class="flex items-center gap-1.5 text-sm font-medium leading-6">
+        <.icon :if={@kind == :info} name="hero-information-circle" class="w-6 h-6" />
+        <.icon :if={@kind == :error} name="hero-exclamation-circle" class="w-6 h-6" />
         <%= @title %>
       </p>
-      <p class="mt-2 text-[0.8125rem] leading-5"><%= msg %></p>
+      <p class="ml-3 mt-2 text-sm leading-5"><%= msg %></p>
       <button
         :if={@close}
         type="button"
@@ -345,7 +345,7 @@ defmodule SentrypeerWeb.CoreComponents do
       phx-disconnected={show("#disconnected")}
       phx-connected={hide("#disconnected")}
     >
-      Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 w-3 h-3 animate-spin" />
+      Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 w-5 h-5 animate-spin" />
     </.flash>
     """
   end

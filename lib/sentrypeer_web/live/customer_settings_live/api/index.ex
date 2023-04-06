@@ -20,9 +20,11 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
 
+  @client_type "api_client"
+
   @impl true
   def mount(_params, session, socket) do
-    clients = list_clients(session["current_user"].id)
+    clients = list_clients(session["current_user"].id, @client_type)
 
     {:ok,
      assign(socket,
@@ -68,7 +70,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
   def handle_info({SentrypeerWeb.CustomerClientsLive.FormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:clients, list_clients(socket.assigns.current_user.id))
+     |> assign(:clients, list_clients(socket.assigns.current_user.id, @client_type))
      |> assign(:client, client)}
   end
 
@@ -83,8 +85,8 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Index do
     end
   end
 
-  defp list_clients(user) do
-    case Auth0ManagementAPI.list_clients_by_user(user) do
+  defp list_clients(user, @client_type) do
+    case Auth0ManagementAPI.list_clients_by_user(user, @client_type) do
       {:ok, clients} ->
         clients
 

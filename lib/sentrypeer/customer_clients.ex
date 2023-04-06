@@ -32,18 +32,28 @@ defmodule Sentrypeer.CustomerClients do
       %Ecto.Changeset{data: %Client{}}
 
   """
-  def change_client(%Client{} = client, attrs \\ %{}) do
-    Client.changeset(client, attrs)
+  def change_client(client, attrs \\ %{}) do
+    Logger.debug("client_name: #{client["name"]}")
+    Logger.debug("client_description: #{client["description"]}")
+
+    # Just update our %Client{} to match the Auth0 API data structure?
+    # Although this way we can add more fields to our %Client{} if we want
+    # and it doesn't tie us to the Auth0 API format
+    %Client{}
+    |> Map.put(:client_name, client["name"])
+    |> Map.put(:client_description, client["description"])
+    |> Client.changeset(attrs)
   end
 
-  def create_client(auth_id, attrs \\ %{}) do
+  def create_client(auth_id, client_type, attrs \\ %{}) do
     changeset = Client.changeset(%Client{}, attrs)
 
     if changeset.valid? do
       case Auth0ManagementAPI.create_client(
              auth_id,
              changeset.changes.client_name,
-             changeset.changes.client_description
+             changeset.changes.client_description,
+             client_type
            ) do
         {:ok, body} ->
           {:ok, client} = Jason.decode(body)
@@ -59,6 +69,30 @@ defmodule Sentrypeer.CustomerClients do
       #
       # Or use, but then we need to import Ecto.Changeset
       # https://hexdocs.pm/ecto/Ecto.Changeset.html#apply_action/2
+      changeset = changeset |> Map.put(:action, :validate)
+      {:error, changeset}
+    end
+  end
+
+  def update_client(auth_id, client_id, attrs \\ %{}) do
+    changeset = Client.changeset(%Client{}, attrs)
+
+    if changeset.valid? do
+      case Auth0ManagementAPI.update_client_for_user(
+             auth_id,
+             client_id,
+             changeset.changes.client_name,
+             changeset.changes.client_description
+           ) do
+        {:ok, body} ->
+          Logger.debug("Updated client: #{inspect(body)}")
+          {:ok, client} = Jason.decode(body)
+
+        {:error, error} ->
+          {:error, error}
+      end
+    else
+      # See above for why we do this
       changeset = changeset |> Map.put(:action, :validate)
       {:error, changeset}
     end

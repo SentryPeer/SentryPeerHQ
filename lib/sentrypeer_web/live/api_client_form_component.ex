@@ -24,7 +24,7 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Give your <%= @client_type %> some memorable details</:subtitle>
+        <:subtitle>Give your <%= @client_desc %> some memorable details</:subtitle>
       </.header>
 
       <.simple_form
@@ -38,7 +38,7 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
         <.input field={@form[:client_name]} type="text" label="Name" />
         <.input field={@form[:client_description]} type="textarea" label="Description" />
         <:actions>
-          <.button phx-disable-with="Building...">Create <%= @client_type %></.button>
+          <.button phx-disable-with="Saving...">Save <%= @client_desc %></.button>
         </:actions>
       </.simple_form>
     </div>
@@ -47,11 +47,14 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
 
   @impl true
   def update(%{client: client} = assigns, socket) do
+    Logger.debug("Client in is: #{inspect(client)}")
+    Logger.debug("Client ID is: #{inspect(client["client_id"])}")
     changeset = CustomerClients.change_client(client)
 
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:client_id, client["client_id"])
      |> assign_form(changeset)}
   end
 
@@ -71,13 +74,17 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   end
 
   defp save_client(socket, :edit, client_params) do
-    case CustomerClients.update_client(socket.assigns.client, client_params) do
+    case CustomerClients.update_client(
+           socket.assigns.current_user.id,
+           socket.assigns.client_id,
+           client_params
+         ) do
       {:ok, client} ->
         notify_parent({:saved, client})
 
         {:noreply,
          socket
-         |> put_flash(:info, "client updated successfully")
+         |> put_flash(:info, "Client updated successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

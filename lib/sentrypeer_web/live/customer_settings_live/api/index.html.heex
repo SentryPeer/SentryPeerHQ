@@ -78,15 +78,15 @@
           </div>
         </div>
       </div>
-      <!-- Nodes List -->
+      <!-- Clients List -->
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Nodes</h1>
+            <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Clients</h1>
             <div class="relative">
               <button
                 type="button"
-                title="Sort nodes by name and date"
+                title="Sort clients by name and date"
                 class="inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-slate-400 bg-white dark:bg-slate-800 dark:text-white px-4 py-2 text-sm font-medium text-gray-700 dark:text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 id="sort-menu-button"
                 aria-expanded="false"
@@ -181,11 +181,13 @@
             title={@page_title}
             action={@live_action}
             client={@client}
+            client_type="api"
+            client_desc="API client"
             patch={~p"/settings"}
           />
         </.modal>
-        <%= if @nodes == nil do %>
-          <.link patch={~p"/nodes/new"}>
+        <%= if @clients == nil do %>
+          <.link patch={~p"/clients/new"}>
             <button
               type="button"
               title="Create a new SentryPeer node"
@@ -210,7 +212,7 @@
             </button>
           </.link>
         <% else %>
-          <%= for node <- @nodes do %>
+          <%= for node <- @clients do %>
             <ul
               role="list"
               class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"
@@ -229,7 +231,7 @@
 
                       <h2 class="text-sm font-medium dark:text-white">
                         <.link
-                          navigate={~p"/nodes/#{node["client_id"]}"}
+                          navigate={~p"/clients/#{node["client_id"]}"}
                           title="View all details about this node"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
@@ -238,7 +240,7 @@
                       </h2>
                     </div>
                     <.link
-                      navigate={~p"/nodes/#{node["client_id"]}/edit"}
+                      navigate={~p"/clients/#{node["client_id"]}/edit"}
                       title="Edit the Name and Description of this node"
                       class="group relative flex items-center space-x-2.5"
                     >
@@ -301,7 +303,7 @@
                   </div>
                 </div>
               </li>
-              <!-- More nodes... -->
+              <!-- More clients... -->
             </ul>
           <% end %>
         <% end %>

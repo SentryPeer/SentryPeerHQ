@@ -176,12 +176,13 @@
         >
           <.live_component
             module={SentrypeerWeb.Live.APIClientFormComponent}
-            id={:new}
+            id={@client["client_id"] || :new}
             current_user={@current_user}
             title={@page_title}
             action={@live_action}
             client={@client}
             client_type="node"
+            client_desc="SentryPeer node"
             patch={~p"/nodes"}
           />
         </.modal>
