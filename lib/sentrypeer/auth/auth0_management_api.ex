@@ -15,6 +15,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   alias Sentrypeer.Auth.Auth0Config
   use HTTPoison.Base
 
+  alias Sentrypeer.CustomerClients.Client
+
   require Logger
 
   @moduledoc """
@@ -111,6 +113,9 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
          |> Enum.filter(fn client ->
            client["client_metadata"]["auth_id"] == user &&
              client["client_metadata"]["client_type"] == client_type
+         end)
+         |> Enum.map(fn client ->
+           client_json_to_client_struct(client)
          end)}
 
       {:error, error} ->
@@ -143,7 +148,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     get_client(id)
     |> case do
       {:ok, body} ->
-        {:ok, client} = Jason.decode(body)
+        client = Jason.decode!(body) |> client_json_to_client_struct()
 
         case check_client_belongs_to_user(client, user) do
           true ->
@@ -256,8 +261,21 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
+  defp client_json_to_client_struct(client_json) do
+    %Client{
+      client_id: client_json["client_id"],
+      client_name: client_json["name"],
+      client_description: client_json["description"],
+      client_secret: client_json["client_secret"],
+      client_created_at: client_json["client_metadata"]["created_at"],
+      client_updated_at: client_json["client_metadata"]["updated_at"],
+      client_auth_id: client_json["client_metadata"]["auth_id"],
+      client_type: client_json["client_metadata"]["client_type"]
+    }
+  end
+
   defp check_client_belongs_to_user(client, user) do
-    client["client_metadata"]["auth_id"] == user
+    client.client_auth_id == user
   end
 
   defp list_clients_query_params(url) do

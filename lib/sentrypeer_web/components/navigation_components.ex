@@ -91,11 +91,11 @@ defmodule SentrypeerWeb.NavigationComponents do
                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
               </svg>
               <.link
-                navigate={~p"/nodes/#{@client["client_id"]}"}
+                navigate={~p"/nodes/#{@client.client_id}"}
                 title="SentryPeer Node"
                 class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
               >
-                <%= @client["client_id"] %>
+                <%= @client.client_id %>
               </.link>
             </div>
           </li>
@@ -120,6 +120,29 @@ defmodule SentrypeerWeb.NavigationComponents do
                 do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
               >
                 Settings
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if @active_page == :settings_overview do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/settings/#{@client.client_id}"}
+                title="SentryPeer Node"
+                class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
+              >
+                <%= @client.client_id %>
               </.link>
             </div>
           </li>
@@ -257,7 +280,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/settings"}
         title="Manage your API client credentials and other settings"
-        class={"#{if (@active_page == :settings ),
+        class={"#{if (@active_page == :settings || @active_page == :settings_overview),
                 do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
       >
         <Heroicons.code_bracket class={"#{if (@active_page == :settings ),

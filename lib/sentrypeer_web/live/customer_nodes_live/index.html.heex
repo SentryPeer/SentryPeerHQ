@@ -176,12 +176,12 @@
         >
           <.live_component
             module={SentrypeerWeb.Live.APIClientFormComponent}
-            id={@client["client_id"] || :new}
+            id={@client.client_id || :new}
             current_user={@current_user}
             title={@page_title}
             action={@live_action}
             client={@client}
-            client_type="node"
+            client_type="node_client"
             client_desc="SentryPeer node"
             patch={~p"/nodes"}
           />
@@ -233,22 +233,22 @@
 
                       <h2 class="text-sm font-medium dark:text-white">
                         <.link
-                          navigate={~p"/nodes/#{client["client_id"]}"}
+                          navigate={~p"/nodes/#{client.client_id}"}
                           title="View all details about this node"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= client["name"] %> <span class="sr-only">Running</span>
+                          <%= client.client_name %> <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
                     <.link
-                      navigate={~p"/nodes/#{client["client_id"]}/edit"}
+                      navigate={~p"/nodes/#{client.client_id}/edit"}
                       title="Edit the Name and Description of this node"
                       class="group relative flex items-center space-x-2.5"
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= client["description"] %>
+                        <%= client.client_description %>
                       </span>
                     </.link>
                   </div>
@@ -297,7 +297,7 @@
                       </button>
                     </p>
                     <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                      <span><%= time_ago(client["client_metadata"]["created_at"]) %></span>
+                      <span><%= time_ago(client.client_created_at) %></span>
                       <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->

@@ -32,17 +32,8 @@ defmodule Sentrypeer.CustomerClients do
       %Ecto.Changeset{data: %Client{}}
 
   """
-  def change_client(client, attrs \\ %{}) do
-    Logger.debug("client_name: #{client["name"]}")
-    Logger.debug("client_description: #{client["description"]}")
-
-    # Just update our %Client{} to match the Auth0 API data structure?
-    # Although this way we can add more fields to our %Client{} if we want
-    # and it doesn't tie us to the Auth0 API format
-    %Client{}
-    |> Map.put(:client_name, client["name"])
-    |> Map.put(:client_description, client["description"])
-    |> Client.changeset(attrs)
+  def change_client(%Client{} = client, attrs \\ %{}) do
+    Client.changeset(client, attrs)
   end
 
   def create_client(auth_id, client_type, attrs \\ %{}) do

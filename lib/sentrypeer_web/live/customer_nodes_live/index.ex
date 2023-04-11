@@ -26,6 +26,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   @impl true
   def mount(_params, session, socket) do
     clients = list_clients(session["current_user"].id, @client_type)
+    Logger.debug("list_mount: #{inspect(clients)}")
 
     {:ok,
      assign(socket,
@@ -62,13 +63,10 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
-    client = %Client{} |> Map.put(:client_id, nil)
-    Logger.debug("New client: #{inspect(client)}")
-
     socket
     |> assign(:page_title, "Create a new SentryPeer Node")
     |> assign(:client_type, "node")
-    |> assign(:client, client)
+    |> assign(:client, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do

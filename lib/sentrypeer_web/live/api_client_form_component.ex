@@ -47,14 +47,11 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
 
   @impl true
   def update(%{client: client} = assigns, socket) do
-    Logger.debug("Client in is: #{inspect(client)}")
-    Logger.debug("Client ID is: #{inspect(client["client_id"])}")
     changeset = CustomerClients.change_client(client)
 
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:client_id, client["client_id"])
      |> assign_form(changeset)}
   end
 
@@ -76,7 +73,7 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   defp save_client(socket, :edit, client_params) do
     case CustomerClients.update_client(
            socket.assigns.current_user.id,
-           socket.assigns.client_id,
+           socket.assigns.client.client_id,
            client_params
          ) do
       {:ok, client} ->
@@ -95,7 +92,11 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   defp save_client(socket, :new, client_params) do
     Logger.debug("Client type is: #{inspect(socket.assigns.client_type)}")
 
-    case CustomerClients.create_client(socket.assigns.current_user.id, client_params) do
+    case CustomerClients.create_client(
+           socket.assigns.current_user.id,
+           socket.assigns.client_type,
+           client_params
+         ) do
       {:ok, client} ->
         notify_parent({:saved, client})
 

@@ -14,8 +14,27 @@
 defmodule Sentrypeer.CustomerClients.Client do
   @moduledoc false
 
-  defstruct [:client_name, :client_description]
-  @types %{client_name: :string, client_description: :string}
+  defstruct [
+    :client_id,
+    :client_name,
+    :client_description,
+    :client_secret,
+    :client_created_at,
+    :client_updated_at,
+    :client_auth_id,
+    :client_type
+  ]
+
+  @types %{
+    client_id: :string,
+    client_name: :string,
+    client_description: :string,
+    client_secret: :string,
+    client_created_at: :string,
+    client_updated_at: :string,
+    client_auth_id: :string,
+    client_type: :string
+  }
 
   import Ecto.Changeset
 

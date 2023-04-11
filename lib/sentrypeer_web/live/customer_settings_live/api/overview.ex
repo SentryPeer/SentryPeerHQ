@@ -31,11 +31,11 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Api.Overview do
       nil ->
         {:noreply, socket |> assign(:page_title, "Node not found")}
 
-      {:ok, node} ->
+      {:ok, client} ->
         {:noreply,
          socket
          |> assign(:page_title, "SentryPeer Node Overview")
-         |> assign(:node, node)}
+         |> assign(:client, client)}
 
       {:error, _} ->
         {:noreply, redirect(socket, to: "/not_found")}

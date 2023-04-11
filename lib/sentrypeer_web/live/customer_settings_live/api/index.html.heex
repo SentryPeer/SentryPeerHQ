@@ -44,7 +44,7 @@
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <.link patch={~p"/settings/api-clients/new"}>
+                  <.link patch={~p"/settings/new"}>
                     <button
                       type="button"
                       title="Create a new SentryPeer API Client"
@@ -65,7 +65,7 @@
                           d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      New node
+                      New API client
                     </button>
                   </.link>
                 </div>
@@ -82,89 +82,7 @@
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer Clients</h1>
-            <div class="relative">
-              <button
-                type="button"
-                title="Sort clients by name and date"
-                class="inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-slate-400 bg-white dark:bg-slate-800 dark:text-white px-4 py-2 text-sm font-medium text-gray-700 dark:text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                id="sort-menu-button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                phx-click={toggle_dropdown_menu("#sort-menu")}
-                phx-click-away={JS.hide(to: "#sort-menu")}
-              >
-                <!-- Heroicon name: mini/bars-arrow-up -->
-                <svg
-                  class="mr-3 h-5 w-5 text-gray-400 dark:text-slate-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 3.75A.75.75 0 012.75 3h11.5a.75.75 0 010 1.5H2.75A.75.75 0 012 3.75zM2 7.5a.75.75 0 01.75-.75h6.365a.75.75 0 010 1.5H2.75A.75.75 0 012 7.5zM14 7a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02l-1.95-2.1v6.59a.75.75 0 01-1.5 0V9.66l-1.95 2.1a.75.75 0 11-1.1-1.02l3.25-3.5A.75.75 0 0114 7zM2 11.25a.75.75 0 01.75-.75H7A.75.75 0 017 12H2.75a.75.75 0 01-.75-.75z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Sort
-                    <!-- Heroicon name: mini/chevron-down -->
-                <svg
-                  class="ml-2.5 -mr-1.5 h-5 w-5 text-gray-400 dark:text-slate-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </button>
-              <!-- Dropdown menu, show/hide based on menu state. -->
-              <div
-                class="absolute hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="sort-menu-button"
-                tabindex="-1"
-                id="sort-menu"
-              >
-                <div class="py-1" role="none">
-                  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="sort-menu-item-0"
-                  >
-                    Name
-                  </a>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="sort-menu-item-1"
-                  >
-                    Date modified
-                  </a>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-slate-400 dark:hover:bg-slate-600 block px-4 py-2 text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="sort-menu-item-2"
-                  >
-                    Date created
-                  </a>
-                </div>
-              </div>
-            </div>
+            <h1 class="flex-1 text-lg font-medium dark:text-white">SentryPeer API Clients</h1>
           </div>
         </div>
 
@@ -181,13 +99,13 @@
             title={@page_title}
             action={@live_action}
             client={@client}
-            client_type="api"
+            client_type="api_client"
             client_desc="API client"
             patch={~p"/settings"}
           />
         </.modal>
         <%= if @clients == nil do %>
-          <.link patch={~p"/clients/new"}>
+          <.link patch={~p"/settings/new"}>
             <button
               type="button"
               title="Create a new SentryPeer node"
@@ -212,7 +130,7 @@
             </button>
           </.link>
         <% else %>
-          <%= for node <- @clients do %>
+          <%= for client <- @clients do %>
             <ul
               role="list"
               class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"
@@ -231,22 +149,22 @@
 
                       <h2 class="text-sm font-medium dark:text-white">
                         <.link
-                          navigate={~p"/clients/#{node["client_id"]}"}
+                          navigate={~p"/settings/api-clients/#{client.client_id}"}
                           title="View all details about this node"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= node["name"] %> <span class="sr-only">Running</span>
+                          <%= client.client_name %> <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
                     <.link
-                      navigate={~p"/clients/#{node["client_id"]}/edit"}
+                      navigate={~p"/settings/api-clients/#{client.client_id}/edit"}
                       title="Edit the Name and Description of this node"
                       class="group relative flex items-center space-x-2.5"
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= node["description"] %>
+                        <%= client.client_description %>
                       </span>
                     </.link>
                   </div>
@@ -295,7 +213,7 @@
                       </button>
                     </p>
                     <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                      <span><%= time_ago(node["client_metadata"]["created_at"]) %></span>
+                      <span><%= time_ago(client.client_created_at) %></span>
                       <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->
@@ -309,43 +227,52 @@
         <% end %>
       </div>
     </div>
-    <!-- Activity feed -->
+    <!-- Help -->
     <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-      <div class="pl-6 lg:w-80">
-        <div class="pt-6 pb-2">
-          <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
-        </div>
-        <div>
-          <ul role="list" class="divide-y divide-gray-200">
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-6 w-6 rounded-full"
-                  src={@current_user.avatar}
-                  alt={ @current_user.name <> "'s avatar" }
-                  title={ @current_user.name <> "'s avatar" }
-                />
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between dark:text-white">
-                    <h3 class="text-sm font-medium">You</h3>
-                    <p class="text-sm text-gray-500">1h</p>
-                  </div>
-                  <p class="text-sm text-gray-500 dark:text-slate-400">
-                    Deployed Workcation (2d89f0c8 in master) to production
-                  </p>
-                </div>
-              </div>
-            </li>
-            <!-- More items... -->
-          </ul>
-          <div class="border-t border-gray-200 py-4 text-sm">
-            <a
-              href="#"
-              title="View all your account activity"
-              class="font-semibold text-indigo-600 hover:text-indigo-900"
-            >
-              View all activity <span aria-hidden="true"> &rarr;</span>
-            </a>
+      <div class="grid grid-cols-1 gap-6 justify-between space-x-6 p-6 pl-6 pt-6 lg:w-80">
+        <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Client Credentials Flow
+            </h3>
+            <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
+              <p>
+                All clients that call the SentryPeer API must use the <span class="font-semibold">Client Credentials Flow</span>.
+              </p>
+              <p class="pt-2">
+                Here you can create your API client and retrieve your
+                <span class="font-semibold">Client ID</span>
+                and <span class="font-semibold">Client Secret</span>.
+              </p>
+              <p class="pt-2">
+                You then use these to request an
+                <a
+                  href="https://auth0.com/docs/secure/tokens/access-tokens#jwt-access-tokens"
+                  title="Read about JWT Access Tokens"
+                  class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  target="_blank"
+                >
+                  Access Token
+                  <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
+                </a>
+              </p>
+              <p class="pt-2">
+                You can also view all your API clients, revoke access to them, see their usage limits and more.
+              </p>
+            </div>
+            <div class="mt-3 text-sm leading-6">
+              <a
+                href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow"
+                class="font-semibold text-indigo-600 hover:text-indigo-500"
+                title="Call our API from a machine-to-machine (M2M) application"
+                target="_blank"
+              >
+                <span class="truncate">
+                  Learn more
+                  <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
