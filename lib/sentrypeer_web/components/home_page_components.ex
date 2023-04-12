@@ -415,6 +415,12 @@ defmodule SentrypeerWeb.HomePageComponents do
                       Terms & Conditions
                     </a>
                   </li>
+
+                  <li>
+                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                      Acceptable Use Policy
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
