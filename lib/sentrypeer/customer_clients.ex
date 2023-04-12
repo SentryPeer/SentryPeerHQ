@@ -49,7 +49,12 @@ defmodule Sentrypeer.CustomerClients do
         {:ok, body} ->
           {:ok, client} = Jason.decode(body)
           Logger.debug("Saving client user association: #{inspect(client)}")
-          Clients.create_client(%{client_id: client["client_id"], auth_id: auth_id})
+
+          Clients.create_client(%{
+            client_id: client["client_id"],
+            auth_id: auth_id,
+            client_type: client_type
+          })
 
         {:error, error} ->
           {:error, error}

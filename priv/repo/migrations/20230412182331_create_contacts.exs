@@ -11,10 +11,19 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.PageHTML do
-  use SentrypeerWeb, :html
+defmodule Sentrypeer.Repo.Migrations.CreateContacts do
+  use Ecto.Migration
 
-  import SentrypeerWeb.HomePageComponents
+  def change do
+    create table(:contacts, primary_key: false) do
+      add :id, :binary_id, primary_key: true
+      add :first_name, :string
+      add :last_name, :string
+      add :company_name, :string
+      add :email, :string
+      add :message, :binary
 
-  embed_templates "page_html/*"
+      timestamps()
+    end
+  end
 end

@@ -11,10 +11,12 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.PageHTML do
-  use SentrypeerWeb, :html
+defmodule Sentrypeer.Repo.Migrations.AddClientsClientTypeColumn do
+  use Ecto.Migration
 
-  import SentrypeerWeb.HomePageComponents
-
-  embed_templates "page_html/*"
+  def change do
+    alter table(:clients) do
+      add :client_type, :string
+    end
+  end
 end

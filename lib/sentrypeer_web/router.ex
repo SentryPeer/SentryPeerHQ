@@ -79,6 +79,10 @@ defmodule SentrypeerWeb.Router do
 
     get "/", PageController, :home
 
+    # Contact Us
+    live "/contact", ContactLive.Index, :index
+    live "/contact/new", ContactLive.Index, :new
+
     # Auth
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout

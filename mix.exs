@@ -52,6 +52,7 @@ defmodule Sentrypeer.MixProject do
       {:cors_plug, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:ecto_commons, "~> 0.3.3"},
       {:ecto_psql_extras, "~> 0.7"},
       {:ecto_sql, "~> 3.6"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},

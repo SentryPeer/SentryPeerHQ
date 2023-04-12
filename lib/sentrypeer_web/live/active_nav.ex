@@ -43,10 +43,7 @@ defmodule SentrypeerWeb.ActiveNav do
         {SentrypeerWeb.CustomerSettingsLive.Index, _} ->
           :settings
 
-        {SentrypeerWeb.CustomerSettingsLive.Api.Index, _} ->
-          :settings
-
-        {SentrypeerWeb.CustomerSettingsLive.Api.Overview, _} ->
+        {SentrypeerWeb.CustomerSettingsLive.Overview, _} ->
           :settings_overview
 
         {_, _} ->

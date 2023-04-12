@@ -1,3 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0
+# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+#
+#   _____            _              _____
+#  / ____|          | |            |  __ \
+# | (___   ___ _ __ | |_ _ __ _   _| |__) |__  ___ _ __
+#  \___ \ / _ \ '_ \| __| '__| | | |  ___/ _ \/ _ \ '__|
+#  ____) |  __/ | | | |_| |  | |_| | |  |  __/  __/ |
+# |_____/ \___|_| |_|\__|_|   \__, |_|   \___|\___|_|
+#                              __/ |
+#                             |___/
+#
+
 defmodule Sentrypeer.Clients.Client do
   use Ecto.Schema
   import Ecto.Changeset
@@ -7,6 +20,7 @@ defmodule Sentrypeer.Clients.Client do
   schema "clients" do
     field :auth_id, :string
     field :client_id, :string
+    field :client_type, :string
 
     has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent,
       foreign_key: :client_id,
@@ -18,7 +32,7 @@ defmodule Sentrypeer.Clients.Client do
   @doc false
   def changeset(client, attrs) do
     client
-    |> cast(attrs, [:auth_id, :client_id])
-    |> validate_required([:auth_id, :client_id])
+    |> cast(attrs, [:auth_id, :client_id, :client_type])
+    |> validate_required([:auth_id, :client_id, :client_type])
   end
 end

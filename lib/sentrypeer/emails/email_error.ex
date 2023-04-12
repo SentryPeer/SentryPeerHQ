@@ -16,8 +16,8 @@ defmodule Sentrypeer.Emails.EmailError do
 
   def notify_admins(module, error, user_id) do
     new()
-    |> to({"SentryPeerHQ General Error", System.get_env("SENTRYPEER_SUPPORT_EMAIL")})
-    |> from({"SentryPeer Alerts", "support@sentrypeer.com"})
+    |> to({"SentryPeerHQ Admins", System.get_env("SENTRYPEER_SUPPORT_EMAIL")})
+    |> from({"SentryPeerHQ General Error", "support@sentrypeer.com"})
     |> subject("SentryPeer has seen an error")
     |> html_body(
       "<h1>Error</h1><p>In module <strong>#{module}</strong> experienced by user: <strong>#{user_id}</strong></p><p>#{error}</p>"

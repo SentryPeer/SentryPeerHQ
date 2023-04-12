@@ -11,10 +11,15 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.PageHTML do
-  use SentrypeerWeb, :html
+defmodule Sentrypeer.Emails.EmailContactForm do
+  import Swoosh.Email
 
-  import SentrypeerWeb.HomePageComponents
-
-  embed_templates "page_html/*"
+  def notify_sales(contact) do
+    new()
+    |> to({"SentryPeerHQ Sales Team", System.get_env("SENTRYPEER_SUPPORT_EMAIL")})
+    |> from({"SentryPeerHQ Sales Contact From", "sales@sentrypeer.com"})
+    |> subject("SentryPeerHQ has an enquiry")
+    |> html_body("<h1>Message</h1><p>#{inspect(contact)}</p>")
+    |> text_body("Message:\n\n#{inspect(contact)}")
+  end
 end
