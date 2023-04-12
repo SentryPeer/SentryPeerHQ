@@ -19,7 +19,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
-  import Logger
+  require Logger
 
   @client_type "node_client"
 
@@ -35,7 +35,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Nodes",
-       client_type: "node",
+       client_type: "node_client",
        clients: clients
      )}
   end
@@ -49,8 +49,6 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"client_id" => id}) do
-    Logger.debug("Editing client #{id}")
-
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
       nil ->
         socket |> assign(:page_title, "Node not found")
@@ -65,7 +63,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create a new SentryPeer Node")
-    |> assign(:client_type, "node")
+    |> assign(:client_type, "node_client")
     |> assign(:client, %Client{})
   end
 
@@ -84,7 +82,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", %{"client_id" => id}, socket) do
     case delete_node(socket.assigns.current_user.id, id) do
       {:ok, _} ->
         {:noreply, socket}

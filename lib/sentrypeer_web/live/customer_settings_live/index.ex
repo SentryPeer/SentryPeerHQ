@@ -19,7 +19,6 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
-
   require Logger
 
   @client_type "api_client"
@@ -35,46 +34,51 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Nodes",
+       page_title: "API Clients",
+       client_type: "api_client",
        api_clients: api_clients
      )}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
+    Logger.debug("handle_params: #{inspect(params)}")
+    Logger.debug("live_action: #{inspect(socket.assigns.live_action)}")
+
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :edit, %{"client_id" => id}) do
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
       nil ->
-        socket |> assign(:page_title, "Node not found")
+        socket |> assign(:page_title, "Client not found")
 
-      {:ok, node} ->
+      {:ok, client} ->
         socket
-        |> assign(:page_title, "Edit Node")
-        |> assign(:node, node)
+        |> assign(:page_title, "Edit Client")
+        |> assign(:client, client)
     end
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "Create a new SentryPeer Node")
-    |> assign(:node, %Client{})
+    |> assign(:page_title, "Create a new SentryPeer API client")
+    |> assign(:client_type, "api_client")
+    |> assign(:client, %Client{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "SentryPeer Nodes")
-    |> assign(:node, nil)
+    |> assign(:page_title, "SentryPeer API clients")
+    |> assign(:client, nil)
   end
 
   @impl true
-  def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, node}}, socket) do
+  def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:nodes, list_clients(socket.assigns.current_user.id, @client_type))
-     |> assign(:node, node)}
+     |> assign(:api_clients, list_clients(socket.assigns.current_user.id, @client_type))
+     |> assign(:client, client)}
   end
 
   @impl true
@@ -84,7 +88,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
         {:noreply, socket}
 
       {:error, _} ->
-        {:noreply, socket |> push_event("error", "Node not deleted")}
+        {:noreply, socket |> push_event("error", "Client not deleted")}
     end
   end
 

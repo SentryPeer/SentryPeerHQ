@@ -61,7 +61,7 @@
                 >
                   <%= @client.client_name %>
                   <.link
-                    patch={~p"/settings/api-clients/#{@client.client_id}/edit"}
+                    patch={~p"/settings/#{@client.client_id}/edit"}
                     title="Edit the Name and Description of this API client"
                     class="group hover:text-indigo-600 relative inline-flex items-center float-right space-x-2.5"
                   >

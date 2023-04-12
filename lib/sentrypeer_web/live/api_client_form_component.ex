@@ -15,6 +15,8 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   use SentrypeerWeb, :live_component
 
   alias Sentrypeer.CustomerClients
+  alias Sentrypeer.Emails.EmailError
+  alias Sentrypeer.Mailer
 
   require Logger
 
@@ -110,6 +112,9 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
 
       {:error, error} ->
         Logger.error("Failed to create client: #{inspect(error)}")
+
+        EmailError.notify_admins(__MODULE__, inspect(error), socket.assigns.current_user.id)
+        |> Mailer.deliver()
 
         {:noreply,
          socket

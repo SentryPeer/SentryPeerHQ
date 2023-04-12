@@ -11,7 +11,7 @@
 #                             |___/
 #
 
-defmodule Sentrypeer.NotificationEmail do
+defmodule Sentrypeer.Emails.EmailNotification do
   import Swoosh.Email
 
   def voip_fraud_email_alert(user) do
