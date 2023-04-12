@@ -106,23 +106,25 @@ if config_env() == :prod do
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 
-  if config_env() == :prod or config_env() == :dev do
-    ## Configuring the mailer
-    #
-    # In production you need to configure the mailer to use a different adapter.
-    # Also, you may need to configure the Swoosh API client of your choice if you
-    # are not using SMTP. Here is an example of the configuration:
-    #
-    config :sentrypeer, Sentrypeer.Mailer,
-      adapter: Swoosh.Adapters.Postmark,
-      api_key: System.get_env("POSTMARK_API_KEY")
-
-    #
-    # For this example you need include a HTTP client required by Swoosh API client.
-    # Swoosh supports Hackney and Finch out of the box:
-    #
-    config :swoosh, :api_client, Swoosh.ApiClient.Finch
-  end
+  # TODO: Switch to this when we get our first paid customer
+  #
+  #  if config_env() == :prod or config_env() == :dev do
+  #    ## Configuring the mailer
+  #    #
+  #    # In production you need to configure the mailer to use a different adapter.
+  #    # Also, you may need to configure the Swoosh API client of your choice if you
+  #    # are not using SMTP. Here is an example of the configuration:
+  #    #
+  #    config :sentrypeer, Sentrypeer.Mailer,
+  #      adapter: Swoosh.Adapters.Postmark,
+  #      api_key: System.get_env("POSTMARK_API_KEY")
+  #
+  #    #
+  #    # For this example you need include a HTTP client required by Swoosh API client.
+  #    # Swoosh supports Hackney and Finch out of the box:
+  #    #
+  #    config :swoosh, :api_client, Swoosh.ApiClient.Finch
+  #  end
 
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
