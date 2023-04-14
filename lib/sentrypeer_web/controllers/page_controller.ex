@@ -19,9 +19,38 @@ defmodule SentrypeerWeb.PageController do
     # so skip the default app layout.
     render(conn, :home,
       current_user: get_session(conn, :current_user),
-      app_version: Application.spec(:sentrypeer, :vsn),
       layout: false,
       page_title: "Home"
+    )
+  end
+
+  def privacy_policy(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    render(conn, :privacy_policy,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      page_title: "Privacy Policy"
+    )
+  end
+
+  def terms_and_conditions(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    render(conn, :terms_and_conditions,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      page_title: "Terms and Conditions"
+    )
+  end
+
+  def acceptable_use_policy(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    render(conn, :acceptable_use_policy,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      page_title: "Acceptable Use Policy"
     )
   end
 end

@@ -20,7 +20,58 @@ defmodule SentrypeerWeb.HomePageComponents do
   def home_page_header(assigns) do
     ~H"""
     <header>
-      <div class="relative bg-white dark:bg-slate-800">
+      <div class="relative isolate bg-white dark:bg-slate-800">
+        <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+          <svg
+            class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
+            viewBox="0 0 1155 678"
+          >
+            <path
+              fill="url(#9b2541ea-d39d-499b-bd42-aeea3e93f5ff)"
+              fill-opacity=".3"
+              d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+            />
+            <defs>
+              <linearGradient
+                id="9b2541ea-d39d-499b-bd42-aeea3e93f5ff"
+                x1="1155.49"
+                x2="-78.208"
+                y1=".177"
+                y2="474.645"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#9089FC" />
+                <stop offset="1" stop-color="#6D50A0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+          <svg
+            class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
+            viewBox="0 0 1155 678"
+          >
+            <path
+              fill="url(#b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1)"
+              fill-opacity=".3"
+              d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+            />
+            <defs>
+              <linearGradient
+                id="b9e4a85f-ccd5-4151-8e84-ab55c66e5aa1"
+                x1="1155.49"
+                x2="-78.208"
+                y1=".177"
+                y2="474.645"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#9089FC" />
+                <stop offset="1" stop-color="#6D50A0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
         <div class="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
           <div class="flex justify-start lg:w-0 lg:flex-1">
             <a href="/" title="SentryPeer Home">
@@ -380,7 +431,7 @@ defmodule SentrypeerWeb.HomePageComponents do
 
                   <li>
                     <a
-                      href="/contact"
+                      href={~p"/contact"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                       title="See the various ways to contact SentryPeer"
                     >
@@ -405,19 +456,28 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <h3 class="text-base font-medium text-gray-900 dark:text-white">Legal</h3>
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <a
+                      href={~p"/privacy-policy"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                    >
                       Privacy Policy
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <a
+                      href={~p"/terms-and-conditions"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                    >
                       Terms & Conditions
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <a
+                      href={~p"/acceptable-use-policy"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                    >
                       Acceptable Use Policy
                     </a>
                   </li>
@@ -482,11 +542,62 @@ defmodule SentrypeerWeb.HomePageComponents do
                   clip-rule="evenodd"
                 />
               </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M27.255 80.719c0 7.33-5.978 13.317-13.309 13.317C6.616 94.036.63 88.049.63 80.719s5.987-13.317 13.317-13.317h13.309zm6.709 0c0-7.33 5.987-13.317 13.317-13.317s13.317 5.986 13.317 13.317v33.335c0 7.33-5.986 13.317-13.317 13.317-7.33 0-13.317-5.987-13.317-13.317zm0 0"
+                  fill="#de1c59"
+                /><path
+                  d="M47.281 27.255c-7.33 0-13.317-5.978-13.317-13.309C33.964 6.616 39.951.63 47.281.63s13.317 5.987 13.317 13.317v13.309zm0 6.709c7.33 0 13.317 5.987 13.317 13.317s-5.986 13.317-13.317 13.317H13.946C6.616 60.598.63 54.612.63 47.281c0-7.33 5.987-13.317 13.317-13.317zm0 0"
+                  fill="#35c5f0"
+                /><path
+                  d="M100.745 47.281c0-7.33 5.978-13.317 13.309-13.317 7.33 0 13.317 5.987 13.317 13.317s-5.987 13.317-13.317 13.317h-13.309zm-6.709 0c0 7.33-5.987 13.317-13.317 13.317s-13.317-5.986-13.317-13.317V13.946C67.402 6.616 73.388.63 80.719.63c7.33 0 13.317 5.987 13.317 13.317zm0 0"
+                  fill="#2eb57d"
+                /><path
+                  d="M80.719 100.745c7.33 0 13.317 5.978 13.317 13.309 0 7.33-5.987 13.317-13.317 13.317s-13.317-5.987-13.317-13.317v-13.309zm0-6.709c-7.33 0-13.317-5.987-13.317-13.317s5.986-13.317 13.317-13.317h33.335c7.33 0 13.317 5.986 13.317 13.317 0 7.33-5.987 13.317-13.317 13.317zm0 0"
+                  fill="#ebb02e"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="https://join.slack.com/t/sentrypeer/shared_invite/zt-zxsmfdo7-iE0odNT2XyKLP9pt0lgbcw"
+              title="SentryPeer Slack Community"
+              target="_blank"
+              class="text-gray-400 hover:text-gray-500"
+            >
+              <span class="sr-only">Slack</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mt-0.5"
+                fill="currentColor"
+                viewBox="0 0 156 156"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M27.255 80.719c0 7.33-5.978 13.317-13.309 13.317C6.616 94.036.63 88.049.63 80.719s5.987-13.317 13.317-13.317h13.309zm6.709 0c0-7.33 5.987-13.317 13.317-13.317s13.317 5.986 13.317 13.317v33.335c0 7.33-5.986 13.317-13.317 13.317-7.33 0-13.317-5.987-13.317-13.317zm0 0"
+                /><path d="M47.281 27.255c-7.33 0-13.317-5.978-13.317-13.309C33.964 6.616 39.951.63 47.281.63s13.317 5.987 13.317 13.317v13.309zm0 6.709c7.33 0 13.317 5.987 13.317 13.317s-5.986 13.317-13.317 13.317H13.946C6.616 60.598.63 54.612.63 47.281c0-7.33 5.987-13.317 13.317-13.317zm0 0" /><path d="M100.745 47.281c0-7.33 5.978-13.317 13.309-13.317 7.33 0 13.317 5.987 13.317 13.317s-5.987 13.317-13.317 13.317h-13.309zm-6.709 0c0 7.33-5.987 13.317-13.317 13.317s-13.317-5.986-13.317-13.317V13.946C67.402 6.616 73.388.63 80.719.63c7.33 0 13.317 5.987 13.317 13.317zm0 0" /><path
+                  d="M80.719 100.745c7.33 0 13.317 5.978 13.317 13.309 0 7.33-5.987 13.317-13.317 13.317s-13.317-5.987-13.317-13.317v-13.309zm0-6.709c-7.33 0-13.317-5.987-13.317-13.317s5.986-13.317 13.317-13.317h33.335c7.33 0 13.317 5.986 13.317 13.317 0 7.33-5.987 13.317-13.317 13.317zm0 0"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </a>
           </div>
           <p class="mt-8 text-sm text-gray-400 dark:text-black md:order-1 md:mt-0">
-            © Ant Networks Ltd. <%= DateTime.utc_now().year %>. SentryPeer is a trading name of Ant Networks
-            Ltd. The
+            ©
+            <a href="https://antnetworks.com/" title="Ant Networks Limited" target="_blank">
+              Ant Networks Ltd.
+            </a>
+            <%= DateTime.utc_now().year %>. SentryPeer is a trading name of
+            <a href="https://antnetworks.com/" title="Ant Networks Limited" target="_blank">
+              Ant Networks Ltd.
+            </a>
+            The
             <a
               href="https://trademarks.ipo.gov.uk/ipo-tmcase/page/Results/1/UK00003847726"
               title="The SentryPeer icon is a registered trademark"
