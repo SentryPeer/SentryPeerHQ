@@ -82,7 +82,7 @@ defmodule Sentrypeer.CustomerClients do
            ) do
         {:ok, body} ->
           Logger.debug("Updated client: #{inspect(body)}")
-          {:ok, client} = Jason.decode(body)
+          {:ok, _client} = Jason.decode(body)
 
         {:error, error} ->
           {:error, error}

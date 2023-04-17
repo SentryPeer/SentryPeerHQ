@@ -339,7 +339,7 @@ defmodule SentrypeerWeb.CoreComponents do
     <.flash
       id="disconnected"
       kind={:error}
-      title="We can't find the internet"
+      title="Reconnecting..."
       close={false}
       autoshow={false}
       phx-disconnected={show("#disconnected")}

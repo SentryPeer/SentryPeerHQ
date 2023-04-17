@@ -77,7 +77,9 @@ defmodule SentrypeerWeb.Router do
   scope "/", SentrypeerWeb do
     pipe_through [:browser, :admins_only]
 
-    get "/", PageController, :home
+    # Home page
+    live "/", HomeLive.Index, :index
+
     get "/privacy-policy", PageController, :privacy_policy
     get "/terms-and-conditions", PageController, :terms_and_conditions
     get "/acceptable-use-policy", PageController, :acceptable_use_policy

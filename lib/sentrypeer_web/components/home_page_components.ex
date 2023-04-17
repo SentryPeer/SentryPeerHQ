@@ -23,7 +23,7 @@ defmodule SentrypeerWeb.HomePageComponents do
       <div class="relative bg-white dark:bg-slate-800">
         <div class="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
           <div class="flex justify-start lg:w-0 lg:flex-1">
-            <a href="/" title="SentryPeer Home">
+            <.link navigate={~p"/"} title="SentryPeer Home">
               <span class="sr-only">SentryPeer</span>
               <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
                 <g id="layer1" transform="translate(-53.112717,-43.907589)">
@@ -73,7 +73,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                   </g>
                 </g>
               </svg>
-            </a>
+            </.link>
           </div>
           <div class="-my-2 -mr-2 md:hidden">
             <button
@@ -124,28 +124,28 @@ defmodule SentrypeerWeb.HomePageComponents do
           </nav>
           <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <%= if @current_user do %>
-              <a
-                href={~p"/dashboard"}
+              <.link
+                navigate={~p"/dashboard"}
                 title="Go to the SentryPeer Dashboard"
                 class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
               >
                 Dashboard
-              </a>
+              </.link>
             <% else %>
-              <a
-                href={~p"/login"}
+              <.link
+                navigate={~p"/login"}
                 title="Login to SentryPeer"
                 class="whitespace-nowrap text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900 mr-4"
               >
                 Sign in
-              </a>
-              <a
-                href={~p"/signup"}
+              </.link>
+              <.link
+                navigate={~p"/signup"}
                 title="Sign up for SentryPeer"
                 class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
               >
                 Sign up
-              </a>
+              </.link>
             <% end %>
           </div>
         </div>
@@ -257,32 +257,32 @@ defmodule SentrypeerWeb.HomePageComponents do
               </div>
               <%= if @current_user do %>
                 <div class="mt-6">
-                  <a
-                    href={~p"/dashboard"}
+                  <.link
+                    navigate={~p"/dashboard"}
                     title="Go to the SentryPeer Dashboard"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >
                     Dashboard
-                  </a>
+                  </.link>
                 </div>
               <% else %>
                 <div class="mt-6">
-                  <a
-                    href={~p"/login"}
+                  <.link
+                    navigate={~p"/login"}
                     title="Login to SentryPeer"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >
                     Sign in
-                  </a>
+                  </.link>
                 </div>
                 <div class="mt-6">
-                  <a
-                    href={~p"/signup"}
+                  <.link
+                    navigate={~p"/signup"}
                     title="Sign up for SentryPeer"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >
                     Sign up
-                  </a>
+                  </.link>
                 </div>
               <% end %>
             </div>
@@ -379,13 +379,13 @@ defmodule SentrypeerWeb.HomePageComponents do
                   </li>
 
                   <li>
-                    <a
-                      href={~p"/contact"}
+                    <.link
+                      navigate={~p"/contact"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                       title="See the various ways to contact SentryPeer"
                     >
                       Contact
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
@@ -405,30 +405,30 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <h3 class="text-base font-medium text-gray-900 dark:text-white">Legal</h3>
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
-                    <a
-                      href={~p"/privacy-policy"}
+                    <.link
+                      navigate={~p"/privacy-policy"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                     >
                       Privacy Policy
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a
-                      href={~p"/terms-and-conditions"}
+                    <.link
+                      navigate={~p"/terms-and-conditions"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                     >
                       Terms & Conditions
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a
-                      href={~p"/acceptable-use-policy"}
+                    <.link
+                      navigate={~p"/acceptable-use-policy"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                     >
                       Acceptable Use Policy
-                    </a>
+                    </.link>
                   </li>
                 </ul>
               </div>
@@ -441,11 +441,11 @@ defmodule SentrypeerWeb.HomePageComponents do
             <p class="mt-4 text-base text-gray-500 dark:text-black">
               The latest news, articles, and resources, sent to your inbox weekly.
             </p>
-            <form class="mt-4 sm:flex sm:max-w-md">
+            <form class="mt-4 sm:flex sm:max-w-md" id="contact-form" phx-submit="subscribe">
               <label for="email-address" class="sr-only">Email address</label>
               <input
                 type="email"
-                name="email-address"
+                name="email"
                 id="email-address"
                 autocomplete="email"
                 required
@@ -454,6 +454,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               />
               <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                 <button
+                  phx-disable-with="Subscribing..."
                   type="submit"
                   class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                 >

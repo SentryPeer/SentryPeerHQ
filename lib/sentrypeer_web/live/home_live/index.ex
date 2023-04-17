@@ -11,18 +11,18 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.ContactLive.Index do
+defmodule SentrypeerWeb.HomeLive.Index do
   use SentrypeerWeb, :live_view
 
-  alias Sentrypeer.ContactForm.Contact
   import SentrypeerWeb.HomePageComponents
+  alias Sentrypeer.Newsletter
 
   @impl true
   def mount(_params, session, socket) do
     {:ok,
      assign(socket,
        current_user: session["current_user"],
-       page_title: "Contact SentryPeer",
+       page_title: "SentryPeer . Home",
        live_action: :index
      )}
   end
@@ -32,19 +32,21 @@ defmodule SentrypeerWeb.ContactLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "Contact SentryPeer Sales")
-    |> assign(:contact, %Contact{})
+  @impl true
+  def handle_event("subscribe", %{"email" => email_address}, socket) do
+    subscribe(socket, socket.assigns.live_action, email_address)
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:contact, nil)
+    |> assign(:email, nil)
   end
 
-  @impl true
-  def handle_info({SentrypeerWeb.ContactLive.FormComponent, {:saved, _contact}}, socket) do
-    {:noreply, socket}
+  defp subscribe(socket, :index, email_address) do
+    Newsletter.subscribe(email_address)
+
+    {:noreply,
+     socket
+     |> put_flash(:info, "Subscribed #{email_address}. Thank you!")}
   end
 end

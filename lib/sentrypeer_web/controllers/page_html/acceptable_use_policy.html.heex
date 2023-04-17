@@ -1,58 +1,469 @@
 <div class="bg-white">
   <%= home_page_header(assigns) %>
 
-  <div class="isolate dark:bg-slate-400 px-6 py-24 sm:py-32 lg:px-8">
+  <div class="dark:bg-slate-400 px-6 py-24 sm:py-32 lg:px-8">
     <div class="mx-auto max-w-2xl sm:text-center">
       <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         Acceptable Use Policy
       </h1>
-      Prohibited Activities
+      <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-slate-800">
+        Last updated on April, 17th, 2023
+      </p>
+    </div>
+    <div class="mx-auto max-w-[40rem] mt-20">
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        This acceptable use policy sets out the terms between you and us under which you may access our website
+        <a href="https://sentrypeer.com" class="text-indigo-600 hover:text-brand">
+          https://sentrypeer.com
+        </a>
+        (our site) and its APIs. This acceptable use policy applies to all users of, and visitors to, our site and its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Your use of our site and APIs means that you accept, and agree to abide by, all the policies in this acceptable use policy, which supplement our <a
+          href={~p"/terms-and-conditions"}
+          class="text-indigo-600 hover:text-brand"
+        >terms and conditions</a>.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        <a href="https://sentrypeer.com" class="text-indigo-600 hover:text-brand">
+          https://sentrypeer.com
+        </a>
+        is a site operated by
+        <a
+          href="https://antnetworks.com/"
+          target="_blank"
+          class="text-indigo-600 hover:text-brand"
+        >
+          Ant Networks Limited
+        </a>
+        (we or us).  We are registered in Scotland under company number SC490020, and we have our registered office at 12a Carden Place, Aberdeen, Scotland, AB10 1UR, United Kingdom. Our VAT number is GB 429 8695 35.
+      </p>
+      <p class="mt-2 mb-10 leading-7 text-gray-600 dark:text-slate-800">
+        We are registered in the UK with the <a
+          href="https://ico.org.uk/"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >Data Protection Registrar</a>. Our registration number is <a
+          href="https://ico.org.uk/ESDWebPages/Entry/ZB535686"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >ZB535686</a>.
+      </p>
+      <h2 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        Table of Contents
+      </h2>
+      <ol class="mt-2 leading-7 list-decimal list-inside">
+        <li class="mt-2 leading-7 text-indigo-600 dark:text-slate-800">
+          <a href="#compliance-uk-law"> Compliance with UK Law </a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 dark:text-slate-800">
+          <a href="#prohibited-uses">Prohibited Uses</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#user-responsibilities">User Responsibilities</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#api-usage">API Usage</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#interactive-services">Interactive Services</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#content-standards">Content Standards</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#disclaimers-and-limitations">Disclaimers and Limitations of Liability</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#suspension-and-termination">Suspension and Termination</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#changes-to-aup">Changes to the Acceptable Use Policy</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#contact-us">Contact Us</a>
+        </li>
+      </ol>
+      <h2
+        id="compliance-uk-law"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#compliance-uk-law" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Compliance with UK Law
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You may not use our site and its API to engage in activities, or store, transfer or receive material of an indecent, offensive or otherwise illegal nature. Any such activities may result in prosecution by the UK authorities under the relevant Criminal Acts including but not limited to the Computer Misuse Act 1990, the Protection of Children Act 1978, the Criminal Justice Act 1988 and the Prevention of Harassment Act 1997.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Under the Electronic Commerce (EC Directive) Regulations 2002, Ant Networks Ltd. is in general not liable to any criminal or pecuniary penalty for any unlawful acts carried out using our service unless we have actual knowledge of those unlawful acts. Accordingly, if we become aware of credible evidence that a customer has carried out any unlawful acts we will take preventative measures to bring those acts to an end.
+      </p>
+      <h2
+        id="prohibited-uses"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#prohibited-uses" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Prohibited Uses
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You may use our site and its API only for lawful purposes. You may not use our site or its API:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          In any way that breaches any applicable local, national or international law or regulation.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          In any way that is unlawful or fraudulent, or has any unlawful or fraudulent purpose or effect.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          For the purpose of harming or attempting to harm minors in any way.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Launching denial-of-service attacks or other attacks that disrupt the website, its API, or other users' access to the service.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Hacking, cracking, or otherwise attempting to gain unauthorized access to the website or its API, or any user accounts.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          To send, knowingly receive, upload, download, use or re-use any material which does not comply with our content standards.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          To transmit, or procure the sending of, any unsolicited or unauthorised advertising or promotional material or any other form of similar solicitation (spam).
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          To transmit unlawful material or material that is defamatory, threatening, discriminatory, extremist or which has the potential to radicalise themselves or others.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          To transmit material that infringes the intellectual property rights or privacy rights of a third party, or that is in breach of a legal duty owed to another party.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          To knowingly transmit any data, send or upload any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.
+        </li>
+      </ul>
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        You also agree:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Not to reproduce, duplicate, copy or re-sell any part of our site in contravention of the provisions of our
+          <a href={~p"/terms-and-conditions"} class="text-indigo-600 hover:text-brand">
+            terms of use
+          </a>
+        </li>
 
-      Users of the SaaS website and its API are strictly prohibited from engaging in any activities that violate UK laws or that are harmful to other users or the website itself. Prohibited activities include, but are not limited to:
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Not to access without authority, interfere with, damage or disrupt:
+        </li>
 
-      Hacking, cracking, or otherwise attempting to gain unauthorized access to the website or its API, or any user accounts
-      Fraudulent activities, such as phishing or identity theft
-      Copyright infringement or other violations of intellectual property rights
-      Sending spam or unsolicited emails to other users or through the API
-      Launching denial-of-service attacks or other attacks that disrupt the website, its API, or other users' access to the service
-      Posting or transmitting any content that is illegal, defamatory, or otherwise offensive
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          any part of our site or APIs;
+        </li>
 
-      User Responsibilities
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          any equipment or network on which our site is stored;
+        </li>
 
-      Users of the SaaS website and its API are responsible for using the service in a lawful and responsible manner. This includes:
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          any software used in the provision of our site; or
+        </li>
 
-      Maintaining the security of their account and API keys, and not sharing their login credentials or API keys with others
-      Reporting any suspicious or unauthorized activity to the website administrators
-      Using the service and its API only for lawful purposes and in accordance with this Acceptable Use Policy
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          any equipment or network or software owned or used by any third party.
+        </li>
+      </ul>
+      <h2
+        id="user-responsibilities"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#user-responsibilities" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        User Responsibilities
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Users of our site and its API are responsible for using the service in a lawful and responsible manner. This includes:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Maintaining the security of their account and API keys, and not sharing their login credentials or API keys with others
+        </li>
 
-      API Usage
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Reporting any suspicious or unauthorized activity to the website administrators
+        </li>
 
-      Users who access the SaaS website's API must comply with the following guidelines:
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Using the service and its API only for lawful purposes and in accordance with this Acceptable Use Policy
+        </li>
+      </ul>
+      <h2 id="api-usage" class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        <a href="#api-usage" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        API Usage
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Users who access the SentryPeer API must comply with the following guidelines:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          You may use our API solely for the purpose of accessing and using the services provided by our platform.
+        </li>
 
-      You may use our API solely for the purpose of accessing and using the services provided by our SaaS platform.
-      You must comply with our API documentation and guidelines, which are subject to change from time to time.
-      You are responsible for any use of our API, including any use by a third party on your behalf.
-      Use only the API endpoints and parameters specified in the API documentation
-      You must not use our API for any illegal or unauthorized purpose, including without limitation, any activity that violates any law, regulation, or intellectual property right.
-      Do not overload the API with excessive requests or use the API in a way that may disrupt or harm the service or other users
-      Respect the rate limits specified in the API documentation and do not exceed them
-      Only use API keys assigned to the user's account and do not share them with others
-      Use proper authentication and encryption methods when accessing the API
-      We reserve the right to suspend or terminate your access to our API at any time, with or without notice, for any reason, including without limitation, if we believe you have violated any provision of this disclaimer.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          You must comply with our
+          <a href="~p/documentation" class="text-indigo-600 hover:text-brand" target="_blank">
+            API documentation
+          </a>
+          and <a href="~p/guides" class="text-indigo-600 hover:text-brand" target="_blank">guidelines</a>, which are subject to change from time to time.
+        </li>
 
-      Consequences of Violations
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          You are responsible for any use of our API, including any use by a third party on your behalf.
+        </li>
 
-      Users who violate this Acceptable Use Policy may be subject to account suspension or termination, legal action, and/or reporting of the violation to the appropriate authorities.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Use only the API endpoints and parameters specified in the
+          <a href="~p/documentation" class="text-indigo-600 hover:text-brand" target="_blank">
+            API documentation
+          </a>
+        </li>
 
-      Disclaimers and Limitations of Liability
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          You must not use our API for any illegal or unauthorized purpose, including without limitation, any activity that violates any law, regulation, or intellectual property right.
+        </li>
 
-      The SaaS website is not responsible for any damages or losses resulting from a user's violation of this Acceptable Use Policy or from the use of the API. By using the service and its API, users agree to indemnify and hold harmless the website from any claims or damages arising out of their use of the service and its API.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Do not overload the API with excessive requests or use the API in a way that may disrupt or harm the service or other users
+        </li>
 
-      Revision of the AUP
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Respect the rate limits specified in the
+          <a href="~p/documentation" class="text-indigo-600 hover:text-brand" target="_blank">
+            API documentation
+          </a>
+          and do not exceed them
+        </li>
 
-      This Acceptable Use Policy may be revised at any time without notice. Users are responsible for regularly reviewing the policy to stay informed of any changes.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Only use API keys assigned to the user's account and do not share them with others
+        </li>
 
-      By using the SaaS website and its API, users agree to comply with this Acceptable Use Policy and all applicable laws and regulations. The website reserves the right to modify or terminate the service and its API at any time, for any reason, without notice.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Use proper authentication and encryption methods when accessing the API
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          We reserve the right to suspend or terminate your access to our API at any time, with or without notice, for any reason, including without limitation, if we believe you have violated any provision of this policy.
+        </li>
+      </ul>
+
+      <h2
+        id="interactive-services"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#interactive-services" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Interactive Services
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We may from time to time provide interactive services on our site, including, without limitation:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Chat rooms
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Message boards and forums
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Blogs
+        </li>
+      </ul>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Where we do provide any interactive service, we will provide clear information to you about the kind of service offered, if it is moderated and what form of moderation is used (including whether it is human or technical).
+      </p>
+
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We will do our best to assess any possible risks for users (and in particular, for children) from third parties when they use any interactive service provided on our site, and we will decide in each case whether it is appropriate to use moderation of the relevant service (including what kind of moderation to use) in the light of those risks. However, we are under no obligation to oversee, monitor or moderate any interactive service we provide on our site, and we expressly exclude our liability for any loss or damage arising from the use of any interactive service by a user in contravention of our content standards, whether the service is moderated or not.
+      </p>
+
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        The use of our interactive services by a minor is subject to the consent of their parent or guardian. We advise parents who permit their children to use an interactive service that it is important that they communicate with their children about their safety online, as moderation is not foolproof. Minors who are using any interactive service should be made aware of the potential risks to them.
+      </p>
+
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Where we do moderate an interactive service, we will normally provide you with a means of contacting the moderator, should a concern or difficulty arise.
+      </p>
+      <h2
+        id="content-standards"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#content-standards" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Content Standards
+      </h2>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        These content standards apply to any and all material which you contribute to our site (contributions), and to any interactive services associated with it.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must comply with the spirit and the letter of the following standards. The standards apply to each part of any contribution as well as to its whole.
+      </p>
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        Contributions must:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be accurate (where they state facts).
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be genuinely held (where they state opinions).
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Comply with applicable law in the UK and in any country from which they are posted.
+        </li>
+      </ul>
+
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        Contributions must not:
+      </p>
+
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Contain any material which is defamatory of any person.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Contain any material which is obscene, offensive, hateful or inflammatory.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Promote sexually explicit material.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Promote violence.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Promote discrimination based on race, sex, religion, nationality, disability, sexual orientation or age.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Infringe any copyright, database right or trademark of any other person.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be likely to deceive any person.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be made in breach of any legal duty owed to a third party, such as a contractual duty or a duty of confidence.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Promote any illegal activity.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be threatening, abuse or invade another’s privacy, or cause annoyance, inconvenience or needless anxiety.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be likely to harass, upset, embarrass, alarm or annoy any other person.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Be used to impersonate any person, or to misrepresent your identity or affiliation with any person.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Give the impression that they emanate from us, if this is not the case.
+        </li>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Advocate, promote or assist any unlawful act such as (by way of example only) copyright infringement or computer misuse.
+        </li>
+      </ul>
+      <h2
+        id="disclaimers-and-limitations"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#disclaimers-and-limitations" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Disclaimers and Limitations of Liability
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        The site is not responsible for any damages or losses resulting from a user's violation of this Acceptable Use Policy or from the use of the API. By using the service and its API, users agree to indemnify and hold harmless the website from any claims or damages arising out of their use of the service and its API.
+      </p>
+      <h2
+        id="suspension-and-termination"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#suspension-and-termination" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Suspension and Termination
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We will determine, in our discretion, whether there has been a breach of this acceptable use policy through your use of our site.  When a breach of this policy has occurred, we may take such action as we deem appropriate.
+      </p>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        Failure to comply with this acceptable use policy constitutes a material breach of the
+        <a href={~p"/terms-and-conditions"} class="text-indigo-600 hover:text-brand">
+          terms of use
+        </a>
+        upon which you are permitted to use our site, and may result in our taking all or any of the following actions:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Immediate, temporary or permanent withdrawal of your right to use our site and APIs.
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Immediate, temporary or permanent removal of any posting or material uploaded by you to our site.
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Issue of a warning to you.
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Legal proceedings against you for reimbursement of all costs on an indemnity basis (including, but not limited to, reasonable administrative and legal costs) resulting from the breach.
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Further legal action against you.
+        </li>
+
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          Disclosure of such information to law enforcement authorities as we reasonably feel is necessary.
+        </li>
+      </ul>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We exclude liability for actions taken in response to breaches of this acceptable use policy.  The responses described in this policy are not limited, and we may take any other action we reasonably deem appropriate.
+      </p>
+      <h2
+        id="changes-to-aup"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#changes-to-aup" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Changes to the Acceptable Use Policy
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We may revise this acceptable use policy at any time by amending this page. You are expected to check this page from time to time to take notice of any changes we make, as they are legally binding on you. Some of the provisions contained in this acceptable use policy may also be superseded by provisions or notices published elsewhere on our site.
+      </p>
+      <h2 id="contact-us" class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        <a href="#contact-us" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Contact Us
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you have any questions about this Acceptable Use Policy, please <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >contact us</a>.
+      </p>
     </div>
   </div>
 

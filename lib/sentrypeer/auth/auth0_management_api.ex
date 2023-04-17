@@ -379,6 +379,6 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   end
 
   defp options do
-    [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 500]
+    [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 2000]
   end
 end
