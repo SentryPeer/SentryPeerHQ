@@ -23,6 +23,7 @@ defmodule SentrypeerWeb.ContactLive.Index do
      assign(socket,
        current_user: session["current_user"],
        page_title: "Contact SentryPeer",
+       show_newsletter_subscription: true,
        live_action: :index
      )}
   end

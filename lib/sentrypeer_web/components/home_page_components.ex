@@ -430,39 +430,49 @@ defmodule SentrypeerWeb.HomePageComponents do
                       Acceptable Use Policy
                     </.link>
                   </li>
+                  <li>
+                    <.link
+                      navigate={~p"/cookie-policy"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                    >
+                      Cookie Policy
+                    </.link>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="mt-12 xl:mt-0">
-            <h3 class="text-base font-medium text-gray-900 dark:text-white">
-              Subscribe to our newsletter
-            </h3>
-            <p class="mt-4 text-base text-gray-500 dark:text-black">
-              The latest news, articles, and resources, sent to your inbox weekly.
-            </p>
-            <form class="mt-4 sm:flex sm:max-w-md" id="contact-form" phx-submit="subscribe">
-              <label for="email-address" class="sr-only">Email address</label>
-              <input
-                type="email"
-                name="email"
-                id="email-address"
-                autocomplete="email"
-                required
-                class="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:placeholder-gray-400 focus:outline-none focus:ring-indigo-500"
-                placeholder="Enter your email"
-              />
-              <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                <button
-                  phx-disable-with="Subscribing..."
-                  type="submit"
-                  class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
+          <%= if @show_newsletter_subscription do %>
+            <div class="mt-12 xl:mt-0">
+              <h3 class="text-base font-medium text-gray-900 dark:text-white">
+                Subscribe to our newsletter
+              </h3>
+              <p class="mt-4 text-base text-gray-500 dark:text-black">
+                The latest news, articles, and resources, sent to your inbox weekly.
+              </p>
+              <form class="mt-4 sm:flex sm:max-w-md" id="contact-form" phx-submit="subscribe">
+                <label for="email-address" class="sr-only">Email address</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email-address"
+                  autocomplete="email"
+                  required
+                  class="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:placeholder-gray-400 focus:outline-none focus:ring-indigo-500"
+                  placeholder="Enter your email"
+                />
+                <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                  <button
+                    phx-disable-with="Subscribing..."
+                    type="submit"
+                    class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+          <% end %>
         </div>
         <div class="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
           <div class="flex space-x-6 md:order-2">

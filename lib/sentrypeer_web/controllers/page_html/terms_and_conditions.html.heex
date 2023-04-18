@@ -1,31 +1,481 @@
 <div class="bg-white">
-  <%= home_page_header(assigns) %> T&Cs'
+  <%= home_page_header(assigns) %>
 
-  Definitions: This section defines key terms used throughout the document, such as "Service", "User", "Subscription", etc.
+  <div class="dark:bg-slate-400 px-6 py-24 sm:py-32 lg:px-8">
+    <div class="mx-auto max-w-2xl sm:text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Terms and Conditions
+      </h1>
+      <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-slate-800">
+        Last updated on April, 18th, 2023.
+      </p>
+    </div>
+    <div class="mx-auto max-w-[40rem] mt-20">
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        These terms and conditions (together with the documents referred to in it) tells you the terms of use on which you may make use of our website
+        <a href="https://sentrypeer.com" class="text-indigo-600 hover:text-brand">
+          https://sentrypeer.com
+        </a>
+        (our site or its APIs), whether as a guest or a registered user. Use of our site or its APIs and includes accessing, browsing, or registering to use our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Please read these terms and conditions carefully before you start to use our site or its APIs, as these will apply to your use of our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        By using our site or its APIs, you confirm that you accept these terms of use and that you agree to comply with them.
+      </p>
+      <p class="mt-2 mb-10 leading-7 text-gray-600 dark:text-slate-800">
+        If you do not agree to these terms and conditions, you must not use our site or its APIs.
+      </p>
+      <h2 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        Table of Contents
+      </h2>
+      <ol class="mt-2 leading-7 list-decimal list-inside">
+        <li class="mt-2 leading-7 text-indigo-600 dark:text-slate-800">
+          <a href="#other-applicable-terms">Other Applicable Terms</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 dark:text-slate-800">
+          <a href="#information-about-us">Information About Us</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#changes-to-terms">Changes to these Terms</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#changes-to-site">Changes to our site or its APIs</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#accessing-our-site">Accessing our site or its APIs</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#your-account-and-password">Your Account and Password</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#intellectual-property-rights">Intellectual Property Rights</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#no-reliance-on-information">No Reliance on Information</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#limitation-of-our-liability">Limitation of our Liability</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#uploading-content-to-our-site-or-its-apis">
+            Uploading content to our site or its APIs
+          </a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#rights-you-licence">Rights You Licence</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#viruses">Viruses</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#linking-to-our-site-or-its-apis">Linking to our site or its APIs</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#third-party-links">Third Party Links and Resources in our site or its APIs</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#applicable-law">Applicable Law</a>
+        </li>
+        <li class="mt-2 leading-7 text-indigo-600 hover:text-brand dark:text-slate-800">
+          <a href="#contact-us">Contact Us</a>
+        </li>
+      </ol>
+      <h2
+        id="other-applicable-terms"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#other-applicable-terms" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Other Applicable Terms
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        These terms of use refer to the following additional terms, which also apply to your use of our site or its APIs:
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Our <a href={~p"/privacy-policy"} class="text-indigo-600 hover:text-brand">Privacy Policy</a>, which sets out the terms on which we process any personal data we collect from you, or that you provide to us. By using our site or its APIs, you consent to such processing and you warrant that all data provided by you is accurate.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Our <a href={~p"/acceptable-use-policy"} class="text-indigo-600 hover:text-brand">Acceptable Use Policy</a>, which sets out the permitted uses and prohibited uses of our site or its APIs. When using our site or its APIs, you must comply with this Acceptable Use Policy.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Our <a href={~p"/cookie-policy"} class="text-indigo-600 hover:text-brand">Cookie Policy</a>, which sets out information about the cookies on our site or its APIs.
+      </p>
 
-  Acceptance of Terms: This section outlines that by using your SaaS website, users agree to be bound by the terms and conditions outlined in this document.
+      <h2
+        id="information-about-us"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#information-about-us" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Information About Us
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        <a href="https://sentrypeer.com" class="text-indigo-600 hover:text-brand">
+          https://sentrypeer.com
+        </a>
+        is a site operated by
+        <a
+          href="https://antnetworks.com/"
+          target="_blank"
+          class="text-indigo-600 hover:text-brand"
+        >
+          Ant Networks Limited
+        </a>
+        (we or us).  We are registered in Scotland under company number SC490020, and we have our registered office at 12a Carden Place, Aberdeen, Scotland, AB10 1UR, United Kingdom. Our VAT number is GB 429 8695 35.
+      </p>
+      <p class="mt-2 mb-10 leading-7 text-gray-600 dark:text-slate-800">
+        We are registered in the UK with the <a
+          href="https://ico.org.uk/"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >Data Protection Registrar</a>. Our registration number is <a
+          href="https://ico.org.uk/ESDWebPages/Entry/ZB535686"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >ZB535686</a>.
+      </p>
 
-  Description of Service: This section describes the features and functionality of your SaaS website, as well as any limitations or restrictions that may apply.
+      <h2
+        id="changes-to-terms"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#changes-to-terms" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Changes to these Terms
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We may revise these terms of use at any time by amending this page.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Please check this page from time to time to take notice of any changes we made, as they are binding on you.
+      </p>
 
-  User Accounts: This section outlines the process for creating a user account, including any requirements for providing personal information, such as name and email address.
+      <h2
+        id="changes-to-site"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#changes-to-site" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Changes to our site or its APIs
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We may update our site or its APIs from time to time, and may change the content at any time. However, please note that any of the content on our site or its APIs may be out of date at any given time, and we are under no obligation to update it.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We do not guarantee that our site or its APIs, or any content on it, will be free from errors or omissions.
+      </p>
+      <h2
+        id="accessing-our-site"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#accessing-our-site" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Accessing our site or its APIs
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We do not guarantee that our site or its APIs, or any content on it, will always be available or be uninterrupted. Access to our site or its APIs is permitted on a temporary basis. We may suspend, withdraw, discontinue or change all or any part of our site or its APIs without notice. We will not be liable to you if for any reason our site or its APIs is unavailable at any time or for any period.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You are responsible for making all arrangements necessary for you to have access to our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You are also responsible for ensuring that all persons who access our site or its APIs through your internet connection are aware of these terms of use and other applicable terms and conditions, and that they comply with them.
+      </p>
+      <h2
+        id="your-account-and-password"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#your-account-and-password" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Your Account and Password
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you choose, or you are provided with, a user identification code, password or any other piece of information as part of our security procedures, you must treat such information as confidential. You must not disclose it to any third party.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We have the right to disable any user identification code or password, whether chosen by you or allocated by us, at any time, if in our reasonable opinion you have failed to comply with any of the provisions of these terms of use.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        If you know or suspect that anyone other than you knows your user identification code or password, you must promptly <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >notify us</a>.
+      </p>
+      <h2
+        id="intellectual-property-rights"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#intellectual-property-rights" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Intellectual Property Rights
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We are the owner or the licensee of all intellectual property rights in our site or its APIs, and in the material published on it.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Those works are protected by copyright laws and treaties around the world. All such rights are reserved.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You may print off one copy, and may download extracts, of any page(s) from our site or its APIs for your personal use and you may draw the attention of others within your organisation to content posted on our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must not modify the paper or digital copies of any materials you have printed off or downloaded in any way, and you must not use any illustrations, photographs, video or audio sequences or any graphics separately from any accompanying text.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Our status (and that of any identified contributors) as the authors of content on our site or its APIs must always be acknowledged.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must not use any part of the content on our site or its APIs for commercial purposes without obtaining a licence to do so from us or our licensors.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        If you print off, copy or download any part of our site or its APIs in breach of these terms of use, your right to use our site or its APIs will cease immediately and you must, at our option, return or destroy any copies of the materials you have made.
+      </p>
+      <h2
+        id="no-reliance-on-information"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#no-reliance-on-information" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        No Reliance on Information
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        The content on our site or its APIs is provided for general information only. It is not intended to amount to advice on which you should rely. You must obtain professional or specialist advice before taking, or refraining from, any action on the basis of the content on our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Although we make reasonable efforts to update the information on our site or its APIs, we make no representations, warranties or guarantees, whether express or implied, that the content on our site or its APIs is accurate, complete or up-to-date.
+      </p>
+      <h2
+        id="limitation-of-our-liability"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#limitation-of-our-liability" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Limitation of our Liability
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        Nothing in these terms of use excludes or limits our liability for death or personal injury arising from our negligence, or our fraud or fraudulent misrepresentation, or any other liability that cannot be excluded or limited by Scottish law.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        To the extent permitted by law, we exclude all conditions, warranties, representations or other terms which may apply to our site or its APIs or any content on it, whether express or implied.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We will not be liable to any user for any loss or damage, whether in contract, tort (including negligence), breach of statutory duty, or otherwise, even if foreseeable, arising under or in connection with:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+          use of, or inability to use, our site or its APIs; or
+        </li>
 
-  User Responsibilities: This section outlines the responsibilities of users, including compliance with applicable laws and regulations, payment of any applicable fees, and adherence to your acceptable use policy.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          use of or reliance on any content displayed on our site or its APIs.
+        </li>
 
-  Subscription and Payment: This section outlines the terms of any subscription plans offered, including pricing, billing cycle, and cancellation policy.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          If you are a business user, please note that in particular, we will not be liable for:
+        </li>
 
-  Intellectual Property: This section outlines ownership of intellectual property rights related to your SaaS website and prohibits users from using or distributing any of your content without prior written permission.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          loss of profits, sales, business, or revenue;
+        </li>
 
-  Data Protection and Privacy: This section outlines how you will collect, use, and protect user data, as well as the user's rights regarding their personal data.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          business interruption;
+        </li>
 
-  Termination: This section outlines the circumstances under which you may terminate a user's account or subscription, as well as the user's right to terminate their account.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          loss of anticipated savings;
+        </li>
 
-  Limitations of Liability: This section limits your liability in the event of damages caused by your SaaS website or service, and also outlines the user's responsibilities for any damages caused by their use of the service.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          loss of business opportunity, goodwill or reputation; or
+        </li>
 
-  Dispute Resolution: This section outlines the process for resolving any disputes that may arise between you and a user.
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          any indirect or consequential loss or damage.
+        </li>
+      </ul>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you are a consumer user, please note that we only provide our site or its APIs for domestic and private use. You agree not to use our site or its APIs for any commercial or business purposes, and we have no liability to you for any loss of profit, loss of business, business interruption, or loss of business opportunity.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We will not be liable for any loss or damage caused by a virus, distributed denial-of-service attack, or other technologically harmful material that may infect your computer equipment, computer programs, data or other proprietary material due to your use of our site or its APIs or to your downloading of any content on it, or on any website linked to it.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We assume no responsibility for the content of websites linked on our site or its APIs. Such links should not be interpreted as endorsement by us of those linked websites. We will not be liable for any loss or damage that may arise from your use of them.
+      </p>
 
-  Modifications: This section outlines your right to modify the terms and conditions at any time and how you will notify users of any changes.
+      <h2
+        id="uploading-content-to-our-site-or-its-apis"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#uploading-content-to-our-site-or-its-apis" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Uploading content to our site or its APIs
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        Whenever you make use of a feature that allows you to upload content to our site or its APIs, or to make contact with other users of our site or its APIs, you must comply with the content standards set out in our <a
+          href={~p"/acceptable-use-policy"}
+          class="text-indigo-600 hover:text-brand"
+        >Acceptable Use Policy</a>.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You warrant that any such contribution does comply with those standards, and you will be liable to us and indemnify us for any breach of that warranty. If you are a consumer user, this means you will be responsible for any loss or damage we suffer as a result of your breach of warranty.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Any content you upload to our site or its APIs will be considered non-confidential and non-proprietary. You retain all of your ownership rights in your content, but you are required to grant us and other users of the site a limited licence to use, store and copy that content and to distribute and make it available to third parties. The rights you license to us are described in the next paragraph (Rights you licence).
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We also have the right to disclose your identity to any third party who is claiming that any content posted or uploaded by you to our site or its APIs constitutes a violation of their intellectual property rights, or of their right to privacy.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We will not be responsible, or liable to any third party, for the content or accuracy of any content posted by you or any other user of our site or its APIs.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We have the right to remove any posting you make on our site or its APIs if, in our opinion, your post does not comply with the content standards set out in our <a
+          href={~p"/acceptable-use-policy"}
+          class="text-indigo-600 hover:text-brand"
+        >Acceptable Use Policy</a>.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        The views expressed by other users on our site or its APIs do not represent our views or values.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You are solely responsible for securing and backing up your content.
+      </p>
+      <h2
+        id="rights-you-licence"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#rights-you-licence" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Rights You Licence
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        When you upload or post content to our site or its APIs, you grant the following licenses:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          A worldwide, non-exclusive, royalty-free, transferable licence to use, reproduce, distribute, prepare derivative works of, display, and perform that content in connection with the services provided by our site or its APIs and across different media and to promote the site or services; and
+        </li>
 
-  Governing Law: This section specifies the governing law that will be used in the event of any disputes related to your SaaS website or service. <%= footer(
-    assigns
-  ) %>
+        <li class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+          A worldwide, non-exclusive, royalty-free, transferable licence to allow third parties to use the content for their purposes.
+        </li>
+      </ul>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We will only ever use your materials to carry out your instructions to us – unless, very exceptionally, a court or other regulator orders us to disclose them.
+      </p>
+      <h2 id="viruses" class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        <a href="#viruses" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Viruses
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        We do not guarantee that our site or its APIs will be secure or free from bugs or viruses.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You are responsible for configuring your information technology, computer programmes and platform in order to access our site or its APIs. You should use your own virus protection software.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must not misuse our site or its APIs by knowingly introducing viruses, trojans, worms, logic bombs or other material which is malicious or technologically harmful. You must not attempt to gain unauthorised access to our site or its APIs, the server on which our site or its APIs is stored or any server, computer or database connected to our site or its APIs. You must not attack our site or its APIs via a denial-of-service attack or a distributed denial-of service attack. By breaching this provision, you would commit a criminal offence under the Computer Misuse Act 1990. We will report any such breach to the relevant law enforcement authorities and we will co-operate with those authorities by disclosing your identity to them. In the event of such a breach, your right to use our site or its APIs will cease immediately.
+      </p>
+
+      <h2
+        id="linking-to-our-site-or-its-apis"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#linking-to-our-site-or-its-apis" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Linking to our site or its APIs
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        You may link to our home page, provided you do so in a way that is fair and legal and does not damage our reputation or take advantage of it.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must not establish a link in such a way as to suggest any form of association, approval or endorsement on our part where none exists.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        You must not establish a link to our site or its APIs in any website that is not owned by you.
+      </p>
+
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Our site or its APIs must not be framed on any other site, nor may you create a link to any part of our site or its APIs other than the home
+        page.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We reserve the right to withdraw linking permission without notice.
+      </p>
+
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        The website in which you are linking must comply in all respects with the content standards set out in our <a
+          href={~p"/acceptable-use-policy"}
+          class="text-indigo-600 hover:text-brand"
+        >Acceptable Use Policy</a>.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        If you wish to make any use of content on our site or its APIs other than that set out above, please <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >contact us</a>.
+      </p>
+      <h2
+        id="third-party-links"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#third-party-links" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Third Party Links and Resources in our site or its APIs
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        Where our site or its APIs contains links to other sites and resources provided by third parties, these links are provided for your information only.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We have no control over the contents of those sites or resources.
+      </p>
+
+      <h2
+        id="applicable-law"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#applicable-law" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Applicable Law
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you are a consumer, please note that these terms and conditions, its subject matter and its formation, are governed by Scottish law. You and we both agree to that the courts of Scotland will have non-exclusive jurisdiction.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        If you are a business, these terms of use, its subject matter and its formation (and any non-contractual disputes or claims) are governed by English law. We both agree to the exclusive jurisdiction of the courts of Scotland.
+      </p>
+      <h2 id="contact-us" class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        <a href="#contact-us" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Contact Us
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you have any questions about these Terms and Conditions, please <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >contact us</a>.
+      </p>
+    </div>
+  </div>
 </div>

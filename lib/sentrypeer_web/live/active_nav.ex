@@ -31,6 +31,9 @@ defmodule SentrypeerWeb.ActiveNav do
   defp set_active_page(_params, _url, socket) do
     active_page =
       case {socket.view, socket.assigns.live_action} do
+        {SentrypeerWeb.HomeLive.Index, _} ->
+          :home_page
+
         {SentrypeerWeb.CustomerDashboardLive.Index, _} ->
           :dashboard
 

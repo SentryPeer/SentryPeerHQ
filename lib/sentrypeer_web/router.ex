@@ -83,6 +83,7 @@ defmodule SentrypeerWeb.Router do
     get "/privacy-policy", PageController, :privacy_policy
     get "/terms-and-conditions", PageController, :terms_and_conditions
     get "/acceptable-use-policy", PageController, :acceptable_use_policy
+    get "/cookie-policy", PageController, :cookie_policy
 
     # Contact Us
     live "/contact", ContactLive.Index, :index

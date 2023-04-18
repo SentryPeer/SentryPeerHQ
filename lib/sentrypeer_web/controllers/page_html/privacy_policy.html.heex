@@ -1,62 +1,106 @@
 <div class="bg-white">
   <%= home_page_header(assigns) %>
 
-  <div class="isolate dark:bg-slate-400 px-6 py-24 sm:py-32 lg:px-8">
+  <div class="dark:bg-slate-400 px-6 py-24 sm:py-32 lg:px-8">
     <div class="mx-auto max-w-2xl sm:text-center">
       <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         Privacy Policy
       </h1>
       <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-slate-800">
-        Last updated on April, 14th, 2023
+        Last updated on April, 19th, 2023
       </p>
-      At [Your SaaS Website Name], we are committed to protecting the privacy and security of our users' personal information. This Privacy Policy outlines how we collect, use, and disclose information when you use our website and services, in compliance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.
+    </div>
+    <div class="mx-auto max-w-[40rem] mt-20">
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        This is privacy notice of Ant Networks Limited T/A SentryPeer.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We respect your privacy and are determined to protect your personal data. The purpose of this privacy notice is to inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from). We’ll also tell you about your privacy rights and how data protection law protects you.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Your use of our site and APIs means that you accept, and agree to abide by, all the policies in this acceptable use policy, which supplement our <a
+          href={~p"/terms-and-conditions"}
+          class="text-indigo-600 hover:text-brand"
+        >terms and conditions</a>.
+      </p>
+      <h2
+        id="important-information"
+        class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#important-information" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Who We Are and Important Information
+      </h2>
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        What is the purpose of this privacy notice?
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        This privacy notice aims to give you information on how we collect and process your personal data through your use of this website, including any data you may provide through this website when you sign up to our newsletter, subscribe to a SentryPeer service or use its APIs.
+      </p>
 
-      Information we collect
-
-      When you use our website and services, we may collect the following types of information:
-
-      Personal information: such as your name, email address, billing address, and payment information.
-      Usage information: such as your IP address, browser type, device type, and operating system.
-      Cookies and similar technologies: we may use cookies and similar technologies to collect information about your use of our website and services.
-      Other information: any other information you voluntarily provide to us.
-
-      How we use information
-
-      We use the information we collect for the following purposes:
-
-      To provide and maintain our services: we use personal information to provide and maintain our services, process payments, and communicate with you.
-      To improve our services: we use usage information and other analytics to improve our website and services.
-      To personalize your experience: we may use cookies and similar technologies to personalize your experience on our website and services.
-      To comply with legal obligations: we may use your information to comply with legal obligations, such as responding to lawful requests or complying with applicable laws and regulations.
-
-      How we share information
-
-      We may share your information with the following third parties:
-
-      Service providers: we may share your information with third-party service providers who help us provide and improve our services.
-      Business partners: we may share your information with our business partners to provide joint services or for marketing purposes.
-      Legal purposes: we may disclose your information to law enforcement or other government officials if required by law or to protect our legal interests.
-
-      Your rights and choices
-
-      You have the following rights and choices regarding your personal information:
-
-      Access: you may request access to the personal information we hold about you.
-      Correction: you may request that we correct or update any inaccurate or incomplete personal information.
-      Deletion: you may request that we delete your personal information.
-      Opt-out: you may opt-out of receiving marketing communications from us at any time.
-
-      Security
-
-      We take reasonable measures to protect your personal information from unauthorized access, disclosure, or destruction. However, please note that no security measures are 100% effective.
-
-      Changes to this policy
-
-      We may update this Privacy Policy from time to time. If we make any material changes, we will notify you by email or by posting a notice on our website.
-
-      Contact us
-
-      If you have any questions or concerns about this Privacy Policy or our use of your personal information, please contact us at [Your contact email address].
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        This website is not intended for children, and we do not knowingly collect data relating to children.
+      </p>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        You must read this privacy notice together with any other privacy notice we may provide on specific occasions when we are collecting or processing personal data about you so that you are fully aware of how and why we are using your data. This privacy notice supplements the other notices and is not intended to override them.
+      </p>
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        Data controller(s)
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Ant Networks Limited is the controller and responsible for your personal data (collectively referred to as SentryPeer, "we", "us" or "our" in this privacy notice).
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We are registered in Scotland under company number SC490020, and we have our registered office at 12a Carden Place, Aberdeen, Scotland, AB10 1UR, United Kingdom. Our VAT number is GB 429 8695 35.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        We are registered in the UK with the <a
+          href="https://ico.org.uk/"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >Data Protection Registrar</a>. Our registration number is <a
+          href="https://ico.org.uk/ESDWebPages/Entry/ZB535686"
+          class="text-indigo-600 hover:text-brand"
+          target="_blank"
+        >ZB535686</a>. For all data matters please <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >contact us</a>.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        Ant Networks Limited is the controller and responsible for this website.
+      </p>
+      <p class="mt-6 leading-7 font-semibold text-gray-600 dark:text-slate-800">
+        Third-party links outside our control
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        This website may include links to third-party websites, plug-ins and applications. Clicking on those links or enabling those connections may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy statements.
+      </p>
+      <p class="mt-2 leading-7 text-gray-600 dark:text-slate-800">
+        When you leave our website, we encourage you to read the privacy notice of every website you visit.
+      </p>
+      <h2
+              id="personal-data-we-collect-about-you"
+              class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+      >
+        <a href="#personal-data-we-collect-about-you" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        The Personal Data We Collect About You
+      </h2>
+      <h2 id="contact-us" class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+        <a href="#contact-us" class="text-white hover:text-brand">
+          <Heroicons.link class="inline-block w-6 h-6 mb-1" />
+        </a>
+        Contact Us
+      </h2>
+      <p class="mt-6 leading-7 text-gray-600 dark:text-slate-800">
+        If you have any questions about this Acceptable Use Policy, please <a
+          href={~p"/contact"}
+          class="text-indigo-600 hover:text-brand"
+        >contact us</a>.
+      </p>
     </div>
   </div>
 

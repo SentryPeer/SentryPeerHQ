@@ -20,6 +20,7 @@ defmodule SentrypeerWeb.PageController do
     render(conn, :privacy_policy,
       current_user: get_session(conn, :current_user),
       layout: false,
+      show_newsletter_subscription: false,
       page_title: "Privacy Policy"
     )
   end
@@ -30,6 +31,7 @@ defmodule SentrypeerWeb.PageController do
     render(conn, :terms_and_conditions,
       current_user: get_session(conn, :current_user),
       layout: false,
+      show_newsletter_subscription: false,
       page_title: "Terms and Conditions"
     )
   end
@@ -40,7 +42,19 @@ defmodule SentrypeerWeb.PageController do
     render(conn, :acceptable_use_policy,
       current_user: get_session(conn, :current_user),
       layout: false,
+      show_newsletter_subscription: false,
       page_title: "Acceptable Use Policy"
+    )
+  end
+
+  def cookie_policy(conn, _params) do
+    # The home page is often custom made,
+    # so skip the default app layout.
+    render(conn, :cookie_policy,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Cookie Policy"
     )
   end
 end
