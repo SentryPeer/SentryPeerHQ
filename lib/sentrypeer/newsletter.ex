@@ -13,19 +13,17 @@
 
 defmodule Sentrypeer.Newsletter do
   use HTTPoison.Base
-
-  @list_id System.get_env("SENTRYPEER_MAILCHIMP_LIST_ID")
-  @api_key System.get_env("SENTRYPEER_MAILCHIMP_API_KEY")
-  @api_server System.get_env("SENTRYPEER_MAILCHIMP_API_SERVER")
-  @api_url "https://#{@api_server}.api.mailchimp.com/3.0/lists/#{@list_id}/members"
+  require Logger
 
   def subscribe(email) do
     submit_to_mailchimp_api(email)
   end
 
   defp submit_to_mailchimp_api(email) do
+    Logger.info("Mailchimp API URL: #{api_url()}")
+
     HTTPoison.post!(
-      @api_url,
+      api_url(),
       Jason.encode!(%{
         email_address: email,
         status: "pending"
@@ -35,7 +33,23 @@ defmodule Sentrypeer.Newsletter do
         {:versions, [:"tlsv1.2"]}
       ],
       recv_timeout: 2000,
-      hackney: [basic_auth: {"key", @api_key}]
+      hackney: [basic_auth: {"key", api_key()}]
     )
+  end
+
+  defp list_id do
+    System.get_env("SENTRYPEER_MAILCHIMP_LIST_ID")
+  end
+
+  defp api_key do
+    System.get_env("SENTRYPEER_MAILCHIMP_API_KEY")
+  end
+
+  defp api_server do
+    System.get_env("SENTRYPEER_MAILCHIMP_API_SERVER")
+  end
+
+  defp api_url do
+    "https://#{api_server()}.api.mailchimp.com/3.0/lists/#{list_id()}/members"
   end
 end

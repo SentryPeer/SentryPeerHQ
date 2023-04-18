@@ -47,6 +47,6 @@ defmodule SentrypeerWeb.HomeLive.Index do
 
     {:noreply,
      socket
-     |> put_flash(:info, "Subscribed #{email_address}. Thank you!")}
+     |> put_flash(:info, "Subscribe request received. Thank you!")}
   end
 end
