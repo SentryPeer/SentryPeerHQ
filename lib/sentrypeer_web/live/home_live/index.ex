@@ -22,7 +22,7 @@ defmodule SentrypeerWeb.HomeLive.Index do
     {:ok,
      assign(socket,
        current_user: session["current_user"],
-       page_title: "SentryPeer . Home",
+       page_title: "SentryPeer® - Help prevent VoIP cyberattacks and fraudulent VoIP phone calls",
        show_newsletter_subscription: true,
        live_action: :index
      )}

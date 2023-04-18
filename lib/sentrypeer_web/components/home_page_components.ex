@@ -169,49 +169,49 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <div>
                   <span class="sr-only">SentryPeer</span>
                   <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
-                    <g id="layer1" transform="translate(-53.112717,-43.907589)">
+                    <g id="layer2" transform="translate(-53.112717,-43.907589)">
                       <g
-                        id="g12"
+                        id="g13"
                         transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
                         style="fill:#ffffff;fill-opacity:1"
                       >
                         <path
                           d="M 0,0 H -17.647 L 0,-70.805 Z"
                           style="fill:#6d50a0;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                          id="path14"
+                          id="path15"
                         />
                       </g>
                       <g
-                        id="g16"
+                        id="g17"
                         transform="matrix(0.35277777,0,0,-0.35277777,65.564008,47.738649)"
                         style="fill:#6d50a0;fill-opacity:1"
                       >
                         <path
                           d="m 0,0 21.827,-79.059 v -40.398 l -11.946,53.864 -26.6,33.448 v -39.963 l 26.472,-21.285 3.25,-47.349 -48.298,38.661 v 86.009 z"
                           style="fill:#6d50a0;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                          id="path18"
+                          id="path19"
                         />
                       </g>
                       <g
-                        id="g20"
+                        id="g21"
                         transform="matrix(0.35277777,0,0,-0.35277777,73.26413,43.907589)"
                         style="fill:#6d50a0;fill-opacity:1"
                       >
                         <path
                           d="M 0,0 H 17.647 L 0,-70.805 Z"
                           style="fill:#6d50a0;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                          id="path22"
+                          id="path23"
                         />
                       </g>
                       <g
-                        id="g24"
+                        id="g25"
                         transform="matrix(0.35277777,0,0,-0.35277777,80.96424,47.738649)"
                         style="fill:#6d50a0;fill-opacity:1"
                       >
                         <path
                           d="m 0,0 -21.827,-79.059 v -40.398 l 11.946,53.864 26.6,33.448 v -39.963 l -26.472,-21.285 -3.25,-47.349 48.298,38.661 v 86.009 z"
                           style="fill:#6d50a0;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                          id="path26"
+                          id="path27"
                         />
                       </g>
                     </g>
