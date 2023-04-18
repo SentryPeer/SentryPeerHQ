@@ -16,3 +16,8 @@
 .has-tooltip:hover .tooltip {
     @apply visible z-50;
 }
+
+#btn-back-to-top {
+    position: fixed;
+    display: none;
+}
