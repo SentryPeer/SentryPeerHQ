@@ -311,7 +311,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <!-- Logo section -->
           <div class="flex items-center px-2 lg:px-0 xl:w-64">
             <div class="flex-shrink-0">
-              <.link navigate={~p"/"} class="flex items-center" title="SentryPeer Home Page">
+              <.link href={~p"/"} class="flex items-center" title="SentryPeer Home Page">
                 <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
                   <g id="layer1" transform="translate(-53.112717,-43.907589)">
                     <g

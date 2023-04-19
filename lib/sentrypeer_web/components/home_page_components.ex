@@ -23,7 +23,7 @@ defmodule SentrypeerWeb.HomePageComponents do
       <div class="relative bg-white dark:bg-slate-800">
         <div class="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
           <div class="flex justify-start lg:w-0 lg:flex-1">
-            <.link navigate={~p"/"} title="SentryPeer Home">
+            <.link href={~p"/"} title="SentryPeer Home">
               <span class="sr-only">SentryPeer</span>
               <svg viewBox="0 0 40.302814 53.481709" class="h-12" aria-hidden="true">
                 <g id="layer1" transform="translate(-53.112717,-43.907589)">
