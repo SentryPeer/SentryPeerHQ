@@ -16,7 +16,16 @@ defmodule SentrypeerWeb.RateLimitPlug do
 
   # See https://dev.to/mnishiguchi/rate-limiter-for-phoenix-app-3j2n
 
-  import Plug.Conn, only: [put_status: 2, halt: 1]
+  import Plug.Conn,
+    only: [
+      halt: 1,
+      merge_resp_headers: 2,
+      put_status: 2,
+      put_resp_header: 3,
+      put_resp_content_type: 2,
+      send_resp: 3
+    ]
+
   import Phoenix.Controller, only: [render: 2]
   require Logger
 
@@ -32,8 +41,8 @@ defmodule SentrypeerWeb.RateLimitPlug do
   """
   def rate_limit(conn, opts \\ []) do
     case check_rate(conn, opts) do
-      {:ok, _count} ->
-        conn
+      {:ok, count} ->
+        add_rate_limit_headers(conn, count)
 
       error ->
         Logger.info(rate_limit: error)
@@ -56,13 +65,25 @@ defmodule SentrypeerWeb.RateLimitPlug do
     "#{ip}:#{path}"
   end
 
+  defp add_rate_limit_headers(conn, count) do
+    conn
+    |> put_resp_header("X-SentryPeer-API-RateLimit-Limit", "600")
+    |> put_resp_header("X-SentryPeer-API-RateLimit-Remaining", "#{600 - count}")
+    # 1 hour
+    |> put_resp_header("X-SentryPeer-API-RateLimit-TimeToReset", "60")
+    # 1 hour
+    |> put_resp_header("X-SentryPeer-API-RateLimit-TimeToResetSecs", "3600")
+  end
+
   defp render_error(conn) do
     conn
     |> merge_resp_headers([
-      {"X-SentryPeer-API-RateLimit-Limit", "5"},
+      {"X-SentryPeer-API-RateLimit-Limit", "600"},
       {"X-SentryPeer-API-RateLimit-Remaining", "0"},
-      {"X-SentryPeer-API-RateLimit-TimeToReset", "60"}, # 1 hour
-      {"X-SentryPeer-API-RateLimit-TimeToResetSecs", "3600"} # 1 hour
+      # 1 hour
+      {"X-SentryPeer-API-RateLimit-TimeToReset", "60"},
+      # 1 hour
+      {"X-SentryPeer-API-RateLimit-TimeToResetSecs", "3600"}
     ])
     |> put_resp_content_type("application/json")
     |> send_resp(429, '{"Status": "429 Too Many Requests"}')

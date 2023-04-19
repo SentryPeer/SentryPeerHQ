@@ -20,8 +20,23 @@ defmodule Sentrypeer.Newsletter do
   end
 
   defp submit_to_mailchimp_api(email) do
-    Logger.info("Mailchimp API URL: #{api_url()}")
+    case rate_limit_requests() do
+      {:ok, count} ->
+        Logger.info("Mailchimp API URL: #{api_url()}")
+        Logger.info("Mailchimp rate limit at: #{count}")
+        Logger.debug("Submitting email address to Mailchimp API: #{email}")
+        post_email(email)
 
+      {:error, count} ->
+        Logger.info("Rate limit exceeded to protect Mailchimp API: #{count}")
+    end
+  end
+
+  defp rate_limit_requests do
+    ExRated.check_rate("send_to_mailchimp_api", 10_000, 5)
+  end
+
+  defp post_email(email) do
     HTTPoison.post!(
       api_url(),
       Jason.encode!(%{

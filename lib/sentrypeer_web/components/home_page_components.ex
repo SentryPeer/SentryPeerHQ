@@ -486,6 +486,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                   <button
                     phx-disable-with="Subscribing..."
+                    phx-throttle="2000"
                     type="submit"
                     class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >

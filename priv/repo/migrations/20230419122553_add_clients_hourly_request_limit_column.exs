@@ -16,7 +16,8 @@ defmodule Sentrypeer.Repo.Migrations.AddClientsHourlyRequestLimitColumn do
 
   def change do
     alter table(:clients) do
-      add :hourly_request_limit, :integer, null: false, default: 600 # 10 requests per minute
+      # 10 requests per minute
+      add :hourly_request_limit, :integer, null: false, default: 600
     end
   end
 end
