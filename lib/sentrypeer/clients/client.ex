@@ -21,6 +21,7 @@ defmodule Sentrypeer.Clients.Client do
     field :auth_id, :string
     field :client_id, :string
     field :client_type, :string
+    field :hourly_request_limit, :integer, default: 600
 
     has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent,
       foreign_key: :client_id,

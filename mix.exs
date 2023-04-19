@@ -31,7 +31,7 @@ defmodule Sentrypeer.MixProject do
   def application do
     [
       mod: {Sentrypeer.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :ex_rated, :os_mon]
     ]
   end
 
@@ -44,6 +44,7 @@ defmodule Sentrypeer.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:appsignal, "~> 2.0"},
       {:appsignal_phoenix, "~> 2.0"},
       {:cachex, "~> 3.6"},
@@ -57,10 +58,12 @@ defmodule Sentrypeer.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:ex_cldr, "~> 2.33"},
-      {:ex_cldr_numbers, "~> 2.0"},
       {:ex_cldr_dates_times, "~> 2.0"},
+      {:ex_cldr_numbers, "~> 2.0"},
+      {:ex_rated, "~> 2.1"},
       {:finch, "~> 0.14"},
       {:floki, "~> 0.34.0"},
+      {:gen_smtp, "~> 1.1"},
       {:gettext, "~> 0.20"},
       {:heroicons, "~> 0.5.2"},
       {:httpoison, "~> 2.0"},
@@ -77,7 +80,6 @@ defmodule Sentrypeer.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_swoosh, "~> 1.0"},
-      # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},
       {:plug_cowboy, "~> 2.5"},
       {:poison, "~> 5.0"},
@@ -86,7 +88,6 @@ defmodule Sentrypeer.MixProject do
       {:sobelow, "~> 0.11", only: [:dev, :test], runtime: false},
       {:ssl_verify_fun, "~> 1.1"},
       {:swoosh, "~> 1.3"},
-      {:gen_smtp, "~> 1.1"},
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
