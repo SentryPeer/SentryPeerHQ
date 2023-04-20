@@ -19,20 +19,17 @@ defmodule SentrypeerWeb.RateLimitPlug do
   import Plug.Conn,
     only: [
       halt: 1,
-      merge_resp_headers: 2,
-      put_status: 2,
       put_resp_header: 3,
       put_resp_content_type: 2,
       send_resp: 3
     ]
 
-  import Phoenix.Controller, only: [render: 2]
   require Logger
 
   @doc """
-  A function plug that implements rate limiting using ExRated.
+  A function plug that implements rate limiting using ExRated
 
-  ## Examples
+  ## Example
 
       # In a controller
       import SentrypeerWeb.RateLimitPlug, only: [rate_limit: 2]
@@ -40,9 +37,14 @@ defmodule SentrypeerWeb.RateLimitPlug do
 
   """
   def rate_limit(conn, opts \\ []) do
-    case check_rate(conn, opts) do
+    interval_ms = Keyword.fetch!(opts, :interval_seconds) * 1000
+    max_requests = Keyword.fetch!(opts, :max_requests)
+
+    inspected = ExRated.inspect_bucket(bucket_name(conn), interval_ms, max_requests)
+
+    case check_rate(conn, interval_ms, max_requests) do
       {:ok, count} ->
-        add_rate_limit_headers(conn, count)
+        add_rate_limit_headers(conn, count, elem(inspected, 2), interval_ms, max_requests)
 
       error ->
         Logger.info(rate_limit: error)
@@ -50,9 +52,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
     end
   end
 
-  defp check_rate(conn, opts) do
-    interval_ms = Keyword.fetch!(opts, :interval_seconds) * 1000
-    max_requests = Keyword.fetch!(opts, :max_requests)
+  defp check_rate(conn, interval_ms, max_requests) do
     ExRated.check_rate(bucket_name(conn), interval_ms, max_requests)
   end
 
@@ -62,31 +62,28 @@ defmodule SentrypeerWeb.RateLimitPlug do
     ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
 
     # E.g., "127.0.0.1:/api/v1/example"
+    Logger.debug("Rate Limit: bucket_name: #{ip}:#{path}")
     "#{ip}:#{path}"
   end
 
-  defp add_rate_limit_headers(conn, count) do
+  # https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
+  defp add_rate_limit_headers(conn, count, ms_remaining, interval_ms, max_requests) do
     conn
-    |> put_resp_header("X-SentryPeer-API-RateLimit-Limit", "600")
-    |> put_resp_header("X-SentryPeer-API-RateLimit-Remaining", "#{600 - count}")
+    |> put_resp_header("RateLimit-Limit", "#{max_requests}")
+    |> put_resp_header("RateLimit-Remaining", "#{max_requests - count}")
     # 1 hour
-    |> put_resp_header("X-SentryPeer-API-RateLimit-TimeToReset", "60")
+    |> put_resp_header("RateLimit-Reset", "#{ceil(ms_remaining / 1000)}")
     # 1 hour
-    |> put_resp_header("X-SentryPeer-API-RateLimit-TimeToResetSecs", "3600")
+    |> put_resp_header(
+      "RateLimit-Policy",
+      "#{max_requests};w=#{ceil(interval_ms / 1000)};policy=\"leaky bucket\""
+    )
   end
 
   defp render_error(conn) do
     conn
-    |> merge_resp_headers([
-      {"X-SentryPeer-API-RateLimit-Limit", "600"},
-      {"X-SentryPeer-API-RateLimit-Remaining", "0"},
-      # 1 hour
-      {"X-SentryPeer-API-RateLimit-TimeToReset", "60"},
-      # 1 hour
-      {"X-SentryPeer-API-RateLimit-TimeToResetSecs", "3600"}
-    ])
     |> put_resp_content_type("application/json")
-    |> send_resp(429, '{"Status": "429 Too Many Requests"}')
+    |> send_resp(429, '{"status": "429 Too Many Requests"}')
     |> halt()
   end
 end

@@ -15,6 +15,7 @@ defmodule SentrypeerWeb.ContactLive.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.ContactForm.Contact
+  alias Sentrypeer.Newsletter
   import SentrypeerWeb.HomePageComponents
 
   @impl true
@@ -47,5 +48,18 @@ defmodule SentrypeerWeb.ContactLive.Index do
   @impl true
   def handle_info({SentrypeerWeb.ContactLive.FormComponent, {:saved, _contact}}, socket) do
     {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("subscribe", %{"email" => email_address}, socket) do
+    subscribe(socket, socket.assigns.live_action, email_address)
+  end
+
+  defp subscribe(socket, :index, email_address) do
+    Newsletter.subscribe(email_address)
+
+    {:noreply,
+     socket
+     |> put_flash(:info, "Subscribe request received. Thank you!")}
   end
 end

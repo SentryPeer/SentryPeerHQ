@@ -14,6 +14,9 @@
 defmodule SentrypeerWeb.SentrypeerEventController do
   use SentrypeerWeb, :controller
 
+  import SentrypeerWeb.RateLimitPlug, only: [rate_limit: 2]
+  plug :rate_limit, max_requests: 5, interval_seconds: 10
+
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 

@@ -17,9 +17,9 @@ defmodule Sentrypeer.CustomerClients do
   """
 
   import Ecto.Query, warn: false
-  alias Sentrypeer.CustomerClients.Client
   alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Clients
+  alias Sentrypeer.CustomerClients.Client
 
   require Logger
 

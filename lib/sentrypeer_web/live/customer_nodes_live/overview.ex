@@ -14,8 +14,8 @@
 defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   use SentrypeerWeb, :live_view
 
-  alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Auth.Auth0Config
+  alias Sentrypeer.Auth.Auth0ManagementAPI
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents

@@ -14,8 +14,9 @@
 defmodule Sentrypeer.SentrypeerIpAddress do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Sentrypeer.SentrypeerIpAddress
+
   alias IP
+  alias Sentrypeer.SentrypeerIpAddress
 
   @primary_key false
   embedded_schema do
