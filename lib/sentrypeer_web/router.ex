@@ -36,6 +36,10 @@ defmodule SentrypeerWeb.Router do
     plug Sentrypeer.Auth.Authorize
   end
 
+  pipeline :rate_limit_per_hour do
+    plug SentrypeerWeb.RateLimitPlug, max_requests: 3600, interval_seconds: 3600
+  end
+
   pipeline :admins_only do
     plug :admin_basic_auth
   end
@@ -96,7 +100,7 @@ defmodule SentrypeerWeb.Router do
   end
 
   scope "/api", SentrypeerWeb do
-    pipe_through [:api, :api_authorization]
+    pipe_through [:rate_limit_per_hour, :api, :api_authorization]
 
     resources "/events", SentrypeerEventController, only: [:create]
     get "/phone-numbers/:phone_number", SentrypeerEventController, :check_phone_number

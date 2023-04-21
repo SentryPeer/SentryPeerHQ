@@ -26,6 +26,18 @@ defmodule SentrypeerWeb.RateLimitPlug do
 
   require Logger
 
+  @moduledoc """
+  This plug can be used in a Phoenix controller to rate limit requests or in the router pipeline to rate limit all requests.
+  """
+  def init(options) do
+    options
+  end
+
+  def call(conn, opts) do
+    conn
+    |> rate_limit(opts)
+  end
+
   @doc """
   A function plug that implements rate limiting using ExRated
 
