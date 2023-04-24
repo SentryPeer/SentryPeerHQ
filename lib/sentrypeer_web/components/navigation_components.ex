@@ -253,6 +253,9 @@ defmodule SentrypeerWeb.NavigationComponents do
           />
         </svg>
         <span class="truncate">Team</span>
+        <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
+          Coming soon
+        </span>
       </a>
 
       <a

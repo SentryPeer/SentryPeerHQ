@@ -102,9 +102,10 @@ defmodule Sentrypeer.SentrypeerEvents do
     if changeset.valid? do
       query =
         from e in SentrypeerEvent,
-          where:
-            e.called_number == ^changeset.changes.phone_number and
-              e.client_id == ^client_id
+          where: e.called_number == ^changeset.changes.phone_number
+
+      # and
+      #  e.client_id == ^client_id
 
       Repo.exists?(query)
     else
@@ -132,9 +133,10 @@ defmodule Sentrypeer.SentrypeerEvents do
     if changeset.valid? do
       query =
         from e in SentrypeerEvent,
-          where:
-            e.source_ip == ^changeset.changes.ip_address and
-              e.client_id == ^client_id
+          where: e.source_ip == ^changeset.changes.ip_address
+
+      # and
+      #  e.client_id == ^client_id
 
       Repo.exists?(query)
     else

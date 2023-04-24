@@ -20,6 +20,9 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
+  alias Sentrypeer.Emails.EmailNotification
+  alias Sentrypeer.Mailer
+
   action_fallback SentrypeerWeb.FallbackController
 
   def create(conn, sentrypeer_event_params) do
@@ -66,5 +69,20 @@ defmodule SentrypeerWeb.SentrypeerEventController do
         |> put_status(:not_found)
         |> json(%{message: "IP Address not found."})
     end
+  end
+
+  defp find_user_id_by_client_id(client_id) do
+    case Repo.get_by(User, client_id: client_id) do
+      nil ->
+        nil
+
+      user ->
+        user
+    end
+  end
+
+  defp send_email_alert(user, number_or_ip_address) do
+    email = EmailNotification.voip_fraud_email_alert(user, number_or_ip_address)
+    Mailer.deliver(email)
   end
 end

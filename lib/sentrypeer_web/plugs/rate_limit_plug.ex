@@ -12,8 +12,6 @@
 #
 
 defmodule SentrypeerWeb.RateLimitPlug do
-  @moduledoc false
-
   # See https://dev.to/mnishiguchi/rate-limiter-for-phoenix-app-3j2n
 
   import Plug.Conn,
@@ -41,11 +39,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
   @doc """
   A function plug that implements rate limiting using ExRated
 
-  ## Example
 
-      # In a controller
-      import SentrypeerWeb.RateLimitPlug, only: [rate_limit: 2]
-      plug :rate_limit, max_requests: 5, interval_seconds: 10
 
   """
   def rate_limit(conn, opts \\ []) do

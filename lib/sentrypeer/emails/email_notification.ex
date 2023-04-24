@@ -14,9 +14,9 @@
 defmodule Sentrypeer.Emails.EmailNotification do
   import Swoosh.Email
 
-  def voip_fraud_email_alert(user) do
+  def voip_fraud_email_alert(user, number_or_ip_address) do
     new()
-    |> to({user.name, user.email})
+    |> to({user.name, user.email, number_or_ip_address})
     |> from({"SentryPeer Alerts", "support@sentrypeer.com"})
     |> subject("SentryPeer has detected potential VoIP fraud")
     |> html_body(
