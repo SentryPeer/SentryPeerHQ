@@ -21,6 +21,14 @@ defmodule Sentrypeer.Auth.Auth0Config do
 
   def auth0_token_url, do: auth0_base_url() <> "oauth/token"
 
+  def auth0_management_token_url,
+    do: auth0_management_api_url() <> "/oauth/token"
+
+  def auth0_management_api_url,
+    do:
+      System.get_env("AUTH0_MANAGEMENT_API_URL") ||
+        raise("AUTH0_MANAGEMENT_API_URL not set")
+
   def auth0_management_api_client_id,
     do:
       System.get_env("AUTH0_MANAGEMENT_API_CLIENT_ID") ||

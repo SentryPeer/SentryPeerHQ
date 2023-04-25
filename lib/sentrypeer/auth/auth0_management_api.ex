@@ -293,13 +293,16 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   end
 
   defp get_auth_token do
+    Logger.debug("Getting auth token from: #{Auth0Config.auth0_management_token_url()}")
+
     case HTTPoison.post(
-           Auth0Config.auth0_token_url(),
+           Auth0Config.auth0_management_token_url(),
            auth_token_json(),
            json_content_type(),
            options()
          ) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        Logger.debug("Auth0 returned body #{body}")
         {:ok, Jason.decode!(body)["access_token"]}
 
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
@@ -314,7 +317,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     Jason.encode!(%{
       "client_id" => Auth0Config.auth0_management_api_client_id(),
       "client_secret" => Auth0Config.auth0_management_api_client_secret(),
-      "audience" => Auth0Config.auth0_base_url() <> "api/v2/",
+      "audience" => auth0_management_url(),
       "grant_type" => "client_credentials"
     })
   end
@@ -363,7 +366,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   end
 
   defp auth0_management_url do
-    Auth0Config.auth0_base_url() <> "api/v2/"
+    Auth0Config.auth0_management_api_url() <> "/api/v2/"
   end
 
   defp headers(access_token) do

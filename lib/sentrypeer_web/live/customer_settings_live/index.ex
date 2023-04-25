@@ -97,7 +97,8 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
       {:ok, clients} ->
         clients
 
-      {:error, _} ->
+      {:error, error} ->
+        Logger.debug("Error in list_clients: #{inspect(error)}")
         []
     end
   end
