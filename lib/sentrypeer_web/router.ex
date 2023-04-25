@@ -84,6 +84,25 @@ defmodule SentrypeerWeb.Router do
     # Home page
     live "/", HomeLive.Index, :index
 
+    # Home page top nav
+    get "/pricing", PageController, :pricing
+    get "/partners", PageController, :partners
+    get "/about", PageController, :about
+
+    # Home page bottom nav
+    get "/jobs", PageController, :jobs
+
+    # Support
+    get "/documentation", PageController, :documentation
+    get "/guides", PageController, :guides
+
+    # Sectors
+    get "/advanced-users", PageController, :advanced_users
+    get "/internet-telephony-service-provider", PageController, :itsps
+    get "/cybersecurity", PageController, :cybersecurity
+    get "/telecom-resellers", PageController, :telecom_resellers
+
+    # Legal
     get "/privacy-policy", PageController, :privacy_policy
     get "/terms-and-conditions", PageController, :terms_and_conditions
     get "/acceptable-use-policy", PageController, :acceptable_use_policy

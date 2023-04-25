@@ -95,7 +95,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_phone_number_sentrypeer_event?(phone_number, client_id) do
+  def check_phone_number_sentrypeer_event?(phone_number, _client_id) do
     changeset =
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
@@ -127,7 +127,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_ip_address_sentrypeer_event?(ip_address, client_id) do
+  def check_ip_address_sentrypeer_event?(ip_address, _client_id) do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do

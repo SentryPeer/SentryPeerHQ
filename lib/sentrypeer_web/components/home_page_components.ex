@@ -103,24 +103,27 @@ defmodule SentrypeerWeb.HomePageComponents do
             </button>
           </div>
           <nav class="hidden space-x-10 md:flex">
-            <a
-              href="#"
+            <.link
+              navigate={~p"/pricing"}
               class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+              title="SentryPeer Pricing Plans for users and companies of all sizes"
             >
               Pricing
-            </a>
-            <a
-              href="#"
+            </.link>
+            <.link
+              navigate={~p"/partners"}
               class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+              title="Become a SentryPeer Partner"
             >
               Partners
-            </a>
-            <a
-              href="#"
+            </.link>
+            <.link
+              navigate={~p"/about"}
               class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
+              title="Learn about the company behind SentryPeer"
             >
               Company
-            </a>
+            </.link>
           </nav>
           <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <%= if @current_user do %>
@@ -245,15 +248,27 @@ defmodule SentrypeerWeb.HomePageComponents do
             </div>
             <div class="py-6 px-5">
               <div class="grid grid-cols-1 gap-4">
-                <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">
+                <.link
+                  navigate={~p"/pricing"}
+                  class="text-base font-medium text-gray-900 hover:text-gray-700"
+                  title="SentryPeer Pricing Plans for users and companies of all sizes"
+                >
                   Pricing
-                </a>
-                <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">
+                </.link>
+                <.link
+                  navigate={~p"/partners"}
+                  class="text-base font-medium text-gray-900 hover:text-gray-700"
+                  title="Become a SentryPeer Partner"
+                >
                   Partners
-                </a>
-                <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">
+                </.link>
+                <.link
+                  navigate={~p"/about"}
+                  class="text-base font-medium text-gray-900 hover:text-gray-700"
+                  title="Learn about the company behind SentryPeer"
+                >
                   Company
-                </a>
+                </.link>
               </div>
               <%= if @current_user do %>
                 <div class="mt-6">
@@ -327,31 +342,41 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <h3 class="text-base font-medium text-gray-900 dark:text-white">Sectors</h3>
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
-                    <a
-                      href="#"
+                    <.link
+                      navigate={~p"/internet-telephony-service-provider"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
-                      title="Internet Telephony Service Providers"
+                      title="Internet Telephony Service Providers LOVE SentryPeer"
                     >
                       ITSPs
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/cybersecurity"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Work in the Cybersecurity industry? We gather lots of realtime data."
+                    >
                       Cybersecurity
-                    </a>
+                    </.link>
                   </li>
-
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/advanced-users"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Love to watch VoIP things in real time? You'll love SentryPeer."
+                    >
+                      Advanced Users
+                    </.link>
+                  </li>
+                  <li>
+                    <.link
+                      navigate={~p"/telecom-resellers"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Want to roll out SentryPeer to your customers?"
+                    >
                       Telecom Resellers
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
-                      Network Operators
-                    </a>
+                    </.link>
                   </li>
                 </ul>
               </div>
@@ -359,21 +384,33 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <h3 class="text-base font-medium text-gray-900 dark:text-white">Support</h3>
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/pricing"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="SentryPeer Pricing Plans for users and companies of all sizes"
+                    >
                       Pricing
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/documentation"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Read the SentryPeer documentation that covers all aspects of the platform and API"
+                    >
                       Documentation
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/guides"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Read the SentryPeer Getting Started Guide and other guides"
+                    >
                       Guides
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
@@ -395,9 +432,13 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <h3 class="text-base font-medium text-gray-900 dark:text-white">Company</h3>
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/about"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Learn about the company behind SentryPeer"
+                    >
                       About
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
@@ -411,15 +452,23 @@ defmodule SentrypeerWeb.HomePageComponents do
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/jobs"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Fancy working at SentryPeer?"
+                    >
                       Jobs
-                    </a>
+                    </.link>
                   </li>
 
                   <li>
-                    <a href="#" class="text-base text-gray-500 dark:text-black hover:text-gray-900">
+                    <.link
+                      navigate={~p"/partners"}
+                      class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Become a SentryPeer Partner"
+                    >
                       Partners
-                    </a>
+                    </.link>
                   </li>
                 </ul>
               </div>
@@ -430,6 +479,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                     <.link
                       navigate={~p"/privacy-policy"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Read the SentryPeer Privacy Policy"
                     >
                       Privacy Policy
                     </.link>
@@ -439,6 +489,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                     <.link
                       navigate={~p"/terms-and-conditions"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Understand the SentryPeer Terms and Conditions"
                     >
                       Terms & Conditions
                     </.link>
@@ -448,6 +499,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                     <.link
                       navigate={~p"/acceptable-use-policy"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Read about what you can and can not use SentryPeer for"
                     >
                       Acceptable Use Policy
                     </.link>
@@ -456,6 +508,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                     <.link
                       navigate={~p"/cookie-policy"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
+                      title="Read about SentryPeer's use of cookies"
                     >
                       Cookie Policy
                     </.link>

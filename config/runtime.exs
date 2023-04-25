@@ -110,6 +110,7 @@ if config_env() == :prod do
   if config_env() == :prod or config_env() == :dev do
     ## Configuring the mailer
     #
+    # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
     # In production you need to configure the mailer to use a different adapter.
     # Also, you may need to configure the Swoosh API client of your choice if you
     # are not using SMTP. Here is an example of the configuration:
@@ -135,6 +136,6 @@ if config_env() == :prod do
       no_mx_lookups: false
   end
 
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  # AppSignal - https://docs.appsignal.com/logging/platforms/integrations/elixir.html
+  config :logger, :backends, [{Appsignal.Logger.Backend, [group: "phoenix"]}]
 end

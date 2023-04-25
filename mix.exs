@@ -45,8 +45,8 @@ defmodule Sentrypeer.MixProject do
   defp deps do
     [
       # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
-      {:appsignal, "~> 2.0"},
-      {:appsignal_phoenix, "~> 2.0"},
+      {:appsignal, "~> 2.6"},
+      {:appsignal_phoenix, "~> 2.3.2"},
       {:cachex, "~> 3.6"},
       {:certifi, "~> 2.4"},
       {:contex, "~> 0.4.0"},

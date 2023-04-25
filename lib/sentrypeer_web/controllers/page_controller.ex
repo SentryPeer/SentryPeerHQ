@@ -14,9 +14,100 @@
 defmodule SentrypeerWeb.PageController do
   use SentrypeerWeb, :controller
 
+  # Top Nav
+  def pricing(conn, _params) do
+    render(conn, :pricing,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Pricing"
+    )
+  end
+
+  def partners(conn, _params) do
+    render(conn, :partners,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Partners"
+    )
+  end
+
+  def about(conn, _params) do
+    render(conn, :about,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "About"
+    )
+  end
+
+  def jobs(conn, _params) do
+    render(conn, :jobs,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Jobs"
+    )
+  end
+
+  # Support
+  def documentation(conn, _params) do
+    render(conn, :documentation,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Documentation"
+    )
+  end
+
+  def guides(conn, _params) do
+    render(conn, :guides,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Guides"
+    )
+  end
+
+  # Sectors
+  def advanced_users(conn, _params) do
+    render(conn, :advanced_users,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Advanced Users"
+    )
+  end
+
+  def itsps(conn, _params) do
+    render(conn, :itsps,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "ITSPs"
+    )
+  end
+
+  def cybersecurity(conn, _params) do
+    render(conn, :cybersecurity,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Cybersecurity"
+    )
+  end
+
+  def telecom_resellers(conn, _params) do
+    render(conn, :telecom_resellers,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Telecom Resellers"
+    )
+  end
+
   def privacy_policy(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
     render(conn, :privacy_policy,
       current_user: get_session(conn, :current_user),
       layout: false,
@@ -26,8 +117,6 @@ defmodule SentrypeerWeb.PageController do
   end
 
   def terms_and_conditions(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
     render(conn, :terms_and_conditions,
       current_user: get_session(conn, :current_user),
       layout: false,
@@ -37,8 +126,6 @@ defmodule SentrypeerWeb.PageController do
   end
 
   def acceptable_use_policy(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
     render(conn, :acceptable_use_policy,
       current_user: get_session(conn, :current_user),
       layout: false,
@@ -48,8 +135,6 @@ defmodule SentrypeerWeb.PageController do
   end
 
   def cookie_policy(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
     render(conn, :cookie_policy,
       current_user: get_session(conn, :current_user),
       layout: false,

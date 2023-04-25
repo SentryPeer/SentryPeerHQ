@@ -23,8 +23,8 @@ config :sentrypeer,
   ecto_repos: [Sentrypeer.Repo],
   generators: [binary_id: true],
   auth0_logout_url:
-    System.get_env("AUTH0_DOMAIN", "sentrypeer.auth0.com")
-    |> String.replace_suffix(".auth0.com", ".auth0.com/v2/logout")
+    System.get_env("AUTH0_DOMAIN", "authz.sentrypeer.com")
+    |> String.replace_suffix(".sentrypeer.com", ".sentrypeer.com/v2/logout")
     |> String.replace_prefix("", "https://")
     |> URI.new!()
     |> URI.append_query(
