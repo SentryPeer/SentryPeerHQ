@@ -1159,6 +1159,7 @@
               type="button"
               class="flex w-full items-start justify-between text-left text-gray-900"
               aria-controls="faq-0"
+              phx-click={JS.toggle(to: "#faq-0")}
               aria-expanded="false"
             >
               <span class="text-base font-semibold leading-7">
@@ -1171,6 +1172,7 @@
                     Item expanded: "hidden", Item collapsed: ""
                   -->
                 <svg
+                  id="faq-0-expanded"
                   class="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -1186,6 +1188,7 @@
                                   Item expanded: "", Item collapsed: "hidden"
                                 -->
                 <svg
+                  id="faq-0-collapsed"
                   class="hidden h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -1198,7 +1201,7 @@
               </span>
             </button>
           </dt>
-          <dd class="mt-2 pr-12" id="faq-0">
+          <dd class="hidden mt-2 pr-12" id="faq-0">
             <p class="text-base leading-7 text-gray-600">
               I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
             </p>
