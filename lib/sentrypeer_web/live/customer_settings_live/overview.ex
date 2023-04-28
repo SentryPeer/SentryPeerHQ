@@ -49,9 +49,9 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
     end
   end
 
-#  @impl true
-#  def handle_info({phone_number, _client_id}, socket) do
-#    IO.puts("Phone number searched.")
-#    {:noreply, assign(socket, :phone_number, phone_number)}
-#  end
+  #  @impl true
+  #  def handle_info({phone_number, _client_id}, socket) do
+  #    IO.puts("Phone number searched.")
+  #    {:noreply, assign(socket, :phone_number, phone_number)}
+  #  end
 end
