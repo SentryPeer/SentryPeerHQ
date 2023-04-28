@@ -148,7 +148,6 @@ defmodule Sentrypeer.SentrypeerEvents do
   end
 
   def subscribe(client_id) do
-    Logger.debug(IEx.Info.info(client_id))
     Logger.debug("Subscribing to topic 'client_id:#{client_id}'")
     Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "client_id:#{client_id}")
   end

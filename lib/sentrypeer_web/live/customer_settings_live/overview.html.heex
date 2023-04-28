@@ -22,7 +22,19 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Live queries
             </h3>
-            <p><%= inspect(@phone_number) %></p>
+            <%= if @phone_numbers == [] do %>
+              <p class="text-sm text-gray-500 dark:text-slate-400">
+                No phone numbers have been queried yet.
+              </p>
+            <% else %>
+              <div class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs">
+                <%= for phone_number <- @phone_numbers do %>
+                  <p>
+                    <%= phone_number %>
+                  </p>
+                <% end %>
+              </div>
+            <% end %>
             <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
               <div class="px-4 py-5 sm:p-6">
                 <dt class="text-base font-normal text-gray-900">Phone Numbers</dt>

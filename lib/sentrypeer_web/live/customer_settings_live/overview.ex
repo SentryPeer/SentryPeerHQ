@@ -25,16 +25,17 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
 
   @impl true
   def mount(_params, _session, socket) do
+    phone_number_searches = []
+
     {:ok,
      assign(socket,
        token_url: Auth0Config.auth0_token_url(),
-       phone_number: "No searches yet."
+       phone_numbers: phone_number_searches
      )}
   end
 
   @impl true
   def handle_params(%{"client_id" => client_id}, _url, socket) do
-    Logger.debug(IEx.Info.info(client_id))
     if connected?(socket), do: SentrypeerEvents.subscribe(client_id)
 
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, client_id) do
@@ -55,6 +56,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
   @impl true
   def handle_info({phone_number, client_id}, socket) do
     Logger.debug("Client #{client_id} has just searched for a phone number.")
-    {:noreply, assign(socket, :phone_number, phone_number)}
+    phone_number_searches = socket.assigns.phone_numbers ++ [phone_number]
+    {:noreply, assign(socket, :phone_numbers, phone_number_searches)}
   end
 end
