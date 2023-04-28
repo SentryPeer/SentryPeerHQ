@@ -20,11 +20,12 @@
           <!-- Main area -->
           <div class="py-6">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              Last 30 days
+              Live queries
             </h3>
+            <p><%= inspect(@phone_number) %></p>
             <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
               <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
+                <dt class="text-base font-normal text-gray-900">Phone Numbers</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
                     71,897
@@ -33,7 +34,7 @@
               </div>
 
               <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-gray-900">Avg. Open Rate</dt>
+                <dt class="text-base font-normal text-gray-900">IP Addresses</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
                     58.16%
@@ -42,7 +43,7 @@
               </div>
 
               <div class="px-4 py-5 sm:p-6">
-                <dt class="text-base font-normal text-gray-900">Avg. Click Rate</dt>
+                <dt class="text-base font-normal text-gray-900">Total Queries</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
                     24.57%
@@ -51,7 +52,7 @@
               </div>
             </dl>
           </div>
-          <!-- Overview of SentryPeer node -->
+          <!-- Overview of SentryPeer API client -->
           <section aria-labelledby="node-title">
             <div class="bg-white dark:bg-slate-800 shadow sm:rounded-lg">
               <div class="px-4 py-5 sm:px-6">

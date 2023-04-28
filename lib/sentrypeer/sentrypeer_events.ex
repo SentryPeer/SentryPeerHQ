@@ -95,7 +95,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_phone_number_sentrypeer_event?(phone_number, _client_id) do
+  def check_phone_number_sentrypeer_event?(phone_number, client_id) do
     changeset =
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
@@ -107,6 +107,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       # and
       #  e.client_id == ^client_id
 
+      broadcast({:ok, phone_number}, client_id)
       Repo.exists?(query)
     else
       false
@@ -142,5 +143,16 @@ defmodule Sentrypeer.SentrypeerEvents do
     else
       false
     end
+  end
+
+  def subscribe(client_id) do
+    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, client_id)
+  end
+
+  defp broadcast({:error, _reason} = error, _client_id), do: error
+
+  defp broadcast({:ok, phone_number}, client_id) do
+    Phoenix.PubSub.broadcast(Sentrypeer.PubSub, client_id, {phone_number, client_id})
+    {:ok, phone_number}
   end
 end

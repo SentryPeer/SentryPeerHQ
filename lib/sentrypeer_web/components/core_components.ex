@@ -851,6 +851,13 @@ defmodule SentrypeerWeb.CoreComponents do
     )
   end
 
+  def toggle_faq(js \\ %JS{}, id) do
+    js
+    |> JS.toggle(to: "#{id}-expanded")
+    |> JS.toggle(to: "#{id}-collapsed")
+    |> JS.toggle(to: "#{id}")
+  end
+
   #  TODO - add tooltip
   #  def sentrypeer_toolip(text) do
   #  end

@@ -464,20 +464,21 @@ defmodule SentrypeerWeb.NavigationComponents do
           <div class="hidden lg:block lg:w-80">
             <div class="flex items-center justify-end">
               <div class="flex">
-                <a
-                  href="#"
+                <.link
+                  navigate={~p"/documentation"}
                   title="SentryPeer Documentation"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >
                   Documentation
-                </a>
-                <a
-                  href="#"
+                </.link>
+                <.link
+                  navigate="https://github.com/SentryPeer/SentryPeerHQ/discussions"
+                  target="_blank"
                   title="SentryPeer Support"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >
                   Support
-                </a>
+                </.link>
               </div>
               <!-- Dark mode toggle -->
               <div class="relative inline-block text-left">

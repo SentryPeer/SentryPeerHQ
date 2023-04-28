@@ -137,5 +137,5 @@ if config_env() == :prod do
   end
 
   # AppSignal - https://docs.appsignal.com/logging/platforms/integrations/elixir.html
-  config :logger, :backends, [{Appsignal.Logger.Backend, [group: "phoenix"]}]
+  config :logger, :backends, [:console, {Appsignal.Logger.Backend, [group: "phoenix"]}]
 end
