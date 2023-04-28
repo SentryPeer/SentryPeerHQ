@@ -23,6 +23,8 @@ defmodule Sentrypeer.SentrypeerEvents do
   alias Sentrypeer.SentrypeerIpAddress
   alias Sentrypeer.SentrypeerPhoneNumber
 
+  require Logger
+
   @doc """
   Returns the list of sentrypeerevents.
 
@@ -146,13 +148,23 @@ defmodule Sentrypeer.SentrypeerEvents do
   end
 
   def subscribe(client_id) do
-    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, client_id)
+    Logger.debug(IEx.Info.info(client_id))
+    Logger.debug("Subscribing to topic 'client_id:#{client_id}'")
+    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "client_id:#{client_id}")
   end
 
   defp broadcast({:error, _reason} = error, _client_id), do: error
 
   defp broadcast({:ok, phone_number}, client_id) do
-    Phoenix.PubSub.broadcast(Sentrypeer.PubSub, client_id, {phone_number, client_id})
+    # Logger.debug(IEx.Info.info(client_id))
+    Logger.debug("Broadcasting to: 'client_id:#{client_id}'")
+
+    Phoenix.PubSub.broadcast(
+      Sentrypeer.PubSub,
+      "client_id:#{client_id}",
+      {phone_number, client_id}
+    )
+
     {:ok, phone_number}
   end
 end

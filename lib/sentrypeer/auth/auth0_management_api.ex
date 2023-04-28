@@ -166,6 +166,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   def create_client(auth_id, name, description, client_type) do
     with {:ok, access_token} <- get_auth_token() do
+      Logger.debug("Creating Auth0 client for user #{auth_id} of type #{client_type}")
+
       case HTTPoison.post(
              auth0_management_url() <> "clients",
              create_client_json(auth_id, name, description, client_type),
@@ -218,6 +220,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   def create_client_grant(client_id) do
     with {:ok, access_token} <- get_auth_token() do
+      Logger.debug("Creating client grant for client #{client_id}")
+
       HTTPoison.post!(
         auth0_management_url() <> "client-grants",
         create_client_grant_json(client_id),

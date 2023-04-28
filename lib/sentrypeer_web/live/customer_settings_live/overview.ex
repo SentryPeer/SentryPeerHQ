@@ -21,6 +21,8 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
 
+  require Logger
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
@@ -32,6 +34,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
 
   @impl true
   def handle_params(%{"client_id" => client_id}, _url, socket) do
+    Logger.debug(IEx.Info.info(client_id))
     if connected?(socket), do: SentrypeerEvents.subscribe(client_id)
 
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, client_id) do
@@ -49,9 +52,9 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
     end
   end
 
-  #  @impl true
-  #  def handle_info({phone_number, _client_id}, socket) do
-  #    IO.puts("Phone number searched.")
-  #    {:noreply, assign(socket, :phone_number, phone_number)}
-  #  end
+  @impl true
+  def handle_info({phone_number, client_id}, socket) do
+    Logger.debug("Client #{client_id} has just searched for a phone number.")
+    {:noreply, assign(socket, :phone_number, phone_number)}
+  end
 end
