@@ -418,6 +418,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                       href="https://status.sentrypeer.com/"
                       title="SentryPeer Service Status Page"
                       target="_blank"
+                      rel="noopener noreferrer"
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                     >
                       Service
@@ -556,6 +557,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               href="https://twitter.com/SentryPeer"
               title="SentryPeer on Twitter"
               target="_blank"
+              rel="noopener noreferrer"
               class="text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">Twitter</span>
@@ -568,6 +570,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               href="https://github.com/SentryPeer"
               title="SentryPeer on GitHub"
               target="_blank"
+              rel="noopener noreferrer"
               class="text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">GitHub</span>
@@ -604,6 +607,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               href="https://join.slack.com/t/sentrypeer/shared_invite/zt-zxsmfdo7-iE0odNT2XyKLP9pt0lgbcw"
               title="SentryPeer Slack Community"
               target="_blank"
+              rel="noopener noreferrer"
               class="text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">Slack</span>
@@ -631,6 +635,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               class="hover:text-brand"
               title="Ant Networks Limited"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Ant Networks Ltd.
             </a>
@@ -640,6 +645,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               class="hover:text-brand"
               title="Ant Networks Limited"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Ant Networks Ltd.
             </a>
@@ -649,6 +655,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               class="hover:text-brand"
               title="The SentryPeer icon is a registered trademark"
               target="_blank"
+              rel="noopener noreferrer"
             >
               SentryPeer Icon
             </a>
@@ -658,6 +665,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               class="hover:text-brand"
               title="SentryPeer is a registered trademark"
               target="_blank"
+              rel="noopener noreferrer"
             >
               SentryPeer name
             </a>
@@ -667,6 +675,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               class="hover:text-brand"
               title="About Gavin Henry"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Gavin Henry.
             </a>

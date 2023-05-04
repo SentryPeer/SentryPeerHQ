@@ -16,6 +16,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
 
   import Plug.Conn,
     only: [
+      get_req_header: 2,
       halt: 1,
       put_resp_header: 3,
       put_resp_content_type: 2,
@@ -65,23 +66,31 @@ defmodule SentrypeerWeb.RateLimitPlug do
   # Bucket name should be a combination of IP address and request path.
   defp bucket_name(conn) do
     path = Enum.join(conn.path_info, "/")
-    ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
 
-    # E.g., "127.0.0.1:/api/v1/example"
-    Logger.debug("Rate Limit: bucket_name: #{ip}:#{path}")
-    "#{ip}:#{path}"
+    case get_req_header(conn, "fly-client-ip") do
+      [] ->
+        ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
+        Logger.info("Rate Limit on a normal IP: bucket_name: #{ip}:#{path}")
+        "#{ip}:#{path}"
+
+      client_ip ->
+        Logger.info("Rate Limit on Fly-Client-IP: bucket_name: #{client_ip}:#{path}")
+        "#{client_ip}:#{path}"
+    end
   end
 
   # https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
+  # Lowercase as per recommendation:
+  #   https://hexdocs.pm/plug/Plug.Conn.html#put_resp_header/3
   defp add_rate_limit_headers(conn, count, ms_remaining, interval_ms, max_requests) do
     conn
-    |> put_resp_header("RateLimit-Limit", "#{max_requests}")
-    |> put_resp_header("RateLimit-Remaining", "#{max_requests - count}")
+    |> put_resp_header("ratelimit-limit", "#{max_requests}")
+    |> put_resp_header("ratelimit-remaining", "#{max_requests - count}")
     # 1 hour
-    |> put_resp_header("RateLimit-Reset", "#{ceil(ms_remaining / 1000)}")
+    |> put_resp_header("ratelimit-reset", "#{ceil(ms_remaining / 1000)}")
     # 1 hour
     |> put_resp_header(
-      "RateLimit-Policy",
+      "ratelimit-policy",
       "#{max_requests};w=#{ceil(interval_ms / 1000)};policy=\"leaky bucket\""
     )
   end

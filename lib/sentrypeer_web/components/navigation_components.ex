@@ -294,6 +294,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <a
         href="https://status.sentrypeer.com/"
         target="_blank"
+        rel="noopener noreferrer"
         title="Visit the SentryPeer Status Page"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
@@ -474,6 +475,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                 <.link
                   navigate="https://github.com/SentryPeer/SentryPeerHQ/discussions"
                   target="_blank"
+                  rel="noopener noreferrer"
                   title="SentryPeer Support"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >

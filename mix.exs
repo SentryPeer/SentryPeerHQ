@@ -87,6 +87,7 @@ defmodule Sentrypeer.MixProject do
       {:premailex, "~> 0.3.0"},
       {:sobelow, "~> 0.11", only: [:dev, :test], runtime: false},
       {:ssl_verify_fun, "~> 1.1"},
+      {:stripity_stripe, "~> 2.0"},
       {:swoosh, "~> 1.3"},
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
