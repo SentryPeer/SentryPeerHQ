@@ -70,6 +70,12 @@ defmodule SentrypeerWeb.Router do
       live "/nodes/:client_id/edit", CustomerNodesLive.Index, :edit
       live "/nodes/:client_id/delete", CustomerNodesLive.Index, :delete
 
+      live "/analytics", CustomerAnalyticsLive.Index, :index
+      live "/insights", CustomerInsightsLive.Index, :index
+      live "/billing", CustomerBillingLive.Index, :index
+      live "/team", CustomerTeamLive.Index, :index
+      live "/integrations", CustomerIntegrationsLive.Index, :index
+
       live "/settings", CustomerSettingsLive.Index, :index
       live "/settings/new", CustomerSettingsLive.Index, :new
       live "/settings/:client_id", CustomerSettingsLive.Overview, :overview
@@ -85,9 +91,18 @@ defmodule SentrypeerWeb.Router do
     live "/", HomeLive.Index, :index
 
     # Home page top nav
-    get "/pricing", PageController, :pricing
     get "/partners", PageController, :partners
     get "/about", PageController, :about
+
+    # Subscription pricing
+    get "/pricing", PricingController, :index
+
+    # Where we handle subscriptions
+    post "/pricing/new", PricingController, :new
+
+    # Where to send our users when they've exited the Stripe session
+    get "/pricing/new/success", PricingController, :success
+    get "/pricing/new/cancel", PricingController, :cancel
 
     # Home page bottom nav
     get "/jobs", PageController, :jobs

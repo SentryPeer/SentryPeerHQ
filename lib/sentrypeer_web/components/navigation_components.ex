@@ -101,6 +101,30 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
+        <%= if (@active_page == :billing ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/billing"}
+                title="SentryPeer Billing"
+                class={"#{if @active_page == :billing,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Billing
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
         <%= if (@active_page == :settings || @active_page == :settings_overview ) do %>
           <li class="flex">
             <div class="flex items-center">
@@ -156,13 +180,12 @@ defmodule SentrypeerWeb.NavigationComponents do
     ~H"""
     <!-- In App Menu Action Buttons -->
     <nav class="space-y-1 dark:bg-slate-800">
-      <!-- Current: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white dark:hover:text-black dark:hover:bg-slate-400", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
-      <a
-        href="#"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-        aria-current="page"
+      <.link
+        navigate={~p"/analytics"}
+        class={"#{if (@active_page == :analytics ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+        title="See lots of useful information"
       >
-        <!-- Current: "text-indigo-500 group-hover:text-indigo-500", Default: "text-gray-400 group-hover:text-gray-500" -->
         <Heroicons.chart_pie
           outline
           class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -171,11 +194,13 @@ defmodule SentrypeerWeb.NavigationComponents do
         <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
           Coming soon
         </span>
-      </a>
+      </.link>
 
-      <a
-        href="#"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+      <.link
+        navigate={~p"/insights"}
+        class={"#{if (@active_page == :insights ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+        title="Get valuable insights from your data"
       >
         <Heroicons.sparkles
           outline
@@ -185,7 +210,7 @@ defmodule SentrypeerWeb.NavigationComponents do
         <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
           Coming soon
         </span>
-      </a>
+      </.link>
 
       <.link
         navigate={~p"/nodes"}
@@ -211,13 +236,15 @@ defmodule SentrypeerWeb.NavigationComponents do
         <span class="truncate">Nodes</span>
       </.link>
 
-      <a
-        href="#"
+      <.link
+        navigate={~p"/billing"}
+        class={"#{if (@active_page == :billing ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="See your current Plan and Billing Information"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <svg
-          class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          class={"#{if (@active_page == :billing ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
@@ -231,12 +258,13 @@ defmodule SentrypeerWeb.NavigationComponents do
           />
         </svg>
         <span class="truncate">Plan &#38; Billing</span>
-      </a>
+      </.link>
 
-      <a
-        href="#"
+      <.link
+        navigate={~p"/team"}
+        class={"#{if (@active_page == :team ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="Add users to your account"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <svg
           class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -256,12 +284,13 @@ defmodule SentrypeerWeb.NavigationComponents do
         <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
           Coming soon
         </span>
-      </a>
+      </.link>
 
-      <a
-        href="#"
+      <.link
+        navigate={~p"/integrations"}
+        class={"#{if (@active_page == :integrations ),
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="Why not have a browse of our Integrations?"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <svg
           class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -278,7 +307,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           />
         </svg>
         <span class="truncate">Integrations</span>
-      </a>
+      </.link>
 
       <.link
         navigate={~p"/settings"}

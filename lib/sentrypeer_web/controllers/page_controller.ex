@@ -15,15 +15,6 @@ defmodule SentrypeerWeb.PageController do
   use SentrypeerWeb, :controller
 
   # Top Nav
-  def pricing(conn, _params) do
-    render(conn, :pricing,
-      current_user: get_session(conn, :current_user),
-      layout: false,
-      show_newsletter_subscription: false,
-      page_title: "Pricing"
-    )
-  end
-
   def partners(conn, _params) do
     render(conn, :partners,
       current_user: get_session(conn, :current_user),

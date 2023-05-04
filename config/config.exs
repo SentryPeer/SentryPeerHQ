@@ -113,7 +113,7 @@ config :ex_cldr,
 
 # Stripe
 config :stripity_stripe,
-  api_key: System.get_env("SENTRYPEER_STRIPE_SECRET"),
+  api_key: System.get_env("SENTRYPEER_STRIPE_API_KEY"),
   signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
   json_library: Jason
 

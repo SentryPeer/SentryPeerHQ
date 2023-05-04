@@ -37,11 +37,26 @@ defmodule SentrypeerWeb.ActiveNav do
         {SentrypeerWeb.CustomerDashboardLive.Index, _} ->
           :dashboard
 
+        {SentrypeerWeb.CustomerAnalyticsLive.Index, _} ->
+          :analytics
+
+        {SentrypeerWeb.CustomerInsightsLive.Index, _} ->
+          :insights
+
         {SentrypeerWeb.CustomerNodesLive.Index, _} ->
           :nodes
 
         {SentrypeerWeb.CustomerNodesLive.Overview, _} ->
           :node_overview
+
+        {SentrypeerWeb.CustomerBillingLive.Index, _} ->
+          :billing
+
+        {SentrypeerWeb.CustomerTeamLive.Index, _} ->
+          :team
+
+        {SentrypeerWeb.CustomerIntegrationsLive.Index, _} ->
+          :integrations
 
         {SentrypeerWeb.CustomerSettingsLive.Index, _} ->
           :settings
