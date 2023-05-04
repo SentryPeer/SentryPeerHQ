@@ -37,7 +37,7 @@ defmodule SentrypeerWeb.Router do
   end
 
   pipeline :rate_limit_per_hour do
-    plug SentrypeerWeb.RateLimitPlug, max_requests: 3600, interval_seconds: 3600
+    plug SentrypeerWeb.RateLimitPlug, max_requests: 7200, interval_seconds: 3600
   end
 
   pipeline :admins_only do
