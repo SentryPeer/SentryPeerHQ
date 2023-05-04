@@ -70,11 +70,11 @@ defmodule SentrypeerWeb.RateLimitPlug do
     case get_req_header(conn, "fly-client-ip") do
       [] ->
         ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
-        Logger.info("Rate Limit on a normal IP: bucket_name: #{ip}:#{path}")
+        Logger.debug("Rate Limit on a normal IP: bucket_name: #{ip}:#{path}")
         "#{ip}:#{path}"
 
       client_ip ->
-        Logger.info("Rate Limit on Fly-Client-IP: bucket_name: #{client_ip}:#{path}")
+        Logger.debug("Rate Limit on Fly-Client-IP: bucket_name: #{client_ip}:#{path}")
         "#{client_ip}:#{path}"
     end
   end
