@@ -395,7 +395,9 @@ defmodule SentrypeerWeb.HomePageComponents do
 
                   <li>
                     <.link
-                      navigate={~p"/documentation"}
+                      navigate="https://docs.sentrypeer.com"
+            target="_blank" rel="noopener noreferrer"
+
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                       title="Read the SentryPeer documentation that covers all aspects of the platform and API"
                     >
@@ -405,7 +407,8 @@ defmodule SentrypeerWeb.HomePageComponents do
 
                   <li>
                     <.link
-                      navigate={~p"/guides"}
+                      navigate="https://docs.sentrypeer.com/#guides"
+      target="_blank" rel="noopener noreferrer"
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
                       title="Read the SentryPeer Getting Started Guide and other guides"
                     >
