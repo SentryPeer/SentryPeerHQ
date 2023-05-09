@@ -76,7 +76,7 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "ITSPs"
+      page_title: "Internet Telephony Service Providers"
     )
   end
 
