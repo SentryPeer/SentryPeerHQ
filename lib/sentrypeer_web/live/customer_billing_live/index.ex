@@ -15,6 +15,7 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
+  require Logger
 
   @impl true
   def mount(_params, session, socket) do
@@ -28,6 +29,7 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
      )}
   end
 
+  @impl true
   def handle_event("manage_billing", _value, socket) do
     # Gavin's test customer
     customer_id = "cus_Npo2H16gMzkLpj"
