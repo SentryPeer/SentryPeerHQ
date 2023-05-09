@@ -57,7 +57,8 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
       id: auth.uid,
       name: name_from_auth(auth),
       avatar: avatar_from_auth(auth),
-      email: email_from_auth(auth)
+      email: email_from_auth(auth),
+      latest_login: DateTime.utc_now()
     }
   end
 

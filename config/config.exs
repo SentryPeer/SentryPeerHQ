@@ -111,6 +111,24 @@ config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
 config :ex_cldr,
   default_backend: Sentrypeer.Cldr
 
+# Stripe
+config :stripity_stripe,
+  api_key: System.get_env("SENTRYPEER_STRIPE_API_KEY"),
+  signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
+  json_library: Jason
+
+config :sentrypeer, Oban,
+  repo: Sentrypeer.Repo,
+  queues: [default: 10, mailers: 20, high: 50, low: 5],
+  plugins: [
+    {Oban.Plugins.Pruner, max_age: 3600 * 24},
+    {Oban.Plugins.Cron,
+     crontab: [
+       # {"0 2 * * *", SentrypeerFebeleven.Workers.DailyDigestWorker},
+       # {"@reboot", SentrypeerFebeleven.Workers.StripeSyncWorker}
+     ]}
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

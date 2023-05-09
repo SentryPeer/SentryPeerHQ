@@ -34,6 +34,7 @@ defmodule Sentrypeer.Application do
       # Start a worker by calling: Sentrypeer.Worker.start_link(arg)
       # {Sentrypeer.Worker, arg}
       Sentrypeer.Auth.Auth0Strategy,
+      {Oban, oban_config()},
       # Our Cache
       {Cachex, name: :sentrypeer_cache}
     ]
@@ -50,5 +51,9 @@ defmodule Sentrypeer.Application do
   def config_change(changed, _new, removed) do
     SentrypeerWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp oban_config do
+    Application.fetch_env!(:sentrypeer, Oban)
   end
 end
