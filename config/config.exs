@@ -111,12 +111,6 @@ config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
 config :ex_cldr,
   default_backend: Sentrypeer.Cldr
 
-# Stripe
-config :stripity_stripe,
-  api_key: System.get_env("SENTRYPEER_STRIPE_API_KEY"),
-  signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
-  json_library: Jason
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

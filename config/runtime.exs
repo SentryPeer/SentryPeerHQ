@@ -105,8 +105,6 @@ if config_env() == :prod do
   #       force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
-
-  # TODO: Switch Postmark to this when we get our first paid customer
   if config_env() == :prod or config_env() == :dev do
     ## Configuring the mailer
     #
@@ -134,6 +132,12 @@ if config_env() == :prod do
       port: System.get_env("SENTRYPEER_SMTP_PORT"),
       retries: 2,
       no_mx_lookups: false
+
+    # Stripe
+    config :stripity_stripe,
+      api_key: System.get_env("SENTRYPEER_STRIPE_API_KEY"),
+      signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
+      json_library: Jason
   end
 
   # AppSignal - https://docs.appsignal.com/logging/platforms/integrations/elixir.html
