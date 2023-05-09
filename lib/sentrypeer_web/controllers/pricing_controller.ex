@@ -14,7 +14,7 @@
 defmodule SentrypeerWeb.PricingController do
   use SentrypeerWeb, :controller
 
-  alias Sentrypeer.Billing
+  alias Sentrypeer.BillingUtils
   require Logger
 
   # Top Nav
@@ -64,7 +64,7 @@ defmodule SentrypeerWeb.PricingController do
         }
       ],
       subscription_data: %{
-        billing_cycle_anchor: Billing.first_of_next_month_unix()
+        billing_cycle_anchor: BillingUtils.first_of_next_month_unix()
       }
     }
 

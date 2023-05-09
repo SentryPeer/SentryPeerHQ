@@ -8,6 +8,21 @@ defmodule Sentrypeer.Accounts.User do
     field :auth_id, :string
     field :latest_login, :naive_datetime
 
+    has_one :billing_subscription, Sentrypeer.BillingSubscriptions.BillingSubscription,
+      foreign_key: :auth_id,
+      define_field: false,
+      references: :auth_id
+
+    has_many :clients, Sentrypeer.Clients.Client,
+      foreign_key: :auth_id,
+      define_field: false,
+      references: :auth_id
+
+    has_many :activity_logs, Sentrypeer.ActivityLogs.ActivityLog,
+      foreign_key: :auth_id,
+      define_field: false,
+      references: :auth_id
+
     timestamps()
   end
 

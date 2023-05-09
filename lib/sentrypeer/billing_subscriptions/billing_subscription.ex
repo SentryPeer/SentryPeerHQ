@@ -13,13 +13,32 @@ defmodule Sentrypeer.BillingSubscriptions.BillingSubscription do
     field :stripe_id, :string
     field :auth_id, :binary_id
 
+    belongs_to :user, Sentrypeer.Accounts.User,
+      foreign_key: :auth_id,
+      define_field: false,
+      references: :auth_id
+
     timestamps()
   end
 
   @doc false
   def changeset(billing_subscription, attrs) do
     billing_subscription
-    |> cast(attrs, [:cancel_at, :cancelled_at, :current_period_end_at, :current_period_start, :status, :stripe_id])
-    |> validate_required([:cancel_at, :cancelled_at, :current_period_end_at, :current_period_start, :status, :stripe_id])
+    |> cast(attrs, [
+      :cancel_at,
+      :cancelled_at,
+      :current_period_end_at,
+      :current_period_start,
+      :status,
+      :stripe_id
+    ])
+    |> validate_required([
+      :cancel_at,
+      :cancelled_at,
+      :current_period_end_at,
+      :current_period_start,
+      :status,
+      :stripe_id
+    ])
   end
 end

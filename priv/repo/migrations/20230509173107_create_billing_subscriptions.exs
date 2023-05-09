@@ -17,6 +17,5 @@ defmodule Sentrypeer.Repo.Migrations.CreateBillingSubscriptions do
 
     create index(:billing_subscriptions, [:auth_id])
     create unique_index(:billing_subscriptions, :stripe_id)
-
   end
 end

@@ -11,7 +11,7 @@
 #                             |___/
 #
 
-defmodule Sentrypeer.Billing do
+defmodule Sentrypeer.BillingUtils do
   @moduledoc """
   Billing context.
   """

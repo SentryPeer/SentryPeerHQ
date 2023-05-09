@@ -11,6 +11,11 @@ defmodule Sentrypeer.ActivityLogs.ActivityLog do
     field :user_agent, :string
     field :auth_id, :binary_id
 
+    belongs_to :user, Sentrypeer.Accounts.User,
+      foreign_key: :auth_id,
+      define_field: false,
+      references: :auth_id
+
     timestamps()
   end
 

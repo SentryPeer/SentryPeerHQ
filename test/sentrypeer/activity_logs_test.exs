@@ -21,7 +21,12 @@ defmodule Sentrypeer.ActivityLogsTest do
     end
 
     test "create_activity_log/1 with valid data creates a activity_log" do
-      valid_attrs = %{data: %{}, event: "some event", ip_address: "some ip_address", user_agent: "some user_agent"}
+      valid_attrs = %{
+        data: %{},
+        event: "some event",
+        ip_address: "some ip_address",
+        user_agent: "some user_agent"
+      }
 
       assert {:ok, %ActivityLog{} = activity_log} = ActivityLogs.create_activity_log(valid_attrs)
       assert activity_log.data == %{}
@@ -36,9 +41,17 @@ defmodule Sentrypeer.ActivityLogsTest do
 
     test "update_activity_log/2 with valid data updates the activity_log" do
       activity_log = activity_log_fixture()
-      update_attrs = %{data: %{}, event: "some updated event", ip_address: "some updated ip_address", user_agent: "some updated user_agent"}
 
-      assert {:ok, %ActivityLog{} = activity_log} = ActivityLogs.update_activity_log(activity_log, update_attrs)
+      update_attrs = %{
+        data: %{},
+        event: "some updated event",
+        ip_address: "some updated ip_address",
+        user_agent: "some updated user_agent"
+      }
+
+      assert {:ok, %ActivityLog{} = activity_log} =
+               ActivityLogs.update_activity_log(activity_log, update_attrs)
+
       assert activity_log.data == %{}
       assert activity_log.event == "some updated event"
       assert activity_log.ip_address == "some updated ip_address"
@@ -47,7 +60,10 @@ defmodule Sentrypeer.ActivityLogsTest do
 
     test "update_activity_log/2 with invalid data returns error changeset" do
       activity_log = activity_log_fixture()
-      assert {:error, %Ecto.Changeset{}} = ActivityLogs.update_activity_log(activity_log, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               ActivityLogs.update_activity_log(activity_log, @invalid_attrs)
+
       assert activity_log == ActivityLogs.get_activity_log!(activity_log.id)
     end
 
