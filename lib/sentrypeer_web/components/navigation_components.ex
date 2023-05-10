@@ -495,16 +495,16 @@ defmodule SentrypeerWeb.NavigationComponents do
             <div class="flex items-center justify-end">
               <div class="flex">
                 <.link
-                  navigate={~p"/documentation"}
+                  href="https://docs.sentrypeer.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   title="SentryPeer Documentation"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >
                   Documentation
                 </.link>
                 <.link
-                  navigate="https://github.com/SentryPeer/SentryPeerHQ/discussions"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  navigate={~p"/contact"}
                   title="SentryPeer Support"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >

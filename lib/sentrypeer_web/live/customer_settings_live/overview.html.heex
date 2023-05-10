@@ -27,12 +27,18 @@
                 No phone numbers have been queried yet.
               </p>
             <% else %>
-              <div class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs">
-                <%= for phone_number <- @phone_numbers do %>
-                  <p>
-                    <%= phone_number %>
-                  </p>
-                <% end %>
+              <div
+                id="api-logger-realtime-container"
+                phx-hook="SentrypeerApiLoggerRealtime"
+                class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
+              >
+                <div id="api-logger-realtime">
+                  <%= for phone_number <- @phone_numbers do %>
+                    <p id={"log-#{System.unique_integer()}"}>
+                      <%= phone_number %>
+                    </p>
+                  <% end %>
+                </div>
               </div>
             <% end %>
             <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
