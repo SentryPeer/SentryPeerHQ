@@ -44,8 +44,8 @@ jobs:
           restore-keys: |
             deps-${{ runner.os }}-${{ matrix.otp_version }}-${{ matrix.elixir_version }}
 
-      - run: mix deps.audit
       - run: mix deps.get
+      - run: mix deps.audit
       - run: mix format --check-formatted
       - run: mix deps.unlock --check-unused
       - run: mix deps.compile
