@@ -2,6 +2,10 @@
 
 <img alt="SentryPeer Logo" src="https://raw.githubusercontent.com/SentryPeer/SentryPeer/main/web-gui-theme/src/assets/logo.svg" width="100" height="100">
 
+[![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/sentrypeer/sentrypeerhq?sort=semver)](https://github.com/SentryPeer/SentryPeeHQ/releases)
+[![CI](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml/badge.svg)](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml)
+
 ## Table of Contents
 * [Introduction](#introduction)
 * [Getting started with SentryPeerHQ](#getting-started-with-sentrypeerhq)
