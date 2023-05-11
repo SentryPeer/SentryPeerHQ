@@ -7,6 +7,7 @@ defmodule Sentrypeer.Accounts.User do
   schema "users" do
     field :auth_id, :string
     field :latest_login, :naive_datetime
+    field :enabled, :boolean
 
     has_one :billing_subscription, Sentrypeer.BillingSubscriptions.BillingSubscription,
       foreign_key: :auth_id,
@@ -28,5 +29,6 @@ defmodule Sentrypeer.Accounts.User do
     user
     |> cast(attrs, [:auth_id, :latest_login])
     |> validate_required([:auth_id, :latest_login])
+    |> unique_constraint(:auth_id, name: :users_auth_id_index)
   end
 end

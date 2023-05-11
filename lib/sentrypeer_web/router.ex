@@ -44,6 +44,13 @@ defmodule SentrypeerWeb.Router do
     plug :admin_basic_auth
   end
 
+  # As per https://hexdocs.pm/fun_with_flags_ui/readme.html#mounted-in-another-plug-application
+  pipeline :flags do
+    plug :accepts, ["html"]
+    plug :put_secure_browser_headers
+    plug :fetch_session
+  end
+
   scope "/auth", SentrypeerWeb do
     pipe_through :browser
 
@@ -52,7 +59,7 @@ defmodule SentrypeerWeb.Router do
     post "/:provider/callback", AuthController, :callback
   end
 
-  use Kaffy.Routes, scope: "/admin", pipe_through: [:admins_only]
+  use Kaffy.Routes, scope: "/crm", pipe_through: [:admins_only]
   # layout: {SentrypeerWeb.Layouts, :main_app}
 
   live_session :default,
@@ -146,7 +153,12 @@ defmodule SentrypeerWeb.Router do
 
   scope "/" do
     pipe_through [:browser, :admins_only]
-    live_dashboard "/admin-dashboard", metrics: SentrypeerWeb.Telemetry
+    live_dashboard "/ops-dashboard", metrics: SentrypeerWeb.Telemetry
+  end
+
+  scope path: "/flags" do
+    pipe_through [:flags, :admins_only]
+    forward "/", FunWithFlags.UI.Router, namespace: "flags"
   end
 
   defp admin_basic_auth(conn, _opts) do

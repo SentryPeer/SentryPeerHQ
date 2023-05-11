@@ -111,12 +111,13 @@ config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
 config :ex_cldr,
   default_backend: Sentrypeer.Cldr
 
-# Stripe
+# Stripe - https://hexdocs.pm/stripity_stripe/Stripe.html
 config :stripity_stripe,
   api_key: System.get_env("SENTRYPEER_STRIPE_API_KEY"),
   signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
   json_library: Jason
 
+# Oban - https://hexdocs.pm/oban/Oban.html
 config :sentrypeer, Oban,
   repo: Sentrypeer.Repo,
   queues: [default: 10, mailers: 20, high: 50, low: 5],
@@ -128,6 +129,17 @@ config :sentrypeer, Oban,
        # {"@reboot", SentrypeerFebeleven.Workers.StripeSyncWorker}
      ]}
   ]
+
+# Feature Flags - https://hexdocs.pm/fun_with_flags/readme.html#installation
+# Something for later - https://hexdocs.pm/fun_with_flags/readme.html#application-start-behaviour
+config :fun_with_flags, :persistence,
+  adapter: FunWithFlags.Store.Persistent.Ecto,
+  repo: Sentrypeer.Repo
+
+config :fun_with_flags, :cache_bust_notifications,
+  enabled: true,
+  adapter: FunWithFlags.Notifications.PhoenixPubSub,
+  client: Sentrypeer.PubSub
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

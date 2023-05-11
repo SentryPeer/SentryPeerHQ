@@ -16,6 +16,9 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
   require Poison
 
   alias Ueberauth.Auth
+  alias Sentrypeer.Accounts
+  alias Sentrypeer.Emails.EmailError
+  alias Sentrypeer.Mailer
 
   @moduledoc """
   Retrieve the user information from an auth request
@@ -32,7 +35,28 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
   end
 
   def find_or_create(%Auth{} = auth) do
-    {:ok, basic_info(auth)}
+    # Check if the user already exists (and is enabled), if not create them
+    # and return the basic info.
+    #
+    # We can always just block the user account on Auth0 anyway, but this
+    # way we can do it ourselves if a subscription is cancelled etc.
+    case Accounts.find_or_create_user(%{
+           auth_id: auth.uid,
+           latest_login: DateTime.utc_now()
+         }) do
+      nil ->
+        EmailError.notify_admins(
+          __MODULE__,
+          "User account exists, but has been disabled by us.",
+          auth.uid
+        )
+        |> Mailer.deliver()
+
+        {:error, "Your account has been disabled, please contact us."}
+
+      _user ->
+        {:ok, basic_info(auth)}
+    end
   end
 
   # github does it this way

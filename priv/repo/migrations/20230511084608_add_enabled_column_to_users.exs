@@ -11,24 +11,14 @@
 #                             |___/
 #
 
-defmodule Sentrypeer.BillingUtils do
-  @moduledoc """
-  Billing context.
-  """
+defmodule Sentrypeer.Repo.Migrations.AddEnabledColumnToUsers do
+  use Ecto.Migration
 
-  def first_of_next_month_unix do
-    today = Date.utc_today()
-
-    NaiveDateTime.from_erl!({{today.year, get_next_month(today.month), 1}, {0, 0, 0}})
-    |> DateTime.from_naive!("Etc/UTC")
-    |> DateTime.to_unix()
-  end
-
-  defp get_next_month(current_month) do
-    case current_month do
-      # Dec becomes Jan
-      12 -> 1
-      _ -> current_month + 1
+  def change do
+    alter table(:users) do
+      add :enabled, :boolean, default: true, null: false, comment: "Is this user enabled?"
     end
+
+    create index(:users, :enabled)
   end
 end

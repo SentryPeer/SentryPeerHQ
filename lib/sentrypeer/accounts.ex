@@ -8,6 +8,8 @@ defmodule Sentrypeer.Accounts do
 
   alias Sentrypeer.Accounts.User
 
+  require Logger
+
   @doc """
   Returns the list of users.
 
@@ -100,5 +102,37 @@ defmodule Sentrypeer.Accounts do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  @doc """
+  Finds or creates a user. Doesn't find one is enabled = false.
+
+  ## Examples
+
+      iex> find_or_create_user(user)
+      %User{}
+
+  """
+  def find_or_create_user(attrs \\ %{}) do
+    Logger.debug("find_or_create_user: #{inspect(attrs)}")
+
+    case find_enabled_user(attrs.auth_id) do
+      nil ->
+        case create_user(attrs) do
+          {:ok, user} ->
+            user
+
+          {:error, changeset} ->
+            Logger.error("find_or_create_user: #{inspect(changeset)}")
+            nil
+        end
+
+      user ->
+        user
+    end
+  end
+
+  defp find_enabled_user(auth_id) do
+    Repo.get_by(User, auth_id: auth_id, enabled: true)
   end
 end
