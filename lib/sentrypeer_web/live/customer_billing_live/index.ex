@@ -15,17 +15,23 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
+  alias Sentrypeer.BillingSubscriptions
   require Logger
 
   @impl true
   def mount(_params, session, socket) do
+    Logger.debug(inspect(session["current_user"].id))
+
     {:ok,
      assign(socket,
        # .avatar is in there too
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Billing"
+       page_title: "Billing",
+       subscription: BillingSubscriptions.get_subscription(session["current_user"].id),
+       billing_email: BillingSubscriptions.get_billing_email(session["current_user"].id),
+       invoices: BillingSubscriptions.get_invoices(session["current_user"].id)
      )}
   end
 

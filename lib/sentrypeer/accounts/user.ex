@@ -11,15 +11,15 @@ defmodule Sentrypeer.Accounts.User do
 
     has_one :billing_subscription, Sentrypeer.BillingSubscriptions.BillingSubscription,
       foreign_key: :auth_id,
-      references: :auth_id
+      references: :id
 
     has_many :clients, Sentrypeer.Clients.Client,
       foreign_key: :auth_id,
-      references: :auth_id
+      references: :id
 
     has_many :activity_logs, Sentrypeer.ActivityLogs.ActivityLog,
       foreign_key: :auth_id,
-      references: :auth_id
+      references: :id
 
     timestamps()
   end

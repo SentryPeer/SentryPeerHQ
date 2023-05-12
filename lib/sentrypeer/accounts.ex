@@ -58,6 +58,25 @@ defmodule Sentrypeer.Accounts do
   def get_user_by_auth_id(auth_id), do: Repo.get_by(User, auth_id: auth_id)
 
   @doc """
+  Gets a users stripe_id.
+
+  Raises `Ecto.NoResultsError` if the User does not exist.
+
+  ## Examples
+
+      iex> get_user_stripe_id(123)
+      %User{}
+
+      iex> get_user_stripe_id(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_user_stripe_id(auth_id) do
+    Repo.get_by(User, auth_id: auth_id)
+    |> Repo.preload(:billing_subscription)
+  end
+
+  @doc """
   Creates a user with a default subscription on the Tester Plan.
 
   ## Examples

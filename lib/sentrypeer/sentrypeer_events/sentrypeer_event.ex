@@ -52,7 +52,7 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
     field :client_id, :string
 
     belongs_to :client, Sentrypeer.Clients.Client,
-      foreign_key: :client_id,
+      foreign_key: :id,
       define_field: false,
       references: :client_id
 

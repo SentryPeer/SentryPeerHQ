@@ -7,6 +7,9 @@ defmodule Sentrypeer.BillingSubscriptions do
   alias Sentrypeer.Repo
 
   alias Sentrypeer.BillingSubscriptions.BillingSubscription
+  alias Sentrypeer.Accounts
+
+  require Logger
 
   @doc """
   Returns the list of billing_subscriptions.
@@ -117,5 +120,49 @@ defmodule Sentrypeer.BillingSubscriptions do
   """
   def change_billing_subscription(%BillingSubscription{} = billing_subscription, attrs \\ %{}) do
     BillingSubscription.changeset(billing_subscription, attrs)
+  end
+
+  def get_subscription(cust_id) do
+    stripe_id = get_stripe_id(cust_id)
+
+    case Stripe.Subscription.list(%{customer: stripe_id}) do
+      {:ok, subscription} ->
+        Logger.debug("Subscription: #{inspect(subscription)}")
+        subscription
+
+      {:error, error} ->
+        Logger.error("Subscription Error: #{inspect(error)}")
+        error
+    end
+  end
+
+  def get_billing_email(cust_id) do
+    stripe_id = get_stripe_id(cust_id)
+
+    case Stripe.Customer.retrieve(stripe_id) do
+      {:ok, customer} ->
+        Logger.debug("Customer: #{inspect(customer)}")
+        customer.email
+
+      {:error, error} ->
+        error
+    end
+  end
+
+  def get_invoices(cust_id) do
+    stripe_id = get_stripe_id(cust_id)
+
+    case Stripe.Invoice.list(%{customer: stripe_id}) do
+      {:ok, invoices} ->
+        Logger.debug("Invoices: #{inspect(invoices)}")
+        invoices
+
+      {:error, error} ->
+        error
+    end
+  end
+
+  defp get_stripe_id(auth_id) do
+    Accounts.get_user_stripe_id(auth_id).billing_subscription.stripe_id
   end
 end

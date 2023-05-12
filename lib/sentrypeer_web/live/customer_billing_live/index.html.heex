@@ -1,6 +1,7 @@
 <!-- Background color split screen for large screens -->
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
+</div>
 <div class="relative flex min-h-full flex-col">
   <%= nav_top_menu(assigns) %>
   <%= breadcrumbs(assigns) %>
@@ -9,7 +10,7 @@
     <!-- Left sidebar & main wrapper -->
     <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
       <!-- Account profile -->
-      <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0">
+      <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
         <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
           <div class="flex items-center justify-between">
             <div class="flex-1 space-y-8">
@@ -42,10 +43,10 @@
                     </div>
                   </div>
                 </div>
-                <!-- Meta info -->
-                <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                  <%= in_app_menu(assigns) %>
-                </div>
+              </div>
+              <!-- Meta info -->
+              <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+                <%= in_app_menu(assigns) %>
               </div>
             </div>
           </div>
@@ -54,17 +55,54 @@
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium dark:text-white">Overview</h1>
+            <h1 class="flex-1 text-lg font-medium dark:text-white">Plan and Billing</h1>
           </div>
         </div>
-
-        <.link
-          phx-click="manage_billing"
-          title="Manage your billing information"
-          class="text-indigo-600 hover:text-brand"
-        >
-          Manage Billing
-        </.link>
+        <div><p class="dark:text-slate-400">Subscription details: <%= inspect @subscription %></p></div>
+        <div><p class="dark:text-slate-400">Billing Email: <%= inspect @billing_email %></p></div>
+      </div>
+    </div>
+    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
+      <div class="h-full py-6 pl-6 lg:w-80">
+        <!-- Right column area -->
+        <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
+          <div class="bg-white dark:bg-slate-900 px-4 py-5 shadow rounded-lg sm:px-6">
+            <h2 id="timeline-title" class="text-lg font-medium text-gray-900 dark:text-white">
+              Invoice History
+            </h2>
+            <!-- Invoice Feed -->
+            <p class="dark:text-slate-400"><%= inspect @invoices %></p>
+            <div class="mt-6 flow-root">
+              <ul role="list" class="divide-y divide-gray-200">
+                <!-- Invoice List -->
+                <li class="py-4">
+                  <div class="relative pb-8 ">
+                    <div class="relative flex space-x-3">
+                      <Heroicons.document_text class="h-5 w-5" />
+                      <div class="flex min-w-0 flex-1 justify-between space-x-4">
+                        <p class="text-sm text-gray-900 dark:text-white">
+                          Applied to
+                        </p>
+                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                          <a
+                            href="https://ico.org.uk/global/contact-us/"
+                            class="text-indigo-600 hover:text-brand"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="The ICO is the UK's independent body set up to uphold information rights."
+                          >
+                            View
+                            <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

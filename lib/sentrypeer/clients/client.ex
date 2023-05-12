@@ -24,12 +24,12 @@ defmodule Sentrypeer.Clients.Client do
     field :hourly_request_limit, :integer, default: 600
 
     belongs_to :user, Sentrypeer.Accounts.User,
-      foreign_key: :auth_id,
+      foreign_key: :id,
       references: :auth_id,
       define_field: false
 
     has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent,
-      foreign_key: :client_id,
+      foreign_key: :id,
       references: :client_id
 
     timestamps()
