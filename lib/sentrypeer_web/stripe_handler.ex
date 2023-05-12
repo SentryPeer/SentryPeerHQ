@@ -14,6 +14,8 @@
 defmodule SentrypeerWeb.StripeHandler do
   @behaviour Stripe.WebhookHandler
 
+  require Logger
+
   @impl true
   def handle_event(%Stripe.Event{type: "invoice.paid"} = event) do
     IO.inspect("Payment Success")
@@ -45,5 +47,8 @@ defmodule SentrypeerWeb.StripeHandler do
 
   # Return HTTP 200 for unhandled events
   @impl true
-  def handle_event(_event), do: :ok
+  def handle_event(event) do
+    Logger.info("Unhandled Stripe Event: #{event.type}")
+    :ok
+  end
 end

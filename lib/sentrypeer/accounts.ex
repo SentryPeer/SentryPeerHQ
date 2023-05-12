@@ -7,6 +7,8 @@ defmodule Sentrypeer.Accounts do
   alias Sentrypeer.Repo
 
   alias Sentrypeer.Accounts.User
+  alias Sentrypeer.BillingSubscriptions
+  alias Sentrypeer.BillingHelpers
 
   require Logger
 
@@ -40,7 +42,23 @@ defmodule Sentrypeer.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
-  Creates a user.
+  Gets a single user by auth_id.
+
+  Raises `Ecto.NoResultsError` if the User does not exist.
+
+  ## Examples
+
+      iex> get_user_by_auth_id(123)
+      %User{}
+
+      iex> get_user_by_auth_id(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_user_by_auth_id(auth_id), do: Repo.get_by(User, auth_id: auth_id)
+
+  @doc """
+  Creates a user with a default subscription on the Tester Plan.
 
   ## Examples
 
@@ -55,6 +73,14 @@ defmodule Sentrypeer.Accounts do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+
+    case create_user_subscription(attrs) do
+      {:ok, subscription} ->
+        {:ok, subscription}
+
+      {:error, changeset} ->
+        Logger.error("create_user: #{inspect(changeset)}")
+    end
   end
 
   @doc """
@@ -125,6 +151,9 @@ defmodule Sentrypeer.Accounts do
           {:error, changeset} ->
             Logger.error("find_or_create_user: #{inspect(changeset)}")
             nil
+
+          _ ->
+            nil
         end
 
       user ->
@@ -134,5 +163,126 @@ defmodule Sentrypeer.Accounts do
 
   defp find_enabled_user(auth_id) do
     Repo.get_by(User, auth_id: auth_id, enabled: true)
+  end
+
+  defp create_user_subscription(attrs \\ %{}) do
+    Logger.debug("create_user_subscription: #{inspect(attrs)}")
+
+    # Check if the user exists on Stripe first
+    case Stripe.Customer.list(%{email: attrs.email}) do
+      {:ok, %{data: [customer | _]}} ->
+        Logger.debug("create_user_subscription: #{inspect(customer)}")
+        # If the user exists, create a subscription
+        create_billing_subscription(attrs, customer.id)
+
+      {:ok, %{data: []}} ->
+        Logger.debug("create_user_subscription: #{inspect(attrs)}")
+        # If the user doesn't exist, create a customer first then a subscription
+        create_stripe_customer(attrs)
+
+      {:error, changeset} ->
+        Logger.error("create_user_subscription: #{inspect(changeset)}")
+        {:error, changeset}
+    end
+  end
+
+  defp create_stripe_customer(attrs) do
+    Logger.debug("create_stripe_customer: #{inspect(attrs)}")
+
+    case Stripe.Customer.create(%{email: attrs.email}) do
+      {:ok, customer} ->
+        Logger.debug("create_user_subscription: #{inspect(customer)}")
+        create_billing_subscription(attrs, customer.id)
+
+      {:error, changeset} ->
+        Logger.error("create_user_subscription: #{inspect(changeset)}")
+        {:error, changeset}
+    end
+  end
+
+  defp check_for_existing_billing_subscription(attrs \\ %{}) do
+    Logger.debug("check_for_existing_billing_subscription: #{inspect(attrs)}")
+
+    case get_user_by_auth_id(attrs.auth_id) do
+      nil ->
+        Logger.debug("check_for_existing_billing_subscription: no user found")
+        {:ok, nil}
+
+      user ->
+        Logger.debug("check_for_existing_billing_subscription: #{inspect(user)}")
+
+        case BillingSubscriptions.get_billing_subscription_by_auth_id(user.id) do
+          nil ->
+            Logger.debug("check_for_existing_billing_subscription: no subscription found")
+            {:ok, attrs}
+
+          subscription ->
+            Logger.debug("check_for_existing_billing_subscription: #{inspect(subscription)}")
+            {:error, subscription}
+        end
+    end
+  end
+
+  defp create_billing_subscription(attrs \\ %{}, customer_id) do
+    case check_for_existing_billing_subscription(attrs) do
+      {:ok, _} ->
+        Logger.debug("create_billing_subscription: no existing subscription found")
+
+        case create_stripe_and_local_subscription(attrs, customer_id) do
+          {:ok, subscription} ->
+            Logger.debug("create_billing_subscription: #{inspect(subscription)}")
+            {:ok, subscription}
+
+          {:error, changeset} ->
+            Logger.error("create_billing_subscription: #{inspect(changeset)}")
+            {:error, changeset}
+        end
+
+      {:error, subscription} ->
+        Logger.debug("create_billing_subscription: existing subscription found")
+        {:error, subscription}
+    end
+  end
+
+  defp create_stripe_and_local_subscription(attrs \\ %{}, customer_id) do
+    Logger.debug("create_stripe_and_local_subscription: #{inspect(attrs)}")
+
+    case Stripe.Subscription.create(%{
+           customer: customer_id,
+           items: [
+             %{
+               price: System.get_env("STRIPE_TESTER_PLAN_ID"),
+               quantity: 1
+             }
+           ],
+           billing_cycle_anchor: BillingHelpers.first_of_next_month_unix()
+         }) do
+      {:ok, subscription} ->
+        Logger.debug("create_billing_subscription: #{inspect(subscription)}")
+
+        our_sub = %{
+          cancel_at: subscription.cancel_at,
+          cancelled_at: subscription.canceled_at,
+          current_period_end_at: DateTime.from_unix!(subscription.current_period_end),
+          current_period_start: DateTime.from_unix!(subscription.current_period_start),
+          status: subscription.status,
+          stripe_id: subscription.customer,
+          auth_id: get_user_by_auth_id(attrs.auth_id).id
+        }
+
+        case BillingSubscriptions.create_billing_subscription(our_sub) do
+          {:ok, subscription} ->
+            Logger.debug("create_billing_subscription: #{inspect(our_sub)}")
+            {:ok, subscription}
+
+          {:error, changeset} ->
+            Logger.error("create_billing_subscription: #{inspect(changeset)}")
+            {:error, changeset}
+        end
+
+      {:error, changeset} ->
+        Logger.error("create_billing_subscription: #{inspect(changeset)}")
+        {:error, changeset}
+    end
   end
 end

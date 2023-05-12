@@ -42,6 +42,7 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
     # way we can do it ourselves if a subscription is cancelled etc.
     case Accounts.find_or_create_user(%{
            auth_id: auth.uid,
+           email: email_from_auth(auth),
            latest_login: DateTime.utc_now()
          }) do
       nil ->

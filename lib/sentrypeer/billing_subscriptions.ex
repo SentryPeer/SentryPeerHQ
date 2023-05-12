@@ -38,6 +38,23 @@ defmodule Sentrypeer.BillingSubscriptions do
   def get_billing_subscription!(id), do: Repo.get!(BillingSubscription, id)
 
   @doc """
+  Gets a single billing_subscription by auth_id.
+
+  Raises `Ecto.NoResultsError` if the Billing subscription does not exist.
+
+  ## Examples
+
+      iex> get_billing_subscription!(123)
+      %BillingSubscription{}
+
+      iex> get_billing_subscription!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_billing_subscription_by_auth_id(auth_id),
+    do: Repo.get_by(BillingSubscription, auth_id: auth_id)
+
+  @doc """
   Creates a billing_subscription.
 
   ## Examples

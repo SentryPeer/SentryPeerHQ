@@ -17,6 +17,16 @@ defmodule SentrypeerWeb.PricingController do
   alias Sentrypeer.BillingHelpers
   require Logger
 
+  @tester_plan_id System.get_env("STRIPE_TESTER_PLAN_ID")
+  @rewarded_ad_plan_id System.get_env("STRIPE_REWARDED_AD_PLAN_ID")
+  @contributor_plan_id System.get_env("STRIPE_CONTRIBUTOR_PLAN_ID")
+  @business_small_plan_id System.get_env("STRIPE_BUSINESS_SMALL_PLAN_ID")
+  @business_medium_plan_id System.get_env("STRIPE_BUSINESS_MEDIUM_PLAN_ID")
+  @business_large_plan_id System.get_env("STRIPE_BUSINESS_LARGE_PLAN_ID")
+  @service_provider_small_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_SMALL_PLAN_ID")
+  @service_provider_medium_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_MEDIUM_PLAN_ID")
+  @service_provider_large_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_LARGE_PLAN_ID")
+
   # Top Nav
   def index(conn, _params) do
     render(conn, :index,
@@ -71,6 +81,10 @@ defmodule SentrypeerWeb.PricingController do
     # Previous customer? customer_id else customer_email
     # The stripe API only allows one of {customer_email, customer}
     current_user = get_session(conn, :current_user)
+
+    # Get them to sign up first, which puts them on the Tester plan
+    if !current_user,
+      do: redirect(conn, to: ~p"/signup?product=#{product}") |> halt()
 
     session_config =
       if customer_id,

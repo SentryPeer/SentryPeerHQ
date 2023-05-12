@@ -30,15 +30,15 @@ defmodule Sentrypeer.BillingSubscriptions.BillingSubscription do
       :current_period_end_at,
       :current_period_start,
       :status,
-      :stripe_id
+      :stripe_id,
+      :auth_id
     ])
     |> validate_required([
-      :cancel_at,
-      :cancelled_at,
       :current_period_end_at,
       :current_period_start,
       :status,
-      :stripe_id
+      :stripe_id,
+      :auth_id
     ])
   end
 end
