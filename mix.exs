@@ -44,7 +44,6 @@ defmodule Sentrypeer.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:appsignal, "~> 2.6"},
       {:appsignal_phoenix, "~> 2.3.2"},
       {:cachex, "~> 3.6"},
@@ -83,6 +82,7 @@ defmodule Sentrypeer.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_swoosh, "~> 1.0"},
+      # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},
       {:plug_cowboy, "~> 2.5"},
       {:poison, "~> 5.0"},
@@ -95,6 +95,7 @@ defmodule Sentrypeer.MixProject do
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
+      {:timex, "~> 3.0"},
       {:ueberauth, "~> 0.10.3"},
       {:ueberauth_auth0, "~> 2.1.0"}
     ]

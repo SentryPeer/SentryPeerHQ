@@ -58,47 +58,264 @@
             <h1 class="flex-1 text-lg font-medium dark:text-white">Plan and Billing</h1>
           </div>
         </div>
-        <div><p class="dark:text-slate-400">Subscription details: <%= inspect @subscription %></p></div>
-        <div><p class="dark:text-slate-400">Billing Email: <%= inspect @billing_email %></p></div>
+        <div>
+          <dl class="divide-y divide-gray-100">
+            <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+                Subscription Status
+              </dt>
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+                <span class="flex-grow">
+                  <%= String.capitalize(@subscription.status) %>
+                </span>
+                <span class="ml-4 flex-shrink-0">
+                  <.link
+                    phx-click="manage_billing"
+                    title="Manage your Subscription"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Manage Subscription
+                  </.link>
+                </span>
+              </dd>
+            </div>
+            <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+                Plan
+              </dt>
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+                <span class="flex-grow"><%= @subscription.plan.nickname %></span>
+                <span class="ml-4 flex-shrink-0">
+                  <.link
+                    phx-click="manage_billing"
+                    title="Manage your Plan"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Manage Plan
+                  </.link>
+                </span>
+              </dd>
+            </div>
+            <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+                Billing date
+              </dt>
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+                <span class="flex-grow">
+                  1st of month (<%= to_month_day(@subscription.billing_cycle_anchor) %>, <%= to_year(
+                    @subscription.current_period_end
+                  ) %>)
+                </span>
+              </dd>
+            </div>
+
+            <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+                Billing Email
+              </dt>
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+                <span class="flex-grow"><%= @billing_email %></span>
+                <span class="ml-4 flex-shrink-0">
+                  <.link
+                    phx-click="manage_billing"
+                    title="Change Billing Email"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Change email
+                  </.link>
+                </span>
+              </dd>
+            </div>
+            <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+                Payment Method
+              </dt>
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+                <span class="flex-grow">
+                  <%= if @subscription.collection_method == "charge_automatically" do %>
+                    Credit Card
+                  <% else %>
+                    <%= @subscription.collection_method %>
+                  <% end %>
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <!-- Invoice -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="-mx-4 px-4 py-8 sm:mx-0 sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-16 xl:pb-20">
+            <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Upcoming Invoice Preview
+            </h2>
+            <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-3 border-b border-gray-200">
+              <div class="sm:pr-4">
+                <dt class="inline text-gray-700 dark:text-slate-300">Issued on</dt>
+                <dd class="inline text-gray-800 dark:text-slate-400">
+                  <%= to_month_day(@upcoming_invoice.created) %>
+                </dd>
+              </div>
+              <div class="mt-2 sm:mt-0 sm:pl-4">
+                <dt class="inline text-gray-700 dark:text-slate-300">Due on</dt>
+                <dd class="inline text-gray-800 dark:text-slate-400">
+                  <%= to_month_day(@upcoming_invoice.created) %>
+                </dd>
+              </div>
+              <div class="mt-2 sm:mt-0 sm:pl-4">
+                <dt class="inline text-gray-700 dark:text-slate-300">Period</dt>
+                <dd class="inline sm:inline-block text-gray-800 dark:text-slate-400">
+                  <%= to_month_day(List.first(@upcoming_invoice.lines.data).period.start) %> &mdash; <%= to_month_day(
+                    List.first(@upcoming_invoice.lines.data).period.end
+                  ) %>, <%= to_year(List.first(@upcoming_invoice.lines.data).period.end) %>
+                </dd>
+              </div>
+            </dl>
+            <table class="mt-4 w-full whitespace-nowrap text-left text-sm leading-6">
+              <colgroup>
+                <col class="w-full" />
+                <col />
+                <col />
+                <col />
+              </colgroup>
+              <thead class="border-b border-gray-200 text-gray-900">
+                <tr>
+                  <th scope="col" class="px-0 py-3 font-semibold dark:text-slate-300">Item</th>
+                  <th
+                    scope="col"
+                    class="py-3 pl-8 pr-0 text-right font-semibold dark:text-slate-300"
+                  >
+                    Price
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="max-w-0 px-0 py-5 align-top">
+                    <div class="truncate font-medium text-gray-900 dark:text-slate-400">
+                      <%= List.first(@upcoming_invoice.lines.data).description %>
+                    </div>
+                  </td>
+                  <td class="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 dark:text-slate-400">
+                    <%= List.first(@upcoming_invoice.lines.data).price.unit_amount %>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th
+                    scope="row"
+                    class="px-0 pb-0 pt-6 font-normal text-gray-700 dark:text-slate-300 sm:hidden"
+                  >
+                    Subtotal
+                  </th>
+                  <th
+                    scope="row"
+                    colspan="3"
+                    class="hidden px-0 pb-0 pt-6 text-right font-normal text-gray-700 dark:text-slate-300 sm:table-cell"
+                  >
+                    Subtotal
+                  </th>
+                  <td class="pb-0 pl-8 pr-0 pt-6 text-right tabular-nums text-gray-900">
+                    <%= @upcoming_invoice.subtotal / 100 %>
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    class="pt-4 font-normal text-gray-700 dark:text-slate-300 sm:hidden"
+                  >
+                    Tax
+                  </th>
+                  <th
+                    scope="row"
+                    colspan="3"
+                    class="hidden pt-4 text-right font-normal text-gray-700 dark:text-slate-300 sm:table-cell"
+                  >
+                    Tax
+                  </th>
+                  <td class="pb-0 pl-8 pr-0 pt-4 text-right tabular-nums text-gray-900">
+                    <%= @upcoming_invoice.tax %>
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    class="pt-4 font-semibold text-gray-900 dark:text-slate-300 sm:hidden"
+                  >
+                    Total
+                  </th>
+                  <th
+                    scope="row"
+                    colspan="3"
+                    class="hidden pt-4 text-right font-semibold text-gray-900 dark:text-slate-300 sm:table-cell"
+                  >
+                    Total
+                  </th>
+                  <td class="pb-0 pl-8 pr-0 pt-4 text-right font-semibold tabular-nums text-gray-900">
+                    <%= @upcoming_invoice.amount_due / 100 %>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
       <div class="h-full py-6 pl-6 lg:w-80">
         <!-- Right column area -->
         <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
-          <div class="bg-white dark:bg-slate-900 px-4 py-5 shadow rounded-lg sm:px-6">
-            <h2 id="timeline-title" class="text-lg font-medium text-gray-900 dark:text-white">
+          <div class="bg-white dark:bg-slate-900 px-4 py-5 overflow-hidden shadow rounded-lg sm:px-6">
+            <h3
+              id="timeline-title"
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+            >
               Invoice History
-            </h2>
+            </h3>
             <!-- Invoice Feed -->
-            <p class="dark:text-slate-400"><%= inspect @invoices %></p>
             <div class="mt-6 flow-root">
               <ul role="list" class="divide-y divide-gray-200">
-                <!-- Invoice List -->
-                <li class="py-4">
-                  <div class="relative pb-8 ">
-                    <div class="relative flex space-x-3">
-                      <Heroicons.document_text class="h-5 w-5" />
-                      <div class="flex min-w-0 flex-1 justify-between space-x-4">
-                        <p class="text-sm text-gray-900 dark:text-white">
-                          Applied to
-                        </p>
-                        <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                <%= if @invoices.data == [] do %>
+                  <p>No invoices yet.</p>
+                <% else %>
+                  <%= for invoice <- @invoices.data do %>
+                    <!-- Invoice List -->
+                    <li class="py-4">
+                      <div class="relative pb-8 ">
+                        <div class="relative flex space-x-3">
                           <a
-                            href="https://ico.org.uk/global/contact-us/"
+                            href={invoice.invoice_pdf}
                             class="text-indigo-600 hover:text-brand"
                             target="_blank"
                             rel="noopener noreferrer"
-                            title="The ICO is the UK's independent body set up to uphold information rights."
+                            title="Download the invoice PDF."
                           >
-                            View
-                            <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+                            <Heroicons.cloud_arrow_down class="inline-block w-5 h-5" />
                           </a>
+                          <div class="flex min-w-0 flex-1 justify-between space-x-4">
+                            <p class="text-sm text-gray-900 dark:text-white">
+                              <%= to_month_day(@subscription.current_period_start) %> &mdash; <%= to_month_day(
+                                @subscription.current_period_end
+                              ) %>, <%= to_year(@subscription.current_period_end) %>
+                            </p>
+                            <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                              <a
+                                href={invoice.hosted_invoice_url}
+                                class="text-indigo-600 hover:text-brand"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="View the full details, invoice and receipt."
+                              >
+                                View
+                                <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
+                    </li>
+                  <% end %>
+                <% end %>
               </ul>
             </div>
           </div>

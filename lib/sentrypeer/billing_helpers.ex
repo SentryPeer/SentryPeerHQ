@@ -37,4 +37,14 @@ defmodule Sentrypeer.BillingHelpers do
       _ -> current_month + 1
     end
   end
+
+  def to_month_day(unixtime) do
+    Timex.from_unix(unixtime, :seconds)
+    |> Timex.format!("{Mshort} {D}")
+  end
+
+  def to_year(unixtime) do
+    Timex.from_unix(unixtime, :seconds)
+    |> Timex.format!("{YYYY}")
+  end
 end

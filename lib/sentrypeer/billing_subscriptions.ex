@@ -162,6 +162,19 @@ defmodule Sentrypeer.BillingSubscriptions do
     end
   end
 
+  def get_upcoming_invoice(cust_id) do
+    stripe_id = get_stripe_id(cust_id)
+
+    case Stripe.Invoice.upcoming(%{customer: stripe_id}) do
+      {:ok, invoice} ->
+        Logger.debug("Upcoming Invoice: #{inspect(invoice)}")
+        invoice
+
+      {:error, error} ->
+        error
+    end
+  end
+
   defp get_stripe_id(auth_id) do
     Accounts.get_user_stripe_id(auth_id).billing_subscription.stripe_id
   end

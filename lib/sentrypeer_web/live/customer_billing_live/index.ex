@@ -15,7 +15,11 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
+  import Sentrypeer.BillingHelpers
+
   alias Sentrypeer.BillingSubscriptions
+  alias Sentrypeer.Accounts
+
   require Logger
 
   @impl true
@@ -29,20 +33,19 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Billing",
-       subscription: BillingSubscriptions.get_subscription(session["current_user"].id),
+       subscription:
+         List.first(BillingSubscriptions.get_subscription(session["current_user"].id).data),
        billing_email: BillingSubscriptions.get_billing_email(session["current_user"].id),
-       invoices: BillingSubscriptions.get_invoices(session["current_user"].id)
+       invoices: BillingSubscriptions.get_invoices(session["current_user"].id),
+       upcoming_invoice: BillingSubscriptions.get_upcoming_invoice(session["current_user"].id)
      )}
   end
 
   @impl true
   def handle_event("manage_billing", _value, socket) do
-    # Gavin's test customer
-    customer_id = "cus_Npo2H16gMzkLpj"
-    # customer_id = get_customer_from_email(email)
-
     case Stripe.BillingPortal.Session.create(%{
-           customer: customer_id,
+           customer:
+             Accounts.get_user_stripe_id(socket.assigns.current_user.id).billing_subscription.stripe_id,
            return_url: url(~p"/billing")
          }) do
       {:ok, session} ->
