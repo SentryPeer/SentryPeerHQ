@@ -32,7 +32,16 @@ defmodule SentrypeerWeb.PricingController do
     render(conn, :index,
       current_user: get_session(conn, :current_user),
       show_newsletter_subscription: false,
-      page_title: "Pricing"
+      page_title: "Pricing",
+      tester_plan_id: @tester_plan_id,
+      rewarded_ad_plan_id: @rewarded_ad_plan_id,
+      contributor_plan_id: @contributor_plan_id,
+      business_small_plan_id: @business_small_plan_id,
+      business_medium_plan_id: @business_medium_plan_id,
+      business_large_plan_id: @business_large_plan_id,
+      service_provider_small_plan_id: @service_provider_small_plan_id,
+      service_provider_medium_plan_id: @service_provider_medium_plan_id,
+      service_provider_large_plan_id: @service_provider_large_plan_id
     )
   end
 
@@ -46,13 +55,6 @@ defmodule SentrypeerWeb.PricingController do
     conn
     |> put_flash(:error, "Shame you didn't want to commit :-(")
     |> redirect(to: ~p"/pricing")
-  end
-
-  defp get_customer_from_email(email) do
-    # TODO: Handle storing and retrieving customer_id
-    # Is in the format
-    # customer_id = "cus_xxxxxxxxxxxxxx"
-    nil
   end
 
   def new(conn, %{"product" => product}) do

@@ -1,0 +1,133 @@
+<!-- Background color split screen for large screens -->
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white dark:bg-slate-800" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
+</div>
+<div class="relative flex min-h-full flex-col">
+  <%= nav_top_menu(assigns) %>
+  <%= breadcrumbs(assigns) %>
+  <!-- 3 column wrapper -->
+  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+    <!-- Left sidebar & main wrapper -->
+    <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
+      <!-- Account profile -->
+      <div class="bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
+        <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 space-y-8">
+              <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
+                <!-- Profile -->
+                <div class="flex items-center space-x-4">
+                  <div class="h-12 w-12 flex-shrink-0">
+                    <img
+                      class="h-12 w-12 rounded-full"
+                      src={@current_user.avatar}
+                      alt={ @current_user.name <> "'s avatar" }
+                      title={ @current_user.name <> "'s avatar" }
+                    />
+                  </div>
+                  <div class="space-y-1">
+                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
+                      <%= @current_user.name %>
+                    </div>
+                    <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
+                      v<%= @app_version %>
+                      <a
+                        href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Browse this deployed version of SentryPeerHQ"
+                        class="ml-1"
+                      >
+                        <%= @git_rev %>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Action buttons -->
+                <div class="flex flex-col sm:flex-col xl:flex-col">
+                  <.link patch={~p"/nodes/new"}>
+                    <button
+                      type="button"
+                      title="Create a new SentryPeer node"
+                      class="inline-flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
+                    >
+                      <!-- Heroicon name: plus/circle -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="mr-1 h-5 w-5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      New node
+                    </button>
+                  </.link>
+                </div>
+              </div>
+              <!-- Meta info -->
+              <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+                <%= in_app_menu(assigns) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Nodes List -->
+      <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
+        <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
+          <div class="flex items-center">
+            <h1 class="flex-1 text-lg font-medium dark:text-white">Insights</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Activity feed -->
+    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
+      <div class="pl-6 lg:w-80">
+        <div class="pt-6 pb-2">
+          <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
+        </div>
+        <div>
+          <ul role="list" class="divide-y divide-gray-200">
+            <li class="py-4">
+              <div class="flex space-x-3">
+                <img
+                  class="h-6 w-6 rounded-full"
+                  src={@current_user.avatar}
+                  alt={ @current_user.name <> "'s avatar" }
+                  title={ @current_user.name <> "'s avatar" }
+                />
+                <div class="flex-1 space-y-1">
+                  <div class="flex items-center justify-between dark:text-white">
+                    <h3 class="text-sm font-medium">You</h3>
+                    <p class="text-sm text-gray-500">1 hour ago</p>
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-slate-400">
+                    Logged in
+                  </p>
+                </div>
+              </div>
+            </li>
+            <!-- More items... -->
+          </ul>
+          <div class="border-t border-gray-200 py-4 text-sm">
+            <a
+              href="#"
+              title="View all your account activity"
+              class="font-semibold text-indigo-600 hover:text-indigo-900"
+            >
+              View all activity <span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

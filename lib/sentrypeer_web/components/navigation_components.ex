@@ -191,9 +191,6 @@ defmodule SentrypeerWeb.NavigationComponents do
           class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
         />
         <span class="truncate">Analytics</span>
-        <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-          Coming soon
-        </span>
       </.link>
 
       <.link
@@ -207,9 +204,6 @@ defmodule SentrypeerWeb.NavigationComponents do
           class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
         />
         <span class="truncate">Insights</span>
-        <span class="inline-flex items-center rounded-full ml-2 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-          Coming soon
-        </span>
       </.link>
 
       <.link
@@ -566,7 +560,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                 >
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <.link
-                    navigate={~p"/users/profile"}
+                    navigate={~p"/user/profile"}
                     title="View your profile"
                     class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
@@ -577,7 +571,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                     Profile
                   </.link>
                   <.link
-                    navigate={~p"/users/settings"}
+                    navigate={~p"/user/settings"}
                     title="Manage your user settings"
                     class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
                     role="menuitem"
@@ -619,31 +613,34 @@ defmodule SentrypeerWeb.NavigationComponents do
       <!-- Mobile menu, show/hide based on menu state. -->
       <div class="hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pt-2 pb-3">
-          <a
-            href="#"
+          <.link
+            href="https://docs.sentrypeer.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="SentryPeer Documentation"
             class="text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium"
-            aria-current="page"
           >
             Documentation
-          </a>
-          <a
-            href="#"
+          </.link>
+          <.link
+            navigate={~p"/contact"}
+            title="SentryPeer Support"
             class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
           >
             Support
-          </a>
+          </.link>
         </div>
         <div class="border-t border-indigo-800 pt-4 pb-3">
           <div class="space-y-1 px-2">
             <.link
-              navigate={~p"/users/profile"}
+              navigate={~p"/user/profile"}
               title="View your profile"
               class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
             >
               View Profile
             </.link>
             <.link
-              navigate={~p"/users/settings"}
+              navigate={~p"/user/settings"}
               title="Manage your user settings"
               class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
             >

@@ -88,6 +88,9 @@ defmodule SentrypeerWeb.Router do
       live "/settings/:client_id", CustomerSettingsLive.Overview, :overview
       live "/settings/:client_id/edit", CustomerSettingsLive.Index, :edit
       live "/settings/:client_id/delete", CustomerSettingsLive.Index, :delete
+
+      live "/user/profile", UserProfileLive.Index, :index
+      live "/user/settings", UserSettingsLive.Index, :index
     end
   end
 

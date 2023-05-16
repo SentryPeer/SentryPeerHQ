@@ -71,15 +71,16 @@ defmodule SentrypeerWeb.SentrypeerEventController do
     end
   end
 
-  defp find_user_id_by_client_id(client_id) do
-    case Repo.get_by(User, client_id: client_id) do
-      nil ->
-        nil
-
-      user ->
-        user
-    end
-  end
+  # For associating a client to a user, not used yet.
+#  defp find_user_id_by_client_id(client_id) do
+#    case Repo.get_by(User, client_id: client_id) do
+#      nil ->
+#        nil
+#
+#      user ->
+#        user
+#    end
+#  end
 
   defp send_email_alert(user, number_or_ip_address) do
     email = EmailNotification.voip_fraud_email_alert(user, number_or_ip_address)

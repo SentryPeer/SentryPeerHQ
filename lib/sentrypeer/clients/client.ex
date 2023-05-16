@@ -29,7 +29,7 @@ defmodule Sentrypeer.Clients.Client do
       define_field: false
 
     has_many :events, Sentrypeer.SentrypeerEvents.SentrypeerEvent,
-      foreign_key: :id,
+      foreign_key: :client_id,
       references: :client_id
 
     timestamps()

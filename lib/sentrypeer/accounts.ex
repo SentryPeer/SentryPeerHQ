@@ -184,7 +184,7 @@ defmodule Sentrypeer.Accounts do
     Repo.get_by(User, auth_id: auth_id, enabled: true)
   end
 
-  defp create_user_subscription(attrs \\ %{}) do
+  defp create_user_subscription(attrs) do
     Logger.debug("create_user_subscription: #{inspect(attrs)}")
 
     # Check if the user exists on Stripe first
@@ -219,7 +219,7 @@ defmodule Sentrypeer.Accounts do
     end
   end
 
-  defp check_for_existing_billing_subscription(attrs \\ %{}) do
+  defp check_for_existing_billing_subscription(attrs) do
     Logger.debug("check_for_existing_billing_subscription: #{inspect(attrs)}")
 
     case get_user_by_auth_id(attrs.auth_id) do
@@ -242,7 +242,7 @@ defmodule Sentrypeer.Accounts do
     end
   end
 
-  defp create_billing_subscription(attrs \\ %{}, customer_id) do
+  defp create_billing_subscription(attrs, customer_id) do
     case check_for_existing_billing_subscription(attrs) do
       {:ok, _} ->
         Logger.debug("create_billing_subscription: no existing subscription found")
@@ -263,7 +263,7 @@ defmodule Sentrypeer.Accounts do
     end
   end
 
-  defp create_stripe_and_local_subscription(attrs \\ %{}, customer_id) do
+  defp create_stripe_and_local_subscription(attrs, customer_id) do
     Logger.debug("create_stripe_and_local_subscription: #{inspect(attrs)}")
 
     case Stripe.Subscription.create(%{

@@ -11,19 +11,23 @@
 #                             |___/
 #
 
-defmodule SentrypeerWeb.CustomerDashboardLive.Index do
+defmodule SentrypeerWeb.CustomerInsightsLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
 
+  require Logger
+
   @impl true
   def mount(_params, session, socket) do
+    Logger.debug(inspect(session["current_user"].id))
+
     {:ok,
      assign(socket,
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Dashboard"
+       page_title: "Insights"
      )}
   end
 end

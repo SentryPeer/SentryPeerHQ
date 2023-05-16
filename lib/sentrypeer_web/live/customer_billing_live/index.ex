@@ -28,7 +28,6 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
 
     {:ok,
      assign(socket,
-       # .avatar is in there too
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
