@@ -58,66 +58,82 @@
             <h1 class="flex-1 text-lg font-medium dark:text-white">Integrations</h1>
           </div>
         </div>
-        <ul
-          role="list"
-          class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
-        >
-          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
-            <div class="flex flex-1 flex-col p-8">
-              <img
-                class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                alt=""
-              />
-              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">Email</h3>
-              <dl class="mt-1 flex flex-grow flex-col justify-between">
-                <dt class="sr-only">Price</dt>
-                <dd class="mt-3">
-                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    Free
-                  </span>
-                </dd>
-              </dl>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
+          <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
+            <div class="flex-shrink-0">
+              <Heroicons.envelope class="h-10 w-10 dark:text-slate-400" />
             </div>
-          </li>
-          <!-- More integrations... -->
-          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
-            <div class="flex flex-1 flex-col p-8">
-              <img
-                class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                alt=""
-              />
-              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">Slack</h3>
-              <dl class="mt-1 flex flex-grow flex-col justify-between">
-                <dt class="sr-only">Price</dt>
-                <dd class="mt-3">
-                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    Free
-                  </span>
-                </dd>
-              </dl>
+            <div class="min-w-0 flex-1">
+              <a href="#" class="focus:outline-none">
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                <p class="text-sm font-medium text-gray-900 dark:text-white">Email</p>
+                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                  Receive alerts via e-mail
+                </p>
+              </a>
             </div>
-          </li>
-          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
-            <div class="flex flex-1 flex-col p-8">
-              <img
-                class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                alt=""
-              />
-              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">FreePBX</h3>
-              <dl class="mt-1 flex flex-grow flex-col justify-between">
-                <dt class="sr-only">Price</dt>
-                <dd class="mt-3">
-                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    Free
-                  </span>
-                </dd>
-              </dl>
+          </div>
+          <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
+            <div class="flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 mt-0.5 dark:text-slate-400"
+                fill="currentColor"
+                viewBox="0 0 156 156"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M27.255 80.719c0 7.33-5.978 13.317-13.309 13.317C6.616 94.036.63 88.049.63 80.719s5.987-13.317 13.317-13.317h13.309zm6.709 0c0-7.33 5.987-13.317 13.317-13.317s13.317 5.986 13.317 13.317v33.335c0 7.33-5.986 13.317-13.317 13.317-7.33 0-13.317-5.987-13.317-13.317zm0 0"
+                /><path d="M47.281 27.255c-7.33 0-13.317-5.978-13.317-13.309C33.964 6.616 39.951.63 47.281.63s13.317 5.987 13.317 13.317v13.309zm0 6.709c7.33 0 13.317 5.987 13.317 13.317s-5.986 13.317-13.317 13.317H13.946C6.616 60.598.63 54.612.63 47.281c0-7.33 5.987-13.317 13.317-13.317zm0 0" /><path d="M100.745 47.281c0-7.33 5.978-13.317 13.309-13.317 7.33 0 13.317 5.987 13.317 13.317s-5.987 13.317-13.317 13.317h-13.309zm-6.709 0c0 7.33-5.987 13.317-13.317 13.317s-13.317-5.986-13.317-13.317V13.946C67.402 6.616 73.388.63 80.719.63c7.33 0 13.317 5.987 13.317 13.317zm0 0" /><path
+                  d="M80.719 100.745c7.33 0 13.317 5.978 13.317 13.309 0 7.33-5.987 13.317-13.317 13.317s-13.317-5.987-13.317-13.317v-13.309zm0-6.709c-7.33 0-13.317-5.987-13.317-13.317s5.986-13.317 13.317-13.317h33.335c7.33 0 13.317 5.986 13.317 13.317 0 7.33-5.987 13.317-13.317 13.317zm0 0"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </div>
-          </li>
-        </ul>
+            <div class="min-w-0 flex-1">
+              <a href="#" class="focus:outline-none">
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                <p class="text-sm font-medium text-gray-900 dark:text-white">Slack</p>
+                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                  Receive alerts via Slack
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
+            <div class="flex-shrink-0">
+              <Heroicons.phone class="h-10 w-10 text-green-400 dark:text-slate-400" />
+            </div>
+            <div class="min-w-0 flex-1">
+              <a href="#" title="Read more about our official module" class="focus:outline-none">
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                <p class="text-sm font-medium text-gray-900 dark:text-white">FreePBX</p>
+                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                  Read more about our official module
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
+            <div class="flex-shrink-0">
+              <Heroicons.cloud_arrow_up class="h-10 w-10 dark:text-slate-400" />
+            </div>
+            <div class="min-w-0 flex-1">
+              <a
+                href="#"
+                title="Receive alerts via a SentryPeer WebHook"
+                class="focus:outline-none"
+              >
+                <span class="absolute inset-0" aria-hidden="true"></span>
+                <p class="text-sm font-medium text-gray-900 dark:text-white">WebHooks</p>
+                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                  Receive alerts via a SentryPeer WebHook
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Help -->
