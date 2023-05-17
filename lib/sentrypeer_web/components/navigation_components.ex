@@ -54,6 +54,54 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
+        <%= if (@active_page == :analytics ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/analytics"}
+                title="SentryPeer Analytics"
+                class={"#{if @active_page == :analytics,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Analytics
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if (@active_page == :insights ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/insights"}
+                title="SentryPeer Insights"
+                class={"#{if @active_page == :insights,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Insights
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
         <%= if (@active_page == :nodes || @active_page == :node_overview ) do %>
           <li class="flex">
             <div class="flex items-center">
@@ -125,6 +173,54 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
+        <%= if (@active_page == :team ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/team"}
+                title="SentryPeer Team"
+                class={"#{if @active_page == :team,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Team
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if (@active_page == :integrations ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/integrations"}
+                title="SentryPeer Integrations"
+                class={"#{if @active_page == :integrations,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                Integrations
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
         <%= if (@active_page == :settings || @active_page == :settings_overview ) do %>
           <li class="flex">
             <div class="flex items-center">
@@ -171,6 +267,54 @@ defmodule SentrypeerWeb.NavigationComponents do
             </div>
           </li>
         <% end %>
+
+        <%= if (@active_page == :user_profile ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/user/profile"}
+                title="User Settings"
+                class={"#{if @active_page == :user_profile,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                User Profile
+              </.link>
+            </div>
+          </li>
+        <% end %>
+
+        <%= if (@active_page == :user_settings ) do %>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <.link
+                navigate={~p"/user/settings"}
+                title="User Settings"
+                class={"#{if @active_page == :user_settings,
+                do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
+              >
+                User Settings
+              </.link>
+            </div>
+          </li>
+        <% end %>
       </ol>
     </nav>
     """
@@ -188,7 +332,8 @@ defmodule SentrypeerWeb.NavigationComponents do
       >
         <Heroicons.chart_pie
           outline
-          class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          class={"#{if (@active_page == :analytics ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
         />
         <span class="truncate">Analytics</span>
       </.link>
@@ -201,7 +346,8 @@ defmodule SentrypeerWeb.NavigationComponents do
       >
         <Heroicons.sparkles
           outline
-          class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          class={"#{if (@active_page == :insights ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
         />
         <span class="truncate">Insights</span>
       </.link>
@@ -261,7 +407,8 @@ defmodule SentrypeerWeb.NavigationComponents do
         title="Add users to your account"
       >
         <svg
-          class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          class={"#{if (@active_page == :team ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
@@ -287,7 +434,8 @@ defmodule SentrypeerWeb.NavigationComponents do
         title="Why not have a browse of our Integrations?"
       >
         <svg
-          class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+          class={"#{if (@active_page == :integrations ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"

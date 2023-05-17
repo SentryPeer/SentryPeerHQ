@@ -64,6 +64,12 @@ defmodule SentrypeerWeb.ActiveNav do
         {SentrypeerWeb.CustomerSettingsLive.Overview, _} ->
           :settings_overview
 
+        {SentrypeerWeb.UserProfileLive.Index, _} ->
+          :user_profile
+
+        {SentrypeerWeb.UserSettingsLive.Index, _} ->
+          :user_settings
+
         {_, _} ->
           nil
       end

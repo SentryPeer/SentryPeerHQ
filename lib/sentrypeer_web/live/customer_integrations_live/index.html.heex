@@ -43,33 +43,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- Action buttons -->
-                <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <.link patch={~p"/nodes/new"}>
-                    <button
-                      type="button"
-                      title="Create a new SentryPeer node"
-                      class="inline-flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full"
-                    >
-                      <!-- Heroicon name: plus/circle -->
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="mr-1 h-5 w-5"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      New node
-                    </button>
-                  </.link>
-                </div>
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
@@ -79,52 +52,90 @@
           </div>
         </div>
       </div>
-      <!-- Nodes List -->
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
             <h1 class="flex-1 text-lg font-medium dark:text-white">Integrations</h1>
           </div>
         </div>
+        <ul
+          role="list"
+          class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        >
+          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
+            <div class="flex flex-1 flex-col p-8">
+              <img
+                class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                alt=""
+              />
+              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">Email</h3>
+              <dl class="mt-1 flex flex-grow flex-col justify-between">
+                <dt class="sr-only">Price</dt>
+                <dd class="mt-3">
+                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    Free
+                  </span>
+                </dd>
+              </dl>
+            </div>
+          </li>
+          <!-- More integrations... -->
+          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
+            <div class="flex flex-1 flex-col p-8">
+              <img
+                      class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                      alt=""
+              />
+              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">Slack</h3>
+              <dl class="mt-1 flex flex-grow flex-col justify-between">
+                <dt class="sr-only">Price</dt>
+                <dd class="mt-3">
+                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    Free
+                  </span>
+                </dd>
+              </dl>
+            </div>
+          </li>
+          <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-slate-600 text-center shadow">
+            <div class="flex flex-1 flex-col p-8">
+              <img
+                      class="mx-auto h-24 w-24 flex-shrink-0 rounded-full"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                      alt=""
+              />
+              <h3 class="mt-6 text-sm font-medium text-gray-900 dark:text-white">FreePBX</h3>
+              <dl class="mt-1 flex flex-grow flex-col justify-between">
+                <dt class="sr-only">Price</dt>
+                <dd class="mt-3">
+                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    Free
+                  </span>
+                </dd>
+              </dl>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-    <!-- Activity feed -->
-    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-      <div class="pl-6 lg:w-80">
-        <div class="pt-6 pb-2">
-          <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
-        </div>
-        <div>
-          <ul role="list" class="divide-y divide-gray-200">
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-6 w-6 rounded-full"
-                  src={@current_user.avatar}
-                  alt={ @current_user.name <> "'s avatar" }
-                  title={ @current_user.name <> "'s avatar" }
-                />
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between dark:text-white">
-                    <h3 class="text-sm font-medium">You</h3>
-                    <p class="text-sm text-gray-500">1 hour ago</p>
-                  </div>
-                  <p class="text-sm text-gray-500 dark:text-slate-400">
-                    Logged in
-                  </p>
-                </div>
-              </div>
-            </li>
-            <!-- More items... -->
-          </ul>
-          <div class="border-t border-gray-200 py-4 text-sm">
-            <a
-              href="#"
-              title="View all your account activity"
-              class="font-semibold text-indigo-600 hover:text-indigo-900"
-            >
-              View all activity <span aria-hidden="true"> &rarr;</span>
-            </a>
+    <!-- Help -->
+    <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-6 xl:pr-0">
+      <div class="grid grid-cols-1 gap-6 justify-between space-x-6 p-6 pl-6 pt-6 lg:w-80">
+        <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              New Integration
+            </h3>
+            <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
+              <p>
+                Got a new integration you'd like to see?
+                <.link patch={~p"/contact"} class="text-indigo-600 hover:text-brand">
+                  Let us know!
+                </.link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
