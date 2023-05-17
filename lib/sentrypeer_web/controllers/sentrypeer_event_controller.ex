@@ -82,8 +82,8 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   #    end
   #  end
 
-  defp send_email_alert(user, number_or_ip_address) do
-    email = EmailNotification.voip_fraud_email_alert(user, number_or_ip_address)
-    Mailer.deliver(email)
-  end
+  #  defp send_email_alert(user, number_or_ip_address) do
+  #    email = EmailNotification.voip_fraud_email_alert(user, number_or_ip_address)
+  #    Mailer.deliver(email)
+  #  end
 end
