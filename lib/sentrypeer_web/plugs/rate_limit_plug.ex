@@ -65,7 +65,11 @@ defmodule SentrypeerWeb.RateLimitPlug do
 
   # Bucket name should be a combination of IP address and request path.
   defp bucket_name(conn) do
-    path = Enum.join(conn.path_info, "/")
+    # /api/ip-addresses
+    # /api/events
+    # /api/phone-numbers etc.
+    path = Enum.slice(conn.path_info, 0, 2) |> Enum.join("/")
+    Logger.debug("Rate Limit path: #{path}")
 
     case get_req_header(conn, "fly-client-ip") do
       [] ->

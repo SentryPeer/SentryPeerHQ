@@ -45,10 +45,31 @@ defmodule SentrypeerWeb.PricingController do
     )
   end
 
-  def success(conn, _params) do
-    conn
-    |> put_flash(:info, "Thanks for becoming a SentryPeer customer!")
-    |> redirect(to: ~p"/pricing")
+  def success(conn, %{"stripe_session_id" => stripe_session_id}) do
+    case Stripe.Session.retrieve(stripe_session_id) do
+      {:ok, session} ->
+        {:ok, customer} = Stripe.Customer.retrieve(session.customer)
+        Logger.debug(inspect(session))
+        Logger.debug(inspect(customer))
+        #
+        #        subscription = List.first(customer.subscriptions.data)
+        #        subscription_item = List.first(subscription.items.data)
+        #        Logger.debug(inspect(customer))
+        #        Logger.debug(inspect(subscription))
+        #        Logger.debug(inspect(subscription_item))
+
+        # Redirect to remove the "stripe_session_id" from the URL.
+        conn
+        |> put_flash(:info, "Thanks for becoming a SentryPeer customer #{customer.name}!")
+        |> redirect(to: ~p"/pricing")
+
+      {:error, error} ->
+        Logger.error(inspect(error))
+
+        conn
+        |> put_flash(:info, "Thanks for becoming a SentryPeer customer!")
+        |> redirect(to: ~p"/pricing")
+    end
   end
 
   def cancel(conn, _params) do
@@ -61,12 +82,13 @@ defmodule SentrypeerWeb.PricingController do
     # Or if it is a recurring customer, you can provide customer_id
     # get_customer_from_email(email)
     customer_id = nil
-    # Get this from the Stripe dashboard for your product
     price_id = product
     quantity = 1
+    success_url = url(~p"/pricing/new/success")
 
+    # https://stripe.com/docs/api/checkout/sessions/create
     session_config = %{
-      success_url: url(~p"/pricing/new/success"),
+      success_url: success_url <> "?stripe_session_id={CHECKOUT_SESSION_ID}",
       cancel_url: url(~p"/pricing/new/cancel"),
       mode: "subscription",
       line_items: [
