@@ -120,9 +120,9 @@ defmodule SentrypeerWeb.HomePageComponents do
             <.link
               navigate={~p"/about"}
               class="text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900"
-              title="Learn about the company behind SentryPeer"
+              title="Learn about SentryPeer"
             >
-              Company
+              About
             </.link>
           </nav>
           <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
@@ -265,9 +265,9 @@ defmodule SentrypeerWeb.HomePageComponents do
                 <.link
                   navigate={~p"/about"}
                   class="text-base font-medium text-gray-900 hover:text-gray-700"
-                  title="Learn about the company behind SentryPeer"
+                  title="Learn about SentryPeer"
                 >
-                  Company
+                  About
                 </.link>
               </div>
               <%= if @current_user do %>
@@ -440,7 +440,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                     <.link
                       navigate={~p"/about"}
                       class="text-base text-gray-500 dark:text-black hover:text-gray-900"
-                      title="Learn about the company behind SentryPeer"
+                      title="Learn about SentryPeer"
                     >
                       About
                     </.link>
