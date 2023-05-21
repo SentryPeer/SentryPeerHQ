@@ -5,16 +5,65 @@
     <div class="mx-auto dark:bg-slate-400 max-w-7xl px-6 py-14 sm:py-22 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
         <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:col-span-2 xl:col-auto">
-          We’re a passionate group of people working from around the world to build the future of ecommerce.
+          We're trying to stop fraudulent VoIP (toll fraud) before it happens.
         </h1>
         <div class="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-          <p class="text-lg leading-8 text-gray-600 dark:text-slate-800">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+          <p class="mt-6 text-gray-700 dark:text-slate-800 ">
+            SentryPeer works by you sending us an API call for each phone call (or IP address) you want to check. We then send you back a response with the results of our analysis. You can then use this information to block the phone call, or take other action.
+          </p>
+          <blockquote class="mt-6 text-xl italic leading-8 text-gray-700 dark:text-slate-800">
+            <p>
+              “After 11 years of building and scaling SureVoIP, an awarding winning Internet Telephone Service Provider, it was <a
+                href="https://telcoswitch.com/press-release-telcoswitch-acquires-surevoip-to-enhance-sme-presence-and-network-capabilities/"
+                title="TelcoSwitch acquires SureVoIP to enhance SME presence and network capabilities"
+                class="text-indigo-600 hover:text-brand"
+                target="_blank"
+                rel="noopener noreferrer"
+              >acquired from me in July 2021</a>. I then created SentryPeer in an attempt to address the need of having an early warning system for VoIP fraud. I hope you find it useful.”
+            </p>
+          </blockquote>
+          <figcaption class="mt-4 mb-12 flex gap-x-4">
+            <img
+              src="https://pbs.twimg.com/profile_images/1566092118086516736/CAbU48Qt_400x400.jpg"
+              alt="Gavin Henry on Twitter"
+              title="Gavin Henry on Twitter"
+              class="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
+            />
+            <div class="text-sm leading-6">
+              <div class="font-semibold text-gray-900">Gavin Henry</div>
+              <div class="text-gray-600">
+                <a
+                  href="https://twitter.com/ghenry"
+                  title="Gavin Henry on Twitter"
+                  class="text-indigo-600 hover:text-brand"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @ghenry
+                </a>
+              </div>
+            </div>
+          </figcaption>
+          <p class="mt-6 text-gray-700 dark:text-slate-800 ">
+            The data we compare your queries against is gathered from various VoIP (SIP) honeypots all round the world (that we run) and by those that contribute events by running their own nodes (rated as 3rd party).
+          </p>
+          <p class="mt-6 mb-6 text-gray-700 dark:text-slate-800 ">
+            We do our
+            <a
+              href="https://github.com/SentryPeer"
+              title="SentryPeer on GitHub"
+              class="text-indigo-600 hover:text-brand"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              software engineering in the open.
+            </a>
           </p>
         </div>
         <img
           src={~p"/images/Gavin-Henry-SentryPeer-Founder.jpg"}
           alt="Gavin Henry, SentryPeer Founder."
+          title="Gavin Henry, SentryPeer Founder."
           class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
         />
       </div>
@@ -25,7 +74,7 @@
     <div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">
       <div>
         <time
-          datetime="2021-08"
+          datetime="2021-10"
           class="flex items-center text-sm font-semibold leading-6 text-indigo-600"
         >
           <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
@@ -42,7 +91,17 @@
           SentryPeer Project Launched
         </p>
         <p class="mt-1 text-base leading-7 text-gray-600 dark:text-slate-800">
-          Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.
+          The
+          <a
+            href="https://github.com/SentryPeer/SentryPeer#introduction"
+            title="SentryPeer introduction"
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            idea came about
+          </a>
+          because I wanted to create the smallest possible SIP honeypot that could be run standalone and have its own local database and web APIs. I also wanted it to share that data with other SentryPeer peers.
         </p>
       </div>
       <div>
@@ -64,12 +123,30 @@
           Beta Released
         </p>
         <p class="mt-1 text-base leading-7 text-gray-600 dark:text-slate-800">
-          Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.
+          <a
+            href="https://www.se-radio.net/2020/06/episode-414-jens-gustedt-on-modern-c/"
+            title="Why C in 2021 and onwards?"
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Written in C
+          </a>
+          and having no low level network stack experience, it took a while. I was very surprised how quickly the first SIP probe came in, which I speak about in
+          <a
+            href="https://github.com/SentryPeer/SentryPeer#talks"
+            title="Various talks about SentryPeer from Gavin Henry."
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            many of my talks.
+          </a>
         </p>
       </div>
       <div>
         <time
-          datetime="2022-02"
+          datetime="2022-03"
           class="flex items-center text-sm font-semibold leading-6 text-indigo-600"
         >
           <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
@@ -86,12 +163,21 @@
           Adopted by many users
         </p>
         <p class="mt-1 text-base leading-7 text-gray-600 dark:text-slate-800">
-          Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.
+          Sometimes, well a lot of the time, you have to make things happen yourself. That includes packaging it up, contacting all the different people that you might think would benefit from using it and doing presentations about it to
+          <a
+            href="https://github.com/SentryPeer/SentryPeer#adoption"
+            title="Adoption of SentryPeer."
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            stir up interest.
+          </a>
         </p>
       </div>
       <div>
         <time
-          datetime="2022-12"
+          datetime="2023-05"
           class="flex items-center text-sm font-semibold leading-6 text-indigo-600"
         >
           <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
@@ -105,10 +191,36 @@
           </div>
         </time>
         <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">
-          Launch of SentryPeer HQ
+          Launch of SentryPeerHQ
         </p>
         <p class="mt-1 text-base leading-7 text-gray-600 dark:text-slate-800">
-          Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.
+          The past year or so from March 2022 was spent maturing SentryPeer and thinking about how to make things easier for users. I decided that the option of a centralised service would help those that didn't want to run things themselves. I also wanted to keep that service free for users that wanted to contribute and consume their own data. Started in November 2022 during my free evenings and weekends, 6 months later, SentryPeerHQ was born. It's powered by the
+          <a
+            href="https://www.phoenixframework.org/"
+            title="Phoenix runs on the Erlang VM with the ability to handle millions of WebSocket connections. "
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Phoenix Framework
+          </a>
+          and
+          <a
+            href="https://elixir-lang.org/"
+            title="Elixir is a dynamic, functional language for building scalable and maintainable applications."
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Elixir
+          </a>
+          for the best reliability and scalability, and is also <a
+            href="https://github.com/SentryPeer/SentryPeerHQ"
+            title="Use SentryPeer® HQ to help prevent VoIP cyberattacks and fraudulent VoIP phone calls (toll fraud) at https://sentrypeer.com"
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >open source</a>.
         </p>
       </div>
     </div>
@@ -119,10 +231,10 @@
       <div class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
         <div class="mx-auto w-full max-w-xl lg:mx-0">
           <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-            Trusted by the most innovative teams
+            Trusted by many users
           </h2>
           <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-800">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.
+            We're just getting started, so this section will be expanded over time once we get permission to mention our users.
           </p>
           <div class="mt-8 flex items-center gap-x-6">
             <a
