@@ -22,6 +22,42 @@ defmodule Sentrypeer.BillingHelpers do
 
   """
 
+  def tester_plan_id do
+    System.get_env("STRIPE_TESTER_PLAN_ID")
+  end
+
+  def rewarded_ad_plan_id do
+    System.get_env("STRIPE_REWARDED_AD_PLAN_ID")
+  end
+
+  def contributor_plan_id do
+    System.get_env("STRIPE_CONTRIBUTOR_PLAN_ID")
+  end
+
+  def business_small_plan_id do
+    System.get_env("STRIPE_BUSINESS_SMALL_PLAN_ID")
+  end
+
+  def business_medium_plan_id do
+    System.get_env("STRIPE_BUSINESS_MEDIUM_PLAN_ID")
+  end
+
+  def business_large_plan_id do
+    System.get_env("STRIPE_BUSINESS_LARGE_PLAN_ID")
+  end
+
+  def service_provider_small_plan_id do
+    System.get_env("STRIPE_SERVICE_PROVIDER_SMALL_PLAN_ID")
+  end
+
+  def service_provider_medium_plan_id do
+    System.get_env("STRIPE_SERVICE_PROVIDER_MEDIUM_PLAN_ID")
+  end
+
+  def service_provider_large_plan_id do
+    System.get_env("STRIPE_SERVICE_PROVIDER_LARGE_PLAN_ID")
+  end
+
   def first_of_next_month_unix do
     today = Date.utc_today()
 

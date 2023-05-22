@@ -15,6 +15,7 @@ defmodule SentrypeerWeb.PricingHTML do
   use SentrypeerWeb, :html
 
   import SentrypeerWeb.HomePageComponents
+  import Sentrypeer.BillingHelpers
 
   embed_templates "pricing_html/*"
 end

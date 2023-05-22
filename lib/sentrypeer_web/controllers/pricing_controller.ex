@@ -17,31 +17,12 @@ defmodule SentrypeerWeb.PricingController do
   alias Sentrypeer.BillingHelpers
   require Logger
 
-  @tester_plan_id System.get_env("STRIPE_TESTER_PLAN_ID")
-  @rewarded_ad_plan_id System.get_env("STRIPE_REWARDED_AD_PLAN_ID")
-  @contributor_plan_id System.get_env("STRIPE_CONTRIBUTOR_PLAN_ID")
-  @business_small_plan_id System.get_env("STRIPE_BUSINESS_SMALL_PLAN_ID")
-  @business_medium_plan_id System.get_env("STRIPE_BUSINESS_MEDIUM_PLAN_ID")
-  @business_large_plan_id System.get_env("STRIPE_BUSINESS_LARGE_PLAN_ID")
-  @service_provider_small_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_SMALL_PLAN_ID")
-  @service_provider_medium_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_MEDIUM_PLAN_ID")
-  @service_provider_large_plan_id System.get_env("STRIPE_SERVICE_PROVIDER_LARGE_PLAN_ID")
-
   # Top Nav
   def index(conn, _params) do
     render(conn, :index,
       current_user: get_session(conn, :current_user),
       show_newsletter_subscription: false,
-      page_title: "Pricing",
-      tester_plan_id: @tester_plan_id,
-      rewarded_ad_plan_id: @rewarded_ad_plan_id,
-      contributor_plan_id: @contributor_plan_id,
-      business_small_plan_id: @business_small_plan_id,
-      business_medium_plan_id: @business_medium_plan_id,
-      business_large_plan_id: @business_large_plan_id,
-      service_provider_small_plan_id: @service_provider_small_plan_id,
-      service_provider_medium_plan_id: @service_provider_medium_plan_id,
-      service_provider_large_plan_id: @service_provider_large_plan_id
+      page_title: "Pricing"
     )
   end
 

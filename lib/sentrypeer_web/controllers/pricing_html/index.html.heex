@@ -39,7 +39,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@tester_plan_id} />
+          <input type="hidden" name="product" value={tester_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -259,7 +259,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@contributor_plan_id} />
+          <input type="hidden" name="product" value={contributor_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -394,7 +394,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@business_small_plan_id} />
+          <input type="hidden" name="product" value={business_small_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -492,7 +492,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@business_medium_plan_id} />
+          <input type="hidden" name="product" value={business_medium_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -604,7 +604,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@business_large_plan_id} />
+          <input type="hidden" name="product" value={business_large_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -742,7 +742,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@service_provider_small_plan_id} />
+          <input type="hidden" name="product" value={service_provider_small_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -867,7 +867,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@service_provider_medium_plan_id} />
+          <input type="hidden" name="product" value={service_provider_medium_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
@@ -1007,7 +1007,7 @@
           </span>
         </p>
         <form method="post" action={~p"/pricing/new"} phx-submit="subscribe">
-          <input type="hidden" name="product" value={@service_provider_large_plan_id} />
+          <input type="hidden" name="product" value={service_provider_large_plan_id()} />
           <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
           <button
             phx-disable-with="Subscribing..."
