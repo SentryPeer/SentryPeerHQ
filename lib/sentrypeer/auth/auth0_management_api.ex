@@ -16,6 +16,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   use HTTPoison.Base
 
   alias Sentrypeer.CustomerClients.Client
+  alias Sentrypeer.Auth.Permissions
 
   require Logger
 
@@ -218,16 +219,25 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  def create_client_grant(client_id) do
+  def create_client_grant(client_id, client_type) do
     with {:ok, access_token} <- get_auth_token() do
       Logger.debug("Creating client grant for client #{client_id}")
 
-      HTTPoison.post!(
-        auth0_management_url() <> "client-grants",
-        create_client_grant_json(client_id),
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.post(
+             auth0_management_url() <> "client-grants",
+             create_client_grant_json(client_id, client_type),
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
+          {:ok, body}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
     end
   end
 
@@ -360,13 +370,25 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     })
   end
 
-  defp create_client_grant_json(client_id) do
+  defp create_client_grant_json(client_id, client_type) do
     Jason.encode!(%{
       "client_id" => client_id,
       "audience" => Auth0Config.auth0_audience(),
-      # empty array means all scopes, but we'll add some read/write scopes later
-      "scope" => []
+      "scope" => scopes(client_type)
     })
+  end
+
+  defp scopes(client_type) do
+    case client_type do
+      "api_client" ->
+        [Permissions.read_phone_numbers_perm(), Permissions.read_ip_addresses_perm()]
+
+      "node_client" ->
+        [Permissions.write_events_perm()]
+
+      _ ->
+        []
+    end
   end
 
   defp auth0_management_url do

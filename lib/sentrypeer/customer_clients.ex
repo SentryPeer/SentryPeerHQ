@@ -50,8 +50,13 @@ defmodule Sentrypeer.CustomerClients do
           {:ok, client} = Jason.decode(body)
           Logger.debug("Saving client user association: #{inspect(client)}")
 
-          # Add another case?
-          Auth0ManagementAPI.create_client_grant(client["client_id"])
+          case Auth0ManagementAPI.create_client_grant(client["client_id"], client_type) do
+            {:ok, _body} ->
+              Logger.debug("Saved client grant")
+
+            {:error, error} ->
+              {:error, error}
+          end
 
           Clients.create_client(%{
             client_id: client["client_id"],

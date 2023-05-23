@@ -20,8 +20,8 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  alias Sentrypeer.Emails.EmailNotification
-  alias Sentrypeer.Mailer
+  #  alias Sentrypeer.Emails.EmailNotification
+  #  alias Sentrypeer.Mailer
 
   action_fallback SentrypeerWeb.FallbackController
 

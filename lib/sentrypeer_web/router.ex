@@ -14,6 +14,8 @@
 defmodule SentrypeerWeb.Router do
   use SentrypeerWeb, :router
 
+  alias Sentrypeer.Auth.Permissions
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -34,6 +36,18 @@ defmodule SentrypeerWeb.Router do
 
   pipeline :api_authorization do
     plug Sentrypeer.Auth.Authorize
+  end
+
+  pipeline :api_permission_write_events do
+    plug Sentrypeer.Auth.ValidatePermission, Permissions.write_events()
+  end
+
+  pipeline :api_permission_read_phone_numbers do
+    plug Sentrypeer.Auth.ValidatePermission, Permissions.read_phone_numbers()
+  end
+
+  pipeline :api_permission_read_ip_addresses do
+    plug Sentrypeer.Auth.ValidatePermission, Permissions.read_ip_addresses()
   end
 
   pipeline :rate_limit_per_hour do
@@ -144,10 +158,29 @@ defmodule SentrypeerWeb.Router do
   end
 
   scope "/api", SentrypeerWeb do
-    pipe_through [:rate_limit_per_hour, :api, :api_authorization]
-
+    pipe_through [:rate_limit_per_hour, :api, :api_authorization, :api_permission_write_events]
     resources "/events", SentrypeerEventController, only: [:create]
+  end
+
+  scope "/api", SentrypeerWeb do
+    pipe_through [
+      :rate_limit_per_hour,
+      :api,
+      :api_authorization,
+      :api_permission_read_phone_numbers
+    ]
+
     get "/phone-numbers/:phone_number", SentrypeerEventController, :check_phone_number
+  end
+
+  scope "/api", SentrypeerWeb do
+    pipe_through [
+      :rate_limit_per_hour,
+      :api,
+      :api_authorization,
+      :api_permission_read_ip_addresses
+    ]
+
     get "/ip-addresses/:ip_address", SentrypeerEventController, :check_ip_address
   end
 
