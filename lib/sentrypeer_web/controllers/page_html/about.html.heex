@@ -7,65 +7,110 @@
         <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:col-span-2 xl:col-auto">
           We're trying to stop fraudulent VoIP (toll fraud) before it happens.
         </h1>
-        <div class="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-          <p class="mt-6 text-gray-700 dark:text-slate-800 ">
-            SentryPeer works by you sending us an API call for each phone call (or IP address) you want to check. We then send you back a response with the results of our analysis. You can then use this information to block the phone call, or take other action.
-          </p>
-          <blockquote class="mt-6 text-xl italic leading-8 text-gray-700 dark:text-slate-800">
-            <p>
-              “After 11 years of building and scaling SureVoIP, an awarding winning Internet Telephone Service Provider, it was <a
-                href="https://telcoswitch.com/press-release-telcoswitch-acquires-surevoip-to-enhance-sme-presence-and-network-capabilities/"
-                title="TelcoSwitch acquires SureVoIP to enhance SME presence and network capabilities"
-                class="text-indigo-600 hover:text-brand"
-                target="_blank"
-                rel="noopener noreferrer"
-              >acquired from me in July 2021</a>. I then created SentryPeer in an attempt to address the need of having an early warning system for VoIP fraud. I hope you find it useful.”
+
+        <div class="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
+          <div>
+            <h2 class="mt-6 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+              What is SentryPeer?
+            </h2>
+            <p class="mt-6 text-gray-700 dark:text-slate-800">
+              SentryPeer is designed to help detect compromised VoIP accounts. These credentials could be gathered from desk phones, softphones, PBXs and WebRTC services for example. It works by your system always sending us an API call for each phone call (or IP address) you want to check. We then send you back a response with the results of our analysis. You can use this information to block the phone call, or take other action.
             </p>
-          </blockquote>
-          <figcaption class="mt-4 mb-12 flex gap-x-4">
+            <p class="mt-6 text-gray-700 dark:text-slate-800">
+              Let's say you are running your own VoIP PBX on site. What SentryPeer will allow you to do in this context, is dip into the list of phone numbers (using the RESTful API) when your users are making outbound calls. If you get a hit, you'll get a heads-up that potentially a device within your network is trying to call known probing phone numbers that have either been:
+            </p>
+            <ol class="mt-6 text-gray-700 dark:text-slate-800 list-decimal list-inside">
+              <li class="mt-2 leading-7">
+                Numbers collected by SentryPeer nodes you are running yourself
+              </li>
+              <li class="mt-2 leading-7">
+                Numbers seen by the SentryPeer nodes we run, depending on your subscription level
+              </li>
+            </ol>
+            <p class="mt-6 text-gray-700 dark:text-slate-800">
+              We would then notify you or block the call using our various integrations, so you don't rack up any expensive calls or something worse happens.
+            </p>
+            <h2 class="mt-6 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+              What scenarios lead to VoIP fraud?
+            </h2>
+            <ol class="mt-6 text-gray-700 dark:text-slate-800 list-decimal list-inside">
+              <li class="mt-2 leading-7">
+                Potential voicemail vulnerabilities. This can happen if you allow calling an inbound number (your DID/DDI) to get to your voicemail system, then prompt for a PIN. This PIN is weak and the voicemail system allows you to press '*' to call back the Caller ID that left a voicemail. The attacker has left a voicemail, and they then guess your PIN and call it back. The CLI might be a known number that SentryPeer has seen, which we can send you an alert for.
+              </li>
+              <li class="mt-2 leading-7">
+                A device has been hijacked and/or a softphone or similar is using the credentials they stole off the phone's GUI and is now registered to your system and trying to make calls to a number seen by SentryPeer.
+              </li>
+              <li class="mt-2 leading-7">
+                An innocent user is calling a phishing number or known expensive number etc. that SentryPeer has seen before.
+              </li>
+            </ol>
+          </div>
+          <div>
             <img
-              src="https://pbs.twimg.com/profile_images/1566092118086516736/CAbU48Qt_400x400.jpg"
-              alt="Gavin Henry on Twitter"
-              title="Gavin Henry on Twitter"
-              class="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
+              src={~p"/images/Gavin-Henry-SentryPeer-Founder.jpg"}
+              alt="Gavin Henry, SentryPeer Founder."
+              title="Gavin Henry, SentryPeer Founder."
+              class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-6"
             />
-            <div class="text-sm leading-6">
-              <div class="font-semibold text-gray-900">Gavin Henry</div>
-              <div class="text-gray-600">
-                <a
-                  href="https://twitter.com/ghenry"
-                  title="Gavin Henry on Twitter"
+            <blockquote class="mt-6 text-xl italic leading-8 text-gray-700 dark:text-slate-800">
+              <p>
+                “After 11 years of building and scaling SureVoIP, an awarding winning Internet Telephone Service Provider, it was <a
+                  href="https://telcoswitch.com/press-release-telcoswitch-acquires-surevoip-to-enhance-sme-presence-and-network-capabilities/"
+                  title="TelcoSwitch acquires SureVoIP to enhance SME presence and network capabilities"
                   class="text-indigo-600 hover:text-brand"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  @ghenry
-                </a>
+                >acquired from me in July 2021</a>. I then created SentryPeer in an attempt to address the need of having an early warning system for VoIP fraud. I hope you find it useful and help us tackle this.”
+              </p>
+            </blockquote>
+            <figcaption class="mt-4 mb-12 flex gap-x-4">
+              <img
+                src="https://pbs.twimg.com/profile_images/1566092118086516736/CAbU48Qt_400x400.jpg"
+                alt="Gavin Henry on Twitter"
+                title="Gavin Henry on Twitter"
+                class="mt-1 h-10 w-10 flex-none rounded-full bg-gray-50"
+              />
+              <div class="text-sm leading-6">
+                <div class="font-semibold text-gray-900">Gavin Henry</div>
+                <div class="text-gray-600">
+                  <a
+                    href="https://twitter.com/ghenry"
+                    title="Gavin Henry on Twitter"
+                    class="text-indigo-600 hover:text-brand"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    @ghenry
+                  </a>
+                </div>
               </div>
-            </div>
-          </figcaption>
-          <p class="mt-6 text-gray-700 dark:text-slate-800 ">
-            The data we compare your queries against is gathered from various VoIP (SIP) honeypots all round the world (that we run) and by those that contribute events by running their own nodes (rated as 3rd party).
-          </p>
-          <p class="mt-6 mb-6 text-gray-700 dark:text-slate-800 ">
-            We do our
-            <a
-              href="https://github.com/SentryPeer"
-              title="SentryPeer on GitHub"
-              class="text-indigo-600 hover:text-brand"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              software engineering in the open.
-            </a>
-          </p>
+            </figcaption>
+          </div>
         </div>
-        <img
-          src={~p"/images/Gavin-Henry-SentryPeer-Founder.jpg"}
-          alt="Gavin Henry, SentryPeer Founder."
-          title="Gavin Henry, SentryPeer Founder."
-          class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
-        />
+
+        <p class="mt-6 text-gray-700 dark:text-slate-800 ">
+          The data we compare your queries against is gathered from various VoIP (SIP) honeypots that we run, all round the world, unless you are on the
+          <a
+            href={~p"/pricing"}
+            title="SentryPeer Pricing"
+            class="text-indigo-600 hover:text-brand"
+          >
+            Contributor Plan.
+          </a>
+        </p>
+        <p class="mb-6 text-gray-700 dark:text-slate-800 ">
+          We do our
+          <a
+            href="https://github.com/SentryPeer"
+            title="SentryPeer on GitHub"
+            class="text-indigo-600 hover:text-brand"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            software engineering in the open.
+          </a>
+          Why not help us?
+        </p>
       </div>
     </div>
   </div>
