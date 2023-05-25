@@ -22,9 +22,9 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Live queries
             </h3>
-            <%= if @phone_numbers == [] do %>
+            <%= if @api_queries == [] do %>
               <p class="text-sm text-gray-500 dark:text-slate-400">
-                No phone numbers have been queried yet.
+                No queries have been seen in the last 30 minutes.
               </p>
             <% else %>
               <div
@@ -33,9 +33,9 @@
                 class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
               >
                 <div id="api-logger-realtime">
-                  <%= for phone_number <- @phone_numbers do %>
+                  <%= for api_query <- @api_queries do %>
                     <p id={"log-#{System.unique_integer()}"}>
-                      <%= phone_number %>
+                      <%= api_query %>
                     </p>
                   <% end %>
                 </div>
@@ -164,10 +164,10 @@
     </div>
 
     <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-      <div class="h-full py-3 pl-3 lg:w-80">
+      <div class="h-full py-6 pl-6 lg:w-80">
         <!-- Right column area -->
         <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
-          <div class="bg-white dark:bg-slate-800 px-4 py-5 shadow sm:rounded-lg sm:px-6">
+          <div class="bg-white dark:bg-slate-800 px-4 py-5 shadow rounded-lg sm:px-6">
             <h2 id="timeline-title" class="text-lg font-medium text-gray-900 dark:text-white">
               Activity
             </h2>

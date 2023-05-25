@@ -11,12 +11,6 @@
 #                             |___/
 #
 
-defimpl FunWithFlags.Actor, for: Sentrypeer.Accounts.User do
-  def id(%{auth_id: auth_id}) do
-    "user:#{auth_id}"
-  end
-end
-
 defmodule Sentrypeer.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset

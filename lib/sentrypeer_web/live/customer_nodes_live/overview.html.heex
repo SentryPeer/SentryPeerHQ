@@ -20,6 +20,30 @@
           <!-- Main area -->
           <div class="py-6">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Live probes
+            </h3>
+            <%= if @node_probes == [] do %>
+              <p class="text-sm text-gray-500 dark:text-slate-400">
+                No probes have been seen in the last 30 minutes.
+              </p>
+            <% else %>
+              <div
+                id="api-logger-realtime-container"
+                phx-hook="SentrypeerApiLoggerRealtime"
+                class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
+              >
+                <div id="api-logger-realtime">
+                  <%= for node_probe <- @node_probes do %>
+                    <p id={"log-#{System.unique_integer()}"}>
+                      <%= node_probe %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="py-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Last 30 days
             </h3>
             <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">

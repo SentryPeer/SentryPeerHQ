@@ -25,12 +25,12 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
 
   @impl true
   def mount(_params, _session, socket) do
-    phone_number_searches = []
+    api_queries = []
 
     {:ok,
      assign(socket,
        token_url: Auth0Config.auth0_token_url(),
-       phone_numbers: phone_number_searches
+       api_queries: api_queries
      )}
   end
 
@@ -54,9 +54,9 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
   end
 
   @impl true
-  def handle_info({phone_number, client_id}, socket) do
-    Logger.debug("Client #{client_id} has just searched for a phone number.")
-    phone_number_searches = socket.assigns.phone_numbers ++ [phone_number]
-    {:noreply, assign(socket, :phone_numbers, phone_number_searches)}
+  def handle_info({api_query, client_id}, socket) do
+    Logger.debug("Client #{client_id} has just searched something.")
+    api_searches = socket.assigns.api_queries ++ [api_query]
+    {:noreply, assign(socket, :api_queries, api_searches)}
   end
 end

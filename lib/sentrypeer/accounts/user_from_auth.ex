@@ -17,6 +17,7 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
 
   alias Ueberauth.Auth
   alias Sentrypeer.Accounts
+  alias Sentrypeer.Auth.Auth0User
   alias Sentrypeer.Emails.EmailError
   alias Sentrypeer.Mailer
 
@@ -78,7 +79,7 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
   defp basic_info(auth) do
     Logger.debug("Auth: " <> Poison.encode!(auth))
 
-    %{
+    %Auth0User{
       id: auth.uid,
       name: name_from_auth(auth),
       avatar: avatar_from_auth(auth),

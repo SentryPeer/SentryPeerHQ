@@ -22,7 +22,13 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:token_url, Auth0Config.auth0_token_url())}
+    node_probes = []
+
+    {:ok,
+     assign(socket,
+       token_url: Auth0Config.auth0_token_url(),
+       node_probes: node_probes
+     )}
   end
 
   @impl true
