@@ -67,9 +67,18 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   """
   def create_sentrypeer_event(attrs \\ %{}, client_id) do
-    %SentrypeerEvent{}
-    |> SentrypeerEvent.changeset(attrs, client_id)
-    |> Repo.insert()
+    changeset =
+      %SentrypeerEvent{}
+      |> SentrypeerEvent.changeset(attrs, client_id)
+
+    if changeset.valid? do
+      broadcast({:ok, changeset.changes}, client_id)
+
+      changeset
+      |> Repo.insert()
+    else
+      changeset
+    end
   end
 
   @doc """
@@ -106,6 +115,10 @@ defmodule Sentrypeer.SentrypeerEvents do
         from e in SentrypeerEvent,
           where: e.called_number == ^changeset.changes.phone_number
 
+      # Just if on Contributor plan, if so, we need to check all their clients and then only
+      # return true if the phone number is in from one of their clients.
+      #
+      # belongs_to :client, Sentrypeer.Client, foreign_key: :client_id etc.
       # and
       #  e.client_id == ^client_id
 
@@ -130,7 +143,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_ip_address_sentrypeer_event?(ip_address, _client_id) do
+  def check_ip_address_sentrypeer_event?(ip_address, client_id) do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
@@ -141,6 +154,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       # and
       #  e.client_id == ^client_id
 
+      broadcast({:ok, ip_address}, client_id)
       Repo.exists?(query)
     else
       false
@@ -154,16 +168,16 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   defp broadcast({:error, _reason} = error, _client_id), do: error
 
-  defp broadcast({:ok, phone_number}, client_id) do
+  defp broadcast({:ok, searched_for}, client_id) do
     # Logger.debug(IEx.Info.info(client_id))
     Logger.debug("Broadcasting to: 'client_id:#{client_id}'")
 
     Phoenix.PubSub.broadcast(
       Sentrypeer.PubSub,
       "client_id:#{client_id}",
-      {phone_number, client_id}
+      {searched_for, client_id}
     )
 
-    {:ok, phone_number}
+    {:ok, searched_for}
   end
 end

@@ -16,9 +16,12 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
 
   alias Sentrypeer.Auth.Auth0Config
   alias Sentrypeer.Auth.Auth0ManagementAPI
+  alias Sentrypeer.SentrypeerEvents
 
   import Sentrypeer.TimeAgo
   import SentrypeerWeb.NavigationComponents
+
+  require Logger
 
   @impl true
   def mount(_params, _session, socket) do
@@ -32,8 +35,10 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   end
 
   @impl true
-  def handle_params(%{"client_id" => id}, _url, socket) do
-    case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
+  def handle_params(%{"client_id" => client_id}, _url, socket) do
+    if connected?(socket), do: SentrypeerEvents.subscribe(client_id)
+
+    case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, client_id) do
       nil ->
         {:noreply, socket |> assign(:page_title, "Node not found")}
 
@@ -46,5 +51,12 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
       {:error, _} ->
         {:noreply, redirect(socket, to: "/not_found")}
     end
+  end
+
+  @impl true
+  def handle_info({node_probe, client_id}, socket) do
+    Logger.debug("Client #{client_id} has just searched something.")
+    node_searches = socket.assigns.node_probes ++ [node_probe]
+    {:noreply, assign(socket, :node_probes, node_searches)}
   end
 end
