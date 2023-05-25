@@ -17,6 +17,10 @@ defimpl FunWithFlags.Actor, for: Sentrypeer.Auth.Auth0User do
   end
 end
 
+defimpl FunWithFlags.Group, for: Sentrypeer.Auth.Auth0User do
+  def in?(%{groups: list}, group_name), do: group_name in list
+end
+
 defmodule Sentrypeer.Auth.Auth0User do
-  defstruct [:id, :name, :avatar, :email, :latest_login]
+  defstruct [:id, :name, :avatar, :email, :latest_login, groups: []]
 end
