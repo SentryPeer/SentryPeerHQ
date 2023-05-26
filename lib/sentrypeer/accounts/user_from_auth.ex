@@ -54,7 +54,7 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
         )
         |> Mailer.deliver()
 
-        {:error, "Your account has been disabled, please contact us."}
+        {:error, "Your account has been disabled. Please contact us."}
 
       _user ->
         {:ok, basic_info(auth)}

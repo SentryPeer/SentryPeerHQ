@@ -311,43 +311,54 @@
         <% end %>
       </div>
     </div>
-    <!-- Activity feed -->
+    <!-- Help -->
     <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-      <div class="pl-6 lg:w-80">
-        <div class="pt-6 pb-2">
-          <h2 class="text-sm font-semibold dark:text-white">Activity</h2>
-        </div>
-        <div>
-          <ul role="list" class="divide-y divide-gray-200">
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-6 w-6 rounded-full"
-                  src={@current_user.avatar}
-                  alt={ @current_user.name <> "'s avatar" }
-                  title={ @current_user.name <> "'s avatar" }
-                />
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between dark:text-white">
-                    <h3 class="text-sm font-medium">You</h3>
-                    <p class="text-sm text-gray-500">1 hour ago</p>
-                  </div>
-                  <p class="text-sm text-gray-500 dark:text-slate-400">
-                    Logged in
-                  </p>
-                </div>
-              </div>
-            </li>
-            <!-- More items... -->
-          </ul>
-          <div class="border-t border-gray-200 py-4 text-sm">
-            <a
-              href="#"
-              title="View all your account activity"
-              class="font-semibold text-indigo-600 hover:text-indigo-900"
-            >
-              View all activity <span aria-hidden="true"> &rarr;</span>
-            </a>
+      <div class="grid grid-cols-1 gap-6 justify-between space-x-6 p-6 pl-6 pt-6 lg:w-80">
+        <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Client Credentials Flow
+            </h3>
+            <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
+              <p>
+                All clients that call the SentryPeer API must use the <span class="font-semibold">Client Credentials Flow</span>.
+              </p>
+              <p class="pt-2">
+                Here you can create your API client and retrieve your
+                <span class="font-semibold">Client ID</span>
+                and <span class="font-semibold">Client Secret</span>.
+              </p>
+              <p class="pt-2">
+                You then use these to request an
+                <a
+                  href="https://auth0.com/docs/secure/tokens/access-tokens#jwt-access-tokens"
+                  title="Read about JWT Access Tokens"
+                  class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Access Token
+                  <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
+                </a>
+              </p>
+              <p class="pt-2">
+                You can also view all your API clients, revoke access to them, see their usage limits and more.
+              </p>
+            </div>
+            <div class="mt-3 text-sm leading-6">
+              <a
+                href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow"
+                class="font-semibold text-indigo-600 hover:text-indigo-500"
+                title="Call our API from a machine-to-machine (M2M) application"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="truncate">
+                  Learn more
+                  <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
