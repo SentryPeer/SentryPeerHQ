@@ -83,4 +83,18 @@ defmodule Sentrypeer.BillingHelpers do
     Timex.from_unix(unixtime, :seconds)
     |> Timex.format!("{YYYY}")
   end
+
+  def unix_to_naive_datetime(nil), do: nil
+
+  def unix_to_naive_datetime(datetime_in_seconds) do
+    datetime_in_seconds
+    |> DateTime.from_unix!()
+    |> DateTime.to_naive()
+  end
+
+  def lowercase_spaces_to_underscores(string) do
+    string
+    |> String.downcase()
+    |> String.replace(" ", "_")
+  end
 end

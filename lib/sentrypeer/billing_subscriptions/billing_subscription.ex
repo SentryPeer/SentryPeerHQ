@@ -27,9 +27,9 @@ defmodule Sentrypeer.BillingSubscriptions.BillingSubscription do
     field :auth_id, :binary_id
 
     belongs_to :user, Sentrypeer.Accounts.User,
-      foreign_key: :id,
+      foreign_key: :auth_id,
       define_field: false,
-      references: :auth_id
+      references: :id
 
     timestamps()
   end

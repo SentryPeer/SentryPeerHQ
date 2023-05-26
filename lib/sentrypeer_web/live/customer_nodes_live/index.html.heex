@@ -45,7 +45,7 @@
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <.link patch={~p"/nodes/new"}>
+                  <.link class="flex flex-col sm:flex-col xl:flex-col" patch={~p"/nodes/new"}>
                     <button
                       type="button"
                       title="Create a new SentryPeer node"
@@ -317,39 +317,48 @@
         <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
           <div class="px-4 py-5 sm:p-6">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              Client Credentials Flow
+              Contribute your data
             </h3>
             <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
               <p>
-                All clients that call the SentryPeer API must use the <span class="font-semibold">Client Credentials Flow</span>.
-              </p>
-              <p class="pt-2">
-                Here you can create your API client and retrieve your
-                <span class="font-semibold">Client ID</span>
-                and <span class="font-semibold">Client Secret</span>.
-              </p>
-              <p class="pt-2">
-                You then use these to request an
+                Why not run your own
                 <a
-                  href="https://auth0.com/docs/secure/tokens/access-tokens#jwt-access-tokens"
-                  title="Read about JWT Access Tokens"
+                  href="https://github.com/SentryPeer/SentryPeer#installation"
+                  title="Run your own SentryPeer nodes"
                   class="font-semibold text-indigo-600 hover:text-indigo-500"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Access Token
+                  SentryPeer® nodes
+                  <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
+                </a>
+                and consume that data via our APIs?
+              </p>
+              <p class="pt-2">
+                Here you can create your SentryPeer nodes and retrieve your
+                <span class="font-semibold">Client ID</span>
+                and <span class="font-semibold">Client Secret</span>
+                for the
+                <a
+                  href="https://github.com/SentryPeer/SentryPeer#webhook"
+                  title="SentryPeer WebHook"
+                  class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WebHook
                   <Heroicons.arrow_top_right_on_square class="inline-block flex-shrink-0 ml-1 mb-1 h-4 w-4 group-hover:text-gray-500" />
                 </a>
               </p>
-              <p class="pt-2">
-                You can also view all your API clients, revoke access to them, see their usage limits and more.
-              </p>
+              <!--              <p class="pt-2">-->
+<!--                Have your own <span class="font-semibold">HoneyPot</span>? Why not contribute your data to the community by sending us events in the SentryPeer format?-->
+<!--              </p>-->
             </div>
             <div class="mt-3 text-sm leading-6">
               <a
-                href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow"
+                href="https://github.com/SentryPeer/SentryPeer#introduction"
                 class="font-semibold text-indigo-600 hover:text-indigo-500"
-                title="Call our API from a machine-to-machine (M2M) application"
+                title="Learn more about running your own node"
                 target="_blank"
                 rel="noopener noreferrer"
               >

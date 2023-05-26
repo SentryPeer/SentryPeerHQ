@@ -863,7 +863,7 @@ defmodule SentrypeerWeb.CoreComponents do
   #  end
   def being_worked_on(assigns) do
     ~H"""
-    <div class="bg-yellow-50 dark:bg-slate-400 p-4">
+    <div class="bg-yellow-50 dark:bg-slate-400 p-4 border-b border-gray-200">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg

@@ -19,8 +19,8 @@ defmodule Sentrypeer.BillingSubscriptions do
   import Ecto.Query, warn: false
   alias Sentrypeer.Repo
 
-  alias Sentrypeer.BillingSubscriptions.BillingSubscription
   alias Sentrypeer.Accounts
+  alias Sentrypeer.BillingSubscriptions.BillingSubscription
 
   require Logger
 
@@ -135,7 +135,7 @@ defmodule Sentrypeer.BillingSubscriptions do
     BillingSubscription.changeset(billing_subscription, attrs)
   end
 
-  def get_subscription(cust_id) do
+  def get_subscription_from_stripe(cust_id) do
     stripe_id = get_stripe_id(cust_id)
 
     case Stripe.Subscription.list(%{customer: stripe_id}) do
@@ -148,6 +148,23 @@ defmodule Sentrypeer.BillingSubscriptions do
         error
     end
   end
+
+  @doc """
+  Gets a single subscription by Stripe Id.
+
+  Raises `Ecto.NoResultsError` if the Subscription does not exist.
+
+  ## Examples
+
+      iex> get_subscription_by_stripe_id!(123)
+      %Subscription{}
+
+      iex> get_subscription_by_stripe_id!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_subscription_by_stripe_id!(stripe_id),
+    do: Repo.get_by!(BillingSubscription, stripe_id: stripe_id)
 
   def get_billing_email(cust_id) do
     stripe_id = get_stripe_id(cust_id)
@@ -190,5 +207,31 @@ defmodule Sentrypeer.BillingSubscriptions do
 
   defp get_stripe_id(auth_id) do
     Accounts.get_user_stripe_id(auth_id).billing_subscription.stripe_id
+  end
+
+  @doc """
+  Gets a single active subscription for a billing customer.
+
+  Returns `nil` if an active Subscription does not exist.
+
+  ## Examples
+
+      iex> get_active_subscription_for_customer(123)
+      %Subscription{}
+
+      iex> get_active_subscription_for_customer(456)
+      nil
+
+  """
+  def get_active_subscription_for_user(user) do
+    from(s in BillingSubscription,
+      join: u in assoc(s, :user),
+      where: u.id == ^user.id,
+      where: is_nil(s.cancel_at) or s.cancel_at > ^NaiveDateTime.utc_now(),
+      where: s.current_period_end_at > ^NaiveDateTime.utc_now(),
+      where: s.status == "active",
+      limit: 1
+    )
+    |> Repo.one()
   end
 end

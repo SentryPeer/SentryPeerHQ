@@ -33,7 +33,9 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Billing",
        subscription:
-         List.first(BillingSubscriptions.get_subscription(session["current_user"].id).data),
+         List.first(
+           BillingSubscriptions.get_subscription_from_stripe(session["current_user"].id).data
+         ),
        billing_email: BillingSubscriptions.get_billing_email(session["current_user"].id),
        invoices: BillingSubscriptions.get_invoices(session["current_user"].id),
        upcoming_invoice: BillingSubscriptions.get_upcoming_invoice(session["current_user"].id)
