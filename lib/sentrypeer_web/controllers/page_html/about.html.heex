@@ -19,7 +19,7 @@
             <p class="mt-6 text-gray-700 dark:text-slate-800">
               For example, let's say you are running your own VoIP PBX on site, or you're a VoIP service provider. What SentryPeer will allow you to do in this context, is dip into our list of phone numbers (using the RESTful API) as your users are trying to make outbound calls.
             </p>
-            
+
             <p class="mt-6 text-gray-700 dark:text-slate-800">
               If you get a hit, you'll get a heads-up that potentially a device within your network is trying to call low cost probing phone numbers to check that the account can make outside calls. Criminals do this before revealing and calling the expensive numbers they want to call, which they usually own. These expensive numbers are often premium rate numbers, or international numbers.
             </p>
@@ -40,6 +40,9 @@
             <h2 class="mt-10 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
               What scenarios lead to VoIP fraud?
             </h2>
+            <p class="mt-6 text-gray-700 dark:text-slate-800">
+              There are many and new ones are being discovered all the time. Here are some common ones:
+            </p>
             <ol class="mt-6 text-gray-700 dark:text-slate-800 list-decimal list-inside">
               <li class="mt-2 leading-7">
                 Potential voicemail vulnerabilities. This can happen if you allow calling an inbound number (your DID/DDI) to get to your voicemail system, then prompt for a PIN. This PIN is weak and the voicemail system allows you to press '*' to call back the Caller ID that left a voicemail. The attacker has left a voicemail, and they then guess your PIN and call it back. The CLI might be a known number that SentryPeer has seen, which we can send you an alert for.
