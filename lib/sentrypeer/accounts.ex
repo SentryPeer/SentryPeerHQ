@@ -19,6 +19,7 @@ defmodule Sentrypeer.Accounts do
   import Ecto.Query, warn: false
   alias Sentrypeer.Repo
 
+  alias Sentrypeer.Auth.Auth0User
   alias Sentrypeer.Accounts.User
   alias Sentrypeer.BillingSubscriptions
   alias Sentrypeer.BillingHelpers
@@ -324,6 +325,13 @@ defmodule Sentrypeer.Accounts do
         case BillingSubscriptions.create_billing_subscription(our_sub) do
           {:ok, subscription} ->
             Logger.debug("create_billing_subscription: #{inspect(our_sub)}")
+
+            # Enable the tester plan for the user
+            user_for_flags = %Auth0User{id: attrs.auth_id}
+            FunWithFlags.enable(:tester_plan, for_actor: user_for_flags)
+
+            # Send a welcome email
+
             {:ok, subscription}
 
           {:error, changeset} ->

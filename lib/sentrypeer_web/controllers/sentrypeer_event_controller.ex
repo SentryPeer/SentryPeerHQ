@@ -44,7 +44,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
          ) do
       true ->
         conn
-        |> put_status(:found)
+        |> put_status(:ok)
         |> json(%{message: "Phone Number found."})
 
       false ->
@@ -61,7 +61,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
          ) do
       true ->
         conn
-        |> put_status(:found)
+        |> put_status(:ok)
         |> json(%{message: "IP Address found."})
 
       false ->
