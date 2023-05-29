@@ -38,7 +38,8 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
          ),
        billing_email: BillingSubscriptions.get_billing_email(session["current_user"].id),
        invoices: BillingSubscriptions.get_invoices(session["current_user"].id),
-       upcoming_invoice: BillingSubscriptions.get_upcoming_invoice(session["current_user"].id)
+       upcoming_invoice: BillingSubscriptions.get_upcoming_invoice(session["current_user"].id),
+       payment_methods: BillingSubscriptions.get_payment_methods(session["current_user"].id)
      )}
   end
 

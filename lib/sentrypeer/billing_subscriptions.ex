@@ -205,6 +205,19 @@ defmodule Sentrypeer.BillingSubscriptions do
     end
   end
 
+  def get_payment_methods(cust_id) do
+    stripe_id = get_stripe_id(cust_id)
+
+    case Stripe.PaymentMethod.list(%{customer: stripe_id}) do
+      {:ok, payment_methods} ->
+        Logger.debug("Customer Payment Methods: #{inspect(payment_methods)}")
+        payment_methods
+
+      {:error, error} ->
+        error
+    end
+  end
+
   defp get_stripe_id(auth_id) do
     Accounts.get_user_stripe_id(auth_id).billing_subscription.stripe_id
   end

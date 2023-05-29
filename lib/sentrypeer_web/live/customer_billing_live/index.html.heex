@@ -132,11 +132,36 @@
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
-                  <%= if @subscription.collection_method == "charge_automatically" do %>
-                    Credit Card
+                  <%= if @payment_methods.data == [] do %>
+                    No Credit Card on file.
+                    <.link
+                      phx-click="manage_billing"
+                      title="Add a Credit Card"
+                      class="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Please add one.
+                    </.link>
                   <% else %>
-                    <%= @subscription.collection_method %>
+                    Card ending in
+                    <span class="font-semibold">
+                      <%= List.first(@payment_methods.data).card.last4 %>.
+                    </span>
+                    Expires
+                    <span class="font-semibold">
+                      <%= List.first(@payment_methods.data).card.exp_month %>/<%= List.first(
+                        @payment_methods.data
+                      ).card.exp_year %>
+                    </span>
                   <% end %>
+                </span>
+                <span class="ml-4 flex-shrink-0">
+                  <.link
+                    phx-click="manage_billing"
+                    title="Change your Credit Card"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Update card
+                  </.link>
                 </span>
               </dd>
             </div>
