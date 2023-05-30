@@ -89,7 +89,7 @@ defmodule SentrypeerWeb.PricingController do
 
     # Get them to sign up first, which puts them on the Tester plan
     if !current_user,
-      do: redirect(conn, to: ~p"/signup?product=#{product}") |> halt()
+      do: redirect(conn, to: ~p"/signup") |> halt()
 
     session_config =
       if customer_id,

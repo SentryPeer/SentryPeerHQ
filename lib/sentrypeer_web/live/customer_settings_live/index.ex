@@ -33,7 +33,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "API Clients",
+       page_title: "API Clients" <> " · SentryPeer",
        client_type: "api_client",
        api_clients: api_clients
      )}

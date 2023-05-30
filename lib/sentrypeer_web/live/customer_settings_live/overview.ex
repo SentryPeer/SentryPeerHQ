@@ -45,7 +45,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
       {:ok, client} ->
         {:noreply,
          socket
-         |> assign(:page_title, "SentryPeer Node Overview")
+         |> assign(:page_title, "SentryPeer API Client Overview")
          |> assign(:client, client)}
 
       {:error, _} ->

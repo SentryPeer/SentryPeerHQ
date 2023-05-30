@@ -27,7 +27,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Integrations"
+       page_title: "Integrations" <> " · SentryPeer"
      )}
   end
 end

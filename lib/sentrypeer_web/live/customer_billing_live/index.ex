@@ -31,7 +31,7 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Billing",
+       page_title: "Billing" <> " · SentryPeer",
        subscription:
          List.first(
            BillingSubscriptions.get_subscription_from_stripe(session["current_user"].id).data

@@ -19,11 +19,11 @@ defmodule SentrypeerWeb.AuthController do
   plug Ueberauth
 
   def login(conn, _params) do
-    conn |> redirect(to: "/auth/auth0") |> halt
+    conn |> redirect(to: "/auth/auth0") |> halt()
   end
 
   def signup(conn, _params) do
-    conn |> redirect(to: "/auth/auth0?screen_hint=signup") |> halt
+    conn |> redirect(to: "/auth/auth0?screen_hint=signup") |> halt()
   end
 
   # See https://hexdocs.pm/phoenix_live_view/security-model.html#mounting-considerations

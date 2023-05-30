@@ -58,78 +58,106 @@
             <h1 class="flex-1 text-lg font-medium dark:text-white">User Profile</h1>
           </div>
         </div>
-        <form class="p-8">
-          <div class="space-y-12">
-            <div class="border-b border-gray-900/10 dark:border-slate-400 pb-12">
-              <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-3">
-                  <label
-                    for="first-name"
-                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
-                  >
-                    First name
-                  </label>
-                  <div class="mt-2">
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      autocomplete="given-name"
-                      value={@current_user.name}
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+        <%= if String.starts_with?(@current_user.id, "auth0") do %>
+          <form class="p-8">
+            <div class="space-y-12">
+              <div class="border-b border-gray-900/10 dark:border-slate-400 pb-12">
+                <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div class="sm:col-span-3">
+                    <label
+                      for="first-name"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                    >
+                      First name
+                    </label>
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="first-name"
+                        id="first-name"
+                        autocomplete="given-name"
+                        value={@current_user.name}
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div class="sm:col-span-3">
-                  <label
-                    for="last-name"
-                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
-                  >
-                    Last name
-                  </label>
-                  <div class="mt-2">
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      autocomplete="family-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+                  <div class="sm:col-span-3">
+                    <label
+                      for="last-name"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                    >
+                      Last name
+                    </label>
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="last-name"
+                        id="last-name"
+                        autocomplete="family-name"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div class="sm:col-span-4">
-                  <label
-                    for="email"
-                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
-                  >
-                    Email address
-                  </label>
-                  <div class="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autocomplete="email"
-                      value={@current_user.email}
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+                  <div class="sm:col-span-4">
+                    <label
+                      for="email"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                    >
+                      Email address
+                    </label>
+                    <div class="mt-2">
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        value={@current_user.email}
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button
-              type="submit"
-              class="rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Save
-            </button>
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              <button
+                type="submit"
+                class="rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        <% else %>
+          <div class="px-4 py-5 sm:p-6">
+            <div class="rounded-md bg-blue-50 dark:bg-slate-400 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg
+                    class="h-5 w-5 text-blue-400 dark:text-slate-800"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="ml-3 flex-1 md:flex md:justify-between">
+                  <p class="text-sm text-blue-700 dark:text-slate-800">
+                    Please update your profile on your identity provider.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
+        <% end %>
       </div>
     </div>
     <!-- Help -->

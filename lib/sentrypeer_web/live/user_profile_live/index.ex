@@ -28,7 +28,7 @@ defmodule SentrypeerWeb.UserProfileLive.Index do
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "User Profile"
+       page_title: "User Profile" <> " · SentryPeer"
      )}
   end
 end
