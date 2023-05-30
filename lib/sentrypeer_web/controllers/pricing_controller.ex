@@ -14,7 +14,7 @@
 defmodule SentrypeerWeb.PricingController do
   use SentrypeerWeb, :controller
 
-  alias Sentrypeer.BillingHelpers
+  alias Sentrypeer.Accounts
   require Logger
 
   # Top Nav
@@ -32,14 +32,7 @@ defmodule SentrypeerWeb.PricingController do
         {:ok, customer} = Stripe.Customer.retrieve(session.customer)
         Logger.debug(inspect(session))
         Logger.debug(inspect(customer))
-        #
-        #        subscription = List.first(customer.subscriptions.data)
-        #        subscription_item = List.first(subscription.items.data)
-        #        Logger.debug(inspect(customer))
-        #        Logger.debug(inspect(subscription))
-        #        Logger.debug(inspect(subscription_item))
 
-        # Redirect to remove the "stripe_session_id" from the URL.
         conn
         |> put_flash(:info, "Thanks for becoming a SentryPeer customer #{customer.name}!")
         |> redirect(to: ~p"/pricing")
@@ -59,53 +52,32 @@ defmodule SentrypeerWeb.PricingController do
     |> redirect(to: ~p"/pricing")
   end
 
-  def new(conn, %{"product" => product}) do
-    # Or if it is a recurring customer, you can provide customer_id
-    # get_customer_from_email(email)
-    customer_id = nil
-    price_id = product
-    quantity = 1
-    success_url = url(~p"/pricing/new/success")
-
-    # https://stripe.com/docs/api/checkout/sessions/create
-    session_config = %{
-      success_url: success_url <> "?stripe_session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: url(~p"/pricing/new/cancel"),
-      mode: "subscription",
-      line_items: [
-        %{
-          price: price_id,
-          quantity: quantity
-        }
-      ],
-      subscription_data: %{
-        billing_cycle_anchor: BillingHelpers.first_of_next_month_unix()
-      }
-    }
-
-    # Previous customer? customer_id else customer_email
-    # The stripe API only allows one of {customer_email, customer}
+  def new(conn, %{"product" => _product}) do
+    # Already logged in?
     current_user = get_session(conn, :current_user)
 
-    # Get them to sign up first, which puts them on the Tester plan
+    # Get them to sign up first if not, which puts them on the Tester plan
     if !current_user,
       do: redirect(conn, to: ~p"/signup") |> halt()
 
-    session_config =
-      if customer_id,
-        do: Map.put(session_config, :customer, customer_id),
-        else: Map.put(session_config, :customer_email, current_user.email)
+    customer_id = Accounts.get_user_stripe_id(current_user.id).billing_subscription.stripe_id
 
-    case Stripe.Session.create(session_config) do
-      {:ok, session} ->
-        redirect(conn, external: session.url)
+    # If they are a customer, redirect to the Stripe Customer Billing Portal to allow
+    # them to switch plan or cancel.
+    if customer_id do
+      case Stripe.BillingPortal.Session.create(%{
+             customer: customer_id,
+             return_url: url(~p"/billing")
+           }) do
+        {:ok, session} ->
+          redirect(conn, external: session.url)
 
-      {:error, stripe_error} ->
-        Logger.error("Stripe error: #{inspect(stripe_error)}")
+        {:error, stripe_error} ->
+          Logger.error("Stripe error: #{inspect(stripe_error)}")
 
-        conn
-        |> put_flash(:error, "Stripe error: #{inspect(stripe_error)}")
-        |> redirect(to: ~p"/pricing")
+          conn
+          |> put_flash(:error, "There's been an error, please try again.")
+      end
     end
   end
 end

@@ -134,13 +134,6 @@
                 <span class="flex-grow">
                   <%= if @payment_methods.data == [] do %>
                     No Credit Card on file.
-                    <.link
-                      phx-click="manage_billing"
-                      title="Add a Credit Card"
-                      class="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Please add one.
-                    </.link>
                   <% else %>
                     Card ending in
                     <span class="font-semibold">
