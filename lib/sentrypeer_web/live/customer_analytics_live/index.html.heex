@@ -6,7 +6,7 @@
   <%= nav_top_menu(assigns) %>
   <%= breadcrumbs(assigns) %>
   <!-- 3 column wrapper -->
-  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+  <div id="page_wrapper" class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
     <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
       <!-- Account profile -->
@@ -55,7 +55,25 @@
       <div class="bg-white dark:bg-slate-800 lg:min-w-0 lg:flex-1">
         <div class="border-b border-t border-gray-200 dark:border-slate-400 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
           <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium dark:text-white">Analytics</h1>
+            <h1 class="flex-grow text-lg font-medium dark:text-white">Analytics</h1>
+            <span class="ml-4 flex-shrink-0 inline-flex">
+              <button
+                id="expand-page"
+                class="dark:text-white dark:hover:text-slate-400 hover:text-brand"
+                phx-click={expand_page("#page_wrapper")}
+                title="Expand"
+              >
+                <Heroicons.arrows_pointing_out class="w-5 h-5" />
+              </button>
+              <button
+                id="shrink-page"
+                class="hidden dark:text-white hover:text-brand"
+                phx-click={shrink_page("#page_wrapper")}
+                title="Shrink"
+              >
+                <Heroicons.arrows_pointing_in class="w-5 h-5" />
+              </button>
+            </span>
           </div>
         </div>
         <%= being_worked_on(assigns) %>

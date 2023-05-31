@@ -841,7 +841,7 @@ defmodule SentrypeerWeb.CoreComponents do
   Toggle dropdown menus with the SentryPeer style.
   """
 
-  # SentryPeer style
+  # SentryPeer components
   def toggle_dropdown_menu(js \\ %JS{}, id) when is_binary(id) do
     js
     |> JS.toggle(
@@ -858,9 +858,22 @@ defmodule SentrypeerWeb.CoreComponents do
     |> JS.toggle(to: "#{id}")
   end
 
-  #  TODO - add tooltip
-  #  def sentrypeer_toolip(text) do
-  #  end
+  def expand_page(js \\ %JS{}, id) do
+    js
+    |> JS.toggle(to: "#shrink-page")
+    |> JS.toggle(to: "#expand-page")
+    |> JS.add_class("max-w-8xl", to: "#{id}")
+    |> JS.remove_class("max-w-7xl", to: "#{id}")
+  end
+
+  def shrink_page(js \\ %JS{}, id) do
+    js
+    |> JS.toggle(to: "#expand-page")
+    |> JS.toggle(to: "#shrink-page")
+    |> JS.add_class("max-w-7xl", to: "#{id}")
+    |> JS.remove_class("max-w-8xl", to: "#{id}")
+  end
+
   def being_worked_on(assigns) do
     ~H"""
     <div class="bg-yellow-50 dark:bg-slate-400 p-4 border-b border-gray-200">
