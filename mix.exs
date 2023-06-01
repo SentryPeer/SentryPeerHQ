@@ -48,7 +48,7 @@ defmodule Sentrypeer.MixProject do
       {:appsignal_phoenix, "~> 2.3.2"},
       {:cachex, "~> 3.6"},
       {:certifi, "~> 2.4"},
-      {:contex, "~> 0.4.0"},
+      {:contex, "~> 0.5.0"},
       {:cors_plug, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},

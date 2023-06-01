@@ -16,16 +16,34 @@ defmodule SentrypeerWeb.HomeLive.Index do
 
   import SentrypeerWeb.HomePageComponents
   alias Sentrypeer.Newsletter
+  alias Sentrypeer.SentrypeerEvents
 
   @impl true
   def mount(_params, session, socket) do
+    if connected?(socket), do: SentrypeerEvents.subscribe_all_nodes()
+
     {:ok,
      assign(socket,
        current_user: session["current_user"],
        page_title: "SentryPeer® - Help prevent VoIP cyberattacks and fraudulent VoIP phone calls",
        show_newsletter_subscription: true,
-       live_action: :index
+       live_action: :index,
+       total_unique_phone_numbers: total_unique_phone_numbers(),
+       total_unique_ip_addresses: total_unique_ip_addresses(),
+       total_events: total_events()
      )}
+  end
+
+  defp total_unique_phone_numbers() do
+    Sentrypeer.SentrypeerEvents.total_unique_phone_numbers!()
+  end
+
+  defp total_unique_ip_addresses() do
+    Sentrypeer.SentrypeerEvents.total_unique_ip_addresses!()
+  end
+
+  defp total_events() do
+    Sentrypeer.SentrypeerEvents.total_events!()
   end
 
   @impl true
@@ -49,5 +67,15 @@ defmodule SentrypeerWeb.HomeLive.Index do
     {:noreply,
      socket
      |> put_flash(:info, "Subscribe request received. Thank you!")}
+  end
+
+  @impl true
+  def handle_info({:ok}, socket) do
+    {:noreply,
+     assign(socket,
+       total_unique_phone_numbers: total_unique_phone_numbers(),
+       total_unique_ip_addresses: total_unique_ip_addresses(),
+       total_events: total_events()
+     )}
   end
 end

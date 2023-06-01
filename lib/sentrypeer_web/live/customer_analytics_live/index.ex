@@ -15,6 +15,7 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
+  alias Contex
 
   require Logger
 
@@ -22,12 +23,21 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   def mount(_params, session, socket) do
     Logger.debug(inspect(session["current_user"].id))
 
+    data = [["Apples", 10], ["Bananas", 12], ["Pears", 2]]
+
+    output =
+      data
+      |> Contex.Dataset.new()
+      |> Contex.Plot.new(Contex.BarChart, 600, 400)
+      |> Contex.Plot.to_svg()
+
     {:ok,
      assign(socket,
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Analytics" <> " · SentryPeer"
+       page_title: "Analytics" <> " · SentryPeer",
+       graph: output
      )}
   end
 end

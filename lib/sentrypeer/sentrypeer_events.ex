@@ -55,6 +55,108 @@ defmodule Sentrypeer.SentrypeerEvents do
   def get_sentrypeer_event!(id), do: Repo.get!(SentrypeerEvent, id)
 
   @doc """
+  Gets the total phone numbers seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_phone_numbers_for_client!(123)
+      213
+
+      iex> total_phone_numbers_for_client!(456)
+      0
+
+  """
+  def total_unique_phone_numbers_for_client!(client_id) do
+    query = from s in SentrypeerEvent, where: s.client_id == ^client_id, distinct: s.called_number
+    Repo.aggregate(query, :count, :called_number)
+  end
+
+  @doc """
+  Gets the total IP addresses seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_ip_addresses_for_client!(123)
+      213
+
+      iex> total_ip_addresses_for_client!(456)
+      0
+
+  """
+  def total_unique_ip_addresses_for_client!(client_id) do
+    query = from s in SentrypeerEvent, where: s.client_id == ^client_id, distinct: s.source_ip
+    Repo.aggregate(query, :count, :source_ip)
+  end
+
+  @doc """
+  Gets the total events seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_events_for_client!(123)
+      %SentrypeerEvent{}
+
+      iex> total_events_for_client!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def total_events_for_client!(client_id) do
+    query = from s in SentrypeerEvent, where: s.client_id == ^client_id
+    Repo.aggregate(query, :count, :event_uuid)
+  end
+
+  @doc """
+  Gets the total phone numbers seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_phone_numbers_for_client!(123)
+      213
+
+      iex> total_phone_numbers_for_client!(456)
+      0
+
+  """
+  def total_unique_phone_numbers!() do
+    query = from s in SentrypeerEvent, distinct: s.called_number
+    Repo.aggregate(query, :count, :called_number)
+  end
+
+  @doc """
+  Gets the total IP addresses seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_ip_addresses_for_client!(123)
+      213
+
+      iex> total_ip_addresses_for_client!(456)
+      0
+
+  """
+  def total_unique_ip_addresses!() do
+    query = from s in SentrypeerEvent, distinct: s.source_ip
+    Repo.aggregate(query, :count, :source_ip)
+  end
+
+  @doc """
+  Gets the total events seen from sentrypeer_events for a specific client_id.
+
+  ## Examples
+
+      iex> total_events_for_client!(123)
+      %SentrypeerEvent{}
+
+      iex> total_events_for_client!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def total_events!() do
+    query = from(s in SentrypeerEvent)
+    Repo.aggregate(query, :count, :event_uuid)
+  end
+
+  @doc """
   Creates a sentrypeer_event.
 
   ## Examples
@@ -74,8 +176,12 @@ defmodule Sentrypeer.SentrypeerEvents do
     if changeset.valid? do
       broadcast({:ok, changeset.changes}, client_id)
 
-      changeset
-      |> Repo.insert()
+      changeset_after_insert = Repo.insert(changeset)
+
+      # Do after insert so we have the latest data
+      broadcast_all_nodes({:ok})
+
+      changeset_after_insert
     else
       changeset
     end
@@ -166,6 +272,11 @@ defmodule Sentrypeer.SentrypeerEvents do
     Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "client_id:#{client_id}")
   end
 
+  def subscribe_all_nodes() do
+    Logger.debug("Subscribing to topic 'all_nodes'")
+    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "all_nodes")
+  end
+
   defp broadcast({:error, _reason} = error, _client_id), do: error
 
   defp broadcast({:ok, searched_for}, client_id) do
@@ -179,5 +290,19 @@ defmodule Sentrypeer.SentrypeerEvents do
     )
 
     {:ok, searched_for}
+  end
+
+  defp broadcast_all_nodes({:error, _reason} = error), do: error
+
+  defp broadcast_all_nodes({:ok}) do
+    Logger.debug("Broadcasting to: 'all_nodes'")
+
+    Phoenix.PubSub.broadcast(
+      Sentrypeer.PubSub,
+      "all_nodes",
+      {:ok}
+    )
+
+    {:ok}
   end
 end

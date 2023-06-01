@@ -24,7 +24,7 @@
             </h3>
             <%= if @node_probes == [] do %>
               <p class="text-sm text-gray-500 dark:text-slate-400">
-                No probes have been seen in the last 30 minutes.
+                No probes at the moment.
               </p>
             <% else %>
               <div
@@ -56,7 +56,7 @@
                 <dt class="text-base font-normal text-gray-900">Phone Numbers</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                    71,897
+                    <%= @total_unique_phone_numbers %>
                   </div>
                 </dd>
               </div>
@@ -65,7 +65,7 @@
                 <dt class="text-base font-normal text-gray-900">IP Addresses</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                    58.16%
+                    <%= @total_unique_ip_addresses %>
                   </div>
                 </dd>
               </div>
@@ -74,7 +74,7 @@
                 <dt class="text-base font-normal text-gray-900">Total Events</dt>
                 <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                   <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                    24.57%
+                    <%= @total_events %>
                   </div>
                 </dd>
               </div>

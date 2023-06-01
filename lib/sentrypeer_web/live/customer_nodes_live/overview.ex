@@ -46,17 +46,45 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
         {:noreply,
          socket
          |> assign(:page_title, "SentryPeer Node Overview")
-         |> assign(:client, client)}
+         |> assign(:client, client)
+         |> assign(
+           :total_unique_phone_numbers,
+           total_unique_phone_numbers_for_client(client.client_id)
+         )
+         |> assign(
+           :total_unique_ip_addresses,
+           total_unique_ip_addresses_for_client(client.client_id)
+         )
+         |> assign(:total_events, total_events_for_client(client.client_id))}
 
       {:error, _} ->
         {:noreply, redirect(socket, to: "/not_found")}
     end
   end
 
+  defp total_unique_phone_numbers_for_client(client_id) do
+    Sentrypeer.SentrypeerEvents.total_unique_phone_numbers_for_client!(client_id)
+  end
+
+  defp total_unique_ip_addresses_for_client(client_id) do
+    Sentrypeer.SentrypeerEvents.total_unique_ip_addresses_for_client!(client_id)
+  end
+
+  defp total_events_for_client(client_id) do
+    Sentrypeer.SentrypeerEvents.total_events_for_client!(client_id)
+  end
+
   @impl true
   def handle_info({node_probe, client_id}, socket) do
     Logger.debug("Client #{client_id} has just searched something.")
     node_searches = socket.assigns.node_probes ++ [node_probe]
-    {:noreply, assign(socket, :node_probes, node_searches)}
+
+    {:noreply,
+     assign(socket,
+       node_probes: node_searches,
+       total_unique_phone_numbers: total_unique_phone_numbers_for_client(client_id),
+       total_unique_ip_addresses: total_unique_ip_addresses_for_client(client_id),
+       total_events: total_events_for_client(client_id)
+     )}
   end
 end

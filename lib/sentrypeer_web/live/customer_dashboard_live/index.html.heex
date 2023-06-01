@@ -63,28 +63,28 @@
           </h3>
           <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
             <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">Phone Numbers</dt>
+              <dt class="text-base font-normal text-gray-900">Unique phone numbers</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  202,772
+                  <%= @total_unique_phone_numbers %>
                 </div>
               </dd>
             </div>
 
             <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">IP Addresses</dt>
+              <dt class="text-base font-normal text-gray-900">Unique IP addresses</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  730
+                  <%= @total_unique_ip_addresses %>
                 </div>
               </dd>
             </div>
 
             <div class="px-4 py-5 sm:p-6">
-              <dt class="text-base font-normal text-gray-900">Total Events</dt>
+              <dt class="text-base font-normal text-gray-900">Total events collected</dt>
               <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                  598,809
+                  <%= @total_events %>
                 </div>
               </dd>
             </div>

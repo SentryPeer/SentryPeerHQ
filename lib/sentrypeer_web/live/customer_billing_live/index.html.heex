@@ -102,9 +102,9 @@
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
-                  1st of month (<%= to_month_day(@subscription.billing_cycle_anchor) %>, <%= to_year(
+                  <%= to_month_day(@subscription.billing_cycle_anchor) %>, <%= to_year(
                     @subscription.current_period_end
-                  ) %>)
+                  ) %>
                 </span>
               </dd>
             </div>
@@ -214,7 +214,7 @@
                     </div>
                   </td>
                   <td class="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 dark:text-slate-400">
-                    <%= List.first(@upcoming_invoice.lines.data).price.unit_amount %>
+                    <%= List.first(@upcoming_invoice.lines.data).price.unit_amount / 100 %>
                   </td>
                 </tr>
               </tbody>
@@ -299,7 +299,7 @@
                   <%= for invoice <- @invoices.data do %>
                     <!-- Invoice List -->
                     <li class="py-4">
-                      <div class="relative pb-8 ">
+                      <div class="relative">
                         <div class="relative flex space-x-3">
                           <a
                             href={invoice.invoice_pdf}
@@ -310,11 +310,11 @@
                           >
                             <Heroicons.cloud_arrow_down class="inline-block w-5 h-5" />
                           </a>
-                          <div class="flex min-w-0 flex-1 justify-between space-x-4">
+                          <div class="flex min-w-0 flex-1 justify-between space-x-3">
                             <p class="text-sm text-gray-900 dark:text-white">
-                              <%= to_month_day(@subscription.current_period_start) %> &mdash; <%= to_month_day(
-                                @subscription.current_period_end
-                              ) %>, <%= to_year(@subscription.current_period_end) %>
+                              <%= to_month_day(List.first(invoice.lines.data).period.start) %> - <%= to_month_day(
+                                List.first(invoice.lines.data).period.end
+                              ) %>, <%= to_year(List.first(invoice.lines.data).period.end) %>
                             </p>
                             <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
                               <a
