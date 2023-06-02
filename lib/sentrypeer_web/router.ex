@@ -134,6 +134,7 @@ defmodule SentrypeerWeb.Router do
     # Support
     get "/documentation", PageController, :documentation
     get "/guides", PageController, :guides
+    get "/changelog", PageController, :changelog
 
     # Sectors
     get "/advanced-users", PageController, :advanced_users

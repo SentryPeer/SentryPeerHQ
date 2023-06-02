@@ -675,7 +675,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                   title="SentryPeer Documentation"
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >
-                  Documentation
+                  Docs
                 </.link>
                 <.link
                   navigate={~p"/contact"}
@@ -683,6 +683,13 @@ defmodule SentrypeerWeb.NavigationComponents do
                   class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
                 >
                   Support
+                </.link>
+                <.link
+                  navigate={~p"/changelog"}
+                  title="SentryPeer Changelog"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
+                >
+                  Changelog
                 </.link>
               </div>
               <!-- Dark mode toggle -->
@@ -808,6 +815,13 @@ defmodule SentrypeerWeb.NavigationComponents do
             class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
           >
             Support
+          </.link>
+          <.link
+            navigate={~p"/changelog"}
+            title="SentryPeer Changelog"
+            class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Changelog
           </.link>
         </div>
         <div class="border-t border-indigo-800 pt-4 pb-3">

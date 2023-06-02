@@ -61,6 +61,15 @@ defmodule SentrypeerWeb.PageController do
     )
   end
 
+  def changelog(conn, _params) do
+    render(conn, :changelog,
+      current_user: get_session(conn, :current_user),
+      layout: false,
+      show_newsletter_subscription: false,
+      page_title: "Changelog"
+    )
+  end
+
   # Sectors
   def advanced_users(conn, _params) do
     render(conn, :advanced_users,
