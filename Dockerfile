@@ -51,6 +51,9 @@ RUN mix local.hex --force && \
 ENV MIX_ENV="prod"
 ENV GIT_REV=${GIT_REV}
 
+# set APP_REVISION for AppSignal
+ENV APP_REVISION=${GIT_REV}
+
 # install mix dependencies
 COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
