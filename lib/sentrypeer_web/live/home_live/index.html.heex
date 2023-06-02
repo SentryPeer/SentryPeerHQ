@@ -70,7 +70,7 @@
                     Unique phone numbers
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= @total_unique_phone_numbers %>
+                    <%= Sentrypeer.Cldr.Number.to_string!(@total_unique_phone_numbers) %>
                   </dd>
                 </div>
                 <div class="flex flex-col border-b border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -78,7 +78,7 @@
                     Unique IP addresses
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= @total_unique_ip_addresses %>
+                    <%= Sentrypeer.Cldr.Number.to_string!(@total_unique_ip_addresses) %>
                   </dd>
                 </div>
                 <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -86,7 +86,7 @@
                     Total events collected
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= @total_events %>
+                    <%= Sentrypeer.Cldr.Number.to_string!(@total_events) %>
                   </dd>
                 </div>
               </dl>
