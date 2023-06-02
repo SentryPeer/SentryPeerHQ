@@ -18,9 +18,3 @@
 
 ## Tweak GC to run more often
 ##-env ERL_FULLSWEEP_AFTER 10
-
-# https://fly.io/docs/elixir/the-basics/naming-your-elixir-node/
-ip=$(grep fly-local-6pn /etc/hosts | cut -f 1)
-export RELEASE_DISTRIBUTION=name
-export RELEASE_NODE=$FLY_APP_NAME@$ip
-
