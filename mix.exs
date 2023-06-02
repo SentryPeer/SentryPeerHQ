@@ -72,6 +72,7 @@ defmodule Sentrypeer.MixProject do
       {:joken, "~> 2.6.0"},
       {:joken_jwks, "~> 1.6.0"},
       {:kaffy, "~> 0.9.4"},
+      {:libcluster, "~> 3.3"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
       {:oban, "~> 2.14"},

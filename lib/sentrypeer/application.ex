@@ -20,6 +20,8 @@ defmodule Sentrypeer.Application do
 
   @impl true
   def start(_type, _args) do
+    topologies = Application.get_env(:libcluster, :topologies) || []
+
     children = [
       # Start the Telemetry supervisor
       SentrypeerWeb.Telemetry,
@@ -36,7 +38,10 @@ defmodule Sentrypeer.Application do
       Sentrypeer.Auth.Auth0Strategy,
       {Oban, oban_config()},
       # Our Cache
-      {Cachex, name: :sentrypeer_cache}
+      {Cachex, name: :sentrypeer_cache},
+      # https://fly.io/docs/elixir/the-basics/clustering/#adding-libcluster
+      # Setup for clustering
+      {Cluster.Supervisor, [topologies, [name: Sentrypeer.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
