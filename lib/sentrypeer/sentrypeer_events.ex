@@ -174,8 +174,7 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   """
   def total_events!() do
-    query =
-      from s in SentrypeerEvent, where: s.event_timestamp > fragment("now() - interval '30 day'")
+    query = from(s in SentrypeerEvent)
 
     Repo.aggregate(query, :count, :event_uuid)
   end
@@ -297,8 +296,8 @@ defmodule Sentrypeer.SentrypeerEvents do
   end
 
   def subscribe_all_nodes() do
-    Logger.debug("Subscribing to topic 'all_nodes'")
-    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "all_nodes")
+    Logger.debug("Subscribing to topic 'global:all_nodes'")
+    Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "global:all_nodes")
   end
 
   defp broadcast({:error, _reason} = error, _client_id), do: error
@@ -319,11 +318,11 @@ defmodule Sentrypeer.SentrypeerEvents do
   defp broadcast_all_nodes({:error, _reason} = error), do: error
 
   defp broadcast_all_nodes({:ok}) do
-    Logger.debug("Broadcasting to: 'all_nodes'")
+    Logger.debug("Broadcasting to: 'global:all_nodes'")
 
     Phoenix.PubSub.broadcast(
       Sentrypeer.PubSub,
-      "all_nodes",
+      "global:all_nodes",
       {:ok}
     )
 
