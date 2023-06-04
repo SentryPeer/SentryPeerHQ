@@ -307,7 +307,8 @@ defmodule Sentrypeer.Accounts do
                quantity: 1
              }
            ],
-           billing_cycle_anchor: BillingHelpers.first_of_next_month_unix()
+           billing_cycle_anchor: BillingHelpers.first_of_next_month_unix(),
+           automatic_tax: %{enabled: true}
          }) do
       {:ok, subscription} ->
         Logger.debug("create_billing_subscription: #{inspect(subscription)}")
