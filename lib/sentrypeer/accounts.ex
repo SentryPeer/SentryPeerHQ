@@ -20,6 +20,7 @@ defmodule Sentrypeer.Accounts do
   alias Sentrypeer.Repo
 
   alias Sentrypeer.Auth.Auth0User
+  alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Accounts.User
   alias Sentrypeer.BillingSubscriptions
   alias Sentrypeer.BillingHelpers
@@ -241,14 +242,24 @@ defmodule Sentrypeer.Accounts do
   defp create_stripe_customer(attrs) do
     Logger.debug("create_stripe_customer: #{inspect(attrs)}")
 
-    case Stripe.Customer.create(%{email: attrs.email}) do
-      {:ok, customer} ->
-        Logger.debug("create_user_subscription: #{inspect(customer)}")
-        create_billing_subscription(attrs, customer.id)
+    case Auth0ManagementAPI.get_user(attrs.auth_id) do
+      {:ok, user} ->
+        case Stripe.Customer.create(%{
+               email: attrs.email,
+               tax: %{ip_address: user["last_ip"]}
+             }) do
+          {:ok, customer} ->
+            Logger.debug("create_user_subscription: #{inspect(customer)}")
+            create_billing_subscription(attrs, customer.id)
 
-      {:error, changeset} ->
-        Logger.error("create_user_subscription: #{inspect(changeset)}")
-        {:error, changeset}
+          {:error, changeset} ->
+            Logger.error("create_user_subscription: #{inspect(changeset)}")
+            {:error, changeset}
+        end
+
+      {:error, error} ->
+        Logger.error("Can't retrieve user from Auth0: #{inspect(error)}")
+        {:error, error}
     end
   end
 

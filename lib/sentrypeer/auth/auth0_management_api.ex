@@ -36,21 +36,39 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
 
   def get_user(id) do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.get!(
-        auth0_management_url() <> "users/" <> id,
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.get(
+             auth0_management_url() <> "users/" <> id,
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          {:ok, Jason.decode!(body)}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
     end
   end
 
   def get_user_by_email(email) do
     with {:ok, access_token} <- get_auth_token() do
-      HTTPoison.get!(
-        auth0_management_url() <> "users-by-email?email=" <> email,
-        headers(access_token),
-        options()
-      )
+      case HTTPoison.get!(
+             auth0_management_url() <> "users-by-email?email=" <> email,
+             headers(access_token),
+             options()
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          {:ok, Jason.decode!(body)}
+
+        {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+          {:error, "Auth0 returned status code #{status_code} with body #{body}"}
+
+        {:error, error} ->
+          {:error, error}
+      end
     end
   end
 
