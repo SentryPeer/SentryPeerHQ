@@ -52,7 +52,7 @@ ENV MIX_ENV="prod"
 ENV GIT_REV=${GIT_REV}
 
 # set APP_REVISION for AppSignal
-ENV APP_REVISION=${GIT_REV}
+ENV APP_REVISION=${APP_REVISION}
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
