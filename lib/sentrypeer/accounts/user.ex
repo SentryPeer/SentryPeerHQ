@@ -28,7 +28,7 @@ defmodule Sentrypeer.Accounts.User do
 
     has_many :clients, Sentrypeer.Clients.Client,
       foreign_key: :auth_id,
-      references: :id
+      references: :auth_id
 
     has_many :activity_logs, Sentrypeer.ActivityLogs.ActivityLog,
       foreign_key: :auth_id,

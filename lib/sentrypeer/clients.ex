@@ -114,4 +114,22 @@ defmodule Sentrypeer.Clients do
   def change_client(%Client{} = client, attrs \\ %{}) do
     Client.changeset(client, attrs)
   end
+
+  @doc """
+  Find user that owns the client.
+
+  ## Examples
+
+      iex> get_client_owner_by_client_id!(client_id)
+      {:ok, %User{}}
+
+      iex> get_client_owner_by_client_id(client_id)
+            ** (Ecto.NoResultsError)
+
+
+  """
+  def get_client_owner_by_client_id!(client_id) do
+    Repo.get_by(Client, client_id: client_id)
+    |> Repo.preload(user: :clients)
+  end
 end

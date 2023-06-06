@@ -22,6 +22,8 @@ defmodule Sentrypeer.SentrypeerEvents do
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
   alias Sentrypeer.SentrypeerIpAddress
   alias Sentrypeer.SentrypeerPhoneNumber
+  alias Sentrypeer.Clients.Client
+  alias Sentrypeer.Accounts.User
 
   require Logger
 
@@ -244,15 +246,42 @@ defmodule Sentrypeer.SentrypeerEvents do
         from e in SentrypeerEvent,
           where: e.called_number == ^changeset.changes.phone_number
 
-      # Just if on Contributor plan, if so, we need to check all their clients and then only
-      # return true if the phone number is in from one of their clients.
-      #
-      # belongs_to :client, Sentrypeer.Client, foreign_key: :client_id etc.
-      # and
-      #  e.client_id == ^client_id
-
       broadcast({:ok, phone_number}, client_id)
       Repo.exists?(query)
+    else
+      false
+    end
+  end
+
+  def check_phone_number_exists_for_contributor?(phone_number, client_id) do
+    changeset =
+      SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
+
+    if changeset.valid? do
+      # Check client_id is owned by someone, if not return false
+      case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
+        %Client{} = client ->
+          case client.user do
+            nil ->
+              false
+
+            %User{} = _user ->
+              # Check if they have any events from one of their nodes
+              client_ids = Enum.map(client.user.clients, fn client -> client.client_id end)
+
+              query =
+                from e in SentrypeerEvent,
+                  where:
+                    e.called_number == ^changeset.changes.phone_number and
+                      e.client_id in ^client_ids
+
+              broadcast({:ok, phone_number}, client_id)
+              Repo.exists?(query)
+          end
+
+        _ ->
+          false
+      end
     else
       false
     end
@@ -280,11 +309,42 @@ defmodule Sentrypeer.SentrypeerEvents do
         from e in SentrypeerEvent,
           where: e.source_ip == ^changeset.changes.ip_address
 
-      # and
-      #  e.client_id == ^client_id
-
       broadcast({:ok, ip_address}, client_id)
       Repo.exists?(query)
+    else
+      false
+    end
+  end
+
+  def check_ip_address_exists_for_contributor?(ip_address, client_id) do
+    changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
+
+    if changeset.valid? do
+      # Move to a new plug...
+      # Check client_id is owned by someone, if not return false
+      case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
+        %Client{} = client ->
+          case client.user do
+            nil ->
+              false
+
+            %User{} = _user ->
+              # Check if they have any events from one of their nodes
+              client_ids = Enum.map(client.user.clients, fn client -> client.client_id end)
+
+              query =
+                from e in SentrypeerEvent,
+                     where:
+                       e.source_ip == ^changeset.changes.ip_address and
+                       e.client_id in ^client_ids
+
+              broadcast({:ok, ip_address}, client_id)
+              Repo.exists?(query)
+          end
+
+        _ ->
+          false
+      end
     else
       false
     end
