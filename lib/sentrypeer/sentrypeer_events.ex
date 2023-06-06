@@ -334,9 +334,9 @@ defmodule Sentrypeer.SentrypeerEvents do
 
               query =
                 from e in SentrypeerEvent,
-                     where:
-                       e.source_ip == ^changeset.changes.ip_address and
-                       e.client_id in ^client_ids
+                  where:
+                    e.source_ip == ^changeset.changes.ip_address and
+                      e.client_id in ^client_ids
 
               broadcast({:ok, ip_address}, client_id)
               Repo.exists?(query)
