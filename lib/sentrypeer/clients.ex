@@ -116,6 +116,23 @@ defmodule Sentrypeer.Clients do
   end
 
   @doc """
+  Find the client by client_id.
+
+  ## Examples
+
+      iex> get_client_by_client_id!(client_id)
+      {:ok, %User{}}
+
+      iex> get_client_by_client_id(client_id)
+            ** (Ecto.NoResultsError)
+
+
+  """
+  def get_client_by_client_id!(client_id) do
+    Repo.get_by(Client, client_id: client_id)
+  end
+
+  @doc """
   Find user that owns the client.
 
   ## Examples

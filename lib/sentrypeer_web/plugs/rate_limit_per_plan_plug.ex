@@ -25,7 +25,6 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
 
   alias Sentrypeer.Clients.Client
   alias Sentrypeer.Auth.Auth0User
-  alias Sentrypeer.Accounts.User
 
   require Logger
 
@@ -42,21 +41,13 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
     |> check_who_owns_client_id(opts)
   end
 
-  defp check_who_owns_client_id(conn, opts) do
+  defp check_who_owns_client_id(conn, _opts) do
     client_id = conn.assigns.client_id
 
-    case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
+    case Sentrypeer.Clients.get_client_by_client_id!(client_id) do
       %Client{} = client ->
-        case client.user do
-          nil ->
-            conn
-            |> not_found()
-
-          %User{} = user ->
-            auth0_user = %Auth0User{id: user.auth_id}
-            check_what_plan_is_enabled(auth0_user)
-            conn
-        end
+        check_what_plan_is_enabled(%Auth0User{id: client.auth_id})
+        conn
 
       _ ->
         conn
