@@ -20,7 +20,6 @@ defmodule Sentrypeer.Plans do
   """
 
   def what_plan_am_i_on(user_id) do
-
     # TODO: Move this to our config or Pg
     plans = [
       tester_plan: %{
