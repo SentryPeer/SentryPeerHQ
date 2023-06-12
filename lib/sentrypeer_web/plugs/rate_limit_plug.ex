@@ -53,9 +53,11 @@ defmodule SentrypeerWeb.RateLimitPlug do
       {:ok, count} ->
         add_rate_limit_headers(conn, count, elem(inspected, 2), interval_ms, max_requests)
 
-      error ->
-        Logger.info(rate_limit: error)
-        render_error(conn)
+      {:error, count} ->
+        Logger.info("Rate limit exceeded for #{inspect(bucket_name(conn))}")
+
+        add_rate_limit_headers(conn, count, elem(inspected, 2), interval_ms, max_requests)
+        |> render_error()
     end
   end
 
@@ -86,7 +88,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
   # https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
   # Lowercase as per recommendation:
   #   https://hexdocs.pm/plug/Plug.Conn.html#put_resp_header/3
-  defp add_rate_limit_headers(conn, count, ms_remaining, interval_ms, max_requests) do
+  def add_rate_limit_headers(conn, count, ms_remaining, interval_ms, max_requests) do
     conn
     |> put_resp_header("ratelimit-limit", "#{max_requests}")
     |> put_resp_header("ratelimit-remaining", "#{max_requests - count}")
@@ -99,7 +101,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
     )
   end
 
-  defp render_error(conn) do
+  def render_error(conn) do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(429, '{"status": "429 Too Many Requests"}')
