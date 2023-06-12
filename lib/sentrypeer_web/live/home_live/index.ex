@@ -28,18 +28,8 @@ defmodule SentrypeerWeb.HomeLive.Index do
        page_title: "SentryPeer® - Help prevent VoIP cyberattacks and fraudulent VoIP phone calls",
        show_newsletter_subscription: true,
        live_action: :index,
-       total_unique_phone_numbers: total_unique_phone_numbers(),
-       total_unique_ip_addresses: total_unique_ip_addresses(),
        total_events: total_events()
      )}
-  end
-
-  defp total_unique_phone_numbers() do
-    Sentrypeer.SentrypeerEvents.total_unique_phone_numbers!()
-  end
-
-  defp total_unique_ip_addresses() do
-    Sentrypeer.SentrypeerEvents.total_unique_ip_addresses!()
   end
 
   defp total_events() do
@@ -73,8 +63,6 @@ defmodule SentrypeerWeb.HomeLive.Index do
   def handle_info({:ok}, socket) do
     {:noreply,
      assign(socket,
-       total_unique_phone_numbers: total_unique_phone_numbers(),
-       total_unique_ip_addresses: total_unique_ip_addresses(),
        total_events: total_events()
      )}
   end

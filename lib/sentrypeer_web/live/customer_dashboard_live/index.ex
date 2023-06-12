@@ -27,18 +27,8 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Dashboard" <> " · SentryPeer",
-       total_unique_phone_numbers: total_unique_phone_numbers(),
-       total_unique_ip_addresses: total_unique_ip_addresses(),
        total_events: total_events()
      )}
-  end
-
-  defp total_unique_phone_numbers() do
-    Sentrypeer.SentrypeerEvents.total_unique_phone_numbers!()
-  end
-
-  defp total_unique_ip_addresses() do
-    Sentrypeer.SentrypeerEvents.total_unique_ip_addresses!()
   end
 
   defp total_events() do
@@ -49,8 +39,6 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
   def handle_info({:ok}, socket) do
     {:noreply,
      assign(socket,
-       total_unique_phone_numbers: total_unique_phone_numbers(),
-       total_unique_ip_addresses: total_unique_ip_addresses(),
        total_events: total_events()
      )}
   end
