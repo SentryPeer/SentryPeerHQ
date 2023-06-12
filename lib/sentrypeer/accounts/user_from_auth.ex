@@ -97,7 +97,7 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
         |> Enum.filter(&(&1 != nil and &1 != ""))
 
       cond do
-        length(name) == 0 -> auth.info.nickname
+        Enum.empty?(name) -> auth.info.nickname
         true -> Enum.join(name, " ")
       end
     end
