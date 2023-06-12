@@ -87,7 +87,7 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
     interval_ms = Keyword.fetch!(opts, :interval_seconds) * 1000
     max_requests = Keyword.fetch!(opts, :max_requests)
 
-    inspected = ExRated.inspect_bucket(bucket_name(conn), interval_ms, max_requests)
+    inspected = ExRated.inspect_bucket(bucket_name_per_client(conn), interval_ms, max_requests)
 
     case check_rate(conn, interval_ms, max_requests) do
       {:ok, count} ->
@@ -100,7 +100,7 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
         )
 
       {:error, count} ->
-        Logger.info("Rate limit exceeded for #{inspect(bucket_name(conn))}")
+        Logger.info("Rate limit exceeded for #{inspect(bucket_name_per_client(conn))}")
 
         RateLimitPlug.add_rate_limit_headers(
           conn,
@@ -114,10 +114,10 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
   end
 
   defp check_rate(conn, interval_ms, max_requests) do
-    ExRated.check_rate(bucket_name(conn), interval_ms, max_requests)
+    ExRated.check_rate(bucket_name_per_client(conn), interval_ms, max_requests)
   end
 
-  defp bucket_name(conn) do
+  defp bucket_name_per_client(conn) do
     path = Enum.slice(conn.path_info, 0, 2) |> Enum.join("/")
     Logger.debug("Rate Limit path: #{path}")
 
