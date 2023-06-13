@@ -12,6 +12,10 @@
 #
 
 defmodule Sentrypeer.Cldr do
+  @moduledoc """
+  The Cldr context.
+  """
+
   use Cldr,
     locales: ["en"],
     default_locale: "en",

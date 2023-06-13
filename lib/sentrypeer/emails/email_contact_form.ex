@@ -14,6 +14,10 @@
 defmodule Sentrypeer.Emails.EmailContactForm do
   import Swoosh.Email
 
+  @moduledoc """
+  The EmailContactForm main message.
+  """
+
   def notify_sales(contact) do
     new()
     |> to({"SentryPeerHQ Sales Team", System.get_env("SENTRYPEER_SUPPORT_EMAIL")})

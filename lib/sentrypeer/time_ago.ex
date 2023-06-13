@@ -12,6 +12,8 @@
 #
 
 defmodule Sentrypeer.TimeAgo do
+  alias Cldr.DateTime.Relative
+
   @moduledoc """
   This module is used to generate a human readable time ago string. It 
   uses the Cldr.DateTime.Relative.to_string function to generate the
@@ -25,7 +27,7 @@ defmodule Sentrypeer.TimeAgo do
   def time_ago(datetime) do
     case DateTime.from_iso8601(datetime) do
       {:ok, datetime, _} ->
-        {:ok, time_ago_string} = Cldr.DateTime.Relative.to_string(datetime, Sentrypeer.Cldr)
+        {:ok, time_ago_string} = Relative.to_string(datetime, Sentrypeer.Cldr)
         time_ago_string
 
       nil ->

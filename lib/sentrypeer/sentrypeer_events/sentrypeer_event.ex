@@ -16,6 +16,10 @@ defmodule Sentrypeer.SentrypeerEvents.SentrypeerEvent do
   import Ecto.Changeset
   require Ecto.UUID
 
+  @moduledoc """
+  The SentrypeerEvent schema.
+  """
+
   @allowed_fields [
     :app_name,
     :app_version,

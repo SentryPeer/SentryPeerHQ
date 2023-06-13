@@ -12,6 +12,10 @@
 #
 
 defmodule SentrypeerWeb.ErrorJSON do
+  @moduledoc """
+  This module is used to generate a JSON error response.
+  """
+
   # If you want to customize a particular status code,
   # you may add your own clauses, such as:
   #

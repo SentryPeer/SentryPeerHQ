@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.NavigationComponents do
   use SentrypeerWeb, :html
 
+  @moduledoc """
+  This module is used to generate the navigation components for the application.
+  """
+
   # Need to turn these into proper components like in the below module
   import SentrypeerWeb.CoreComponents
 

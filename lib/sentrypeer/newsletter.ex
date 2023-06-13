@@ -15,6 +15,10 @@ defmodule Sentrypeer.Newsletter do
   use HTTPoison.Base
   require Logger
 
+  @moduledoc """
+  The Newsletter module for signing up users to Mailchimp.
+  """
+
   def subscribe(email) do
     submit_to_mailchimp_api(email)
   end

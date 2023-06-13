@@ -18,6 +18,10 @@ defmodule Sentrypeer.Emails.EmailWelcome do
 
   alias Sentrypeer.Mailer
 
+  @moduledoc """
+  The EmailWelcome main messages.
+  """
+
   def welcome(user) do
     new()
     |> subject("Welcome to SentryPeer!")

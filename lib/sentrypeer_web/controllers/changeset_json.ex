@@ -12,7 +12,7 @@
 #
 
 defmodule SentrypeerWeb.ChangesetJSON do
-  @doc """
+  @moduledoc """
   Renders changeset errors.
   """
   def error(%{changeset: changeset}) do

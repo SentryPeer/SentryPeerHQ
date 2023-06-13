@@ -36,6 +36,6 @@ defmodule Sentrypeer.Auth.Token do
     aud() in audience
   end
 
-  defp iss(), do: Auth0Config.auth0_base_url()
-  defp aud(), do: Auth0Config.auth0_audience()
+  defp iss, do: Auth0Config.auth0_base_url()
+  defp aud, do: Auth0Config.auth0_audience()
 end

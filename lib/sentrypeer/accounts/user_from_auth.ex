@@ -15,11 +15,11 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
   require Logger
   require Poison
 
-  alias Ueberauth.Auth
   alias Sentrypeer.Accounts
   alias Sentrypeer.Auth.Auth0User
   alias Sentrypeer.Emails.EmailError
   alias Sentrypeer.Mailer
+  alias Ueberauth.Auth
 
   @moduledoc """
   Retrieve the user information from an auth request
@@ -96,9 +96,10 @@ defmodule Sentrypeer.Accounts.UserFromAuth do
         [auth.info.first_name, auth.info.last_name]
         |> Enum.filter(&(&1 != nil and &1 != ""))
 
-      cond do
-        Enum.empty?(name) -> auth.info.nickname
-        true -> Enum.join(name, " ")
+      if Enum.empty?(name) do
+        auth.info.nickname
+      else
+        Enum.join(name, " ")
       end
     end
   end

@@ -14,6 +14,10 @@
 defmodule Sentrypeer.Emails.EmailNotification do
   import Swoosh.Email
 
+  @moduledoc """
+  The EmailNotification main message.
+  """
+
   def voip_fraud_email_alert(user, number_or_ip_address) do
     new()
     |> to({user.name, user.email, number_or_ip_address})

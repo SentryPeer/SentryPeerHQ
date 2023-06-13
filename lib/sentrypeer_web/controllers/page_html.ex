@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.PageHTML do
   use SentrypeerWeb, :html
 
+  @moduledoc """
+  This module is used to generate the HTML for the page we use.
+  """
+
   import SentrypeerWeb.HomePageComponents
 
   embed_templates "page_html/*"

@@ -31,7 +31,7 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
      )}
   end
 
-  defp total_events() do
+  defp total_events do
     Sentrypeer.SentrypeerEvents.total_events!()
   end
 

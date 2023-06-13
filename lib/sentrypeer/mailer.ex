@@ -13,4 +13,8 @@
 
 defmodule Sentrypeer.Mailer do
   use Swoosh.Mailer, otp_app: :sentrypeer
+
+  @moduledoc """
+  The SentryPeer Mailer.
+  """
 end

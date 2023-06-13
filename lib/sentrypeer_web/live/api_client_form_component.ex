@@ -18,6 +18,11 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   alias Sentrypeer.Emails.EmailError
   alias Sentrypeer.Mailer
 
+  @moduledoc """
+  This component is used to render the form for creating and editing
+  API and Node clients.
+  """
+
   require Logger
 
   @impl true

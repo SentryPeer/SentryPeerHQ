@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.StripeHandler do
   @behaviour Stripe.WebhookHandler
 
+  @moduledoc """
+  This module is used to handle Stripe webhook events.
+  """
+
   require Logger
   alias Sentrypeer.Accounts
   alias Sentrypeer.Auth.Auth0User

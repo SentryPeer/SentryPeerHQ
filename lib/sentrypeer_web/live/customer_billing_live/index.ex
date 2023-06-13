@@ -17,8 +17,9 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
   import SentrypeerWeb.NavigationComponents
   import Sentrypeer.BillingHelpers
 
-  alias Sentrypeer.BillingSubscriptions
   alias Sentrypeer.Accounts
+  alias Sentrypeer.BillingSubscriptions
+  alias Stripe.BillingPortal.Session
 
   require Logger
 
@@ -45,7 +46,7 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
 
   @impl true
   def handle_event("manage_billing", _value, socket) do
-    case Stripe.BillingPortal.Session.create(%{
+    case Session.create(%{
            customer:
              Accounts.get_user_stripe_id(socket.assigns.current_user.id).billing_subscription.stripe_id,
            return_url: url(~p"/billing")

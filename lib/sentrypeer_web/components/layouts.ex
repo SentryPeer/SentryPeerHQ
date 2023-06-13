@@ -14,5 +14,9 @@
 defmodule SentrypeerWeb.Layouts do
   use SentrypeerWeb, :html
 
+  @moduledoc """
+  Layouts for the application.
+  """
+
   embed_templates "layouts/*"
 end

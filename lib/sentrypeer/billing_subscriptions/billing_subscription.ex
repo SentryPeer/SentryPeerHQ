@@ -15,6 +15,10 @@ defmodule Sentrypeer.BillingSubscriptions.BillingSubscription do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+  The BillingSubscription schema.
+  """
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "billing_subscriptions" do

@@ -22,10 +22,10 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
       send_resp: 3
     ]
 
-  alias SentrypeerWeb.RateLimitPlug
   alias Sentrypeer.Clients.Client
-  alias Sentrypeer.Plans.Plan
   alias Sentrypeer.Plans
+  alias Sentrypeer.Plans.Plan
+  alias SentrypeerWeb.RateLimitPlug
 
   require Logger
 

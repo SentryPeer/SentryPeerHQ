@@ -17,4 +17,8 @@ defmodule Sentrypeer.Emails do
     namespace: Sentrypeer
 
   use Phoenix.Component
+
+  @moduledoc """
+  The Emails view.
+  """
 end

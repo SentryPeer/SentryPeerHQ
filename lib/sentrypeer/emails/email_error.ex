@@ -14,6 +14,10 @@
 defmodule Sentrypeer.Emails.EmailError do
   import Swoosh.Email
 
+  @moduledoc """
+  The EmailError main message.
+  """
+
   def notify_admins(module, error, user_id) do
     new()
     |> to({"SentryPeerHQ Admins", System.get_env("SENTRYPEER_SUPPORT_EMAIL")})

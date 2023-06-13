@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.HomePageComponents do
   use SentrypeerWeb, :html
 
+  @moduledoc """
+  This module is used to generate the HTML for the home page.
+  """
+
   # Need to turn these into proper components like in the below module
   import SentrypeerWeb.CoreComponents
 

@@ -20,6 +20,7 @@ defmodule Sentrypeer.Plans do
   This module is used to check what plan a user
   """
 
+  # credo:disable-for-this-file Credo.Check.Design.TagTODO
   def what_plan_am_i_on(user_id) do
     # TODO: Move this to our config or Pg
     plans = [
@@ -40,7 +41,7 @@ defmodule Sentrypeer.Plans do
         support_level: :community,
         api_credits: :rewarded_ads
       },
-      # TODO: Move to :proportional for rate_limit
+      # Move to :proportional for rate_limit ?
       %Plan{
         plan_name: :contributor_plan,
         rate_limit: 3600,

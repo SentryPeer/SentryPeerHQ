@@ -19,11 +19,11 @@ defmodule Sentrypeer.Accounts do
   import Ecto.Query, warn: false
   alias Sentrypeer.Repo
 
-  alias Sentrypeer.Auth.Auth0User
-  alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Accounts.User
-  alias Sentrypeer.BillingSubscriptions
+  alias Sentrypeer.Auth.Auth0ManagementAPI
+  alias Sentrypeer.Auth.Auth0User
   alias Sentrypeer.BillingHelpers
+  alias Sentrypeer.BillingSubscriptions
 
   require Logger
 

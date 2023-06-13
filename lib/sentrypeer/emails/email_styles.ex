@@ -12,6 +12,10 @@
 #
 
 defmodule Sentrypeer.Emails.EmailStyles do
+  @moduledoc """
+  The EmailStyles module.
+  """
+
   def utility_classes do
     (build_typography() ++
        build_margin_padding_size() ++
@@ -95,7 +99,7 @@ defmodule Sentrypeer.Emails.EmailStyles do
     "h" => "height",
     "w" => "width"
   }
-  def build_margin_padding_size() do
+  def build_margin_padding_size do
     base_class_keys = Map.keys(@base_classes)
     step_keys = Map.keys(@steps)
 
@@ -165,7 +169,7 @@ defmodule Sentrypeer.Emails.EmailStyles do
     "text" => "color",
     "bg" => "background-color"
   }
-  def build_colors() do
+  def build_colors do
     base_class_keys = Map.keys(@base_classes)
     color_keys = Map.keys(@colors)
 

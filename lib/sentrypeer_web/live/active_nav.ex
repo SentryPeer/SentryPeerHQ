@@ -12,9 +12,15 @@
 #
 
 # Taken from https://fly.io/phoenix-files/liveview-active-nav/
+
+# credo:disable-for-this-file Credo.Check.Refactor.CyclomaticComplexity
 defmodule SentrypeerWeb.ActiveNav do
   use SentrypeerWeb, :live_view
   require Logger
+
+  @moduledoc """
+  This module is used to set the active page based on the current live view loaded.
+  """
 
   def render(assigns) do
     ~H"""

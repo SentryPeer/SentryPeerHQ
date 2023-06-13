@@ -15,6 +15,10 @@ defmodule Sentrypeer.SentrypeerEvents.Query do
   import Ecto.Query
   alias Sentrypeer.SentrypeerEvents
 
+  @moduledoc """
+  The SentrypeerEvents query context.
+  """
+
   def base do
     SentrypeerEvents
   end

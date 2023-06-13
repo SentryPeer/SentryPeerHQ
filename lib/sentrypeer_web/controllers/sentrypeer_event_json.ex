@@ -14,7 +14,7 @@
 defmodule SentrypeerWeb.SentrypeerEventJSON do
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  @doc """
+  @moduledoc """
   Renders a list of sentrypeerevents.
   """
   def index(%{events: sentrypeerevents}) do

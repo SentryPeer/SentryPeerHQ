@@ -16,6 +16,10 @@ defmodule Sentrypeer.ContactForm.Contact do
   import Ecto.Changeset
   import EctoCommons.EmailValidator
 
+  @moduledoc """
+  The Contact schema.
+  """
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "contacts" do

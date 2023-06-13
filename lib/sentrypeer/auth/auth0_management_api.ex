@@ -15,8 +15,8 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
   alias Sentrypeer.Auth.Auth0Config
   use HTTPoison.Base
 
-  alias Sentrypeer.CustomerClients.Client
   alias Sentrypeer.Auth.Permissions
+  alias Sentrypeer.CustomerClients.Client
 
   require Logger
 

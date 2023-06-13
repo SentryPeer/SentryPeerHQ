@@ -14,6 +14,10 @@
 defmodule SentrypeerWeb.PricingHTML do
   use SentrypeerWeb, :html
 
+  @moduledoc """
+  This module is used to generate the HTML for the pricing page.
+  """
+
   import SentrypeerWeb.HomePageComponents
   import Sentrypeer.BillingHelpers
 
