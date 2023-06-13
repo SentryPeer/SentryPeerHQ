@@ -74,7 +74,6 @@ defmodule SentrypeerWeb.Router do
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
-    post "/:provider/callback", AuthController, :callback
   end
 
   use Kaffy.Routes, scope: "/crm", pipe_through: [:admins_only]

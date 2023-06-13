@@ -54,6 +54,7 @@ defmodule SentrypeerWeb.StripeHandler do
   end
 
   @impl true
+  # sobelow_skip ["DOS.StringToAtom"]
   def handle_event(%Stripe.Event{type: "customer.subscription.updated"} = event) do
     Logger.debug("Customer Subscription Updated.")
     Logger.debug(event)
@@ -87,14 +88,14 @@ defmodule SentrypeerWeb.StripeHandler do
     old_plan_nickname =
       (List.first(event.data.previous_attributes.items.data).plan.nickname <> "_plan")
       |> BillingHelpers.lowercase_spaces_to_underscores()
-      |> String.to_atom()
+      |> String.to_existing_atom()
 
     FunWithFlags.clear(old_plan_nickname, for_actor: user_for_flags)
 
     new_plan_nickname =
       (stripe_subscription.plan.nickname <> "_plan")
       |> BillingHelpers.lowercase_spaces_to_underscores()
-      |> String.to_atom()
+      |> String.to_existing_atom()
 
     FunWithFlags.enable(new_plan_nickname, for_actor: user_for_flags)
 
