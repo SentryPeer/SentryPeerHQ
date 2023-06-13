@@ -167,8 +167,7 @@ defmodule SentrypeerWeb.Router do
       :rate_limit_per_hour,
       :api,
       :api_authorization,
-      :api_permission_write_events,
-      :rate_limit_per_plan
+      :api_permission_write_events
     ]
 
     resources "/events", SentrypeerEventController, only: [:create]
