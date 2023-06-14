@@ -14,7 +14,7 @@
 defmodule SentrypeerWeb.API.RateLimitPlugTest do
   use SentrypeerWeb.ConnCase, async: true
 
-  alias MnishiguchiWeb.API.RateLimitPlug
+  alias SentrypeerWeb.RateLimitPlug
 
   @path "/"
   @rate_limit_options [max_requests: 1, interval_seconds: 60]
@@ -44,7 +44,7 @@ defmodule SentrypeerWeb.API.RateLimitPlugTest do
         |> RateLimitPlug.rate_limit(@rate_limit_options)
 
       assert conn2.halted
-      assert json_response(conn2, 429) == "Too Many Requests"
+      assert json_response(conn2, 429) == %{"status" => "429 Too Many Requests"}
     end
   end
 end

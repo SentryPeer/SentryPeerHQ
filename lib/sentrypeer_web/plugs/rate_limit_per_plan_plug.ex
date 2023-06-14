@@ -143,7 +143,7 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
   defp not_found(conn) do
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(404, '{"status": "Client not found"}')
+    |> send_resp(404, '{"status": "404 Client not found"}')
     |> halt()
   end
 end
