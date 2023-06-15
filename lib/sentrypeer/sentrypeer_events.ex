@@ -208,7 +208,7 @@ defmodule Sentrypeer.SentrypeerEvents do
 
       changeset_after_insert
     else
-      changeset
+      {:error, changeset}
     end
   end
 
