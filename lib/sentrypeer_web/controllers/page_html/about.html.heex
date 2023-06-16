@@ -3,14 +3,14 @@
   <!-- Hero section -->
   <div>
     <div class="mx-auto dark:bg-slate-400 max-w-7xl px-6 py-14 sm:py-22 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
+      <div class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-1 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
         <h1 class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:col-span-2 xl:col-auto">
           We're trying to stop fraudulent VoIP (toll fraud) before it happens.
         </h1>
 
         <div class="mt-10 grid max-w-xl grid-cols-1 gap-8 text-base leading-7 text-gray-700 lg:max-w-none lg:grid-cols-2">
           <div>
-            <h2 class="mt-6 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+            <h2 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
               What is SentryPeer?
             </h2>
             <p class="mt-6 text-gray-700 dark:text-slate-800">
@@ -65,13 +65,23 @@
                 Exploitations in firmware or PBX software.
               </li>
             </ol>
+            <p class="mt-6 text-gray-700 dark:text-slate-800 ">
+              The data we compare your queries against is gathered from various VoIP (SIP) honeypots that we run, all round the world, unless you are on the
+              <a
+                href={~p"/pricing"}
+                title="SentryPeer Pricing"
+                class="text-indigo-600 hover:text-brand"
+              >
+                Contributor Plan.
+              </a>
+            </p>
           </div>
           <div>
             <img
               src={~p"/images/Gavin-Henry-SentryPeer-Founder.jpg"}
               alt="Gavin Henry, SentryPeer Founder."
               title="Gavin Henry, SentryPeer Founder."
-              class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-6"
+              class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-10 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-0"
             />
             <blockquote class="mt-6 text-xl italic leading-8 text-gray-700 dark:text-slate-800">
               <p>
@@ -106,32 +116,21 @@
                 </div>
               </div>
             </figcaption>
+            <p class="mt-4 mb-6 text-gray-700 dark:text-slate-800 ">
+              We do our
+              <a
+                href="https://github.com/SentryPeer"
+                title="SentryPeer on GitHub"
+                class="text-indigo-600 hover:text-brand"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                software engineering in the open
+              </a>
+              and love bug reports and feature requests. Feel free to open an issue on any of our repositories.
+            </p>
           </div>
         </div>
-
-        <p class="mt-6 text-gray-700 dark:text-slate-800 ">
-          The data we compare your queries against is gathered from various VoIP (SIP) honeypots that we run, all round the world, unless you are on the
-          <a
-            href={~p"/pricing"}
-            title="SentryPeer Pricing"
-            class="text-indigo-600 hover:text-brand"
-          >
-            Contributor Plan.
-          </a>
-        </p>
-        <p class="mt-4 mb-6 text-gray-700 dark:text-slate-800 ">
-          We do our
-          <a
-            href="https://github.com/SentryPeer"
-            title="SentryPeer on GitHub"
-            class="text-indigo-600 hover:text-brand"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            software engineering in the open
-          </a>
-          and love bug reports and feature requests. Feel free to open an issue on any of our repositories.
-        </p>
       </div>
     </div>
   </div>
