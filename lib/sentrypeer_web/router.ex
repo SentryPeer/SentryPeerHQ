@@ -99,6 +99,11 @@ defmodule SentrypeerWeb.Router do
       live "/billing", CustomerBillingLive.Index, :index
       live "/team", CustomerTeamLive.Index, :index
       live "/integrations", CustomerIntegrationsLive.Index, :index
+      live "/integrations/new", IntegrationLive.Index, :new
+      live "/integrations/:id/edit", IntegrationLive.Index, :edit
+
+      live "/integrations/:id", IntegrationLive.Show, :show
+      live "/integrations/:id/show/edit", IntegrationLive.Show, :edit
 
       live "/settings", CustomerSettingsLive.Index, :index
       live "/settings/new", CustomerSettingsLive.Index, :new
