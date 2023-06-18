@@ -16,40 +16,74 @@ defmodule Sentrypeer.Analytics.SourceIPS do
   The Analytics context.
   """
 
+  import Ecto.Query
   alias Sentrypeer.Repo
+  alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
   def most_recent_hits_top_10 do
-    query = """
-    SELECT source_ip, MAX(event_timestamp) AS seen_last,
-    COUNT(source_ip) as seen_total
-    FROM sentrypeerevents
-    GROUP BY source_ip
-    ORDER BY max(event_timestamp)
-    DESC limit 10;
-    """
+    #    query = """
+    #    SELECT source_ip, MAX(event_timestamp) AS seen_last,
+    #    COUNT(source_ip) as seen_total
+    #    FROM sentrypeerevents
+    #    GROUP BY source_ip
+    #    ORDER BY max(event_timestamp)
+    #    DESC limit 10;
+    #    """
+    #
+    #    Repo.query!(query)
 
-    Repo.query!(query)
+    query =
+      from s in SentrypeerEvent,
+        group_by: s.source_ip,
+        order_by: [desc: max(s.event_timestamp)],
+        limit: 10,
+        select: %{
+          source_ip: s.source_ip,
+          seen_last: max(s.event_timestamp),
+          seen_total: count(s.source_ip)
+        }
+
+    Repo.all(query)
   end
 
   def highest_top_10 do
-    query = """
-    SELECT source_ip, MAX(event_timestamp) AS seen_last,
-    COUNT(source_ip) as seen_total
-    FROM sentrypeerevents
-    GROUP BY source_ip
-    ORDER BY seen_total
-    DESC limit 10;
-    """
+    #    query = """
+    #    SELECT source_ip, MAX(event_timestamp) AS seen_last,
+    #    COUNT(source_ip) as seen_total
+    #    FROM sentrypeerevents
+    #    GROUP BY source_ip
+    #    ORDER BY seen_total
+    #    DESC limit 10;
+    #    """
+    #
+    #    Repo.query!(query)
 
-    Repo.query!(query)
+    query =
+      from s in SentrypeerEvent,
+        group_by: s.source_ip,
+        order_by: [desc: count(s.source_ip)],
+        limit: 10,
+        select: %{
+          source_ip: s.source_ip,
+          seen_last: max(s.event_timestamp),
+          seen_total: count(s.source_ip)
+        }
+
+    Repo.all(query)
   end
 
   def total_unique do
-    query = """
-    SELECT COUNT(DISTINCT called_number) AS seen_total
-    FROM sentrypeerevents;
-    """
+    #    query = """
+    #    SELECT COUNT(DISTINCT source_ip) AS seen_total
+    #    FROM sentrypeerevents;
+    #    """
+    #
+    #    Repo.query!(query)
 
-    Repo.query!(query)
+    query =
+      from s in SentrypeerEvent,
+        distinct: s.source_ip
+
+    Repo.aggregate(query, :count, :source_ip)
   end
 end
