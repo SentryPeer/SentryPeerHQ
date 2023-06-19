@@ -16,6 +16,7 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
 
   import SentrypeerWeb.NavigationComponents
   alias Contex
+  alias Sentrypeer.Analytics
 
   require Logger
 
@@ -23,12 +24,30 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   def mount(_params, session, socket) do
     Logger.debug(inspect(session["current_user"].id))
 
-    data = [["Apples", 10], ["Bananas", 12], ["Pears", 2]]
+    sip_methods_top_10_opts = [
+      mapping: %{category_col: "SIP Method", value_col: "Count"},
+      legend_setting: :legend_right,
+      data_labels: true,
+      title: "Top 10 SIP Methods"
+    ]
 
-    output =
-      data
-      |> Contex.Dataset.new()
-      |> Contex.Plot.new(Contex.BarChart, 600, 400)
+    sip_methods_top_10_output =
+      Analytics.sip_methods_top_10()
+      |> Contex.Dataset.new(["SIP Method", "Count"])
+      |> Contex.Plot.new(Contex.PieChart, 600, 400, sip_methods_top_10_opts)
+      |> Contex.Plot.to_svg()
+
+    user_agents_highest_top_10_opts = [
+      mapping: %{category_col: "User Agent", value_col: "Count"},
+      legend_setting: :legend_right,
+      data_labels: true,
+      title: "Top 10 SIP User Agents"
+    ]
+
+    user_agents_highest_top_10_output =
+      Analytics.user_agents_highest_top_10()
+      |> Contex.Dataset.new(["User Agent", "Count"])
+      |> Contex.Plot.new(Contex.PieChart, 600, 400, user_agents_highest_top_10_opts)
       |> Contex.Plot.to_svg()
 
     {:ok,
@@ -37,7 +56,8 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
-       graph: output
+       sip_methods_top_10_graph: sip_methods_top_10_output,
+       user_agents_highest_top_10_graph: user_agents_highest_top_10_output
      )}
   end
 end

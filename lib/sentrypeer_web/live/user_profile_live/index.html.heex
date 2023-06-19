@@ -151,7 +151,30 @@
                 </div>
                 <div class="ml-3 flex-1 md:flex md:justify-between">
                   <p class="text-sm text-blue-700 dark:text-slate-800">
-                    Please update your profile on your identity provider.
+                    Please update your profile on your
+                    <%= if String.starts_with?(@current_user.id, "goo") do %>
+                      <a
+                        href="https://myaccount.google.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Your Google account profile"
+                        class="text-indigo-600 hover:text-brand"
+                      >
+                        Google account
+                      </a>
+                      <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+                    <% else %>
+                      <a
+                        href="https://github.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Your GitHub account profile"
+                        class="text-indigo-600 hover:text-brand"
+                      >
+                        GitHub account
+                      </a>
+                      <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+                    <% end %>
                   </p>
                 </div>
               </div>

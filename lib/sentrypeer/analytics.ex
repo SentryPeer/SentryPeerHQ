@@ -21,27 +21,26 @@ defmodule Sentrypeer.Analytics do
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
   def user_agents_highest_top_10 do
-#    query = """
-#    SELECT sip_user_agent, MAX(event_timestamp) AS seen_last,
-#    COUNT(sip_user_agent) AS seen_total
-#    FROM sentrypeerevents
-#    GROUP BY sip_user_agent
-#    ORDER BY seen_total
-#    DESC limit 10;
-#    """
-#
-#    Repo.query!(query)
+    #    query = """
+    #    SELECT sip_user_agent, MAX(event_timestamp) AS seen_last,
+    #    COUNT(sip_user_agent) AS seen_total
+    #    FROM sentrypeerevents
+    #    GROUP BY sip_user_agent
+    #    ORDER BY seen_total
+    #    DESC limit 10;
+    #    """
+    #
+    #    Repo.query!(query)
 
-     query =
+    query =
       from s in SentrypeerEvent,
         group_by: s.sip_user_agent,
         order_by: [desc: count(s.sip_user_agent)],
         limit: 10,
-        select: %{
-          sip_user_agent: s.sip_user_agent,
-          seen_last: max(s.event_timestamp),
-          seen_total: count(s.sip_user_agent)
-        }
+        select: [
+          s.sip_user_agent,
+          count(s.sip_user_agent)
+        ]
 
     Repo.all(query)
   end
@@ -65,10 +64,10 @@ defmodule Sentrypeer.Analytics do
         group_by: s.sip_method,
         order_by: [desc: count(s.sip_method)],
         limit: 10,
-        select: %{
-          sip_method: s.sip_method,
-          seen_total: count(s.sip_method)
-        }
+        select: [
+          s.sip_method,
+          count(s.sip_method)
+        ]
 
     Repo.all(query)
   end
