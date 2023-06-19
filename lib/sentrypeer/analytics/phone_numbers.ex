@@ -26,14 +26,14 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
     #    COUNT(called_number) as seen_total
     #    FROM sentrypeerevents
     #    GROUP BY called_number
-    #    ORDER BY seen_total
+    #    ORDER BY seen_last
     #    DESC limit 10;
     #    """
 
     query =
       from s in SentrypeerEvent,
         group_by: s.called_number,
-        order_by: [desc: count(s.called_number)],
+        order_by: [desc: max(s.event_timestamp)],
         limit: 10,
         select: %{
           called_number: s.called_number,
@@ -64,6 +64,20 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
           seen_last: max(s.event_timestamp),
           seen_total: count(s.called_number)
         }
+
+    Repo.all(query)
+  end
+
+  def top_10 do
+    query =
+      from s in SentrypeerEvent,
+        group_by: s.called_number,
+        order_by: [desc: count(s.called_number)],
+        limit: 10,
+        select: [
+          s.called_number,
+          count(s.called_number)
+        ]
 
     Repo.all(query)
   end

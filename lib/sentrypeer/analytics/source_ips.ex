@@ -72,6 +72,20 @@ defmodule Sentrypeer.Analytics.SourceIPS do
     Repo.all(query)
   end
 
+  def top_10 do
+    query =
+      from s in SentrypeerEvent,
+        group_by: s.source_ip,
+        order_by: [desc: count(s.source_ip)],
+        limit: 10,
+        select: [
+          s.source_ip,
+          count(s.source_ip)
+        ]
+
+    Repo.all(query)
+  end
+
   def total_unique do
     #    query = """
     #    SELECT COUNT(DISTINCT source_ip) AS seen_total
