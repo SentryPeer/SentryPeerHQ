@@ -31,18 +31,7 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
        sip_methods_top_10_graph: sip_methods_top_10_graph(),
-       user_agents_highest_top_10_graph: user_agents_highest_top_10_graph(),
-       events_per_day_total: events_per_day_total()
-     )}
-  end
-
-  @impl true
-  def handle_event "events_per_day_total_bar_clicked", %{"value" => value}, socket do
-    Logger.debug(inspect(value))
-
-    {:noreply,
-     assign(socket,
-       events_per_day_total: events_per_day_total()
+       user_agents_highest_top_10_graph: user_agents_highest_top_10_graph()
      )}
   end
 
@@ -71,22 +60,6 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
     Analytics.user_agents_highest_top_10()
     |> Dataset.new(["User Agent", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
-    |> Plot.to_svg()
-  end
-
-  defp events_per_day_total do
-    opts = [
-      mapping: %{category_col: "Date", value_cols: ["Count"]},
-      type: :stacked,
-      data_labels: true,
-      orientation: :horizontal,
-      phx_event_handler: "events_per_day_total_bar_clicked",
-      title: "Events per 30 days"
-    ]
-
-    Analytics.user_agents_highest_top_10()
-    |> Dataset.new(["Date", "Count"])
-    |> Plot.new(BarChart, 600, 400, opts)
     |> Plot.to_svg()
   end
 end
