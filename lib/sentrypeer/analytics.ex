@@ -87,10 +87,12 @@ defmodule Sentrypeer.Analytics do
       from s in SentrypeerEvent,
         group_by: fragment("date_trunc('day', event_timestamp)"),
         order_by: [asc: fragment("date_trunc('day', event_timestamp)")],
-        select: %{
-          day: fragment("date_trunc('day', event_timestamp)"),
-          seen_total: count(s.event_timestamp)
-        }
+        select: [
+          "Date",
+          fragment("date_trunc('day', event_timestamp)"),
+          "Count",
+          count(s.event_timestamp)
+        ]
 
     Repo.all(query)
   end

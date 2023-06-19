@@ -77,12 +77,51 @@
           </div>
         </div>
         <%= being_worked_on(assigns) %>
+
+        <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
+          <h3 class="text-base font-semibold leading-7 text-indigo-600 dark:text-white">
+            Phone Numbers
+          </h3>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-900 dark:text-slate-400">
+            Attempted phone numbers called
+          </p>
+        </div>
+
+        <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
+          <h3 class="text-base font-semibold leading-7 text-indigo-600 dark:text-white">
+            IP Addresses
+          </h3>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-900 dark:text-slate-400">
+            Source IPs of attackers
+          </p>
+        </div>
+        <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
+          <h3 class="text-base font-semibold leading-7 text-indigo-600 dark:text-white">
+            SIP Protocol
+          </h3>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-900 dark:text-slate-400">
+            Information from SIP packets
+          </p>
+        </div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
             <%= @sip_methods_top_10_graph %>
           </div>
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
             <%= @user_agents_highest_top_10_graph %>
+          </div>
+        </div>
+        <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
+          <h3 class="text-base font-semibold leading-7 text-indigo-600 dark:text-white">
+            General
+          </h3>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-900 dark:text-slate-400">
+            General information about attacks
+          </p>
+        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
+          <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
+            <%= @events_per_day_total %>
           </div>
         </div>
       </div>

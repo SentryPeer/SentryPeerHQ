@@ -15,7 +15,7 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   use SentrypeerWeb, :live_view
 
   import SentrypeerWeb.NavigationComponents
-  alias Contex
+  alias Contex.{Dataset, BarChart, PieChart, Plot}
   alias Sentrypeer.Analytics
 
   require Logger
@@ -24,40 +24,69 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   def mount(_params, session, socket) do
     Logger.debug(inspect(session["current_user"].id))
 
-    sip_methods_top_10_opts = [
-      mapping: %{category_col: "SIP Method", value_col: "Count"},
-      legend_setting: :legend_right,
-      data_labels: true,
-      title: "Top 10 SIP Methods"
-    ]
-
-    sip_methods_top_10_output =
-      Analytics.sip_methods_top_10()
-      |> Contex.Dataset.new(["SIP Method", "Count"])
-      |> Contex.Plot.new(Contex.PieChart, 600, 400, sip_methods_top_10_opts)
-      |> Contex.Plot.to_svg()
-
-    user_agents_highest_top_10_opts = [
-      mapping: %{category_col: "User Agent", value_col: "Count"},
-      legend_setting: :legend_right,
-      data_labels: true,
-      title: "Top 10 SIP User Agents"
-    ]
-
-    user_agents_highest_top_10_output =
-      Analytics.user_agents_highest_top_10()
-      |> Contex.Dataset.new(["User Agent", "Count"])
-      |> Contex.Plot.new(Contex.PieChart, 600, 400, user_agents_highest_top_10_opts)
-      |> Contex.Plot.to_svg()
-
     {:ok,
      assign(socket,
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
-       sip_methods_top_10_graph: sip_methods_top_10_output,
-       user_agents_highest_top_10_graph: user_agents_highest_top_10_output
+       sip_methods_top_10_graph: sip_methods_top_10_graph(),
+       user_agents_highest_top_10_graph: user_agents_highest_top_10_graph(),
+       events_per_day_total: events_per_day_total()
      )}
+  end
+
+  @impl true
+  def handle_event "events_per_day_total_bar_clicked", %{"value" => value}, socket do
+    Logger.debug(inspect(value))
+
+    {:noreply,
+     assign(socket,
+       events_per_day_total: events_per_day_total()
+     )}
+  end
+
+  defp sip_methods_top_10_graph do
+    opts = [
+      mapping: %{category_col: "SIP Method", value_col: "Count"},
+      legend_setting: :legend_right,
+      data_labels: true,
+      title: "Top 10 SIP Methods"
+    ]
+
+    Analytics.sip_methods_top_10()
+    |> Dataset.new(["SIP Method", "Count"])
+    |> Plot.new(PieChart, 600, 400, opts)
+    |> Plot.to_svg()
+  end
+
+  defp user_agents_highest_top_10_graph do
+    opts = [
+      mapping: %{category_col: "User Agent", value_col: "Count"},
+      legend_setting: :legend_right,
+      data_labels: true,
+      title: "Top 10 SIP User Agents"
+    ]
+
+    Analytics.user_agents_highest_top_10()
+    |> Dataset.new(["User Agent", "Count"])
+    |> Plot.new(PieChart, 600, 400, opts)
+    |> Plot.to_svg()
+  end
+
+  defp events_per_day_total do
+    opts = [
+      mapping: %{category_col: "Date", value_cols: ["Count"]},
+      type: :stacked,
+      data_labels: true,
+      orientation: :horizontal,
+      phx_event_handler: "events_per_day_total_bar_clicked",
+      title: "Events per 30 days"
+    ]
+
+    Analytics.user_agents_highest_top_10()
+    |> Dataset.new(["Date", "Count"])
+    |> Plot.new(BarChart, 600, 400, opts)
+    |> Plot.to_svg()
   end
 end
