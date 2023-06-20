@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04]
-        elixir_version: [1.14.4]
+        elixir_version: [1.15.0]
         otp_version: [25]
 
     steps:
