@@ -54,7 +54,7 @@ defmodule Sentrypeer.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:ecto_commons, "~> 0.3.3"},
       {:ecto_psql_extras, "~> 0.7"},
-      {:ecto_sql, "~> 3.6"},
+      {:ecto_sql, "~> 3.10"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:ex_cldr, "~> 2.33"},
       {:ex_cldr_dates_times, "~> 2.0"},

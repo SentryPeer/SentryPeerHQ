@@ -39,7 +39,8 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.called_number)
-        }
+        },
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -63,7 +64,8 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.called_number)
-        }
+        },
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -77,7 +79,8 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
         select: [
           s.called_number,
           count(s.called_number)
-        ]
+        ],
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -91,7 +94,8 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
 
     query =
       from s in SentrypeerEvent,
-        distinct: s.called_number
+        distinct: s.called_number,
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.aggregate(query, :count, :called_number)
   end

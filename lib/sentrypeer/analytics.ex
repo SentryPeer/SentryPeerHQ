@@ -40,7 +40,8 @@ defmodule Sentrypeer.Analytics do
         select: [
           s.sip_user_agent,
           count(s.sip_user_agent)
-        ]
+        ],
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -67,7 +68,8 @@ defmodule Sentrypeer.Analytics do
         select: [
           s.sip_method,
           count(s.sip_method)
-        ]
+        ],
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -92,7 +94,8 @@ defmodule Sentrypeer.Analytics do
           fragment("date_trunc('day', event_timestamp)"),
           "Count",
           count(s.event_timestamp)
-        ]
+        ],
+        where: s.event_timestamp > ago(30, "day")
 
     Repo.all(query)
   end

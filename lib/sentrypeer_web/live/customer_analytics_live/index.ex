@@ -39,6 +39,16 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
      )}
   end
 
+  @impl true
+  def handle_params(%{"interval" => interval}, url, socket) do
+    Logger.debug("#{interval} has been selected at #{url}")
+
+    {:noreply,
+     assign(socket,
+       phone_numbers_top_10_graph: phone_numbers_top_10_graph()
+     )}
+  end
+
   defp phone_numbers_top_10_graph do
     opts = [
       mapping: %{category_col: "Phone Number", value_col: "Count"},

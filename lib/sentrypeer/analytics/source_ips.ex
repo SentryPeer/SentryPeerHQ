@@ -41,7 +41,8 @@ defmodule Sentrypeer.Analytics.SourceIPS do
           source_ip: s.source_ip,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.source_ip)
-        }
+        },
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -67,7 +68,8 @@ defmodule Sentrypeer.Analytics.SourceIPS do
           source_ip: s.source_ip,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.source_ip)
-        }
+        },
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -81,7 +83,8 @@ defmodule Sentrypeer.Analytics.SourceIPS do
         select: [
           s.source_ip,
           count(s.source_ip)
-        ]
+        ],
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.all(query)
   end
@@ -96,7 +99,8 @@ defmodule Sentrypeer.Analytics.SourceIPS do
 
     query =
       from s in SentrypeerEvent,
-        distinct: s.source_ip
+        distinct: s.source_ip,
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.aggregate(query, :count, :source_ip)
   end

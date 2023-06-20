@@ -176,7 +176,9 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   """
   def total_events! do
-    query = from(s in SentrypeerEvent)
+    query =
+      from s in SentrypeerEvent,
+        where: s.event_timestamp > ago(1, "day")
 
     Repo.aggregate(query, :count, :event_uuid)
   end
