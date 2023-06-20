@@ -12,4 +12,8 @@
 #
 
 defmodule Sentrypeer.Insights do
+
+  @moduledoc """
+  The Insights Context.
+  """
 end
