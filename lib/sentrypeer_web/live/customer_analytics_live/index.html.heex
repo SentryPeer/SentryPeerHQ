@@ -78,8 +78,8 @@
         </div>
         <%= being_worked_on(assigns) %>
 
-        <.modal id="phone_numbers_top_10_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @phone_numbers_top_10_graph %>
+        <.modal id="phone_numbers_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
+          <%= @phone_numbers_top_5_graph %>
         </.modal>
         <div class="flex flex-col items-center flex-grow py-6">
           <span class="isolate inline-flex rounded-md shadow-sm">
@@ -159,10 +159,10 @@
         </div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
           <div
-            phx-click={show_modal("phone_numbers_top_10_graph_modal")}
+            phx-click={show_modal("phone_numbers_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @phone_numbers_top_10_graph %>
+            <%= @phone_numbers_top_5_graph %>
           </div>
 
           <div class="bg-white space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
@@ -186,8 +186,8 @@
           </div>
         </div>
 
-        <.modal id="source_ips_top_10_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @source_ips_top_10_graph %>
+        <.modal id="source_ips_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
+          <%= @source_ips_top_5_graph %>
         </.modal>
 
         <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
@@ -200,10 +200,10 @@
         </div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
           <div
-            phx-click={show_modal("source_ips_top_10_graph_modal")}
+            phx-click={show_modal("source_ips_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @source_ips_top_10_graph %>
+            <%= @source_ips_top_5_graph %>
           </div>
           <div class="bg-white space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
             <div class="relative">
@@ -226,15 +226,12 @@
           </div>
         </div>
 
-        <.modal id="sip_methods_top_10_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @sip_methods_top_10_graph %>
+        <.modal id="sip_methods_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
+          <%= @sip_methods_top_5_graph %>
         </.modal>
 
-        <.modal
-          id="user_agents_highest_top_10_graph_modal"
-          on_cancel={JS.navigate(~p"/analytics")}
-        >
-          <%= @user_agents_highest_top_10_graph %>
+        <.modal id="user_agents_highest_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
+          <%= @user_agents_highest_top_5_graph %>
         </.modal>
 
         <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
@@ -247,16 +244,16 @@
         </div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
           <div
-            phx-click={show_modal("sip_methods_top_10_graph_modal")}
+            phx-click={show_modal("sip_methods_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @sip_methods_top_10_graph %>
+            <%= @sip_methods_top_5_graph %>
           </div>
           <div
-            phx-click={show_modal("user_agents_highest_top_10_graph_modal")}
+            phx-click={show_modal("user_agents_highest_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @user_agents_highest_top_10_graph %>
+            <%= @user_agents_highest_top_5_graph %>
           </div>
         </div>
       </div>

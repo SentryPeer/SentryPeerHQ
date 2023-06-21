@@ -30,76 +30,90 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
-       phone_numbers_top_10_graph: phone_numbers_top_10_graph(),
+       phone_numbers_top_5_graph: phone_numbers_top_5_graph(),
        phone_numbers_total_unique: Analytics.PhoneNumbers.total_unique(),
-       source_ips_top_10_graph: source_ips_top_10_graph(),
+       source_ips_top_5_graph: source_ips_top_5_graph(),
        source_ips_total_unique: Analytics.SourceIPS.total_unique(),
-       sip_methods_top_10_graph: sip_methods_top_10_graph(),
-       user_agents_highest_top_10_graph: user_agents_highest_top_10_graph()
+       sip_methods_top_5_graph: sip_methods_top_5_graph(),
+       user_agents_highest_top_5_graph: user_agents_highest_top_5_graph()
      )}
   end
 
   @impl true
-  def handle_params(%{"interval" => interval}, url, socket) do
-    Logger.debug("#{interval} has been selected at #{url}")
-
-    {:noreply,
-     assign(socket,
-       phone_numbers_top_10_graph: phone_numbers_top_10_graph()
-     )}
+  def handle_params(params, _url, socket) do
+    {:noreply, process_params(socket, params)}
   end
 
-  defp phone_numbers_top_10_graph do
+  defp process_params(socket, %{"interval" => interval}) do
+    Logger.debug("#{interval} has been selected.")
+
+    socket
+    |> recreate_graphs_with_filter(interval)
+  end
+
+  defp process_params(socket, %{}) do
+    # Do nothing
+    socket
+  end
+
+  defp recreate_graphs_with_filter(socket, interval) do
+    assign(socket,
+      sip_methods_top_5_graph: sip_methods_top_5_graph(interval),
+      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(interval)
+    )
+  end
+
+  defp phone_numbers_top_5_graph() do
     opts = [
       mapping: %{category_col: "Phone Number", value_col: "Count"},
-      legend_setting: :legend_right,
+      legend_setting: :legend_top,
       data_labels: true,
-      title: "Top 10 Phone Numbers"
+      title: "Top 5 Phone Numbers"
     ]
 
-    Analytics.PhoneNumbers.top_10()
+    Analytics.PhoneNumbers.top_5()
     |> Dataset.new(["Phone Number", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()
   end
 
-  defp source_ips_top_10_graph do
+  defp source_ips_top_5_graph() do
     opts = [
       mapping: %{category_col: "IP Address", value_col: "Count"},
-      legend_setting: :legend_right,
+      legend_setting: :legend_top,
       data_labels: true,
-      title: "Top 10 IP Addresses"
+      title: "Top 5 IP Addresses"
     ]
 
-    Analytics.SourceIPS.top_10()
+    Analytics.SourceIPS.top_5()
     |> Dataset.new(["IP Address", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()
   end
 
-  defp sip_methods_top_10_graph do
+  defp sip_methods_top_5_graph(interval \\ []) do
     opts = [
       mapping: %{category_col: "SIP Method", value_col: "Count"},
-      legend_setting: :legend_right,
+      legend_setting: :legend_top,
       data_labels: true,
-      title: "Top 10 SIP Methods"
+      title: "Top 5 SIP Methods"
     ]
 
-    Analytics.sip_methods_top_10()
+    Analytics.sip_methods_top_5(interval)
     |> Dataset.new(["SIP Method", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()
   end
 
-  defp user_agents_highest_top_10_graph do
+  defp user_agents_highest_top_5_graph(interval \\ []) do
     opts = [
       mapping: %{category_col: "User Agent", value_col: "Count"},
-      legend_setting: :legend_right,
+      legend_setting: :legend_top,
       data_labels: true,
-      title: "Top 10 SIP User Agents"
+      title: "Top 5 SIP User Agents"
     ]
 
-    Analytics.user_agents_highest_top_10()
+    Analytics.user_agents_highest_top_5(interval)
     |> Dataset.new(["User Agent", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()

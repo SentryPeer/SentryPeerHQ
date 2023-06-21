@@ -20,21 +20,21 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
   alias Sentrypeer.Repo
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  def most_recent_attempted_top_10 do
+  def most_recent_attempted_top_5 do
     #    query = """
     #    SELECT called_number, MAX(event_timestamp) AS seen_last,
     #    COUNT(called_number) as seen_total
     #    FROM sentrypeerevents
     #    GROUP BY called_number
     #    ORDER BY seen_last
-    #    DESC limit 10;
+    #    DESC limit 5;
     #    """
 
     query =
       from s in SentrypeerEvent,
         group_by: s.called_number,
         order_by: [desc: max(s.event_timestamp)],
-        limit: 10,
+        limit: 5,
         select: %{
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
@@ -45,21 +45,21 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
     Repo.all(query)
   end
 
-  def highest_attempted_top_10 do
+  def highest_attempted_top_5 do
     #    query = """
     #    SELECT called_number, MAX(event_timestamp) AS seen_last,
     #    COUNT(called_number) as seen_total
     #    FROM sentrypeerevents
     #    GROUP BY called_number
     #    ORDER BY seen_total
-    #    DESC limit 10;
+    #    DESC limit 5;
     #    """
 
     query =
       from s in SentrypeerEvent,
         group_by: s.called_number,
         order_by: [desc: count(s.called_number)],
-        limit: 10,
+        limit: 5,
         select: %{
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
@@ -70,12 +70,12 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
     Repo.all(query)
   end
 
-  def top_10 do
+  def top_5 do
     query =
       from s in SentrypeerEvent,
         group_by: s.called_number,
         order_by: [desc: count(s.called_number)],
-        limit: 10,
+        limit: 5,
         select: [
           s.called_number,
           count(s.called_number)
