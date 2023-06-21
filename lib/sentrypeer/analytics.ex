@@ -72,7 +72,7 @@ defmodule Sentrypeer.Analytics do
     |> where([s], s.event_timestamp > ago(30, "day"))
   end
 
-  # Default to 1 day
+  # Default to 24 hours
   defp apply_interval_filter(query, []) do
     query
     |> where([s], s.event_timestamp > ago(1, "day"))

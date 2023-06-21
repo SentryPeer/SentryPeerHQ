@@ -35,7 +35,8 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        source_ips_top_5_graph: source_ips_top_5_graph(),
        source_ips_total_unique: Analytics.SourceIPS.total_unique(),
        sip_methods_top_5_graph: sip_methods_top_5_graph(),
-       user_agents_highest_top_5_graph: user_agents_highest_top_5_graph()
+       user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(),
+       interval: "24h"
      )}
   end
 
