@@ -59,7 +59,8 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
   defp recreate_graphs_with_filter(socket, interval) do
     assign(socket,
       sip_methods_top_5_graph: sip_methods_top_5_graph(interval),
-      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(interval)
+      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(interval),
+      interval: interval
     )
   end
 

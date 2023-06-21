@@ -84,64 +84,82 @@
         <div class="flex flex-col items-center flex-grow py-6">
           <span class="isolate inline-flex rounded-md shadow-sm">
             <.link
-              href={~p"/analytics?interval=5m"}
-              class="relative inline-flex items-center rounded-l-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=5m"}
+              class={"#{if @interval == "5m",
+                do: "relative inline-flex items-center rounded-l-md bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center rounded-l-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="5 minute intervals"
             >
               5m
             </.link>
             <.link
-              href={~p"/analytics?interval=15m"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=15m"}
+              class={"#{if @interval == "15m",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="15 minute intervals"
             >
               15m
             </.link>
             <.link
-              href={~p"/analytics?interval=1h"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=1h"}
+              class={"#{if @interval == "1h",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="1 hour intervals"
             >
               1h
             </.link>
             <.link
-              href={~p"/analytics?interval=6h"}
-              class="relative -ml-px inline-flex items-center dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=6h"}
+              class={"#{if @interval == "6h",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="6 hour intervals"
             >
               6h
             </.link>
             <.link
-              href={~p"/analytics?interval=12h"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=12h"}
+              class={"#{if @interval == "12h",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="12 hour intervals"
             >
               12h
             </.link>
             <.link
-              href={~p"/analytics?interval=24h"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=24h"}
+              class={"#{if @interval == "24h",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="24 hour intervals"
             >
               24h
             </.link>
             <.link
-              href={~p"/analytics?interval=2d"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=2d"}
+              class={"#{if @interval == "2d",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="2 day intervals"
             >
               2d
             </.link>
             <.link
-              href={~p"/analytics?interval=7d"}
-              class="relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=7d"}
+              class={"#{if @interval == "7d",
+                do: "relative -ml-px inline-flex items-center bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="7 day intervals"
             >
               7d
             </.link>
             <.link
-              href={~p"/analytics?interval=30d"}
-              class="relative -ml-px inline-flex items-center rounded-r-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              patch={~p"/analytics?interval=30d"}
+              class={"#{if @interval == "30d",
+                do: "relative -ml-px inline-flex items-center rounded-r-md bg-brand px-3 py-2 text-sm font-semibold text-white dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-slate-400 hover:bg-brand focus:z-10",
+                else: "relative -ml-px inline-flex items-center rounded-r-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-indigo-600 dark:text-slate-400 ring-1 ring-inset ring-gray-300 hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white focus:z-10"}"}
               title="30 day intervals"
             >
               30d
