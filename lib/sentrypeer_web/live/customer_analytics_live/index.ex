@@ -59,12 +59,12 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
 
   defp recreate_graphs_with_filter(socket, interval) do
     assign(socket,
-      phone_numbers_top_5_graph: phone_numbers_top_5_graph(),
-      phone_numbers_total_unique: phone_numbers_total_unique(),
-      source_ips_top_5_graph: source_ips_top_5_graph(),
-      source_ips_total_unique: source_ips_total_unique(),
-      sip_methods_top_5_graph: sip_methods_top_5_graph(),
-      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(),
+      phone_numbers_top_5_graph: phone_numbers_top_5_graph(interval),
+      phone_numbers_total_unique: phone_numbers_total_unique(interval),
+      source_ips_top_5_graph: source_ips_top_5_graph(interval),
+      source_ips_total_unique: source_ips_total_unique(interval),
+      sip_methods_top_5_graph: sip_methods_top_5_graph(interval),
+      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(interval),
       interval: interval
     )
   end
