@@ -31,9 +31,9 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
        phone_numbers_top_5_graph: phone_numbers_top_5_graph(),
-       phone_numbers_total_unique: Analytics.PhoneNumbers.total_unique(),
+       phone_numbers_total_unique: phone_numbers_total_unique(),
        source_ips_top_5_graph: source_ips_top_5_graph(),
-       source_ips_total_unique: Analytics.SourceIPS.total_unique(),
+       source_ips_total_unique: source_ips_total_unique(),
        sip_methods_top_5_graph: sip_methods_top_5_graph(),
        user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(),
        interval: "24h"
@@ -59,13 +59,17 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
 
   defp recreate_graphs_with_filter(socket, interval) do
     assign(socket,
-      sip_methods_top_5_graph: sip_methods_top_5_graph(interval),
-      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(interval),
+      phone_numbers_top_5_graph: phone_numbers_top_5_graph(),
+      phone_numbers_total_unique: phone_numbers_total_unique(),
+      source_ips_top_5_graph: source_ips_top_5_graph(),
+      source_ips_total_unique: source_ips_total_unique(),
+      sip_methods_top_5_graph: sip_methods_top_5_graph(),
+      user_agents_highest_top_5_graph: user_agents_highest_top_5_graph(),
       interval: interval
     )
   end
 
-  defp phone_numbers_top_5_graph() do
+  defp phone_numbers_top_5_graph(interval \\ []) do
     opts = [
       mapping: %{category_col: "Phone Number", value_col: "Count"},
       legend_setting: :legend_top,
@@ -73,13 +77,17 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
       title: "Top 5 Phone Numbers"
     ]
 
-    Analytics.PhoneNumbers.top_5()
+    Analytics.PhoneNumbers.top_5(interval)
     |> Dataset.new(["Phone Number", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()
   end
 
-  defp source_ips_top_5_graph() do
+  defp phone_numbers_total_unique(interval \\ []) do
+    Analytics.PhoneNumbers.total_unique(interval)
+  end
+
+  defp source_ips_top_5_graph(interval \\ []) do
     opts = [
       mapping: %{category_col: "IP Address", value_col: "Count"},
       legend_setting: :legend_top,
@@ -87,10 +95,14 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
       title: "Top 5 IP Addresses"
     ]
 
-    Analytics.SourceIPS.top_5()
+    Analytics.SourceIPS.top_5(interval)
     |> Dataset.new(["IP Address", "Count"])
     |> Plot.new(PieChart, 600, 400, opts)
     |> Plot.to_svg()
+  end
+
+  defp source_ips_total_unique(interval \\ []) do
+    Analytics.SourceIPS.total_unique(interval)
   end
 
   defp sip_methods_top_5_graph(interval \\ []) do

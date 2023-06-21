@@ -17,10 +17,11 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
   """
 
   import Ecto.Query
+  alias Sentrypeer.Analytics
   alias Sentrypeer.Repo
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  def most_recent_attempted_top_5 do
+  def most_recent_attempted_top_5(interval) do
     #    query = """
     #    SELECT called_number, MAX(event_timestamp) AS seen_last,
     #    COUNT(called_number) as seen_total
@@ -39,13 +40,14 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.called_number)
-        },
-        where: s.event_timestamp > ago(1, "day")
+        }
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def highest_attempted_top_5 do
+  def highest_attempted_top_5(interval) do
     #    query = """
     #    SELECT called_number, MAX(event_timestamp) AS seen_last,
     #    COUNT(called_number) as seen_total
@@ -64,13 +66,14 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
           called_number: s.called_number,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.called_number)
-        },
-        where: s.event_timestamp > ago(1, "day")
+        }
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def top_5 do
+  def top_5(interval) do
     query =
       from s in SentrypeerEvent,
         group_by: s.called_number,
@@ -79,13 +82,14 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
         select: [
           s.called_number,
           count(s.called_number)
-        ],
-        where: s.event_timestamp > ago(1, "day")
+        ]
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def total_unique do
+  def total_unique(interval) do
     #    query = """
     #    SELECT COUNT(DISTINCT called_number) AS seen_total
     #    FROM sentrypeerevents;
@@ -94,9 +98,10 @@ defmodule Sentrypeer.Analytics.PhoneNumbers do
 
     query =
       from s in SentrypeerEvent,
-        distinct: s.called_number,
-        where: s.event_timestamp > ago(1, "day")
+        distinct: s.called_number
 
-    Repo.aggregate(query, :count, :called_number)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.aggregate(:count, :called_number)
   end
 end

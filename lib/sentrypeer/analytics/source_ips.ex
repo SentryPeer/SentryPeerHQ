@@ -17,10 +17,11 @@ defmodule Sentrypeer.Analytics.SourceIPS do
   """
 
   import Ecto.Query
+  alias Sentrypeer.Analytics
   alias Sentrypeer.Repo
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  def most_recent_hits_top_5 do
+  def most_recent_hits_top_5(interval) do
     #    query = """
     #    SELECT source_ip, MAX(event_timestamp) AS seen_last,
     #    COUNT(source_ip) as seen_total
@@ -41,13 +42,14 @@ defmodule Sentrypeer.Analytics.SourceIPS do
           source_ip: s.source_ip,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.source_ip)
-        },
-        where: s.event_timestamp > ago(1, "day")
+        }
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def highest_top_5 do
+  def highest_top_5(interval) do
     #    query = """
     #    SELECT source_ip, MAX(event_timestamp) AS seen_last,
     #    COUNT(source_ip) as seen_total
@@ -68,13 +70,14 @@ defmodule Sentrypeer.Analytics.SourceIPS do
           source_ip: s.source_ip,
           seen_last: max(s.event_timestamp),
           seen_total: count(s.source_ip)
-        },
-        where: s.event_timestamp > ago(1, "day")
+        }
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def top_5 do
+  def top_5(interval) do
     query =
       from s in SentrypeerEvent,
         group_by: s.source_ip,
@@ -83,13 +86,14 @@ defmodule Sentrypeer.Analytics.SourceIPS do
         select: [
           s.source_ip,
           count(s.source_ip)
-        ],
-        where: s.event_timestamp > ago(1, "day")
+        ]
 
-    Repo.all(query)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.all()
   end
 
-  def total_unique do
+  def total_unique(interval) do
     #    query = """
     #    SELECT COUNT(DISTINCT source_ip) AS seen_total
     #    FROM sentrypeerevents;
@@ -99,9 +103,10 @@ defmodule Sentrypeer.Analytics.SourceIPS do
 
     query =
       from s in SentrypeerEvent,
-        distinct: s.source_ip,
-        where: s.event_timestamp > ago(1, "day")
+        distinct: s.source_ip
 
-    Repo.aggregate(query, :count, :source_ip)
+    query
+    |> Analytics.filter_by_interval(interval)
+    |> Repo.aggregate(:count, :source_ip)
   end
 end
