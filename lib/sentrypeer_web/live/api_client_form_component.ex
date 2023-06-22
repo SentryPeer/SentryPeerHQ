@@ -99,32 +99,42 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   defp save_client(socket, :new, client_params) do
     Logger.debug("Client type is: #{inspect(socket.assigns.client_type)}")
 
-    case CustomerClients.create_client(
-           socket.assigns.current_user.id,
-           socket.assigns.client_type,
-           client_params
-         ) do
-      {:ok, client} ->
-        notify_parent({:saved, client})
+    if CustomerClients.is_allowed_more_api_clients?(socket.assigns.current_user.id) do
+      case CustomerClients.create_client(
+             socket.assigns.current_user.id,
+             socket.assigns.client_type,
+             client_params
+           ) do
+        {:ok, client} ->
+          notify_parent({:saved, client})
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "Client created successfully")
-         |> push_patch(to: socket.assigns.patch)}
+          {:noreply,
+           socket
+           |> put_flash(:info, "Client created successfully")
+           |> push_patch(to: socket.assigns.patch)}
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+        {:error, %Ecto.Changeset{} = changeset} ->
+          {:noreply, assign_form(socket, changeset)}
 
-      {:error, error} ->
-        Logger.error("Failed to create client: #{inspect(error)}")
+        {:error, error} ->
+          Logger.error("Failed to create client: #{inspect(error)}")
 
-        EmailError.notify_admins(__MODULE__, inspect(error), socket.assigns.current_user.id)
-        |> Mailer.deliver()
+          EmailError.notify_admins(__MODULE__, inspect(error), socket.assigns.current_user.id)
+          |> Mailer.deliver()
 
-        {:noreply,
-         socket
-         |> put_flash(:error, "Failed to create client")
-         |> push_patch(to: socket.assigns.patch)}
+          {:noreply,
+           socket
+           |> put_flash(:error, "Failed to create client")
+           |> push_patch(to: socket.assigns.patch)}
+      end
+    else
+      {:noreply,
+       socket
+       |> put_flash(
+         :error,
+         "You have reached the maximum number of API clients in your plan. Please upgrade to create more."
+       )
+       |> push_patch(to: socket.assigns.patch)}
     end
   end
 

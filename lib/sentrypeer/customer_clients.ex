@@ -37,27 +37,34 @@ defmodule Sentrypeer.CustomerClients do
     Client.changeset(client, attrs)
   end
 
-  def is_allowed_more_clients!(auth_id, client_type) do
-    case Auth0ManagementAPI.list_clients_by_user(auth_id, client_type) do
+  @doc """
+  Returns true if the user is allowed to create more clients, false if not.
+
+  ## Examples
+
+      iex> is_allowed_more_clients!(auth_id)
+      true
+
+  """
+  def is_allowed_more_api_clients?(auth_id) do
+    case Auth0ManagementAPI.list_clients_by_user(auth_id, "api_client") do
       {:ok, clients} ->
         total_clients = length(clients)
-
         Logger.debug("Total clients for #{auth_id} is: #{total_clients}")
 
-        # Check against their plan
         my_plan = Plans.what_plan_am_i_on(auth_id)
-
         Logger.debug("User #{auth_id} is on plan: #{inspect(my_plan)}")
 
         my_total_allowed_clients = List.first(my_plan).api_clients
-
         Logger.debug("My total allowed clients is: #{my_total_allowed_clients}")
 
         # On a plan that returns :unlimited for api_clients, this still works.
-        if my_total_allowed_clients < total_clients do
-          false
-        else
+        if total_clients < my_total_allowed_clients do
+          # They can create more
           true
+        else
+          # They can't create more
+          false
         end
 
       {:error, _error} ->

@@ -15,6 +15,7 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Index do
   use SentrypeerWeb, :live_view
 
   alias Sentrypeer.Auth.Auth0ManagementAPI
+  alias Sentrypeer.CustomerClients
   alias Sentrypeer.CustomerClients.Client
 
   import Sentrypeer.TimeAgo

@@ -106,51 +106,53 @@ defmodule SentrypeerWeb.NavigationComponents do
           </li>
         <% end %>
 
-        <%= if (@active_page == :nodes || @active_page == :node_overview ) do %>
-          <li class="flex">
-            <div class="flex items-center">
-              <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <.link
-                navigate={~p"/nodes"}
-                title="SentryPeer Nodes"
-                class={"#{if @active_page == :nodes,
+        <%= if FunWithFlags.enabled?(:contributor_plan, for: @current_user) do %>
+          <%= if (@active_page == :nodes || @active_page == :node_overview ) do %>
+            <li class="flex">
+              <div class="flex items-center">
+                <svg
+                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                  viewBox="0 0 24 44"
+                  preserveAspectRatio="none"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                </svg>
+                <.link
+                  navigate={~p"/nodes"}
+                  title="SentryPeer Nodes"
+                  class={"#{if @active_page == :nodes,
                 do: "ml-4 text-sm font-medium hover:text-gray-700 dark:text-white dark:hover:text-white", else: "ml-4 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white"}"}
-              >
-                Nodes
-              </.link>
-            </div>
-          </li>
-        <% end %>
+                >
+                  Nodes
+                </.link>
+              </div>
+            </li>
+          <% end %>
 
-        <%= if @active_page == :node_overview do %>
-          <li class="flex">
-            <div class="flex items-center">
-              <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <.link
-                navigate={~p"/nodes/#{@client.client_id}"}
-                title="SentryPeer Node"
-                class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
-              >
-                <%= @client.client_id %>
-              </.link>
-            </div>
-          </li>
+          <%= if @active_page == :node_overview do %>
+            <li class="flex">
+              <div class="flex items-center">
+                <svg
+                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                  viewBox="0 0 24 44"
+                  preserveAspectRatio="none"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                </svg>
+                <.link
+                  navigate={~p"/nodes/#{@client.client_id}"}
+                  title="SentryPeer Node"
+                  class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
+                >
+                  <%= @client.client_id %>
+                </.link>
+              </div>
+            </li>
+          <% end %>
         <% end %>
 
         <%= if (@active_page == :billing ) do %>
@@ -388,29 +390,31 @@ defmodule SentrypeerWeb.NavigationComponents do
         <span class="truncate">Insights</span>
       </.link>
 
-      <.link
-        navigate={~p"/nodes"}
-        class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
-        title="SentryPeer Nodes"
-      >
-        <svg
+      <%= if FunWithFlags.enabled?(:contributor_plan, for: @current_user) do %>
+        <.link
+          navigate={~p"/nodes"}
           class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
-                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+          title="SentryPeer Nodes"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-          />
-        </svg>
-        <span class="truncate">Nodes</span>
-      </.link>
+          <svg
+            class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
+                do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+            />
+          </svg>
+          <span class="truncate">Nodes</span>
+        </.link>
+      <% end %>
 
       <.link
         navigate={~p"/billing"}
