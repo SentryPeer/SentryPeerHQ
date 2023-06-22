@@ -20,6 +20,7 @@ defmodule Sentrypeer.CustomerClients do
   alias Sentrypeer.Auth.Auth0ManagementAPI
   alias Sentrypeer.Clients
   alias Sentrypeer.CustomerClients.Client
+  alias Sentrypeer.Plans
 
   require Logger
 
@@ -34,6 +35,35 @@ defmodule Sentrypeer.CustomerClients do
   """
   def change_client(%Client{} = client, attrs \\ %{}) do
     Client.changeset(client, attrs)
+  end
+
+  def is_allowed_more_clients!(auth_id, client_type) do
+    case Auth0ManagementAPI.list_clients_by_user(auth_id, client_type) do
+      {:ok, clients} ->
+        total_clients = length(clients)
+
+        Logger.debug("Total clients for #{auth_id} is: #{total_clients}")
+
+        # Check against their plan
+        my_plan = Plans.what_plan_am_i_on(auth_id)
+
+        Logger.debug("User #{auth_id} is on plan: #{inspect(my_plan)}")
+
+        my_total_allowed_clients = List.first(my_plan).api_clients
+
+        Logger.debug("My total allowed clients is: #{my_total_allowed_clients}")
+
+        # On a plan that returns :unlimited for api_clients, this still works.
+        if my_total_allowed_clients < total_clients do
+          false
+        else
+          true
+        end
+
+      {:error, _error} ->
+        # Block them here just in case of an Auth0 issue
+        true
+    end
   end
 
   def create_client(auth_id, client_type, attrs \\ %{}) do
