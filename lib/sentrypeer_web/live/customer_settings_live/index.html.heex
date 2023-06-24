@@ -251,7 +251,27 @@
     </div>
     <!-- Help -->
     <div class="bg-gray-50 dark:bg-slate-800 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:dark:border-slate-400 lg:pr-8 xl:pr-0">
-      <div class="grid grid-cols-1 gap-6 justify-between space-x-6 p-6 pl-6 pt-6 lg:w-80">
+      <div class="grid grid-cols-1 gap-6 justify-between p-6 pl-6 pt-6 lg:w-80">
+        <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Best Practice
+            </h3>
+            <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
+              <p>
+                Use a client per PBX, location or system so that
+                <.link
+                  navigate={~p"/integrations"}
+                  class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  title="Read about Integrations for creating alerts"
+                >
+                  your alerts
+                </.link>
+                are meaningful.
+              </p>
+            </div>
+          </div>
+        </div>
         <div class="bg-white dark:bg-slate-900 shadow rounded-lg">
           <div class="px-4 py-5 sm:p-6">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">

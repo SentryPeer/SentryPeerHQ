@@ -65,13 +65,45 @@
               <Heroicons.envelope class="h-10 w-10 text-indigo-600 dark:text-slate-400" />
             </div>
             <div class="min-w-0 flex-1">
-              <a href="#" title="Receive alerts via e-mail" class="focus:outline-none">
+              <.modal
+                :if={
+                  @live_action in [
+                    :email_new,
+                    :email_edit,
+                    :slack_new,
+                    :slack_edit,
+                    :webhook_new,
+                    :webhook_edit
+                  ]
+                }
+                id="integration-modal"
+                show
+                on_cancel={JS.patch(~p"/integrations")}
+              >
+                <.live_component
+                  module={SentrypeerWeb.CustomerIntegrationsLive.FormComponent}
+                  id={@integration.id || :new}
+                  title={@page_title}
+                  subtitle={@page_subtitle}
+                  action={@live_action}
+                  current_user={@current_user}
+                  integration={@integration}
+                  integration_type={@integration_type}
+                  patch={~p"/integrations"}
+                />
+              </.modal>
+
+              <.link
+                patch={~p"/integrations/email/new"}
+                title="Receive alerts via e-mail"
+                class="focus:outline-none"
+              >
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 <p class="text-sm font-medium text-gray-900 dark:text-white">Email</p>
                 <p class="truncate text-sm text-gray-500 dark:text-slate-400">
                   Receive alerts via e-mail
                 </p>
-              </a>
+              </.link>
             </div>
           </div>
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
@@ -100,13 +132,17 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <a href="#" title="Receive alerts via Slack" class="focus:outline-none">
+              <.link
+                patch={~p"/integrations/slack/new"}
+                title="Receive alerts via Slack"
+                class="focus:outline-none"
+              >
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 <p class="text-sm font-medium text-gray-900 dark:text-white">Slack</p>
                 <p class="truncate text-sm text-gray-500 dark:text-slate-400">
                   Receive alerts via Slack
                 </p>
-              </a>
+              </.link>
             </div>
           </div>
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
@@ -157,8 +193,8 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <a
-                href="#"
+              <.link
+                patch={~p"/integrations/webhook/new"}
                 title="Receive alerts via a SentryPeer WebHook"
                 class="focus:outline-none"
               >
@@ -167,7 +203,7 @@
                 <p class="truncate text-sm text-gray-500 dark:text-slate-400">
                   Receive alerts via a SentryPeer WebHook
                 </p>
-              </a>
+              </.link>
             </div>
           </div>
         </div>
@@ -184,7 +220,7 @@
             <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-slate-400">
               <p>
                 Got a new integration you'd like to see?
-                <.link patch={~p"/contact"} class="text-indigo-600 hover:text-brand">
+                <.link navigate={~p"/contact"} class="text-indigo-600 hover:text-brand">
                   Let us know!
                 </.link>
               </p>

@@ -73,6 +73,26 @@ defmodule Sentrypeer.Accounts do
   def get_user_by_auth_id(auth_id), do: Repo.get_by(User, auth_id: auth_id)
 
   @doc """
+  Gets a single user by auth_id with their integrations.
+
+  Raises `Ecto.NoResultsError` if the User does not exist.
+
+  ## Examples
+
+      iex> get_user_by_auth_id_with_integrations(123)
+      %User{}
+
+      iex> get_user_by_auth_id_with_integrations(456)
+      ** (Ecto.NoResultsError)
+
+  """
+
+  def get_user_by_auth_id_with_integrations(auth_id) do
+    Repo.get_by(User, auth_id: auth_id)
+    |> Repo.preload(:integrations)
+  end
+
+  @doc """
   Gets a users stripe_id.
 
   Raises `Ecto.NoResultsError` if the User does not exist.

@@ -99,12 +99,12 @@ defmodule SentrypeerWeb.Router do
       live "/billing", CustomerBillingLive.Index, :index
       live "/team", CustomerTeamLive.Index, :index
       live "/integrations", CustomerIntegrationsLive.Index, :index
-      live "/integrations/new", IntegrationLive.Index, :new
-      live "/integrations/:id/edit", IntegrationLive.Index, :edit
-
-      live "/integrations/:id", IntegrationLive.Show, :show
-      live "/integrations/:id/show/edit", IntegrationLive.Show, :edit
-
+      live "/integrations/email/new", CustomerIntegrationsLive.Index, :email_new
+      live "/integrations/email/edit", CustomerIntegrationsLive.Index, :email_edit
+      live "/integrations/slack/new", CustomerIntegrationsLive.Index, :slack_new
+      live "/integrations/slack/edit", CustomerIntegrationsLive.Index, :slack_edit
+      live "/integrations/webhook/new", CustomerIntegrationsLive.Index, :webhook_new
+      live "/integrations/webhook/edit", CustomerIntegrationsLive.Index, :webhook_edit
       live "/settings", CustomerSettingsLive.Index, :index
       live "/settings/new", CustomerSettingsLive.Index, :new
       live "/settings/:client_id", CustomerSettingsLive.Overview, :overview

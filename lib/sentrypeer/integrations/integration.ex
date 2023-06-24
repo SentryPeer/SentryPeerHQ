@@ -44,14 +44,10 @@ defmodule Sentrypeer.Integrations.Integration do
     integration
     |> cast(attrs, [:name, :description, :type, :subject, :message, :url, :enabled, :auth_id])
     |> validate_required([
-      :name,
-      :description,
-      :type,
       :subject,
       :message,
       :url,
-      :enabled,
-      :auth_id
+      :enabled
     ])
   end
 end

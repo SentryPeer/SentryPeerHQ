@@ -38,6 +38,10 @@ defmodule Sentrypeer.Accounts.User do
       foreign_key: :auth_id,
       references: :id
 
+    has_many :integrations, Sentrypeer.Integrations.Integration,
+      foreign_key: :auth_id,
+      references: :id
+
     timestamps()
   end
 

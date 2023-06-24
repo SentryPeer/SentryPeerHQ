@@ -87,7 +87,7 @@ defmodule Sentrypeer.Integrations do
   end
 
   @doc """
-  Deletes a integration.
+  Deletes an integration.
 
   ## Examples
 

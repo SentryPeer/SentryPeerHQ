@@ -1,7 +1,10 @@
-defmodule SentrypeerWeb.IntegrationLive.FormComponent do
+defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
   use SentrypeerWeb, :live_component
 
+  alias Sentrypeer.Accounts
   alias Sentrypeer.Integrations
+
+  require Logger
 
   @impl true
   def render(assigns) do
@@ -9,7 +12,7 @@ defmodule SentrypeerWeb.IntegrationLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage integration records in your database.</:subtitle>
+        <:subtitle><%= @subtitle %></:subtitle>
       </.header>
 
       <.simple_form
@@ -19,14 +22,16 @@ defmodule SentrypeerWeb.IntegrationLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:description]} type="text" label="Description" />
-        <.input field={@form[:type]} type="text" label="Type" />
-        <.input field={@form[:subject]} type="text" label="Subject" />
-        <.input field={@form[:message]} type="text" label="Message" />
-        <.input field={@form[:url]} type="text" label="Url" />
-        <.input field={@form[:enabled]} type="checkbox" label="Enabled" />
-        <.input field={@form[:auth_id]} type="text" label="Auth" />
+        <div class="float-right">
+          <.input field={@form[:enabled]} type="checkbox" phx-debounce="blur" label="Enabled" />
+        </div>
+        <.input field={@form[:subject]} type="text" phx-debounce="blur" label="Subject" />
+        <.input field={@form[:message]} type="textarea" phx-debounce="blur" label="Message" />
+        <%= if @integration_type == "email" do %>
+          <.input field={@form[:url]} type="email" phx-debounce="blur" label="Email" />
+        <% else %>
+          <.input field={@form[:url]} type="text" phx-debounce="blur" label="WebHook Url" />
+        <% end %>
         <:actions>
           <.button phx-disable-with="Saving...">Save Integration</.button>
         </:actions>
@@ -59,7 +64,7 @@ defmodule SentrypeerWeb.IntegrationLive.FormComponent do
     save_integration(socket, socket.assigns.action, integration_params)
   end
 
-  defp save_integration(socket, :edit, integration_params) do
+  defp save_integration(socket, :email_edit, integration_params) do
     case Integrations.update_integration(socket.assigns.integration, integration_params) do
       {:ok, integration} ->
         notify_parent({:saved, integration})
@@ -74,7 +79,45 @@ defmodule SentrypeerWeb.IntegrationLive.FormComponent do
     end
   end
 
-  defp save_integration(socket, :new, integration_params) do
+  defp save_integration(socket, :email_new, integration_params) do
+    integration_params
+    |> Map.put("name", "Email")
+    |> Map.put("description", "Email integration")
+    |> Map.put("type", "email")
+    |> Map.put(
+      "auth_id",
+      Accounts.get_user_by_auth_id(socket.assigns.current_user.id).id
+    )
+    |> save_integration(socket)
+  end
+
+  defp save_integration(socket, :slack_new, integration_params) do
+    integration_params
+    |> Map.put("name", "Slack")
+    |> Map.put("description", "Slack integration")
+    |> Map.put("type", "slack")
+    |> Map.put(
+      "auth_id",
+      Accounts.get_user_by_auth_id(socket.assigns.current_user.id).id
+    )
+    |> save_integration(socket)
+  end
+
+  defp save_integration(socket, :webhook_new, integration_params) do
+    integration_params
+    |> Map.put("name", "Webhook")
+    |> Map.put("description", "Webhook integration")
+    |> Map.put("type", "webhook")
+    |> Map.put(
+      "auth_id",
+      Accounts.get_user_by_auth_id(socket.assigns.current_user.id).id
+    )
+    |> save_integration(socket)
+  end
+
+  defp save_integration(integration_params, socket) do
+    Logger.debug("Integration params: #{inspect(integration_params)}")
+
     case Integrations.create_integration(integration_params) do
       {:ok, integration} ->
         notify_parent({:saved, integration})

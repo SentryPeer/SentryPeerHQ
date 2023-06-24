@@ -26,14 +26,6 @@
     </div>
     <.link patch={~p"/integrations/#{integration}/edit"}>Edit</.link>
   </:action>
-  <:action :let={{id, integration}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: integration.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
-  </:action>
 </.table>
 
 <.modal
