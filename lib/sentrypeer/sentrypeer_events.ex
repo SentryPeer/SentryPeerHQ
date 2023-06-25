@@ -164,21 +164,21 @@ defmodule Sentrypeer.SentrypeerEvents do
   end
 
   @doc """
-  Gets the total events seen from sentrypeer_events for a specific client_id.
+  Gets the total events seen from all clients
 
   ## Examples
 
-      iex> total_events_for_client!(123)
+      iex> total_events!()
       %SentrypeerEvent{}
 
-      iex> total_events_for_client!(456)
+      iex> total_events!()
       ** (Ecto.NoResultsError)
 
   """
   def total_events! do
     query =
       from s in SentrypeerEvent,
-        where: s.event_timestamp > ago(1, "day")
+        where: s.event_timestamp > fragment("date_trunc('month', now())")
 
     Repo.aggregate(query, :count, :event_uuid)
   end
