@@ -17,7 +17,6 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   import SentrypeerWeb.NavigationComponents
 
   alias Sentrypeer.Accounts
-  alias Sentrypeer.Integrations
   alias Sentrypeer.Integrations.Integration
 
   require Logger
@@ -26,12 +25,19 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   def mount(_params, session, socket) do
     Logger.debug(inspect(session["current_user"].id))
 
+    integrations =
+      Accounts.get_user_by_auth_id_with_integrations(session["current_user"].id).integrations
+
     {:ok,
      assign(socket,
        current_user: session["current_user"],
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Integrations" <> " · SentryPeer"
+       page_title: "Integrations" <> " · SentryPeer",
+       integrations: integrations,
+       email_integration_exists: get_email_integration(integrations),
+       slack_integration_exists: get_slack_integration(integrations),
+       webhook_integration_exists: get_webhook_integration(integrations)
      )}
   end
 
@@ -45,12 +51,16 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
     |> assign(:integration, nil)
   end
 
-  defp apply_action(socket, :email_edit) do
+  defp apply_action(socket, :email_edit, _params) do
     socket
-    |> assign(:page_title, "Edit Integration")
+    |> assign(:page_title, "Edit Email Integration")
+    |> assign(:page_subtitle, "Email alerts use the following details.")
+    |> assign(:integration_type, "email")
     |> assign(
       :integration,
-      Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id)
+      get_email_integration(
+        Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id).integrations
+      )
     )
   end
 
@@ -65,9 +75,13 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   defp apply_action(socket, :slack_edit, _params) do
     socket
     |> assign(:page_title, "Edit Slack Integration · SentryPeer")
+    |> assign(:page_subtitle, "Slack alerts will use the following details.")
+    |> assign(:integration_type, "slack")
     |> assign(
       :integration,
-      Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id)
+      get_slack_integration(
+        Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id).integrations
+      )
     )
   end
 
@@ -82,9 +96,13 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   defp apply_action(socket, :webhook_edit, _params) do
     socket
     |> assign(:page_title, "Edit Webhook Integration · SentryPeer")
+    |> assign(:page_subtitle, "Webhook alerts will use the following details.")
+    |> assign(:integration_type, "webhook")
     |> assign(
       :integration,
-      Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id)
+      get_webhook_integration(
+        Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id).integrations
+      )
     )
   end
 
@@ -96,11 +114,57 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
     |> assign(:integration, %Integration{})
   end
 
+  defp get_email_integration(integrations) do
+    Enum.find(integrations, fn i -> i.type == "email" end)
+  end
+
+  defp get_slack_integration(integrations) do
+    Enum.find(integrations, fn i -> i.type == "slack" end)
+  end
+
+  defp get_webhook_integration(integrations) do
+    Enum.find(integrations, fn i -> i.type == "webhook" end)
+  end
+
+  def handle_event("test", %{"value" => "email"}, socket) do
+    Logger.debug("Send test email")
+
+    {:noreply,
+     socket
+     |> put_flash(:info, "Email sent successfully")}
+  end
+
+  def handle_event("test", %{"value" => "slack"}, socket) do
+    Logger.debug("Send test slack")
+
+    {:noreply,
+     socket
+     |> put_flash(:info, "Slack Webhook sent successfully")}
+  end
+
+  def handle_event("test", %{"value" => "webhook"}, socket) do
+    Logger.debug("Send test webhook")
+
+    {:noreply,
+     socket
+     |> put_flash(:info, "SentryPeer Webhook sent successfully")}
+  end
+
   @impl true
   def handle_info(
-        {SentrypeerWeb.CustomerIntegrationsLive.FormComponent, {:saved, integration}},
+        {SentrypeerWeb.CustomerIntegrationsLive.FormComponent, {:saved, _integration}},
         socket
       ) do
-    {:noreply, socket}
+    integrations =
+      Accounts.get_user_by_auth_id_with_integrations(socket.assigns.current_user.id).integrations
+
+    {:noreply,
+     assign(socket,
+       page_title: "Integrations" <> " · SentryPeer",
+       integrations: integrations,
+       email_integration_exists: get_email_integration(integrations),
+       slack_integration_exists: get_slack_integration(integrations),
+       webhook_integration_exists: get_webhook_integration(integrations)
+     )}
   end
 end

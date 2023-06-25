@@ -93,18 +93,37 @@
                 />
               </.modal>
 
-              <.link
-                patch={~p"/integrations/email/new"}
-                title="Receive alerts via e-mail"
-                class="focus:outline-none"
-              >
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900 dark:text-white">Email</p>
-                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
-                  Receive alerts via e-mail
-                </p>
-              </.link>
+              <%= if @email_integration_exists do %>
+                <.link
+                  patch={~p"/integrations/email/edit"}
+                  title="Edit your Email integration"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">Email</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via e-mail
+                  </p>
+                </.link>
+              <% else %>
+                <.link
+                  patch={~p"/integrations/email/new"}
+                  title="Receive alerts via e-mail"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">Email</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via e-mail
+                  </p>
+                </.link>
+              <% end %>
             </div>
+            <%= if @email_integration_exists do %>
+              <div class="flex-shrink-0 self-center">
+                <Heroicons.check_circle class="h-6 w-6 text-green-400 dark:text-slate-400" />
+              </div>
+            <% end %>
           </div>
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
             <div class="flex-shrink-0">
@@ -132,18 +151,37 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <.link
-                patch={~p"/integrations/slack/new"}
-                title="Receive alerts via Slack"
-                class="focus:outline-none"
-              >
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900 dark:text-white">Slack</p>
-                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
-                  Receive alerts via Slack
-                </p>
-              </.link>
+              <%= if @slack_integration_exists do %>
+                <.link
+                  patch={~p"/integrations/slack/edit"}
+                  title="Edit your Slack integration"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">Slack</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via Slack
+                  </p>
+                </.link>
+              <% else %>
+                <.link
+                  patch={~p"/integrations/slack/new"}
+                  title="Receive alerts via Slack"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">Slack</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via Slack
+                  </p>
+                </.link>
+              <% end %>
             </div>
+            <%= if @slack_integration_exists do %>
+              <div class="flex-shrink-0 self-center">
+                <Heroicons.check_circle class="h-6 w-6 text-green-400 dark:text-slate-400" />
+              </div>
+            <% end %>
           </div>
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
             <div class="flex-shrink-0">
@@ -193,18 +231,37 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <.link
-                patch={~p"/integrations/webhook/new"}
-                title="Receive alerts via a SentryPeer WebHook"
-                class="focus:outline-none"
-              >
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900 dark:text-white">WebHooks</p>
-                <p class="truncate text-sm text-gray-500 dark:text-slate-400">
-                  Receive alerts via a SentryPeer WebHook
-                </p>
-              </.link>
+              <%= if @webhook_integration_exists do %>
+                <.link
+                  patch={~p"/integrations/webhook/edit"}
+                  title="Edit your SentryPeer WebHook"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">WebHooks</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via a SentryPeer WebHook
+                  </p>
+                </.link>
+              <% else %>
+                <.link
+                  patch={~p"/integrations/webhook/new"}
+                  title="Receive alerts via a SentryPeer WebHook"
+                  class="focus:outline-none"
+                >
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">WebHooks</p>
+                  <p class="truncate text-sm text-gray-500 dark:text-slate-400">
+                    Receive alerts via a SentryPeer WebHook
+                  </p>
+                </.link>
+              <% end %>
             </div>
+            <%= if @webhook_integration_exists do %>
+              <div class="flex-shrink-0 self-center">
+                <Heroicons.check_circle class="h-6 w-6 text-green-400 dark:text-slate-400" />
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

@@ -12,8 +12,35 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle><%= @subtitle %></:subtitle>
+        <:subtitle>
+          <%= @subtitle %>
+        </:subtitle>
       </.header>
+      <div class="mt-10 sm:mt-0 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-4">
+        <%= if @integration_type == "email" do %>
+          <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="email">Test</.button>
+        <% end %>
+
+        <%= if @integration_type == "slack" do %>
+          <.link
+            href="https://api.slack.com/messaging/webhooks"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="External link to the official Slack documentation for Webhooks"
+            class="mt-4 text-sm sm:col-span-3 sm:col-start-1 text-indigo-600 hover:text-brand"
+          >
+            https://api.slack.com/messaging/webhooks
+            <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+          </.link>
+          <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="slack">Test</.button>
+        <% end %>
+
+        <%= if @integration_type == "webhook" do %>
+          <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="webhook">
+            Test
+          </.button>
+        <% end %>
+      </div>
 
       <.simple_form
         for={@form}
@@ -30,7 +57,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
         <%= if @integration_type == "email" do %>
           <.input field={@form[:url]} type="email" phx-debounce="blur" label="Email" />
         <% else %>
-          <.input field={@form[:url]} type="text" phx-debounce="blur" label="WebHook Url" />
+          <.input field={@form[:url]} type="url" phx-debounce="blur" label="WebHook Url" />
         <% end %>
         <:actions>
           <.button phx-disable-with="Saving...">Save Integration</.button>
@@ -65,18 +92,15 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
   end
 
   defp save_integration(socket, :email_edit, integration_params) do
-    case Integrations.update_integration(socket.assigns.integration, integration_params) do
-      {:ok, integration} ->
-        notify_parent({:saved, integration})
+    update_integration(socket, integration_params)
+  end
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "Integration updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
+  defp save_integration(socket, :slack_edit, integration_params) do
+    update_integration(socket, integration_params)
+  end
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
-    end
+  defp save_integration(socket, :webhook_edit, integration_params) do
+    update_integration(socket, integration_params)
   end
 
   defp save_integration(socket, :email_new, integration_params) do
@@ -125,6 +149,23 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Integration created successfully")
+         |> push_patch(to: socket.assigns.patch)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign_form(socket, changeset)}
+    end
+  end
+
+  defp update_integration(socket, integration_params) do
+    Logger.debug("Integration params: #{inspect(integration_params)}")
+
+    case Integrations.update_integration(socket.assigns.integration, integration_params) do
+      {:ok, integration} ->
+        notify_parent({:saved, integration})
+
+        {:noreply,
+         socket
+         |> put_flash(:info, "Integration updated successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
