@@ -126,6 +126,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
     Enum.find(integrations, fn i -> i.type == "webhook" end)
   end
 
+  @impl true
   def handle_event("test", %{"value" => "email"}, socket) do
     Logger.debug("Send test email")
 
@@ -134,6 +135,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
      |> put_flash(:info, "Email sent successfully")}
   end
 
+  @impl true
   def handle_event("test", %{"value" => "slack"}, socket) do
     Logger.debug("Send test slack")
 
@@ -142,6 +144,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
      |> put_flash(:info, "Slack Webhook sent successfully")}
   end
 
+  @impl true
   def handle_event("test", %{"value" => "webhook"}, socket) do
     Logger.debug("Send test webhook")
 
