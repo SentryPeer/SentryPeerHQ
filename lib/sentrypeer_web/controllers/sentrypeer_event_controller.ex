@@ -17,6 +17,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   #  import SentrypeerWeb.RateLimitPlug, only: [rate_limit: 2]
   #  plug :rate_limit, max_requests: 30000, interval_seconds: 86400 # 1 day
 
+  alias Sentrypeer.Alerts
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
@@ -43,6 +44,8 @@ defmodule SentrypeerWeb.SentrypeerEventController do
            conn.assigns.client_id
          ) do
       true ->
+        Alerts.send_alert(conn.assigns.client_id, phone_number)
+
         conn
         |> put_status(:ok)
         |> json(%{message: "Phone Number found."})
@@ -60,6 +63,8 @@ defmodule SentrypeerWeb.SentrypeerEventController do
            conn.assigns.client_id
          ) do
       true ->
+        Alerts.send_alert(conn.assigns.client_id, ip_address)
+
         conn
         |> put_status(:ok)
         |> json(%{message: "IP Address found."})
@@ -70,9 +75,4 @@ defmodule SentrypeerWeb.SentrypeerEventController do
         |> json(%{message: "IP Address not found."})
     end
   end
-
-  #  defp send_email_alert(user, number_or_ip_address) do
-  #    email = EmailNotification.voip_fraud_email_alert(user, number_or_ip_address)
-  #    Mailer.deliver(email)
-  #  end
 end
