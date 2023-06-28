@@ -18,6 +18,9 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   #  plug :rate_limit, max_requests: 30000, interval_seconds: 86400 # 1 day
 
   alias Sentrypeer.Alerts
+  alias Sentrypeer.Auth.Auth0User
+  alias Sentrypeer.Clients
+  alias Sentrypeer.Clients.Client
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
@@ -39,6 +42,37 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   def check_phone_number(conn, %{"phone_number" => phone_number}) do
+    case Clients.get_client_by_client_id!(conn.assigns.client_id) do
+      %Client{} = client ->
+        auth0_user = %Auth0User{id: client.auth_id}
+
+        if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
+          check_phone_number_contributor_plan(conn, phone_number)
+        else
+          check_phone_number_paid_plan(conn, phone_number)
+        end
+
+      _ ->
+        phone_number_not_found(conn)
+    end
+  end
+
+  defp check_phone_number_contributor_plan(conn, phone_number) do
+    case SentrypeerEvents.check_ip_address_exists_for_contributor?(
+           phone_number,
+           conn.assigns.client_id
+         ) do
+      true ->
+        Alerts.send_alert(conn.assigns.client_id, phone_number)
+
+        phone_number_found(conn)
+
+      false ->
+        phone_number_not_found(conn)
+    end
+  end
+
+  defp check_phone_number_paid_plan(conn, phone_number) do
     case SentrypeerEvents.check_phone_number_sentrypeer_event?(
            phone_number,
            conn.assigns.client_id
@@ -46,18 +80,45 @@ defmodule SentrypeerWeb.SentrypeerEventController do
       true ->
         Alerts.send_alert(conn.assigns.client_id, phone_number)
 
-        conn
-        |> put_status(:ok)
-        |> json(%{message: "Phone Number found."})
+        phone_number_found(conn)
 
       false ->
-        conn
-        |> put_status(:not_found)
-        |> json(%{message: "Phone Number not found."})
+        phone_number_not_found(conn)
     end
   end
 
   def check_ip_address(conn, %{"ip_address" => ip_address}) do
+    case Clients.get_client_by_client_id!(conn.assigns.client_id) do
+      %Client{} = client ->
+        auth0_user = %Auth0User{id: client.auth_id}
+
+        if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
+          check_ip_address_contributor_plan(conn, ip_address)
+        else
+          check_ip_address_paid_plan(conn, ip_address)
+        end
+
+      _ ->
+        ip_address_not_found(conn)
+    end
+  end
+
+  defp check_ip_address_contributor_plan(conn, ip_address) do
+    case SentrypeerEvents.check_ip_address_exists_for_contributor?(
+           ip_address,
+           conn.assigns.client_id
+         ) do
+      true ->
+        Alerts.send_alert(conn.assigns.client_id, ip_address)
+
+        ip_address_found(conn)
+
+      false ->
+        ip_address_not_found(conn)
+    end
+  end
+
+  defp check_ip_address_paid_plan(conn, ip_address) do
     case SentrypeerEvents.check_ip_address_sentrypeer_event?(
            ip_address,
            conn.assigns.client_id
@@ -65,14 +126,34 @@ defmodule SentrypeerWeb.SentrypeerEventController do
       true ->
         Alerts.send_alert(conn.assigns.client_id, ip_address)
 
-        conn
-        |> put_status(:ok)
-        |> json(%{message: "IP Address found."})
+        ip_address_found(conn)
 
       false ->
-        conn
-        |> put_status(:not_found)
-        |> json(%{message: "IP Address not found."})
+        ip_address_not_found(conn)
     end
+  end
+
+  defp phone_number_found(conn) do
+    conn
+    |> put_status(:ok)
+    |> json(%{message: "Phone Number found."})
+  end
+
+  defp phone_number_not_found(conn) do
+    conn
+    |> put_status(:not_found)
+    |> json(%{message: "Phone Number not found."})
+  end
+
+  defp ip_address_found(conn) do
+    conn
+    |> put_status(:ok)
+    |> json(%{message: "IP Address found."})
+  end
+
+  defp ip_address_not_found(conn) do
+    conn
+    |> put_status(:not_found)
+    |> json(%{message: "IP Address not found."})
   end
 end

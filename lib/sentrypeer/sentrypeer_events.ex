@@ -322,7 +322,6 @@ defmodule Sentrypeer.SentrypeerEvents do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
-      # Move to a new plug...
       # Check client_id is owned by someone, if not return false
       case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
         %Client{} = client ->

@@ -51,7 +51,10 @@ defmodule Sentrypeer.Alerts.Webhook do
 
   defp to_json(integration, number_or_ip_address) do
     %{
-      "#{integration.subject}": "#{integration.message} #{number_or_ip_address} has been seen."
+      type: "sentrypeer_webhook",
+      subject: "#{integration.subject}",
+      message: "#{integration.message}",
+      number_or_ip_address: "#{number_or_ip_address}"
     }
     |> Poison.encode!()
   end
