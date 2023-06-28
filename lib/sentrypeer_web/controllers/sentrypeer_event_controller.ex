@@ -58,25 +58,23 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   defp check_phone_number_contributor_plan(conn, phone_number) do
-    case SentrypeerEvents.check_ip_address_exists_for_contributor?(
-           phone_number,
-           conn.assigns.client_id
-         ) do
-      true ->
-        Alerts.send_alert(conn.assigns.client_id, phone_number)
-
-        phone_number_found(conn)
-
-      false ->
-        phone_number_not_found(conn)
-    end
+    SentrypeerEvents.check_ip_address_exists_for_contributor?(
+      phone_number,
+      conn.assigns.client_id
+    )
+    |> check_phone_number_result(conn, phone_number)
   end
 
   defp check_phone_number_paid_plan(conn, phone_number) do
-    case SentrypeerEvents.check_phone_number_sentrypeer_event?(
-           phone_number,
-           conn.assigns.client_id
-         ) do
+    SentrypeerEvents.check_phone_number_sentrypeer_event?(
+      phone_number,
+      conn.assigns.client_id
+    )
+    |> check_phone_number_result(conn, phone_number)
+  end
+
+  defp check_phone_number_result(result, conn, phone_number) do
+    case result do
       true ->
         Alerts.send_alert(conn.assigns.client_id, phone_number)
 
@@ -104,25 +102,23 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   defp check_ip_address_contributor_plan(conn, ip_address) do
-    case SentrypeerEvents.check_ip_address_exists_for_contributor?(
-           ip_address,
-           conn.assigns.client_id
-         ) do
-      true ->
-        Alerts.send_alert(conn.assigns.client_id, ip_address)
-
-        ip_address_found(conn)
-
-      false ->
-        ip_address_not_found(conn)
-    end
+    SentrypeerEvents.check_ip_address_exists_for_contributor?(
+      ip_address,
+      conn.assigns.client_id
+    )
+    |> check_ip_address_result(conn, ip_address)
   end
 
   defp check_ip_address_paid_plan(conn, ip_address) do
-    case SentrypeerEvents.check_ip_address_sentrypeer_event?(
-           ip_address,
-           conn.assigns.client_id
-         ) do
+    SentrypeerEvents.check_ip_address_sentrypeer_event?(
+      ip_address,
+      conn.assigns.client_id
+    )
+    |> check_ip_address_result(conn, ip_address)
+  end
+
+  defp check_ip_address_result(result, conn, ip_address) do
+    case result do
       true ->
         Alerts.send_alert(conn.assigns.client_id, ip_address)
 
