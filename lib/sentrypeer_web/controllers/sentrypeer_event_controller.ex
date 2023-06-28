@@ -24,8 +24,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
-  #  alias Sentrypeer.Emails.EmailNotification
-  #  alias Sentrypeer.Mailer
+  require Logger
 
   action_fallback SentrypeerWeb.FallbackController
 
@@ -41,19 +40,21 @@ defmodule SentrypeerWeb.SentrypeerEventController do
     end
   end
 
+  defp get_user_from_client_id(conn) do
+    {:ok, auth_id} = Cachex.get(:sentrypeer_cache, "client_id:#{conn.assigns.client_id}")
+
+    Logger.debug("get_user_from_client_id: #{auth_id}")
+
+    auth0_user = %Auth0User{id: auth_id}
+  end
+
   def check_phone_number(conn, %{"phone_number" => phone_number}) do
-    case Clients.get_client_by_client_id!(conn.assigns.client_id) do
-      %Client{} = client ->
-        auth0_user = %Auth0User{id: client.auth_id}
+    auth0_user = get_user_from_client_id(conn)
 
-        if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
-          check_phone_number_contributor_plan(conn, phone_number)
-        else
-          check_phone_number_paid_plan(conn, phone_number)
-        end
-
-      _ ->
-        phone_number_not_found(conn)
+    if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
+      check_phone_number_contributor_plan(conn, phone_number)
+    else
+      check_phone_number_paid_plan(conn, phone_number)
     end
   end
 
@@ -86,18 +87,12 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   def check_ip_address(conn, %{"ip_address" => ip_address}) do
-    case Clients.get_client_by_client_id!(conn.assigns.client_id) do
-      %Client{} = client ->
-        auth0_user = %Auth0User{id: client.auth_id}
+    auth0_user = get_user_from_client_id(conn)
 
-        if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
-          check_ip_address_contributor_plan(conn, ip_address)
-        else
-          check_ip_address_paid_plan(conn, ip_address)
-        end
-
-      _ ->
-        ip_address_not_found(conn)
+    if FunWithFlags.enabled?(:contributor_plan, for: auth0_user) do
+      check_ip_address_contributor_plan(conn, ip_address)
+    else
+      check_ip_address_paid_plan(conn, ip_address)
     end
   end
 

@@ -49,6 +49,8 @@ defmodule SentrypeerWeb.RateLimitPerPlanPlug do
       %Client{} = client ->
         case check_what_plan_is_enabled(client.auth_id) do
           %Plan{} = plan ->
+            Cachex.put(:sentrypeer_cache, "client_id:#{client_id}", client.auth_id)
+
             conn
             |> rate_limit_by_plan(
               interval_seconds: plan.rate_limit_period,
