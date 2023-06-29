@@ -72,7 +72,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     query =
       from s in SentrypeerEvent,
         where:
-          s.client_id == ^client_id and s.event_timestamp > fragment("now() - interval '30 day'"),
+          s.client_id == ^client_id and s.event_timestamp > fragment("date_trunc('month', now())"),
         distinct: s.called_number
 
     Repo.aggregate(query, :count, :called_number)
@@ -94,7 +94,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     query =
       from s in SentrypeerEvent,
         where:
-          s.client_id == ^client_id and s.event_timestamp > fragment("now() - interval '30 day'"),
+          s.client_id == ^client_id and s.event_timestamp > fragment("date_trunc('month', now())"),
         distinct: s.source_ip
 
     Repo.aggregate(query, :count, :source_ip)
@@ -116,7 +116,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     query =
       from s in SentrypeerEvent,
         where:
-          s.client_id == ^client_id and s.event_timestamp > fragment("now() - interval '30 day'")
+          s.client_id == ^client_id and s.event_timestamp > fragment("date_trunc('month', now())")
 
     Repo.aggregate(query, :count, :event_uuid)
   end
@@ -136,7 +136,7 @@ defmodule Sentrypeer.SentrypeerEvents do
   def total_unique_phone_numbers! do
     query =
       from s in SentrypeerEvent,
-        where: s.event_timestamp > fragment("now() - interval '30 day'"),
+        where: s.event_timestamp > fragment("date_trunc('month', now())"),
         distinct: s.called_number
 
     Repo.aggregate(query, :count, :called_number)
@@ -157,7 +157,7 @@ defmodule Sentrypeer.SentrypeerEvents do
   def total_unique_ip_addresses! do
     query =
       from s in SentrypeerEvent,
-        where: s.event_timestamp > fragment("now() - interval '30 day'"),
+        where: s.event_timestamp > fragment("date_trunc('month', now())"),
         distinct: s.source_ip
 
     Repo.aggregate(query, :count, :source_ip)
