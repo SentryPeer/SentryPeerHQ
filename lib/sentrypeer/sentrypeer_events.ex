@@ -198,7 +198,7 @@ defmodule Sentrypeer.SentrypeerEvents do
   def create_sentrypeer_event(attrs \\ %{}, client_id) do
     changeset =
       %SentrypeerEvent{}
-      |> SentrypeerEvent.changeset(attrs, client_id)
+      |> SentrypeerEvent.changeset(attrs, client_id, is_third_party_client(client_id))
 
     if changeset.valid? do
       broadcast({:ok, changeset.changes}, client_id)
@@ -211,6 +211,18 @@ defmodule Sentrypeer.SentrypeerEvents do
       changeset_after_insert
     else
       {:error, changeset}
+    end
+  end
+
+  defp is_third_party_client(client_id) do
+    case Sentrypeer.Clients.get_client_by_client_id!(client_id) do
+      %Client{} = client ->
+        client.third_party
+
+      # Does not exist, i.e. is one of our clients created in the Auth0 dashboard,
+      # not via the Auth0 Management API
+      _ ->
+        false
     end
   end
 
@@ -246,7 +258,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     if changeset.valid? do
       query =
         from e in SentrypeerEvent,
-          where: e.called_number == ^changeset.changes.phone_number
+          where: e.called_number == ^changeset.changes.phone_number and e.third_party == false
 
       broadcast({:ok, phone_number}, client_id)
       Repo.exists?(query)
@@ -309,7 +321,7 @@ defmodule Sentrypeer.SentrypeerEvents do
     if changeset.valid? do
       query =
         from e in SentrypeerEvent,
-          where: e.source_ip == ^changeset.changes.ip_address
+          where: e.source_ip == ^changeset.changes.ip_address and e.third_party == false
 
       broadcast({:ok, ip_address}, client_id)
       Repo.exists?(query)

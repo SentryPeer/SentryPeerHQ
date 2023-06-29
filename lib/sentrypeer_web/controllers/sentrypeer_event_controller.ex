@@ -19,8 +19,6 @@ defmodule SentrypeerWeb.SentrypeerEventController do
 
   alias Sentrypeer.Alerts
   alias Sentrypeer.Auth.Auth0User
-  alias Sentrypeer.Clients
-  alias Sentrypeer.Clients.Client
   alias Sentrypeer.SentrypeerEvents
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
 
@@ -45,7 +43,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
 
     Logger.debug("get_user_from_client_id: #{auth_id}")
 
-    auth0_user = %Auth0User{id: auth_id}
+    %Auth0User{id: auth_id}
   end
 
   def check_phone_number(conn, %{"phone_number" => phone_number}) do

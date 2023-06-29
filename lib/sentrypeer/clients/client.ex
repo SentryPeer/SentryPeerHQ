@@ -26,6 +26,7 @@ defmodule Sentrypeer.Clients.Client do
     field :client_id, :string
     field :client_type, :string
     field :hourly_request_limit, :integer, default: 600
+    field :third_party, :boolean, default: true
 
     belongs_to :user, Sentrypeer.Accounts.User,
       foreign_key: :auth_id,
