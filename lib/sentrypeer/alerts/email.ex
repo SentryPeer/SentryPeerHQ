@@ -15,13 +15,14 @@ defmodule Sentrypeer.Alerts.Email do
   import Swoosh.Email
 
   alias Sentrypeer.Mailer
+  alias Sentrypeer.Integrations.Integration
   require Logger
 
   @moduledoc """
   Send an email alert.
   """
 
-  def send_alert(integration, number_or_ip_address) do
+  def send_alert(%Integration{} = integration, number_or_ip_address) do
     case integration.enabled do
       true ->
         Logger.debug("Sending email alert to #{integration.url}")

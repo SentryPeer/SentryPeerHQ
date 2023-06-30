@@ -757,7 +757,8 @@ defmodule SentrypeerWeb.NavigationComponents do
                   <.link
                     navigate={~p"/user/profile"}
                     title="View your profile"
-                    class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
+                    class={"#{if @active_page == :user_profile,
+                      do: "bg-gray-100 dark:bg-slate-500 text-white block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-0"
@@ -768,7 +769,8 @@ defmodule SentrypeerWeb.NavigationComponents do
                   <.link
                     navigate={~p"/user/settings"}
                     title="Manage your user settings"
-                    class="block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"
+                    class={"#{if @active_page == :user_settings,
+                      do: "bg-gray-100 dark:bg-slate-500 text-white block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
@@ -813,7 +815,7 @@ defmodule SentrypeerWeb.NavigationComponents do
             target="_blank"
             rel="noopener noreferrer"
             title="SentryPeer Documentation"
-            class="text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium"
+            class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
           >
             Documentation
           </.link>
@@ -837,14 +839,16 @@ defmodule SentrypeerWeb.NavigationComponents do
             <.link
               navigate={~p"/user/profile"}
               title="View your profile"
-              class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
+              class={"#{if @active_page == :user_profile,
+                do: "text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium", else: "block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"}"}
             >
               View Profile
             </.link>
             <.link
               navigate={~p"/user/settings"}
               title="Manage your user settings"
-              class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"
+              class={"#{if @active_page == :user_settings,
+                do: "text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium", else: "block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100"}"}
             >
               Settings
             </.link>

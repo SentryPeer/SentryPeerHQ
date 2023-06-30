@@ -13,6 +13,7 @@
 
 defmodule Sentrypeer.Alerts.Webhook do
   alias Sentrypeer.Alerts
+  alias Sentrypeer.Integrations.Integration
 
   require Logger
 
@@ -20,7 +21,7 @@ defmodule Sentrypeer.Alerts.Webhook do
   Send a Webhook alert.
   """
 
-  def send_alert(integration, number_or_ip_address) do
+  def send_alert(%Integration{} = integration, number_or_ip_address) do
     case integration.enabled do
       true ->
         Logger.debug("Sending Webhook alert to #{integration.url}")

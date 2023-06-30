@@ -17,7 +17,7 @@ defmodule Sentrypeer.Alerts do
   alias Sentrypeer.Alerts.Slack
   alias Sentrypeer.Alerts.Webhook
   alias Sentrypeer.Clients.Client
-
+  alias Sentrypeer.Integrations.Integration
   require Logger
 
   @moduledoc """
@@ -30,7 +30,7 @@ defmodule Sentrypeer.Alerts do
         {:error, "Client not found"}
 
       integrations ->
-        Enum.each(integrations, fn integration ->
+        Enum.each(integrations, fn %Integration{} = integration ->
           case integration.type do
             "email" ->
               Email.send_alert(integration, number_or_ip_address)

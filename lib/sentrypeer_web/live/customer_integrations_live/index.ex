@@ -37,7 +37,8 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
        integrations: integrations,
        email_integration_exists: get_email_integration(integrations),
        slack_integration_exists: get_slack_integration(integrations),
-       webhook_integration_exists: get_webhook_integration(integrations)
+       webhook_integration_exists: get_webhook_integration(integrations),
+       test_message_sent: false
      )}
   end
 
@@ -128,29 +129,44 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
 
   @impl true
   def handle_event("test", %{"value" => "email"}, socket) do
-    Logger.debug("Send test email")
+    Logger.debug("Send test email to #{socket.assigns.integration.url}")
+
+    Sentrypeer.Alerts.Email.send_alert(
+      socket.assigns.integration,
+      "Testing SentryPeer Email Integration"
+    )
 
     {:noreply,
      socket
-     |> put_flash(:info, "Email sent successfully")}
+     |> assign(:test_message_sent, true)}
   end
 
   @impl true
   def handle_event("test", %{"value" => "slack"}, socket) do
-    Logger.debug("Send test slack")
+    Logger.debug("Send test slack webhook to #{socket.assigns.integration.url}")
+
+    Sentrypeer.Alerts.Slack.send_alert(
+      socket.assigns.integration,
+      "Testing SentryPeer Slack Integration"
+    )
 
     {:noreply,
      socket
-     |> put_flash(:info, "Slack Webhook sent successfully")}
+     |> assign(:test_message_sent, true)}
   end
 
   @impl true
   def handle_event("test", %{"value" => "webhook"}, socket) do
-    Logger.debug("Send test webhook")
+    Logger.debug("Send test webhook to #{socket.assigns.integration.url}")
+
+    Sentrypeer.Alerts.Webhook.send_alert(
+      socket.assigns.integration,
+      "Testing SentryPeer Webhook Integration"
+    )
 
     {:noreply,
      socket
-     |> put_flash(:info, "SentryPeer Webhook sent successfully")}
+     |> assign(:test_message_sent, true)}
   end
 
   @impl true
@@ -167,7 +183,8 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
        integrations: integrations,
        email_integration_exists: get_email_integration(integrations),
        slack_integration_exists: get_slack_integration(integrations),
-       webhook_integration_exists: get_webhook_integration(integrations)
+       webhook_integration_exists: get_webhook_integration(integrations),
+       test_message_sent: false
      )}
   end
 end

@@ -17,6 +17,22 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
         </:subtitle>
       </.header>
       <div class="mt-10 sm:mt-0 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-4">
+        <%= if @test_message_sent do %>
+          <div class="mt-5 sm:col-span-4">
+            <div class="rounded-md bg-green-50 dark:bg-slate-400 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <Heroicons.check_circle class="h-5 w-5 text-green-400 dark:text-slate-800" />
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm leading-5 font-medium text-green-800 dark:text-slate-800">
+                    Test message sent successfully.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
         <%= if @integration_type == "email" do %>
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="email">Test</.button>
         <% end %>
