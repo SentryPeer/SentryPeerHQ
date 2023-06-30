@@ -33,11 +33,11 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
             </div>
           </div>
         <% end %>
-        <%= if @integration_type == "email" do %>
+        <%= if @integration_type == "email" && @integration.enabled do %>
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="email">Test</.button>
         <% end %>
 
-        <%= if @integration_type == "slack" do %>
+        <%= if @integration_type == "slack" && @integration.enabled do %>
           <.link
             href="https://api.slack.com/messaging/webhooks"
             target="_blank"
@@ -51,7 +51,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="slack">Test</.button>
         <% end %>
 
-        <%= if @integration_type == "webhook" do %>
+        <%= if @integration_type == "webhook" && @integration.enabled do %>
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="webhook">
             Test
           </.button>
