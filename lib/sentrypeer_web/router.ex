@@ -117,7 +117,7 @@ defmodule SentrypeerWeb.Router do
   end
 
   scope "/", SentrypeerWeb do
-    pipe_through [:browser, :admins_only]
+    pipe_through [:browser]
 
     # Home page
     live "/", HomeLive.Index, :index
