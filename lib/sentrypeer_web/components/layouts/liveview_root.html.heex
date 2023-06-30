@@ -29,31 +29,6 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
-    <%= if @active_page == :dashboard do %>
-      <!-- Cal-Heatmap -->
-      <script type="text/javascript" src="https://d3js.org/d3.v7.min.js">
-      </script>
-      <script type="text/javascript" src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js">
-      </script>
-      <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2">
-      </script>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"
-      >
-      </script>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"
-      >
-      </script>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/cal-heatmap/dist/plugins/CalendarLabel.min.js"
-      >
-      </script>
-      <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css" />
-    <% end %>
   </head>
   <body class="bg-white antialiased h-full">
     <!-- This is the start of the root component for the live view -->

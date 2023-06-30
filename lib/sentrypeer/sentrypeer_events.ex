@@ -183,6 +183,20 @@ defmodule Sentrypeer.SentrypeerEvents do
     Repo.aggregate(query, :count, :event_uuid)
   end
 
+  def total_events_per_day!(start_date, end_date) do
+    query =
+      from s in SentrypeerEvent,
+        where: s.event_timestamp >= ^start_date and s.event_timestamp <= ^end_date,
+        group_by: fragment("time_bucket('1 day', event_timestamp)"),
+        order_by: fragment("time_bucket('1 day', event_timestamp)"),
+        select: %{
+          date: fragment("time_bucket('1 day', event_timestamp)"),
+          value: count(s.event_uuid)
+        }
+
+    Repo.all(query)
+  end
+
   @doc """
   Creates a sentrypeer_event.
 

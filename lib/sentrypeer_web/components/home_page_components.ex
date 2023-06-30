@@ -132,7 +132,7 @@ defmodule SentrypeerWeb.HomePageComponents do
           <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <%= if @current_user do %>
               <.link
-                href={~p"/dashboard"}
+                navigate={~p"/dashboard"}
                 title="Go to the SentryPeer Dashboard"
                 class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
               >
@@ -277,7 +277,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               <%= if @current_user do %>
                 <div class="mt-6">
                   <.link
-                    href={~p"/dashboard"}
+                    navigate={~p"/dashboard"}
                     title="Go to the SentryPeer Dashboard"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >

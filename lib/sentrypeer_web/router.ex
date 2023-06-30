@@ -201,6 +201,15 @@ defmodule SentrypeerWeb.Router do
     get "/ip-addresses/:ip_address", SentrypeerEventController, :check_ip_address
   end
 
+  scope "/api", SentrypeerWeb do
+    pipe_through [
+      :rate_limit_per_hour,
+      :api,
+    ]
+
+    get "/events/heatmap", SentrypeerEventHeatmapController, :heatmap
+  end
+
   # Enables a password protected LiveDashboard
   import Phoenix.LiveDashboard.Router
 

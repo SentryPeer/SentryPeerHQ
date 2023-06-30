@@ -35,9 +35,11 @@ import topbar from "../vendor/topbar"
 
 // SentryPeerHQ JavaScript
 import SentrypeerApiLoggerRealtime from "./api_logger_realtime"
+import SentrypeerCalHeatmap from "./cal_heatmap"
 
 let Hooks = {
-    SentrypeerApiLoggerRealtime: SentrypeerApiLoggerRealtime
+    SentrypeerApiLoggerRealtime: SentrypeerApiLoggerRealtime,
+    SentrypeerCalHeatmap: SentrypeerCalHeatmap
 }
 
 

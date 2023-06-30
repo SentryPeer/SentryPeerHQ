@@ -37,8 +37,9 @@ FROM ${BUILDER_IMAGE} as builder
 SHELL ["/bin/bash", "-c"]
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && apt-get install -y build-essential git npm && \
+    npm install npm@latest -g && \
+    apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
 WORKDIR /app
@@ -58,6 +59,11 @@ ENV APP_REVISION=${APP_REVISION}
 COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
 RUN mkdir config
+
+# install npm dependencies
+COPY assets/package.json assets/package-lock.json ./assets/
+
+RUN npm install --prefix ./assets
 
 # copy compile-time config files before we compile dependencies
 # to ensure any relevant config change will trigger the dependencies

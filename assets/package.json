@@ -1,0 +1,20 @@
+{
+  "name": "sentrypeer-hq",
+  "version": "1.0.0",
+  "author": "Gavin Henry <ghenry@sentrypeer.org>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SentryPeer/SentryPeerHQ.git"
+  },
+  "homepage": "https://sentrypeer.com",
+  "license": "AGPL-3.0",
+  "description": "SentryPeerHQ",
+  "dependencies": {
+    "cal-heatmap": "^4.2.3"
+  },
+  "devDependencies": {
+    "eslint": "8.43.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "prettier": "2.8.8"
+  }
+}
