@@ -204,7 +204,7 @@ defmodule SentrypeerWeb.Router do
   scope "/api", SentrypeerWeb do
     pipe_through [
       :rate_limit_per_hour,
-      :api,
+      :api
     ]
 
     get "/events/heatmap", SentrypeerEventHeatmapController, :heatmap
