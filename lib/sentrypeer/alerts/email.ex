@@ -14,8 +14,8 @@
 defmodule Sentrypeer.Alerts.Email do
   import Swoosh.Email
 
-  alias Sentrypeer.Mailer
   alias Sentrypeer.Integrations.Integration
+  alias Sentrypeer.Mailer
   require Logger
 
   @moduledoc """

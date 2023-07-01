@@ -17,6 +17,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   import SentrypeerWeb.NavigationComponents
 
   alias Sentrypeer.Accounts
+  alias Sentrypeer.Alerts
   alias Sentrypeer.Integrations.Integration
 
   require Logger
@@ -131,7 +132,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   def handle_event("test", %{"value" => "email"}, socket) do
     Logger.debug("Send test email to #{socket.assigns.integration.url}")
 
-    Sentrypeer.Alerts.Email.send_alert(
+    Alerts.Email.send_alert(
       socket.assigns.integration,
       "Testing SentryPeer Email Integration"
     )
@@ -145,7 +146,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   def handle_event("test", %{"value" => "slack"}, socket) do
     Logger.debug("Send test slack webhook to #{socket.assigns.integration.url}")
 
-    Sentrypeer.Alerts.Slack.send_alert(
+    Alerts.Slack.send_alert(
       socket.assigns.integration,
       "Testing SentryPeer Slack Integration"
     )
@@ -159,7 +160,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   def handle_event("test", %{"value" => "webhook"}, socket) do
     Logger.debug("Send test webhook to #{socket.assigns.integration.url}")
 
-    Sentrypeer.Alerts.Webhook.send_alert(
+    Alerts.Webhook.send_alert(
       socket.assigns.integration,
       "Testing SentryPeer Webhook Integration"
     )

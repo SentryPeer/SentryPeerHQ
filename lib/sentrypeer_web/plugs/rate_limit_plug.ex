@@ -104,7 +104,7 @@ defmodule SentrypeerWeb.RateLimitPlug do
   def render_error(conn) do
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(429, '{"status": "429 Too Many Requests"}')
+    |> send_resp(429, ~c"{\"status\": \"429 Too Many Requests\"}")
     |> halt()
   end
 end

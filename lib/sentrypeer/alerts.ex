@@ -31,21 +31,25 @@ defmodule Sentrypeer.Alerts do
 
       integrations ->
         Enum.each(integrations, fn %Integration{} = integration ->
-          case integration.type do
-            "email" ->
-              Email.send_alert(integration, number_or_ip_address)
-
-            "slack" ->
-              Slack.send_alert(integration, number_or_ip_address)
-
-            "webhook" ->
-              Webhook.send_alert(integration, number_or_ip_address)
-
-            _ ->
-              Logger.error("Unknown integration type: #{integration.type}")
-          end
+          send_alert_based_on_type(integration, number_or_ip_address)
         end)
     end
+  end
+
+  defp send_alert_based_on_type(%Integration{type: "email"} = integration, number_or_ip_address) do
+    Email.send_alert(integration, number_or_ip_address)
+  end
+
+  defp send_alert_based_on_type(%Integration{type: "slack"} = integration, number_or_ip_address) do
+    Slack.send_alert(integration, number_or_ip_address)
+  end
+
+  defp send_alert_based_on_type(%Integration{type: "webhook"} = integration, number_or_ip_address) do
+    Webhook.send_alert(integration, number_or_ip_address)
+  end
+
+  defp send_alert_based_on_type(%Integration{type: _} = integration, _number_or_ip_address) do
+    Logger.error("Unknown integration type: #{integration.type}")
   end
 
   defp get_integrations_from_client(client_id) do

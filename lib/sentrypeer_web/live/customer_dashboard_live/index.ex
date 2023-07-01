@@ -33,15 +33,15 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
      )}
   end
 
-  defp total_unique_phone_numbers() do
+  defp total_unique_phone_numbers do
     Sentrypeer.SentrypeerEvents.total_unique_phone_numbers!()
   end
 
-  defp total_unique_ip_addresses() do
+  defp total_unique_ip_addresses do
     Sentrypeer.SentrypeerEvents.total_unique_ip_addresses!()
   end
 
-  defp total_events() do
+  defp total_events do
     Sentrypeer.SentrypeerEvents.total_events!()
   end
 

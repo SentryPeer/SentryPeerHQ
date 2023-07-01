@@ -10,7 +10,8 @@
   "license": "AGPL-3.0",
   "description": "SentryPeerHQ",
   "dependencies": {
-    "cal-heatmap": "^4.2.3"
+    "cal-heatmap": "^4.2.3",
+    "npm": "^9.7.2"
   },
   "devDependencies": {
     "eslint": "8.43.0",
