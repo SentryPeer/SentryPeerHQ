@@ -83,7 +83,7 @@ defmodule SentrypeerWeb.Router do
     root_layout: {SentrypeerWeb.Layouts, :liveview_root},
     on_mount: [SentrypeerWeb.UserLiveAuth, SentrypeerWeb.ActiveNav] do
     scope "/", SentrypeerWeb do
-      pipe_through [:browser, :admins_only, :ensure_authenticated_user]
+      pipe_through [:browser, :ensure_authenticated_user]
       live "/dashboard", CustomerDashboardLive.Index, :index
 
       # SentryPeer nodes that the user owns - https://sentrypeer.org is the node software used to contribute their
@@ -203,8 +203,8 @@ defmodule SentrypeerWeb.Router do
 
   scope "/api", SentrypeerWeb do
     pipe_through [
-      :rate_limit_per_hour,
-      :api
+      :browser,
+      :ensure_authenticated_user
     ]
 
     get "/events/heatmap", SentrypeerEventHeatmapController, :heatmap
