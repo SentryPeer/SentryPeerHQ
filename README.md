@@ -1,7 +1,7 @@
 # Use SentryPeer<sup>&reg;</sup> to help prevent VoIP cyberattacks and fraudulent VoIP phone calls (toll fraud)
 
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/sentrypeer/sentrypeerhq?sort=semver)](https://github.com/SentryPeer/SentryPeeHQ/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/sentrypeer/sentrypeerhq?sort=semver)](https://github.com/SentryPeer/SentryPeerHQ/releases)
 [![CI](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml/badge.svg)](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml)
 
 ## Table of Contents
