@@ -534,7 +534,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               <p class="mt-4 text-base text-gray-500 dark:text-black">
                 The latest news, articles, and resources, sent to your inbox weekly.
               </p>
-              <form class="mt-4 sm:flex sm:max-w-md" id="contact-form" phx-submit="subscribe">
+              <form class="mt-4 sm:flex sm:max-w-md" id="newsletter-form" phx-submit="subscribe">
                 <label for="email-address" class="sr-only">Email address</label>
                 <input
                   type="email"

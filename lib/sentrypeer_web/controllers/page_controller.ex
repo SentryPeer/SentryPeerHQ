@@ -43,24 +43,6 @@ defmodule SentrypeerWeb.PageController do
   end
 
   # Support
-  def documentation(conn, _params) do
-    render(conn, :documentation,
-      current_user: get_session(conn, :current_user),
-      layout: false,
-      show_newsletter_subscription: false,
-      page_title: "Documentation"
-    )
-  end
-
-  def guides(conn, _params) do
-    render(conn, :guides,
-      current_user: get_session(conn, :current_user),
-      layout: false,
-      show_newsletter_subscription: false,
-      page_title: "Guides"
-    )
-  end
-
   def changelog(conn, _params) do
     render(conn, :changelog,
       current_user: get_session(conn, :current_user),

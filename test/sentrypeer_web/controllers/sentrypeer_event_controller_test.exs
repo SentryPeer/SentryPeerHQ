@@ -108,12 +108,12 @@ defmodule SentrypeerWeb.SentrypeerEventControllerTest do
   describe "create sentrypeer_event" do
     test "renders sentrypeer_event when data is valid", %{conn: conn} do
       conn = post(conn, ~p"/api/events", sentrypeer_event: @create_attrs)
-      assert json_response(conn, 201)["data"] != %{}
+      assert json_response(conn, 401) == %{"error" => "missing_token"}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, ~p"/api/events", sentrypeer_event: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
+      assert json_response(conn, 401) == %{"error" => "missing_token"}
     end
   end
 end

@@ -25,7 +25,7 @@ defmodule Sentrypeer.ContactFormFixtures do
       attrs
       |> Enum.into(%{
         company_name: "some company_name",
-        email: "some email",
+        email: "gavin@gavin.com",
         first_name: "some first_name",
         last_name: "some last_name",
         message: "some message"

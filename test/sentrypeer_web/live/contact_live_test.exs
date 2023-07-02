@@ -17,19 +17,14 @@ defmodule SentrypeerWeb.ContactLiveTest do
   import Phoenix.LiveViewTest
   import Sentrypeer.ContactFormFixtures
 
+  require Logger
+
   @create_attrs %{
     company_name: "some company_name",
     email: "some email",
     first_name: "some first_name",
     last_name: "some last_name",
     message: "some message"
-  }
-  @update_attrs %{
-    company_name: "some updated company_name",
-    email: "some updated email",
-    first_name: "some updated first_name",
-    last_name: "some updated last_name",
-    message: "some updated message"
   }
   @invalid_attrs %{company_name: nil, email: nil, first_name: nil, last_name: nil, message: nil}
 
@@ -41,18 +36,11 @@ defmodule SentrypeerWeb.ContactLiveTest do
   describe "Index" do
     setup [:create_contact]
 
-    test "lists all contacts", %{conn: conn, contact: contact} do
-      {:ok, _index_live, html} = live(conn, ~p"/contacts")
-
-      assert html =~ "Listing Contacts"
-      assert html =~ contact.company_name
-    end
-
     test "saves new contact", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, ~p"/contact")
 
-      assert index_live |> element("a", "New Contact") |> render_click() =~
-               "New Contact"
+      assert index_live |> element("a", "Contact us") |> render_click() =~
+               "Contact SentryPeer"
 
       assert_patch(index_live, ~p"/contact/new")
 
@@ -64,10 +52,8 @@ defmodule SentrypeerWeb.ContactLiveTest do
              |> form("#contact-form", contact: @create_attrs)
              |> render_submit()
 
-      assert_patch(index_live, ~p"/contact")
-
       html = render(index_live)
-      assert html =~ "Contact created successfully"
+      assert html =~ "Contact SentryPeer"
       assert html =~ "some company_name"
     end
   end

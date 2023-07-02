@@ -1,7 +1,5 @@
 # Use SentryPeer<sup>&reg;</sup> to help prevent VoIP cyberattacks and fraudulent VoIP phone calls (toll fraud)
 
-<img alt="SentryPeer Logo" src="https://raw.githubusercontent.com/SentryPeer/SentryPeer/main/web-gui-theme/src/assets/logo.svg" width="100" height="100">
-
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/sentrypeer/sentrypeerhq?sort=semver)](https://github.com/SentryPeer/SentryPeeHQ/releases)
 [![CI](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml/badge.svg)](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml)
@@ -14,6 +12,9 @@
 * [Trademark](#trademark)
 * [Questions, Bug reports, Feature Requests](#questions-bug-reports-feature-requests)
 * [Special Thanks](#special-thanks)
+* [Sponsorship](#sponsorship)
+
+<img alt="SentryPeerHQ Screenshot" src="https://raw.githubusercontent.com/SentryPeer/SentryPeerHQ/main/priv/static/images/sentrypeer-app-screenshot-overview.png">
 
 ### Introduction
 
@@ -68,3 +69,7 @@ It's okay to raise an issue to ask a question.
 Special thanks to:
 - [Fly.io](https://fly.io) for crediting the SentryPeer account for hosting the SentryPeerHQ web app on their infrastructure
 - [AppSignal](https://www.appsignal.com/) for Application performance monitoring sponsorship in the SentryPeerHQ web app
+
+### Sponsorship
+
+Special thanks to [Deutsche Telekom Security GmbH](https://github.com/telekom-security) for sponsoring us! Very kind!
