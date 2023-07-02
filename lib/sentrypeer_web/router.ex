@@ -140,8 +140,6 @@ defmodule SentrypeerWeb.Router do
     get "/jobs", PageController, :jobs
 
     # Support
-    get "/documentation", PageController, :documentation
-    get "/guides", PageController, :guides
     get "/changelog", PageController, :changelog
 
     # Sectors
