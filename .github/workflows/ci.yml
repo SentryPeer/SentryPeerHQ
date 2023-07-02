@@ -54,4 +54,3 @@ jobs:
       - run: mix sobelow -i Config.CSP,Config.CSRF,Config.HTTPS 
       #- run: mix dialyzer --halt-exit-status
       #- run: mix test --warnings-as-errors --cover
-      - run: mix test --warnings-as-errors

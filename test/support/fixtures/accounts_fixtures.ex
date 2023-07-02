@@ -25,7 +25,8 @@ defmodule Sentrypeer.AccountsFixtures do
       attrs
       |> Enum.into(%{
         auth_id: "some auth_id",
-        latest_login: ~N[2023-05-08 17:24:00]
+        latest_login: ~N[2023-05-08 17:24:00],
+        email: "some email"
       })
       |> Sentrypeer.Accounts.create_user()
 

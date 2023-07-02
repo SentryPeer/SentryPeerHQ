@@ -21,7 +21,7 @@ defmodule Sentrypeer.AccountsTest do
 
     import Sentrypeer.AccountsFixtures
 
-    @invalid_attrs %{auth_id: nil, latest_login: nil}
+    @invalid_attrs %{auth_id: nil, latest_login: nil, email: nil}
 
     test "list_users/0 returns all users" do
       user = user_fixture()
@@ -47,11 +47,17 @@ defmodule Sentrypeer.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{auth_id: "some updated auth_id", latest_login: ~N[2023-05-09 17:24:00]}
+
+      update_attrs = %{
+        auth_id: "some updated auth_id",
+        latest_login: ~N[2023-05-09 17:24:00],
+        email: "some updated email"
+      }
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.auth_id == "some updated auth_id"
       assert user.latest_login == ~N[2023-05-09 17:24:00]
+      assert user.email == "some updated email"
     end
 
     test "update_user/2 with invalid data returns error changeset" do

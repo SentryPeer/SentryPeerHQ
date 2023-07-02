@@ -29,7 +29,8 @@ defmodule Sentrypeer.BillingSubscriptionsFixtures do
         current_period_end_at: ~N[2023-05-08 17:31:00],
         current_period_start: ~N[2023-05-08 17:31:00],
         status: "some status",
-        stripe_id: "some stripe_id"
+        stripe_id: "some stripe_id",
+        auth_id: Ecto.UUID.generate()
       })
       |> Sentrypeer.BillingSubscriptions.create_billing_subscription()
 
