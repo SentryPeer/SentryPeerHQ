@@ -29,6 +29,7 @@ kill_timeout = 5
   GIT_REV = "a6737a9"
   PHX_HOST = "sentrypeer.com"
   PORT = "8080"
+  POOL_SIZE = "20"
   RELEASE_COOKIE = "KRZUUgQ6UkklyFu8mPR6MNaIWD0Njw-hriWNxEjRMCw-mlil0duZsA=="
 
 [[services]]
