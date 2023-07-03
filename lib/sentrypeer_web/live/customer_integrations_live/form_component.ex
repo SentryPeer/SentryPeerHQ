@@ -52,6 +52,16 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
         <% end %>
 
         <%= if @integration_type == "webhook" && @integration.enabled do %>
+          <.link
+            href="https://docs.sentrypeer.com/webhooks"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="External link to the official SentryPeer documentation for Webhooks"
+            class="mt-4 text-sm sm:col-span-3 sm:col-start-1 text-indigo-600 hover:text-brand"
+          >
+            https://docs.sentrypeer.com/webhooks
+            <Heroicons.arrow_top_right_on_square class="inline-block w-4 h-4" />
+          </.link>
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="webhook">
             Test
           </.button>
