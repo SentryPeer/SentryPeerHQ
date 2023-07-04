@@ -26,7 +26,7 @@
                     />
                   </div>
                   <div class="space-y-1">
-                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
+                    <div class="text-sm font-medium text-gray-900 dark:text-white">
                       <%= @current_user.name %>
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
@@ -61,10 +61,10 @@
         <div>
           <dl class="divide-y divide-gray-100">
             <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                 Subscription Status
               </dt>
-              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
                   <%= String.capitalize(@subscription.status) %>
                 </span>
@@ -80,10 +80,10 @@
               </dd>
             </div>
             <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                 Plan
               </dt>
-              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow"><%= @subscription.plan.nickname %></span>
                 <span class="ml-4 flex-shrink-0">
                   <.link
@@ -97,10 +97,10 @@
               </dd>
             </div>
             <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                 Billing date
               </dt>
-              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
                   <%= to_month_day(@subscription.billing_cycle_anchor) %>, <%= to_year(
                     @subscription.current_period_end
@@ -110,10 +110,10 @@
             </div>
 
             <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                 Billing Email
               </dt>
-              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow"><%= @billing_email %></span>
                 <span class="ml-4 flex-shrink-0">
                   <.link
@@ -127,10 +127,10 @@
               </dd>
             </div>
             <div class="py-4 px-4 sm:px-6 lg:px-8 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-slate-400">
+              <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                 Payment Method
               </dt>
-              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-slate-400 sm:col-span-2 sm:mt-0">
+              <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
                   <%= if @payment_methods.data == [] do %>
                     No Credit Card on file.
@@ -169,19 +169,19 @@
             <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-3 border-b border-gray-200">
               <div class="sm:pr-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Issued on</dt>
-                <dd class="inline text-gray-800 dark:text-slate-400">
+                <dd class="inline text-gray-800 dark:text-white">
                   <%= to_month_day(@upcoming_invoice.created) %>
                 </dd>
               </div>
               <div class="mt-2 sm:mt-0 sm:pl-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Due on</dt>
-                <dd class="inline text-gray-800 dark:text-slate-400">
+                <dd class="inline text-gray-800 dark:text-white">
                   <%= to_month_day(@upcoming_invoice.created) %>
                 </dd>
               </div>
               <div class="mt-2 sm:mt-0 sm:pl-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Period</dt>
-                <dd class="inline sm:inline-block text-gray-800 dark:text-slate-400">
+                <dd class="inline sm:inline-block text-gray-800 dark:text-white">
                   <%= to_month_day(List.first(@upcoming_invoice.lines.data).period.start) %> &mdash; <%= to_month_day(
                     List.first(@upcoming_invoice.lines.data).period.end
                   ) %>, <%= to_year(List.first(@upcoming_invoice.lines.data).period.end) %>
@@ -209,11 +209,11 @@
               <tbody>
                 <tr class="border-b border-gray-100">
                   <td class="max-w-0 px-0 py-5 align-top">
-                    <div class="truncate font-medium text-gray-900 dark:text-slate-400">
+                    <div class="truncate font-medium text-gray-900 dark:text-white">
                       <%= List.first(@upcoming_invoice.lines.data).description %>
                     </div>
                   </td>
-                  <td class="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 dark:text-slate-400">
+                  <td class="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 dark:text-white">
                     <%= List.first(@upcoming_invoice.lines.data).price.unit_amount / 100 %>
                   </td>
                 </tr>
@@ -233,7 +233,7 @@
                   >
                     Subtotal
                   </th>
-                  <td class="pb-0 pl-8 pr-0 pt-6 text-right tabular-nums text-gray-900 dark:text-slate-400">
+                  <td class="pb-0 pl-8 pr-0 pt-6 text-right tabular-nums text-gray-900 dark:text-white">
                     <%= @upcoming_invoice.subtotal / 100 %>
                   </td>
                 </tr>
@@ -251,7 +251,7 @@
                   >
                     Tax
                   </th>
-                  <td class="pb-0 pl-8 pr-0 pt-4 text-right tabular-nums text-gray-900 dark:text-slate-400">
+                  <td class="pb-0 pl-8 pr-0 pt-4 text-right tabular-nums text-gray-900 dark:text-white">
                     <%= @upcoming_invoice.tax %>
                   </td>
                 </tr>
@@ -269,7 +269,7 @@
                   >
                     Total
                   </th>
-                  <td class="pb-0 pl-8 pr-0 pt-4 text-right font-semibold tabular-nums text-gray-900 dark:text-slate-400">
+                  <td class="pb-0 pl-8 pr-0 pt-4 text-right font-semibold tabular-nums text-gray-900 dark:text-white">
                     <%= @upcoming_invoice.amount_due / 100 %>
                   </td>
                 </tr>
@@ -316,7 +316,7 @@
                                 List.first(invoice.lines.data).period.end
                               ) %>, <%= to_year(List.first(invoice.lines.data).period.end) %>
                             </p>
-                            <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-slate-400">
+                            <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-white">
                               <a
                                 href={invoice.hosted_invoice_url}
                                 class="text-indigo-600 hover:text-brand"

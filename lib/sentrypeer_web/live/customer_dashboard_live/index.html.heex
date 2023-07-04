@@ -25,7 +25,7 @@
                     />
                   </div>
                   <div class="space-y-1">
-                    <div class="text-sm font-medium text-gray-900 dark:text-slate-400">
+                    <div class="text-sm font-medium text-gray-900 dark:text-white">
                       <%= @current_user.name %>
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div>
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-slate-400 pl-4 pr-6 pt-6 sm:pl-6 lg:pl-8 xl:pl-6">
+          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white pl-4 pr-6 pt-6 sm:pl-6 lg:pl-8 xl:pl-6">
             Live data from our honeypots for <%= Date.utc_today() |> Calendar.strftime("%B") %>
           </h3>
           <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 dark:divide-slate-800 overflow-hidden rounded-lg bg-white dark:bg-slate-400 shadow m-6 md:grid-cols-3 md:divide-y-0 md:divide-x">
@@ -94,13 +94,13 @@
             </div>
           </dl>
         </div>
-        <h3 class="hidden lg:block text-base font-semibold leading-6 text-gray-900 dark:text-slate-400 pl-4 pr-6 pt-6 sm:pl-6 lg:pl-8 xl:pl-6">
+        <h3 class="hidden lg:block text-base font-semibold leading-6 text-gray-900 dark:text-white pl-4 pr-6 pt-6 sm:pl-6 lg:pl-8 xl:pl-6">
           Historical data for the past year
         </h3>
         <div
           phx-hook="SentrypeerCalHeatmap"
           phx-update="ignore"
-          class="hidden lg:block mt-10 pl-4 lg:pl-4 xl:pl-0 dark:text-slate-400"
+          class="hidden lg:block mt-10 pl-4 lg:pl-4 xl:pl-0 dark:text-white"
           id="event-heatmap"
         >
         </div>
@@ -108,7 +108,7 @@
           <div class="mt-2" id="ex-ghDay"></div>
           <a
             id="cal-previous"
-            class="text-slate-700 dark:text-slate-400 text-xs"
+            class="text-slate-700 dark:text-white text-xs"
             href="#"
             phx-click={JS.dispatch("sentrypeerhq:cal_previous", to: "#cal-previous")}
           >
@@ -116,21 +116,21 @@
           </a>
           <a
             id="cal-next"
-            class="text-slate-700 dark:text-slate-400 text-xs"
+            class="text-slate-700 dark:text-white text-xs"
             href="#"
             phx-click={JS.dispatch("sentrypeerhq:cal_next", to: "#cal-next")}
           >
             Next →
           </a>
           <div class="hidden pr-10 lg:pr-10 lg:block float-right mt-2">
-            <span class="text-slate-700 dark:text-slate-400 text-xs">Less</span>
+            <span class="text-slate-700 dark:text-white text-xs">Less</span>
             <div
               id="ex-ghDay-legend"
               phx-update="ignore"
-              class="inline-block ml-1 mr-1 dark:text-slate-400"
+              class="inline-block ml-1 mr-1 dark:text-white"
             >
             </div>
-            <span class="text-slate-700 dark:text-slate-400 text-xs">More</span>
+            <span class="text-slate-700 dark:text-white text-xs">More</span>
           </div>
         </div>
       </div>

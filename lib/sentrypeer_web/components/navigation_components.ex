@@ -46,7 +46,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -62,7 +62,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -86,7 +86,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -111,7 +111,7 @@ defmodule SentrypeerWeb.NavigationComponents do
             <li class="flex">
               <div class="flex items-center">
                 <svg
-                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                   viewBox="0 0 24 44"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -135,7 +135,7 @@ defmodule SentrypeerWeb.NavigationComponents do
             <li class="flex">
               <div class="flex items-center">
                 <svg
-                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                  class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                   viewBox="0 0 24 44"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -159,7 +159,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -183,7 +183,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -207,7 +207,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -231,7 +231,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -255,7 +255,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -278,7 +278,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -302,7 +302,7 @@ defmodule SentrypeerWeb.NavigationComponents do
           <li class="flex">
             <div class="flex items-center">
               <svg
-                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-slate-400"
+                class="h-full w-6 flex-shrink-0 text-gray-200 dark:text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -365,7 +365,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/analytics"}
         class={"#{if (@active_page == :analytics ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="See lots of useful information"
       >
         <Heroicons.chart_pie
@@ -379,7 +379,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/insights"}
         class={"#{if (@active_page == :insights ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="Get valuable insights from your data"
       >
         <Heroicons.sparkles
@@ -394,7 +394,7 @@ defmodule SentrypeerWeb.NavigationComponents do
         <.link
           navigate={~p"/nodes"}
           class={"#{if (@active_page == :nodes || @active_page == :node_overview ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
           title="SentryPeer Nodes"
         >
           <svg
@@ -419,7 +419,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/billing"}
         class={"#{if (@active_page == :billing ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="See your current Plan and Billing Information"
       >
         <svg
@@ -443,7 +443,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/team"}
         class={"#{if (@active_page == :team ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="Add users to your account"
       >
         <svg
@@ -470,7 +470,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <.link
         navigate={~p"/integrations"}
         class={"#{if (@active_page == :integrations ),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
         title="Why not have a browse of our Integrations?"
       >
         <svg
@@ -495,7 +495,7 @@ defmodule SentrypeerWeb.NavigationComponents do
         navigate={~p"/settings"}
         title="Manage your API client credentials and other settings"
         class={"#{if (@active_page == :settings || @active_page == :settings_overview),
-                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
+                do: "bg-gray-50 dark:bg-slate-400 text-indigo-700 dark:text-black hover:text-indigo-700 hover:bg-white dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium", else: "text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"}"}
       >
         <Heroicons.code_bracket class={"#{if (@active_page == :settings ),
                 do: "text-indigo-500 dark:text-black group-hover:text-indigo-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6", else: "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6"}"} />
@@ -507,7 +507,7 @@ defmodule SentrypeerWeb.NavigationComponents do
         target="_blank"
         rel="noopener noreferrer"
         title="Visit the SentryPeer Status Page"
-        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-slate-400 dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:text-black dark:hover:bg-slate-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <Heroicons.megaphone class="text-gray-400 group-hover:text-gray-500 dark:group-hover:text-black flex-shrink-0 -ml-1 mr-3 h-6 w-6" />
         <span class="truncate">Status</span>
