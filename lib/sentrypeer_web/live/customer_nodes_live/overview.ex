@@ -79,7 +79,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   end
 
   @impl true
-  def handle_info({node_probe, client_id}, socket) do
+  def handle_info({node_probe, _conn, client_id}, socket) do
     Logger.debug("Client #{client_id} has just searched something.")
     node_searches = socket.assigns.node_probes ++ [node_probe]
 

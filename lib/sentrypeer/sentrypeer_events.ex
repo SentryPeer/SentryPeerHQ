@@ -215,7 +215,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       |> SentrypeerEvent.changeset(attrs, client_id, is_third_party_client(client_id))
 
     if changeset.valid? do
-      broadcast({:ok, changeset.changes}, client_id)
+      broadcast({:ok, changeset.changes, conn}, client_id)
 
       changeset_after_insert = Repo.insert(changeset)
 
