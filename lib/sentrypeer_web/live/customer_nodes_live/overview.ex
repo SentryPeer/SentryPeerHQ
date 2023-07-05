@@ -24,14 +24,18 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   require Logger
 
   @impl true
-  def mount(_params, _session, socket) do
-    node_probes = []
+  def mount(_params, session, socket) do
+    if FunWithFlags.enabled?(:contributor_plan, for: session["current_user"]) do
+      node_probes = []
 
-    {:ok,
-     assign(socket,
-       token_url: Auth0Config.auth0_token_url(),
-       node_probes: node_probes
-     )}
+      {:ok,
+       assign(socket,
+         token_url: Auth0Config.auth0_token_url(),
+         node_probes: node_probes
+       )}
+    else
+      {:ok, redirect(socket, to: "/not_found")}
+    end
   end
 
   @impl true

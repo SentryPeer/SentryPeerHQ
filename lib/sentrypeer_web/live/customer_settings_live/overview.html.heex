@@ -34,9 +34,12 @@
                 class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
               >
                 <div id="api-logger-realtime">
-                  <%= for api_query <- @api_queries do %>
+                  <%= for query <- @api_queries do %>
                     <p id={"log-#{System.unique_integer()}"}>
-                      <%= api_query %>
+                      Remote IP: <%= elem(query, 1).remote_ip |> Tuple.to_list() |> Enum.join(".") %> Searched for: <%= elem(
+                        query,
+                        0
+                      ) %>
                     </p>
                   <% end %>
                 </div>
@@ -185,7 +188,7 @@
                 </.link>
                 for more information.
               </p>
-              <p>
+              <p class="mt-2">
                 Something you'd like to see?
                 <.link patch={~p"/contact"} class="text-indigo-600 hover:text-brand">
                   Let us know!

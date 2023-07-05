@@ -25,18 +25,22 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    clients = list_clients(session["current_user"].id, @client_type)
-    Logger.debug("list_mount: #{inspect(clients)}")
+    if FunWithFlags.enabled?(:contributor_plan, for: session["current_user"]) do
+      clients = list_clients(session["current_user"].id, @client_type)
+      Logger.debug("list_mount: #{inspect(clients)}")
 
-    {:ok,
-     assign(socket,
-       current_user: session["current_user"],
-       app_version: Application.spec(:sentrypeer, :vsn),
-       git_rev: Application.get_env(:sentrypeer, :git_rev),
-       page_title: "Nodes" <> " · SentryPeer",
-       client_type: "node_client",
-       clients: clients
-     )}
+      {:ok,
+       assign(socket,
+         current_user: session["current_user"],
+         app_version: Application.spec(:sentrypeer, :vsn),
+         git_rev: Application.get_env(:sentrypeer, :git_rev),
+         page_title: "Nodes" <> " · SentryPeer",
+         client_type: "node_client",
+         clients: clients
+       )}
+    else
+      {:ok, redirect(socket, to: "/not_found")}
+    end
   end
 
   @impl true

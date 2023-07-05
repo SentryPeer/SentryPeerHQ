@@ -265,7 +265,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_phone_number_sentrypeer_event?(phone_number, client_id) do
+  def check_phone_number_sentrypeer_event?(phone_number, conn) do
     changeset =
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
@@ -274,20 +274,20 @@ defmodule Sentrypeer.SentrypeerEvents do
         from e in SentrypeerEvent,
           where: e.called_number == ^changeset.changes.phone_number and e.third_party == false
 
-      broadcast({:ok, phone_number}, client_id)
+      broadcast({:ok, phone_number, conn}, conn.assigns.client_id)
       Repo.exists?(query)
     else
       false
     end
   end
 
-  def check_phone_number_exists_for_contributor?(phone_number, client_id) do
+  def check_phone_number_exists_for_contributor?(phone_number, conn) do
     changeset =
       SentrypeerPhoneNumber.changeset(%SentrypeerPhoneNumber{}, %{phone_number: phone_number})
 
     if changeset.valid? do
       # Check client_id is owned by someone, if not return false
-      case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
+      case Sentrypeer.Clients.get_client_owner_by_client_id!(conn.assigns.client_id) do
         %Client{} = client ->
           case client.user do
             nil ->
@@ -303,7 +303,7 @@ defmodule Sentrypeer.SentrypeerEvents do
                     e.called_number == ^changeset.changes.phone_number and
                       e.client_id in ^client_ids
 
-              broadcast({:ok, phone_number}, client_id)
+              broadcast({:ok, phone_number, conn}, conn.assigns.client_id)
               Repo.exists?(query)
           end
 
@@ -329,7 +329,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       false
 
   """
-  def check_ip_address_sentrypeer_event?(ip_address, client_id) do
+  def check_ip_address_sentrypeer_event?(ip_address, conn) do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
@@ -337,19 +337,19 @@ defmodule Sentrypeer.SentrypeerEvents do
         from e in SentrypeerEvent,
           where: e.source_ip == ^changeset.changes.ip_address and e.third_party == false
 
-      broadcast({:ok, ip_address}, client_id)
+      broadcast({:ok, ip_address, conn}, conn.assigns.client_id)
       Repo.exists?(query)
     else
       false
     end
   end
 
-  def check_ip_address_exists_for_contributor?(ip_address, client_id) do
+  def check_ip_address_exists_for_contributor?(ip_address, conn) do
     changeset = SentrypeerIpAddress.changeset(%SentrypeerIpAddress{}, %{ip_address: ip_address})
 
     if changeset.valid? do
       # Check client_id is owned by someone, if not return false
-      case Sentrypeer.Clients.get_client_owner_by_client_id!(client_id) do
+      case Sentrypeer.Clients.get_client_owner_by_client_id!(conn.assigns.client_id) do
         %Client{} = client ->
           case client.user do
             nil ->
@@ -365,7 +365,7 @@ defmodule Sentrypeer.SentrypeerEvents do
                     e.source_ip == ^changeset.changes.ip_address and
                       e.client_id in ^client_ids
 
-              broadcast({:ok, ip_address}, client_id)
+              broadcast({:ok, ip_address, conn}, conn.assigns.client_id)
               Repo.exists?(query)
           end
 
@@ -389,17 +389,17 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   defp broadcast({:error, _reason} = error, _client_id), do: error
 
-  defp broadcast({:ok, searched_for}, client_id) do
+  defp broadcast({:ok, searched_for, conn}, client_id) do
     # Logger.debug(IEx.Info.info(client_id))
     Logger.debug("Broadcasting to: 'client_id:#{client_id}'")
 
     Phoenix.PubSub.broadcast(
       Sentrypeer.PubSub,
       "client_id:#{client_id}",
-      {searched_for, client_id}
+      {searched_for, conn, client_id}
     )
 
-    {:ok, searched_for}
+    {:ok, searched_for, conn}
   end
 
   defp broadcast_all_nodes({:error, _reason} = error), do: error

@@ -57,9 +57,9 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   end
 
   defp check_phone_number_contributor_plan(conn, phone_number) do
-    SentrypeerEvents.check_ip_address_exists_for_contributor?(
+    SentrypeerEvents.check_phone_number_exists_for_contributor?(
       phone_number,
-      conn.assigns.client_id
+      conn
     )
     |> check_phone_number_result(conn, phone_number)
   end
@@ -67,7 +67,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   defp check_phone_number_paid_plan(conn, phone_number) do
     SentrypeerEvents.check_phone_number_sentrypeer_event?(
       phone_number,
-      conn.assigns.client_id
+      conn
     )
     |> check_phone_number_result(conn, phone_number)
   end
@@ -97,7 +97,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   defp check_ip_address_contributor_plan(conn, ip_address) do
     SentrypeerEvents.check_ip_address_exists_for_contributor?(
       ip_address,
-      conn.assigns.client_id
+      conn
     )
     |> check_ip_address_result(conn, ip_address)
   end
@@ -105,7 +105,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
   defp check_ip_address_paid_plan(conn, ip_address) do
     SentrypeerEvents.check_ip_address_sentrypeer_event?(
       ip_address,
-      conn.assigns.client_id
+      conn
     )
     |> check_ip_address_result(conn, ip_address)
   end

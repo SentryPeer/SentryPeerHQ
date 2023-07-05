@@ -54,9 +54,9 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
   end
 
   @impl true
-  def handle_info({api_query, client_id}, socket) do
+  def handle_info({api_query, conn, client_id}, socket) do
     Logger.debug("Client #{client_id} has just searched something.")
-    api_searches = socket.assigns.api_queries ++ [api_query]
+    api_searches = socket.assigns.api_queries ++ [{api_query, conn}]
     {:noreply, assign(socket, :api_queries, api_searches)}
   end
 end
