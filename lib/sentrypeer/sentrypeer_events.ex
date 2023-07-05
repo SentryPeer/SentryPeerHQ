@@ -289,6 +289,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       # Check client_id is owned by someone, if not return false
       case Sentrypeer.Clients.get_client_owner_by_client_id!(conn.assigns.client_id) do
         %Client{} = client ->
+          # credo:disable-for-next-line
           case client.user do
             nil ->
               false
@@ -351,6 +352,7 @@ defmodule Sentrypeer.SentrypeerEvents do
       # Check client_id is owned by someone, if not return false
       case Sentrypeer.Clients.get_client_owner_by_client_id!(conn.assigns.client_id) do
         %Client{} = client ->
+          # credo:disable-for-next-line
           case client.user do
             nil ->
               false
