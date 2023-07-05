@@ -30,7 +30,7 @@ defmodule SentrypeerWeb.SentrypeerEventController do
     with {:ok, %SentrypeerEvent{} = _sentrypeer_event} <-
            SentrypeerEvents.create_sentrypeer_event(
              sentrypeer_event_params,
-             conn.assigns.client_id
+             conn
            ) do
       conn
       |> put_status(:created)

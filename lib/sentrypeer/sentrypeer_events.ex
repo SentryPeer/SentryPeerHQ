@@ -209,7 +209,9 @@ defmodule Sentrypeer.SentrypeerEvents do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_sentrypeer_event(attrs \\ %{}, client_id) do
+  def create_sentrypeer_event(attrs \\ %{}, conn) do
+    client_id = conn.assigns.client_id
+
     changeset =
       %SentrypeerEvent{}
       |> SentrypeerEvent.changeset(attrs, client_id, is_third_party_client(client_id))
