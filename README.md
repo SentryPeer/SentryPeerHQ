@@ -3,6 +3,7 @@
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/sentrypeer/sentrypeerhq?sort=semver)](https://github.com/SentryPeer/SentryPeerHQ/releases)
 [![CI](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml/badge.svg)](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/ci.yml)
+[![gitleaks](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/gitleaks.yml/badge.svg?branch=main)](https://github.com/SentryPeer/SentryPeerHQ/actions/workflows/gitleaks.yml)
 
 ## Table of Contents
 * [Introduction](#introduction)
