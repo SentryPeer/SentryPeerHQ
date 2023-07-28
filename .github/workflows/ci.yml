@@ -39,7 +39,7 @@ jobs:
           --health-retries 5
         ports:
           # Maps tcp port 5434 on service container to the host
-          - 5432:5434
+          - 5434:5432
 
     steps:
       - uses: actions/checkout@v3
