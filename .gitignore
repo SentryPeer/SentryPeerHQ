@@ -48,3 +48,6 @@ npm-debug.log
 # IntelliJ etc
 .idea
 *.iml
+
+# Backups
+sentrypeer_hq.sql
