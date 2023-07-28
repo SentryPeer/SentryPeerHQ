@@ -536,6 +536,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               </p>
               <form class="mt-4 sm:flex sm:max-w-md" id="newsletter-form" phx-submit="subscribe">
                 <label for="email-address" class="sr-only">Email address</label>
+                <input type="hidden" name="_csrf_token" value={get_csrf_token()} />
                 <input
                   type="email"
                   name="email"
