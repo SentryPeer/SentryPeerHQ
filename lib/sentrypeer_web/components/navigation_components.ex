@@ -758,7 +758,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                     navigate={~p"/user/profile"}
                     title="View your profile"
                     class={"#{if @active_page == :user_profile,
-                      do: "bg-gray-100 dark:bg-slate-500 text-white block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
+                      do: "bg-gray-100 dark:bg-slate-500 text-gray-700 block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-0"
@@ -770,7 +770,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                     navigate={~p"/user/settings"}
                     title="Manage your user settings"
                     class={"#{if @active_page == :user_settings,
-                      do: "bg-gray-100 dark:bg-slate-500 text-white block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
+                      do: "bg-gray-100 dark:bg-slate-500 text-text-gray-700 block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600", else: "block px-4 py-2 text-sm group flex items-center hover:text-gray-900 hover:bg-gray-50 flex items-center font-medium text-gray-700 dark:text-black dark:hover:bg-slate-600"}"}
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
