@@ -25,10 +25,10 @@ defmodule Sentrypeer.Alerts.Email do
   def send_alert(%Integration{} = integration, number_or_ip_address) do
     case integration.enabled do
       true ->
-        Logger.debug("Sending email alert to #{integration.url}")
+        Logger.debug("Sending email alert to #{integration.destination}")
 
         new()
-        |> to(integration.url)
+        |> to(integration.destination)
         |> from({"SentryPeer Alerts", "support@sentrypeer.com"})
         |> subject(integration.subject)
         |> html_body(

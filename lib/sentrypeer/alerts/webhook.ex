@@ -24,10 +24,10 @@ defmodule Sentrypeer.Alerts.Webhook do
   def send_alert(%Integration{} = integration, number_or_ip_address) do
     case integration.enabled do
       true ->
-        Logger.debug("Sending Webhook alert to #{integration.url}")
+        Logger.debug("Sending Webhook alert to #{integration.destination}")
 
         case HTTPoison.post(
-               integration.url,
+               integration.destination,
                to_json(integration, number_or_ip_address),
                Alerts.post_headers(),
                Alerts.post_options()

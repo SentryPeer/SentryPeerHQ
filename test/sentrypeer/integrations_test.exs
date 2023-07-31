@@ -24,12 +24,12 @@ defmodule Sentrypeer.IntegrationsTest do
     @invalid_attrs %{
       auth_id: nil,
       description: nil,
+      destination: nil,
       enabled: nil,
       message: nil,
       name: nil,
       subject: nil,
-      type: nil,
-      url: nil
+      type: nil
     }
 
     test "list_integrations/0 returns all integrations" do
@@ -46,23 +46,23 @@ defmodule Sentrypeer.IntegrationsTest do
       valid_attrs = %{
         auth_id: "some auth_id",
         description: "some description",
+        destination: "some url",
         enabled: true,
         message: "some message",
         name: "some name",
         subject: "some subject",
-        type: "some type",
-        url: "some url"
+        type: "some type"
       }
 
       assert {:ok, %Integration{} = integration} = Integrations.create_integration(valid_attrs)
       assert integration.auth_id == "some auth_id"
       assert integration.description == "some description"
+      assert integration.destination == "some url"
       assert integration.enabled == true
       assert integration.message == "some message"
       assert integration.name == "some name"
       assert integration.subject == "some subject"
       assert integration.type == "some type"
-      assert integration.url == "some url"
     end
 
     test "create_integration/1 with invalid data returns error changeset" do
@@ -75,12 +75,12 @@ defmodule Sentrypeer.IntegrationsTest do
       update_attrs = %{
         auth_id: "some updated auth_id",
         description: "some updated description",
+        destination: "some updated url",
         enabled: false,
         message: "some updated message",
         name: "some updated name",
         subject: "some updated subject",
-        type: "some updated type",
-        url: "some updated url"
+        type: "some updated type"
       }
 
       assert {:ok, %Integration{} = integration} =
@@ -88,12 +88,12 @@ defmodule Sentrypeer.IntegrationsTest do
 
       assert integration.auth_id == "some updated auth_id"
       assert integration.description == "some updated description"
+      assert integration.destination == "some updated url"
       assert integration.enabled == false
       assert integration.message == "some updated message"
       assert integration.name == "some updated name"
       assert integration.subject == "some updated subject"
       assert integration.type == "some updated type"
-      assert integration.url == "some updated url"
     end
 
     test "update_integration/2 with invalid data returns error changeset" do

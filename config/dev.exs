@@ -36,7 +36,7 @@ config :sentrypeer, SentrypeerWeb.Endpoint,
   http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
-  debug_errors: false,
+  debug_errors: true,
   secret_key_base: "k5p1twamk5UIVdchT6Kiu8urUAOYKf8Gt7pTD2tAPr0snMv80mgnIpQ/VgS6RLAs",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},

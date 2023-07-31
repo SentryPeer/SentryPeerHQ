@@ -44,7 +44,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   end
 
   @impl true
-  def handle_params(params, _url, socket) do
+  def handle_params(params, _destination, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
@@ -130,7 +130,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
 
   @impl true
   def handle_event("test", %{"value" => "email"}, socket) do
-    Logger.debug("Send test email to #{socket.assigns.integration.url}")
+    Logger.debug("Send test email to #{socket.assigns.integration.destination}")
 
     Alerts.Email.send_alert(
       socket.assigns.integration,
@@ -144,7 +144,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
 
   @impl true
   def handle_event("test", %{"value" => "slack"}, socket) do
-    Logger.debug("Send test slack webhook to #{socket.assigns.integration.url}")
+    Logger.debug("Send test slack webhook to #{socket.assigns.integration.destination}")
 
     Alerts.Slack.send_alert(
       socket.assigns.integration,
@@ -158,7 +158,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
 
   @impl true
   def handle_event("test", %{"value" => "webhook"}, socket) do
-    Logger.debug("Send test webhook to #{socket.assigns.integration.url}")
+    Logger.debug("Send test webhook to #{socket.assigns.integration.destination}")
 
     Alerts.Webhook.send_alert(
       socket.assigns.integration,

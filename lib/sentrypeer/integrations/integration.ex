@@ -27,7 +27,6 @@ defmodule Sentrypeer.Integrations.Integration do
     field :type, :string
     field :subject, :string
     field :message, :string
-    field :url, :string
     field :destination, Sentrypeer.Encrypted.Data
     field :enabled, :boolean, default: true
     field :auth_id, :binary_id
@@ -43,20 +42,21 @@ defmodule Sentrypeer.Integrations.Integration do
   @doc false
   def changeset(integration, attrs) do
     integration
-    |> cast(attrs, [:name, :description, :type, :subject, :message, :url, :enabled, :auth_id])
+    |> cast(attrs, [
+      :name,
+      :description,
+      :type,
+      :subject,
+      :message,
+      :destination,
+      :enabled,
+      :auth_id
+    ])
     |> validate_required([
       :subject,
       :message,
-      :url,
+      :destination,
       :enabled
     ])
-    |> put_encrypted_fields()
-  end
-
-  # Temporary function during the migration process, to ensure
-  # that all changes are copied over to the new fields
-  defp put_encrypted_fields(changeset) do
-    changeset
-    |> put_change(:destination, get_field(changeset, :url))
   end
 end

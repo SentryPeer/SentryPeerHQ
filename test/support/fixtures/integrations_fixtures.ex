@@ -26,12 +26,12 @@ defmodule Sentrypeer.IntegrationsFixtures do
       |> Enum.into(%{
         auth_id: "some auth_id",
         description: "some description",
+        destination: "some url",
         enabled: true,
         message: "some message",
         name: "some name",
         subject: "some subject",
-        type: "some type",
-        url: "some url"
+        type: "some type"
       })
       |> Sentrypeer.Integrations.create_integration()
 

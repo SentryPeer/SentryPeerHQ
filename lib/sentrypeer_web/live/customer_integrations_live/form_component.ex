@@ -81,9 +81,9 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
         <.input field={@form[:subject]} type="text" phx-debounce="blur" label="Subject" />
         <.input field={@form[:message]} type="textarea" phx-debounce="blur" label="Message" />
         <%= if @integration_type == "email" do %>
-          <.input field={@form[:url]} type="email" phx-debounce="blur" label="Email" />
+          <.input field={@form[:destination]} type="email" phx-debounce="blur" label="Email" />
         <% else %>
-          <.input field={@form[:url]} type="url" phx-debounce="blur" label="WebHook Url" />
+          <.input field={@form[:destination]} type="url" phx-debounce="blur" label="WebHook Url" />
         <% end %>
         <:actions>
           <.button phx-disable-with="Saving...">Save Integration</.button>
