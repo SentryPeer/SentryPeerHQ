@@ -13,8 +13,9 @@
 
 defmodule Mix.Tasks.CopyUrlToDestination do
   use Mix.Task
-  alias Sentrypeer.Repo
+
   alias Sentrypeer.Integrations.Integration
+  alias Sentrypeer.Repo
 
   @moduledoc """
   Copy the url field to the destination field for all integrations
