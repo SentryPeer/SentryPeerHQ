@@ -13,6 +13,12 @@
 
 defmodule Sentrypeer.Vault do
   use Cloak.Vault, otp_app: :sentrypeer
+
+  @moduledoc """
+  This module is used to configure the Cloak.Vault module. It is used to
+  encrypt and decrypt data at runtime. Data is encrypted at rest in PostgreSQL
+  """
+
   @impl GenServer
   def init(config) do
     config =

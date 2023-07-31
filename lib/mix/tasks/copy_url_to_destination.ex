@@ -16,6 +16,13 @@ defmodule Mix.Tasks.CopyUrlToDestination do
   alias Sentrypeer.Repo
   alias Sentrypeer.Integrations.Integration
 
+  @moduledoc """
+  Copy the url field to the destination field for all integrations
+
+  This is also a good example of how to run a task from the command line
+  so we are keeping it around.
+  """
+
   def run(_) do
     Mix.Task.run("app.start")
 

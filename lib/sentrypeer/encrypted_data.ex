@@ -13,4 +13,9 @@
 
 defmodule Sentrypeer.Encrypted.Data do
   use Cloak.Ecto.Binary, vault: Sentrypeer.Vault
+
+  @moduledoc """
+  This module is used to encrypt and decrypt data at runtime. Data is encrypted
+  at rest in PostgreSQL
+  """
 end
