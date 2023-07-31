@@ -37,6 +37,8 @@ defmodule Sentrypeer.Application do
       # {Sentrypeer.Worker, arg}
       Sentrypeer.Auth.Auth0Strategy,
       {Oban, oban_config()},
+      # Our Cloak Vault
+      Sentrypeer.Vault,
       # Our Cache
       {Cachex, name: :sentrypeer_cache},
       # https://fly.io/docs/elixir/the-basics/clustering/#adding-libcluster
