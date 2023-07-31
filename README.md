@@ -17,7 +17,7 @@
 
 <img alt="SentryPeerHQ Screenshot" src="https://raw.githubusercontent.com/SentryPeer/SentryPeerHQ/main/priv/static/images/sentrypeer-app-screenshot-overview.png">
 
-### Introduction
+### 📚 Introduction
 
 Use SentryPeer<sup>&reg;</sup> to help prevent VoIP cyberattacks, fraudulent VoIP phone calls (toll fraud) and improve cybersecurity by detecting early stage reconnaissance attempts.
 
@@ -28,7 +28,7 @@ and consume the data from the [SentryPeer](https://sentrypeer.org) nodes that we
 
 _You'll always be able to use SentryPeerHQ for **free** to consume the data you provide from the [SentryPeer](https://sentrypeer.org) nodes that you run yourself._
 
-### Getting started with SentryPeerHQ
+### 🚀 Getting started with SentryPeerHQ
 
 The easiest way to get started with SentryPeerHQ is [in the cloud](https://sentrypeer.com/pricing) (we run it on [fly.io](https://fly.io/)).
 
@@ -41,6 +41,8 @@ Yes, but it's a bit of work. We'll be making it much easier as we progress. It�
 SentryPeerHQ is an [Elixir/Phoenix application](https://www.phoenixframework.org/) (web app and RESTful API) which uses [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) and is backed by a [PostgreSQL](https://www.postgresql.org/) database with [timescaledb](https://github.com/timescale/timescaledb). On the frontend we use [TailwindCSS](https://tailwindcss.com/) for styling.
 
 ### License
+
+[![AGPLv3](https://camo.githubusercontent.com/473b62766b498e4f2b008ada39f1d56fb3183649f24447866e25d958ac3fd79a/68747470733a2f2f7777772e676e752e6f72672f67726170686963732f6167706c76332d3135357835312e706e67)](https://www.gnu.org/licenses/why-affero-gpl.en.html)
 
 Great reading - [How to choose a license for your own work](https://www.gnu.org/licenses/license-recommendations.en.html)
 
