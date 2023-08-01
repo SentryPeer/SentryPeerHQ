@@ -162,6 +162,9 @@ defmodule SentrypeerWeb.Router do
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout
     get "/signup", AuthController, :signup
+
+    # Verify integration email
+    get "/integrations/email/confirm/:token", EmailVerifyController, :verify
   end
 
   scope "/api", SentrypeerWeb do

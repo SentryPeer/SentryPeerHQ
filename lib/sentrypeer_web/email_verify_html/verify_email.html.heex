@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1><%= @page_title %></h1>
+      <p>
+        <%= if @verified do %>
+          Your email address has been verified.
+        <% else %>
+          Your email address has not been verified.
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
