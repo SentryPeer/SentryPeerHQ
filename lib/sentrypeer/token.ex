@@ -37,7 +37,7 @@ defmodule Sentrypeer.Token do
     )
   end
 
-  defp get_secret_key_base() do
+  defp get_secret_key_base do
     Application.get_env(:sentrypeer, SentrypeerWeb.Endpoint)[:secret_key_base]
   end
 end
