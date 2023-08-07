@@ -2,7 +2,10 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
   use SentrypeerWeb, :live_component
 
   alias Sentrypeer.Accounts
+  alias Sentrypeer.Emails.EmailIntegrationConfirm
   alias Sentrypeer.Integrations
+  alias Sentrypeer.Integrations.Integration
+  alias Sentrypeer.Token
 
   require Logger
 
@@ -33,11 +36,11 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
             </div>
           </div>
         <% end %>
-        <%= if @integration_type == "email" && @integration.enabled do %>
+        <%= if @integration_type == "email" && @integration.id do %>
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="email">Test</.button>
         <% end %>
 
-        <%= if @integration_type == "slack" && @integration.enabled do %>
+        <%= if @integration_type == "slack" && @integration.id do %>
           <.link
             href="https://api.slack.com/messaging/webhooks"
             target="_blank"
@@ -51,7 +54,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
           <.button class="sm:col-span-1 sm:col-start-4" phx-click="test" value="slack">Test</.button>
         <% end %>
 
-        <%= if @integration_type == "webhook" && @integration.enabled do %>
+        <%= if @integration_type == "webhook" && @integration.id do %>
           <.link
             href="https://docs.sentrypeer.com/webhooks"
             target="_blank"
@@ -185,6 +188,8 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
   defp update_integration(socket, integration_params) do
     Logger.debug("Integration params: #{inspect(integration_params)}")
 
+    check_email_verify_needed!(socket.assigns.integration, integration_params)
+
     case Integrations.update_integration(socket.assigns.integration, integration_params) do
       {:ok, integration} ->
         notify_parent({:saved, integration})
@@ -196,6 +201,18 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
+    end
+  end
+
+  defp check_email_verify_needed!(%Integration{} = integration, integration_params) do
+    if integration.type == "email" &&
+         integration.destination != integration_params["destination"] do
+      Integrations.update_integration(integration, %{verified: false})
+
+      EmailIntegrationConfirm.send!(
+        integration,
+        Token.generate_token(integration.id)
+      )
     end
   end
 

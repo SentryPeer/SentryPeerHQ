@@ -23,7 +23,7 @@ defmodule Sentrypeer.Alerts.Email do
   """
 
   def send_alert(%Integration{} = integration, number_or_ip_address) do
-    case integration.enabled do
+    case integration.enabled && integration.verified do
       true ->
         Logger.debug("Sending email alert to #{integration.destination}")
 

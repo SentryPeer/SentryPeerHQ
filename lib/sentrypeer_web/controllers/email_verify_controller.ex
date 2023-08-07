@@ -14,7 +14,10 @@
 defmodule SentrypeerWeb.EmailVerifyController do
   use SentrypeerWeb, :controller
 
+  alias Sentrypeer.Integrations
+  alias Sentrypeer.Integrations.Integration
   alias Sentrypeer.Token
+
   require Logger
 
   action_fallback SentrypeerWeb.FallbackController
@@ -22,23 +25,22 @@ defmodule SentrypeerWeb.EmailVerifyController do
   def verify(conn, %{"token" => token}) do
     case Token.verify_token(token) do
       {:ok, payload} ->
-        case Sentrypeer.Accounts.confirm_email(payload) do
-          {:ok, user} ->
+        Logger.debug("Token verification succeeded: #{inspect(payload)}")
+
+        case Integrations.get_integration!(payload) do
+          %Integration{} = integration ->
+            Integrations.update_integration(integration, %{verified: true})
+
             render(conn, :verify_email,
-              current_user: get_session(conn, :current_user),
-              layout: false,
-              show_newsletter_subscription: false,
               page_title: "Email Confirmed",
               verified: true
             )
 
           {:error, reason} ->
             render(conn, :verify_email,
-              current_user: get_session(conn, :current_user),
-              layout: false,
-              show_newsletter_subscription: false,
               page_title: "Email Not Confirmed",
-              verified: false
+              verified: false,
+              reason: reason
             )
         end
 
@@ -46,11 +48,8 @@ defmodule SentrypeerWeb.EmailVerifyController do
         Logger.debug("Token verification failed: #{inspect(reason)}")
 
         render(conn, "error.html",
-          current_user: get_session(conn, :current_user),
-          layout: false,
-          show_newsletter_subscription: false,
           page_title: "Email Not Confirmed",
-          verified: false
+          reason: reason
         )
     end
   end

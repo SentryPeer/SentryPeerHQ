@@ -22,40 +22,34 @@ defmodule Sentrypeer.Emails.EmailIntegrationConfirm do
   Send a confirmation email to the email in the Email Alert integration.
   """
 
-  def verify(%Integration{} = integration, token) do
-    case integration.enabled do
-      true ->
-        Logger.debug("Sending email confirmation to #{integration.destination}")
+  def send!(%Integration{} = integration, token) do
+    Logger.debug("Sending email confirmation to #{integration.destination}")
 
-        new()
-        |> to(integration.destination)
-        |> from({"SentryPeer Support", "support@sentrypeer.com"})
-        |> subject("SentryPeer Email Alert Confirmation")
-        |> html_body("""
-        <p>Hi there,</p>
-        <p>Thanks for enabling SentryPeer Email Alerts.</p>
-        <p>Please click the link below to confirm your email address:</p>
-        <p><a href="https://sentrypeer.com/integrations/email/confirm/#{token}">Confirm Email</a></p>
-        <p>Thanks,</p>
-        <p>SentryPeer Support</p>
-        """)
-        |> text_body("""
-        Hi there,
-        Thanks for signing up to SentryPeer Email Alerts.
+    new()
+    |> to(integration.destination)
+    |> from({"SentryPeer Support", "support@sentrypeer.com"})
+    |> subject("SentryPeer Email Alert Confirmation")
+    |> html_body("""
+    <p>Hi there,</p>
+    <p>Thanks for enabling SentryPeer Email Alerts.</p>
+    <p>Please click the link below to confirm your email address:</p>
+    <p><a href="https://sentrypeer.com/integrations/email/confirm/#{token}">Confirm Email</a></p>
+    <p>Or copy and paste the following link into your browser:</p>
+    <p>https://sentrypeer.com/integrations/email/confirm/#{token}</p>
+    <p>Thanks,</p>
+    <p>SentryPeer Support</p>
+    """)
+    |> text_body("""
+    Hi there,
+    Thanks for signing up to SentryPeer Email Alerts.
 
-        Please click the link below to confirm your email address:
+    Please click the link below to confirm your email address:
 
-            https://sentrypeer.com/integrations/email/confirm/#{token}
+        https://sentrypeer.com/integrations/email/confirm/#{token}
 
-        Thanks,
-        SentryPeer Support
-        """)
-        |> Mailer.deliver()
-
-      false ->
-        Logger.debug("Email integration disabled")
-
-        {:ok, "Integration disabled"}
-    end
+    Thanks,
+    SentryPeer Support
+    """)
+    |> Mailer.deliver()
   end
 end

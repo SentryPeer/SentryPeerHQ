@@ -18,7 +18,9 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
 
   alias Sentrypeer.Accounts
   alias Sentrypeer.Alerts
+  alias Sentrypeer.Emails.EmailIntegrationConfirm
   alias Sentrypeer.Integrations.Integration
+  alias Sentrypeer.Token
 
   require Logger
 
@@ -131,6 +133,13 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
   @impl true
   def handle_event("test", %{"value" => "email"}, socket) do
     Logger.debug("Send test email to #{socket.assigns.integration.destination}")
+
+    if socket.assigns.integration.verified == false do
+      EmailIntegrationConfirm.send!(
+        socket.assigns.integration,
+        Token.generate_token(socket.assigns.integration.id)
+      )
+    end
 
     Alerts.Email.send_alert(
       socket.assigns.integration,

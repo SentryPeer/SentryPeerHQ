@@ -29,6 +29,7 @@ defmodule Sentrypeer.Integrations.Integration do
     field :message, :string
     field :destination, Sentrypeer.Encrypted.Data
     field :enabled, :boolean, default: true
+    field :verified, :boolean, default: false
     field :auth_id, :binary_id
 
     belongs_to :user, Sentrypeer.Accounts.User,
@@ -50,6 +51,7 @@ defmodule Sentrypeer.Integrations.Integration do
       :message,
       :destination,
       :enabled,
+      :verified,
       :auth_id
     ])
     |> validate_required([
