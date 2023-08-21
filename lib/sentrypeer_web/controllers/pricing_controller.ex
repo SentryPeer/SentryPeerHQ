@@ -22,7 +22,8 @@ defmodule SentrypeerWeb.PricingController do
     render(conn, :index,
       current_user: get_session(conn, :current_user),
       show_newsletter_subscription: false,
-      page_title: "Pricing"
+      page_title: "Pricing",
+      meta_description: "SentryPeer® pricing plans. Free and paid plans available."
     )
   end
 

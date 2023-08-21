@@ -37,6 +37,7 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Integrations" <> " · SentryPeer",
+       meta_description: "SentryPeer Integrations directory",
        integrations: integrations,
        email_integration_exists: get_email_integration(integrations),
        slack_integration_exists: get_slack_integration(integrations),

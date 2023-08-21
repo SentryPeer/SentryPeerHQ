@@ -30,6 +30,7 @@ defmodule SentrypeerWeb.CustomerAnalyticsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Analytics" <> " · SentryPeer",
+       meta_description: "Discover what SentryPeer is seeing in the VoIP fraud world.",
        phone_numbers_top_5_graph: phone_numbers_top_5_graph(),
        phone_numbers_total_unique: phone_numbers_total_unique(),
        source_ips_top_5_graph: source_ips_top_5_graph(),

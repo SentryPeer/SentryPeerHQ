@@ -20,7 +20,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Partners"
+      page_title: "Partners",
+      meta_description: "Why not join our Partner Programme?"
     )
   end
 
@@ -29,7 +30,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "About"
+      page_title: "About",
+      meta_description: "Learn how SentryPeer® does Fraud Detection and Fraud Prevention for VoIP."
     )
   end
 
@@ -38,7 +40,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Jobs"
+      page_title: "Jobs",
+      meta_description: "We are hiring! Join our team."
     )
   end
 
@@ -48,7 +51,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Changelog"
+      page_title: "Changelog",
+      meta_description: "See what's new in SentryPeer®."
     )
   end
 
@@ -58,7 +62,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Advanced Users"
+      page_title: "Advanced Users",
+      meta_description: "Are you an Advanced User of VoIP? SentryPeer® can help you."
     )
   end
 
@@ -67,7 +72,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Internet Telephony Service Providers"
+      page_title: "Internet Telephony Service Providers",
+      meta_description: "Are you an ITSP? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
     )
   end
 
@@ -76,7 +82,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Cybersecurity"
+      page_title: "Cybersecurity",
+      meta_description: "Are you in Cybersecurity? Learn the trends SentryPeer® is seeing in VoIP fraud."
     )
   end
 
@@ -85,7 +92,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Telecom Resellers"
+      page_title: "Telecom Resellers",
+      meta_description: "Are you a Telecom Reseller? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
     )
   end
 
@@ -94,7 +102,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Privacy Policy"
+      page_title: "Privacy Policy",
+      meta_description: "SentryPeer® Privacy Policy"
     )
   end
 
@@ -103,7 +112,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Terms and Conditions"
+      page_title: "Terms and Conditions",
+      meta_description: "SentryPeer® Terms and Conditions"
     )
   end
 
@@ -112,7 +122,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Acceptable Use Policy"
+      page_title: "Acceptable Use Policy",
+      meta_description: "SentryPeer® Acceptable Use Policy"
     )
   end
 
@@ -121,7 +132,8 @@ defmodule SentrypeerWeb.PageController do
       current_user: get_session(conn, :current_user),
       layout: false,
       show_newsletter_subscription: false,
-      page_title: "Cookie Policy"
+      page_title: "Cookie Policy",
+      meta_description: "SentryPeer® Cookie Policy"
     )
   end
 end
