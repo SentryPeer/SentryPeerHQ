@@ -35,7 +35,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
          app_version: Application.spec(:sentrypeer, :vsn),
          git_rev: Application.get_env(:sentrypeer, :git_rev),
          page_title: "Nodes" <> " · SentryPeer",
-          meta_description: "SentryPeer Nodes list",
+         meta_description: "SentryPeer Nodes list",
          client_type: "node_client",
          clients: clients
        )}

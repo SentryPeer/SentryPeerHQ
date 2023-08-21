@@ -29,7 +29,7 @@ defmodule SentrypeerWeb.UserSettingsLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "User Settings" <> " · SentryPeer",
-        meta_description: "Manage your SentryPeer user settings"
+       meta_description: "Manage your SentryPeer user settings"
      )}
   end
 end

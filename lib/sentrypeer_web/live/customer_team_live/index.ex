@@ -28,7 +28,7 @@ defmodule SentrypeerWeb.CustomerTeamLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Team" <> " · SentryPeer",
-        meta_description: "Team Members"
+       meta_description: "Team Members"
      )}
   end
 end

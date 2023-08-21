@@ -31,7 +31,8 @@ defmodule SentrypeerWeb.PageController do
       layout: false,
       show_newsletter_subscription: false,
       page_title: "About",
-      meta_description: "Learn how SentryPeer® does Fraud Detection and Fraud Prevention for VoIP."
+      meta_description:
+        "Learn how SentryPeer® does Fraud Detection and Fraud Prevention for VoIP."
     )
   end
 
@@ -73,7 +74,8 @@ defmodule SentrypeerWeb.PageController do
       layout: false,
       show_newsletter_subscription: false,
       page_title: "Internet Telephony Service Providers",
-      meta_description: "Are you an ITSP? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
+      meta_description:
+        "Are you an ITSP? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
     )
   end
 
@@ -83,7 +85,8 @@ defmodule SentrypeerWeb.PageController do
       layout: false,
       show_newsletter_subscription: false,
       page_title: "Cybersecurity",
-      meta_description: "Are you in Cybersecurity? Learn the trends SentryPeer® is seeing in VoIP fraud."
+      meta_description:
+        "Are you in Cybersecurity? Learn the trends SentryPeer® is seeing in VoIP fraud."
     )
   end
 
@@ -93,7 +96,8 @@ defmodule SentrypeerWeb.PageController do
       layout: false,
       show_newsletter_subscription: false,
       page_title: "Telecom Resellers",
-      meta_description: "Are you a Telecom Reseller? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
+      meta_description:
+        "Are you a Telecom Reseller? Learn how SentryPeer® can help you detect and prevent VoIP fraud."
     )
   end
 

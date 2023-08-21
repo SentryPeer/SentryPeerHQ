@@ -27,7 +27,7 @@ defmodule SentrypeerWeb.CustomerDashboardLive.Index do
        app_version: Application.spec(:sentrypeer, :vsn),
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Dashboard" <> " · SentryPeer",
-        meta_description: "SentryPeer Dashboard",
+       meta_description: "SentryPeer Dashboard",
        total_unique_phone_numbers: total_unique_phone_numbers(),
        total_unique_ip_addresses: total_unique_ip_addresses(),
        total_events: total_events()
