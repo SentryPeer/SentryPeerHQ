@@ -27,22 +27,26 @@ defmodule Sentrypeer.Alerts.Email do
       true ->
         Logger.debug("Sending email alert to #{integration.destination}")
 
-        new()
-        |> to(integration.destination)
-        |> from({"SentryPeer Alerts", "support@sentrypeer.com"})
-        |> subject(integration.subject)
-        |> html_body(
-          integration.message <> "<br><br><b>#{number_or_ip_address}</b> has been seen."
-        )
-        |> text_body(
-          integration.message <> "<br><br><b>#{number_or_ip_address}</b> has been seen."
-        )
-        |> Mailer.deliver()
+        send_email(integration, number_or_ip_address)
 
       false ->
         Logger.debug("Email integration disabled.")
 
         {:ok, "Integration disabled"}
     end
+  end
+
+  defp send_email(integration, number_or_ip_address) do
+    Task.Supervisor.start_child(Sentrypeer.TaskSupervisor, fn ->
+      new()
+      |> to(integration.destination)
+      |> from({"SentryPeer Alerts", "support@sentrypeer.com"})
+      |> subject(integration.subject)
+      |> html_body(integration.message <> "<br><br><b>#{number_or_ip_address}</b> has been seen.")
+      |> text_body(integration.message <> "<br><br><b>#{number_or_ip_address}</b> has been seen.")
+      |> Mailer.deliver()
+
+      Logger.debug("Email alert sent.")
+    end)
   end
 end

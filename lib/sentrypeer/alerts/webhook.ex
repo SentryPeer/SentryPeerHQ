@@ -26,22 +26,7 @@ defmodule Sentrypeer.Alerts.Webhook do
       true ->
         Logger.debug("Sending Webhook alert to #{integration.destination}")
 
-        case HTTPoison.post(
-               integration.destination,
-               to_json(integration, number_or_ip_address),
-               Alerts.post_headers(),
-               Alerts.post_options()
-             ) do
-          {:ok, res} ->
-            Logger.debug("Webhook alert sent: #{inspect(res)}")
-
-            {:ok, "Webhook alert sent."}
-
-          {:error, error} ->
-            Logger.debug("Webhook alert not sent: #{inspect(error)}")
-
-            {:error, "Webhook alert not sent."}
-        end
+        post_webhook(integration, number_or_ip_address)
 
       false ->
         Logger.debug("Webhook integration disabled.")
@@ -58,5 +43,26 @@ defmodule Sentrypeer.Alerts.Webhook do
       number_or_ip_address: "#{number_or_ip_address}"
     }
     |> Poison.encode!()
+  end
+
+  defp post_webhook(integration, number_or_ip_address) do
+    Task.Supervisor.start_child(Sentrypeer.TaskSupervisor, fn ->
+      case HTTPoison.post(
+             integration.destination,
+             to_json(integration, number_or_ip_address),
+             Alerts.post_headers(),
+             Alerts.post_options()
+           ) do
+        {:ok, res} ->
+          Logger.debug("Webhook alert sent: #{inspect(res)}")
+
+          {:ok, "Webhook alert sent."}
+
+        {:error, error} ->
+          Logger.debug("Webhook alert not sent: #{inspect(error)}")
+
+          {:error, "Webhook alert not sent."}
+      end
+    end)
   end
 end

@@ -26,28 +26,34 @@ defmodule Sentrypeer.Alerts.Slack do
       true ->
         Logger.debug("Sending Slack alert to #{integration.destination}")
 
-        case HTTPoison.post(
-               integration.destination,
-               to_json(integration, number_or_ip_address),
-               Alerts.post_headers(),
-               Alerts.post_options()
-             ) do
-          {:ok, res} ->
-            Logger.debug("Slack alert sent: #{inspect(res)}")
-
-            {:ok, "Slack alert sent."}
-
-          {:error, error} ->
-            Logger.debug("Slack alert not sent: #{inspect(error)}")
-
-            {:error, "Slack alert not sent."}
-        end
+        send_to_slack(integration, number_or_ip_address)
 
       false ->
         Logger.debug("Slack integration disabled.")
 
         {:ok, "Integration disabled."}
     end
+  end
+
+  defp send_to_slack(integration, number_or_ip_address) do
+    Task.Supervisor.start_child(Sentrypeer.TaskSupervisor, fn ->
+      case HTTPoison.post(
+             integration.destination,
+             to_json(integration, number_or_ip_address),
+             Alerts.post_headers(),
+             Alerts.post_options()
+           ) do
+        {:ok, res} ->
+          Logger.debug("Slack alert sent: #{inspect(res)}")
+
+          {:ok, "Slack alert sent."}
+
+        {:error, error} ->
+          Logger.debug("Slack alert not sent: #{inspect(error)}")
+
+          {:error, "Slack alert not sent."}
+      end
+    end)
   end
 
   defp to_json(integration, number_or_ip_address) do
