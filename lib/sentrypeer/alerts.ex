@@ -31,7 +31,9 @@ defmodule Sentrypeer.Alerts do
 
       integrations ->
         Enum.each(integrations, fn %Integration{} = integration ->
-          send_alert_based_on_type(integration, number_or_ip_address)
+          Task.Supervisor.start_child(Sentrypeer.TaskSupervisor, fn ->
+            send_alert_based_on_type(integration, number_or_ip_address)
+          end)
         end)
     end
   end

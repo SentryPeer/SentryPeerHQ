@@ -43,7 +43,9 @@ defmodule Sentrypeer.Application do
       {Cachex, name: :sentrypeer_cache},
       # https://fly.io/docs/elixir/the-basics/clustering/#adding-libcluster
       # Setup for clustering
-      {Cluster.Supervisor, [topologies, [name: Sentrypeer.ClusterSupervisor]]}
+      {Cluster.Supervisor, [topologies, [name: Sentrypeer.ClusterSupervisor]]},
+      # For async tasks etc. We use for Sentrypeer.Alerts.
+      {Task.Supervisor, name: Sentrypeer.TaskSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
