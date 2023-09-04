@@ -37,7 +37,10 @@ FROM ${BUILDER_IMAGE} as builder
 SHELL ["/bin/bash", "-c"]
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git npm && \
+RUN apt-get update -y && apt-get upgrade -y && \
+    apt-get install -y build-essential git curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt install nodejs -y && \
     npm install npm@latest -g && \
     apt-get clean && rm -f /var/lib/apt/lists/*_*
 
