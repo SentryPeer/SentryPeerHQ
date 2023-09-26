@@ -17,11 +17,12 @@ defmodule Sentrypeer.Application do
   @moduledoc false
 
   use Application
+  alias Appsignal.Phoenix.LiveView
 
   @impl true
   def start(_type, _args) do
     topologies = Application.get_env(:libcluster, :topologies) || []
-    Appsignal.Phoenix.LiveView.attach()
+    LiveView.attach()
 
     children = [
       # Start the Telemetry supervisor
