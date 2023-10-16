@@ -28,7 +28,7 @@ defmodule SentrypeerWeb.PricingController do
   end
 
   def success(conn, %{"stripe_session_id" => stripe_session_id}) do
-    case Stripe.Session.retrieve(stripe_session_id) do
+    case Stripe.Checkout.Session.retrieve(stripe_session_id) do
       {:ok, session} ->
         {:ok, customer} = Stripe.Customer.retrieve(session.customer)
         Logger.debug(inspect(session))
