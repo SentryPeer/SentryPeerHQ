@@ -62,7 +62,7 @@ defmodule Sentrypeer.MixProject do
       {:ex_cldr_numbers, "~> 2.0"},
       {:ex_rated, "~> 2.1"},
       {:finch, "~> 0.14"},
-      {:floki, "~> 0.34.0"},
+      {:floki, "~> 0.35.0"},
       {:fun_with_flags, "~> 1.11.0"},
       {:fun_with_flags_ui, "~> 0.8"},
       {:gen_smtp, "~> 1.1"},
