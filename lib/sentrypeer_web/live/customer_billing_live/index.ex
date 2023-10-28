@@ -27,6 +27,8 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
   def mount(_params, session, socket) do
     Logger.debug(inspect(session["current_user"].id))
 
+    subscription = get_subscription(session["current_user"])
+
     {:ok,
      assign(socket,
        current_user: session["current_user"],
@@ -34,15 +36,17 @@ defmodule SentrypeerWeb.CustomerBillingLive.Index do
        git_rev: Application.get_env(:sentrypeer, :git_rev),
        page_title: "Billing" <> " · SentryPeer",
        meta_description: "SentryPeer Billing tools",
-       subscription:
-         List.first(
-           BillingSubscriptions.get_subscription_from_stripe(session["current_user"].id).data
-         ),
+       subscription: subscription,
+       subscription_item: List.first(subscription.items.data),
        billing_email: BillingSubscriptions.get_billing_email(session["current_user"].id),
        invoices: BillingSubscriptions.get_invoices(session["current_user"].id),
        upcoming_invoice: BillingSubscriptions.get_upcoming_invoice(session["current_user"].id),
        payment_methods: BillingSubscriptions.get_payment_methods(session["current_user"].id)
      )}
+  end
+
+  defp get_subscription(current_user) do
+    List.first(BillingSubscriptions.get_subscription_from_stripe(current_user.id).data)
   end
 
   @impl true

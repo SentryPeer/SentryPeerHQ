@@ -136,7 +136,10 @@ defmodule Sentrypeer.BillingSubscriptions do
   end
 
   def get_subscription_from_stripe(cust_id) do
+    Logger.debug("Customer ID: #{inspect(cust_id)}")
+
     stripe_id = get_stripe_id(cust_id)
+    Logger.debug("Stripe ID: #{inspect(stripe_id)}")
 
     case Stripe.Subscription.list(%{customer: stripe_id}) do
       {:ok, subscription} ->

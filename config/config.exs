@@ -117,6 +117,8 @@ config :stripity_stripe,
   signing_secret: System.get_env("SENTRYPEER_STRIPE_WEBHOOK_SIGNING_SECRET"),
   json_library: Jason
 
+# api_version: "2020-08-27" Set if needed
+
 # Oban - https://hexdocs.pm/oban/Oban.html
 config :sentrypeer, Oban,
   repo: Sentrypeer.Repo,
