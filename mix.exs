@@ -76,7 +76,7 @@ defmodule Sentrypeer.MixProject do
       {:libcluster, "~> 3.3"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
-      {:oban, "~> 2.16.0"},
+      {:oban, "~> 2.17.0"},
       {:phoenix, "~> 1.7.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
