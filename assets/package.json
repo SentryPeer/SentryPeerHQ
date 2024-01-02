@@ -10,7 +10,7 @@
   "license": "AGPL-3.0",
   "description": "SentryPeerHQ",
   "dependencies": {
-    "cal-heatmap": "^4.2.3",
+    "cal-heatmap": "^4.2.4",
     "npm": "^10.2.5"
   },
   "devDependencies": {
