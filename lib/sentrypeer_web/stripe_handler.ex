@@ -93,7 +93,7 @@ defmodule SentrypeerWeb.StripeHandler do
     FunWithFlags.clear(old_plan_nickname, for_actor: user_for_flags)
 
     new_plan_nickname =
-      (stripe_subscription.plan.nickname <> "_plan")
+      (List.first(stripe_subscription.items.data).plan.nickname <> "_plan")
       |> BillingHelpers.lowercase_spaces_to_underscores()
       |> String.to_existing_atom()
 
