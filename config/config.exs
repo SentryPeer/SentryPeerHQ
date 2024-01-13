@@ -37,6 +37,7 @@ config :sentrypeer,
 
 # Configures the endpoint
 config :sentrypeer, SentrypeerWeb.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
   url: [host: "localhost"],
   render_errors: [
     formats: [html: SentrypeerWeb.ErrorHTML, json: SentrypeerWeb.ErrorJSON],

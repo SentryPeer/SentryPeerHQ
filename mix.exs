@@ -46,6 +46,7 @@ defmodule Sentrypeer.MixProject do
     [
       {:appsignal, "~> 2.6"},
       {:appsignal_phoenix, "~> 2.3.2"},
+      {:bandit, "~> 1.0"},
       {:cachex, "~> 3.6"},
       {:certifi, "~> 2.4"},
       {:cloak_ecto, "~> 1.2.0"},
@@ -77,12 +78,12 @@ defmodule Sentrypeer.MixProject do
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
       {:oban, "~> 2.17.0"},
-      {:phoenix, "~> 1.7.7"},
+      {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20.0"},
+      {:phoenix_live_view, "~> 0.20.3"},
       {:phoenix_swoosh, "~> 1.0"},
       # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},
