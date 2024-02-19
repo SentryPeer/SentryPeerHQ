@@ -30,20 +30,17 @@
               <div
                 id="api-logger-realtime-container"
                 phx-hook="SentrypeerApiLoggerRealtime"
-                phx-update="stream"
                 class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
               >
-                <div id="api-logger-realtime">
-                  <%= for {id, node_probe} <- @streams.node_probes do %>
-                    <p id={id}>
-                      <%= node_probe.event_timestamp %>
-                      <%= node_probe.transport_type %>
-                      <%= node_probe.source_ip %>
-                      <%= node_probe.called_number %>
-                      <%= node_probe.sip_method %>
-                      <%= node_probe.sip_user_agent %>
-                    </p>
-                  <% end %>
+                <div id="api-logger-realtime" phx-update="stream">
+                  <p :for={{dom_id, event} <- @streams.node_probes} id={dom_id}>
+                    <%= event.probe.event_timestamp %>
+                    <%= event.probe.transport_type %>
+                    <%= event.probe.source_ip %>
+                    <%= event.probe.called_number %>
+                    <%= event.probe.sip_method %>
+                    <%= event.probe.sip_user_agent %>
+                  </p>
                 </div>
               </div>
             <% end %>

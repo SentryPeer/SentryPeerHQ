@@ -26,15 +26,13 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   @impl true
   def mount(_params, session, socket) do
     if FunWithFlags.enabled?(:contributor_plan, for: session["current_user"]) do
-      node_probes = []
-
       {:ok,
        assign(socket,
          token_url: Auth0Config.auth0_token_url(),
-         node_probes: node_probes,
          page_title: "SentryPeer Node Overview",
          meta_description: "SentryPeer Node Overview"
-       )}
+       )
+       |> stream(:node_probes, [])}
     else
       {:ok, redirect(socket, to: "/not_found")}
     end
@@ -81,16 +79,20 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
   end
 
   @impl true
-  def handle_info({node_probe, _conn, client_id}, socket) do
-    Logger.debug("Client #{client_id} has just searched something.")
-    node_searches = socket.assigns.node_probes ++ [node_probe]
+  def handle_info({node_probe, conn, client_id}, socket) do
+    Logger.debug("Node #{client_id} has just received a probe.")
 
     {:noreply,
-     assign(socket,
-       node_probes: node_searches,
+     assign(
+       socket,
        total_unique_phone_numbers: total_unique_phone_numbers_for_client(client_id),
        total_unique_ip_addresses: total_unique_ip_addresses_for_client(client_id),
        total_events: total_events_for_client(client_id)
-     )}
+     )
+     |> stream_insert(:node_probes, %{
+       id: System.unique_integer(),
+       probe: node_probe,
+       conn: conn
+     })}
   end
 end
