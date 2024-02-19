@@ -31,7 +31,9 @@ defmodule SentrypeerWeb.CustomerNodesLive.Overview do
       {:ok,
        assign(socket,
          token_url: Auth0Config.auth0_token_url(),
-         node_probes: node_probes
+         node_probes: node_probes,
+         page_title: "SentryPeer Node Overview",
+         meta_description: "SentryPeer Node Overview"
        )}
     else
       {:ok, redirect(socket, to: "/not_found")}

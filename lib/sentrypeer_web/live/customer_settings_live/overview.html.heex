@@ -22,7 +22,7 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Live queries
             </h3>
-            <%= if @api_queries == [] do %>
+            <%= if @streams.api_queries == [] do %>
               <p class="text-sm text-gray-500 dark:text-slate-400">
                 No queries at the moment.
               </p>
@@ -30,18 +30,12 @@
               <div
                 id="api-logger-realtime-container"
                 phx-hook="SentrypeerApiLoggerRealtime"
-                phx-update="append"
                 class="overflow-y-auto h-32 p-2 mt-2 rounded-lg shadow text-green-200 font-mono bg-black text-xs"
               >
-                <div id="api-logger-realtime">
-                  <%= for query <- @api_queries do %>
-                    <p id={"log-#{System.unique_integer()}"}>
-                      Remote IP: <%= elem(query, 1).remote_ip |> Tuple.to_list() |> Enum.join(".") %> Searched for: <%= elem(
-                        query,
-                        0
-                      ) %>
-                    </p>
-                  <% end %>
+                <div id="api-logger-realtime" phx-update="stream">
+                  <p :for={{dom_id, query} <- @streams.api_queries} id={dom_id}>
+                    Remote IP: <%= query.conn.remote_ip |> Tuple.to_list() |> Enum.join(".") %> Searched for: <%= query.query %>
+                  </p>
                 </div>
               </div>
             <% end %>

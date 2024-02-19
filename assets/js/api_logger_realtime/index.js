@@ -13,7 +13,7 @@
 
 const SentrypeerApiLoggerRealtime = {
     updated() {
-        const loggerElement = this.el.querySelector('#api-logger-realtime')
+        const loggerElement = this.el
         loggerElement.scrollTop = loggerElement.scrollHeight
         console.log('SentrypeerApiLoggerRealtime updated: ' + loggerElement.scrollTop + ' ' + loggerElement.scrollHeight)
     }

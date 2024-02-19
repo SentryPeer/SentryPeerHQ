@@ -25,13 +25,13 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
 
   @impl true
   def mount(_params, _session, socket) do
-    api_queries = []
-
     {:ok,
      assign(socket,
        token_url: Auth0Config.auth0_token_url(),
-       api_queries: api_queries
-     )}
+       page_title: "SentryPeer API Client Overview",
+       meta_description: "SentryPeer API Client Overview"
+     )
+     |> stream(:api_queries, [])}
   end
 
   @impl true
@@ -56,7 +56,12 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
   @impl true
   def handle_info({api_query, conn, client_id}, socket) do
     Logger.debug("Client #{client_id} has just searched something.")
-    api_searches = socket.assigns.api_queries ++ [{api_query, conn}]
-    {:noreply, assign(socket, :api_queries, api_searches)}
+
+    {:noreply,
+     stream_insert(socket, :api_queries, %{
+       id: System.unique_integer(),
+       query: api_query,
+       conn: conn
+     })}
   end
 end
