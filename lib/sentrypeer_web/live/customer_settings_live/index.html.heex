@@ -45,7 +45,7 @@
                 </div>
                 <!-- Action buttons -->
                 <div class="flex flex-col sm:flex-col xl:flex-col">
-                  <%= if CustomerClients.is_allowed_more_api_clients?(@current_user.id) do %>
+                  <%= if CustomerClients.allowed_more_api_clients?(@current_user.id) do %>
                     <.link class="flex flex-col sm:flex-col xl:flex-col" patch={~p"/settings/new"}>
                       <button
                         type="button"

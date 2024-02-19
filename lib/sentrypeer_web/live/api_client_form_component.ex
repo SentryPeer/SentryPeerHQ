@@ -99,7 +99,7 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
   defp save_client(socket, :new, client_params) do
     Logger.debug("Client type is: #{inspect(socket.assigns.client_type)}")
 
-    if CustomerClients.is_allowed_more_api_clients?(socket.assigns.current_user.id) do
+    if CustomerClients.allowed_more_api_clients?(socket.assigns.current_user.id) do
       case CustomerClients.create_client(
              socket.assigns.current_user.id,
              socket.assigns.client_type,

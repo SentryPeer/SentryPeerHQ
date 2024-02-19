@@ -46,7 +46,7 @@ defmodule Sentrypeer.CustomerClients do
       true
 
   """
-  def is_allowed_more_api_clients?(auth_id) do
+  def allowed_more_api_clients?(auth_id) do
     case Auth0ManagementAPI.list_clients_by_user(auth_id, "api_client") do
       {:ok, clients} ->
         total_clients = length(clients)
