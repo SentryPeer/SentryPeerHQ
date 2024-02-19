@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0
-# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+# Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org>
 #
 #   _____            _              _____
 #  / ____|          | |            |  __ \
@@ -68,7 +68,7 @@ config :sentrypeer, Sentrypeer.Mailer,
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.14.41",
+  version: "0.18.6",
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),

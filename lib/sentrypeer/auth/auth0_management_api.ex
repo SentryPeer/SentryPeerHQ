@@ -293,7 +293,7 @@ defmodule Sentrypeer.Auth.Auth0ManagementAPI do
     end
   end
 
-  defp client_json_to_client_struct(client_json) do
+  def client_json_to_client_struct(client_json) do
     %Client{
       client_id: client_json["client_id"],
       client_name: client_json["name"],

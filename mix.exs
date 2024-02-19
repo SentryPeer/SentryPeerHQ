@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0
-# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+# Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org>
 #
 #   _____            _              _____
 #  / ____|          | |            |  __ \
@@ -117,7 +117,11 @@ defmodule Sentrypeer.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind default --minify",
+        "esbuild default --minify --drop:console --drop:debugger",
+        "phx.digest"
+      ]
     ]
   end
 end

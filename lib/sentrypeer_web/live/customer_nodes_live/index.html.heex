@@ -187,7 +187,7 @@
             patch={~p"/nodes"}
           />
         </.modal>
-        <%= if @clients == [] do %>
+        <%= if @streams.clients == [] do %>
           <.link patch={~p"/nodes/new"}>
             <button
               type="button"
@@ -215,7 +215,7 @@
             </button>
           </.link>
         <% else %>
-          <%= for client <- @clients do %>
+          <%= for {_id, client} <- @streams.clients do %>
             <ul
               role="list"
               class="divide-y divide-gray-200 dark:divide-slate-400 border-b border-gray-200 dark:border-slate-400"

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0
-# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+# Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org>
 #
 #   _____            _              _____
 #  / ____|          | |            |  __ \
@@ -26,19 +26,18 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   @impl true
   def mount(_params, session, socket) do
     if FunWithFlags.enabled?(:contributor_plan, for: session["current_user"]) do
-      clients = list_clients(session["current_user"].id, @client_type)
-      Logger.debug("list_mount: #{inspect(clients)}")
-
       {:ok,
-       assign(socket,
+       socket
+       |> assign(
          current_user: session["current_user"],
          app_version: Application.spec(:sentrypeer, :vsn),
          git_rev: Application.get_env(:sentrypeer, :git_rev),
          page_title: "Nodes" <> " · SentryPeer",
          meta_description: "SentryPeer Nodes list",
-         client_type: "node_client",
-         clients: clients
-       )}
+         client_type: "node_client"
+       )
+       |> stream_configure(:clients, dom_id: & &1.client_id)
+       |> stream(:clients, list_clients(session["current_user"].id, @client_type), reset: true)}
     else
       {:ok, redirect(socket, to: "/not_found")}
     end
@@ -81,7 +80,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   def handle_info({SentrypeerWeb.Live.APIClientFormComponent, {:saved, client}}, socket) do
     {:noreply,
      socket
-     |> assign(:clients, list_clients(socket.assigns.current_user.id, @client_type))
+     |> stream_insert(:clients, Auth0ManagementAPI.client_json_to_client_struct(client))
      |> assign(:client, client)}
   end
 
@@ -89,7 +88,7 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
   def handle_event("delete", %{"client_id" => id}, socket) do
     case delete_node(socket.assigns.current_user.id, id) do
       {:ok, _} ->
-        {:noreply, socket}
+        {:noreply, stream_delete(socket, :clients, id)}
 
       {:error, _} ->
         {:noreply, socket |> push_event("error", "Client not deleted")}
