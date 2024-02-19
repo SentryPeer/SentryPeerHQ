@@ -214,7 +214,7 @@ defmodule Sentrypeer.SentrypeerEvents do
 
     changeset =
       %SentrypeerEvent{}
-      |> SentrypeerEvent.changeset(attrs, client_id, third_party_client(client_id))
+      |> SentrypeerEvent.changeset(attrs, client_id, third_party_client?(client_id))
 
     if changeset.valid? do
       broadcast({:ok, changeset.changes, conn}, client_id)
