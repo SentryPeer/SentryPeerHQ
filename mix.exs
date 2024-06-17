@@ -88,7 +88,7 @@ defmodule Sentrypeer.MixProject do
       # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:poison, "~> 5.0"},
+      {:poison, "~> 6.0"},
       {:postgrex, ">= 0.0.0"},
       {:premailex, "~> 0.3.0"},
       {:sobelow, "~> 0.11", only: [:dev, :test], runtime: false},
