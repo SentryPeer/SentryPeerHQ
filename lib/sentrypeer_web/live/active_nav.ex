@@ -24,7 +24,6 @@ defmodule SentrypeerWeb.ActiveNav do
 
   def render(assigns) do
     ~H"""
-
     """
   end
 
