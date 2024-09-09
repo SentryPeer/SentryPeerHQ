@@ -45,7 +45,7 @@ defmodule Sentrypeer.MixProject do
   defp deps do
     [
       {:appsignal, "~> 2.6"},
-      {:appsignal_phoenix, "~> 2.4.0"},
+      {:appsignal_phoenix, "~> 2.5.0"},
       {:bandit, "~> 1.0"},
       {:cachex, "~> 3.6"},
       {:certifi, "~> 2.4"},
