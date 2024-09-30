@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0
-# Copyright (c) 2023 Gavin Henry <ghenry@sentrypeer.org>
+# Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org>
 #
 #   _____            _              _____
 #  / ____|          | |            |  __ \
@@ -33,5 +33,5 @@ defmodule SentrypeerWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :sentrypeer
+  use Gettext.Backend, otp_app: :sentrypeer
 end
