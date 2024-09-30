@@ -47,7 +47,7 @@ defmodule Sentrypeer.MixProject do
       {:appsignal, "~> 2.6"},
       {:appsignal_phoenix, "~> 2.5.0"},
       {:bandit, "~> 1.0"},
-      {:cachex, "~> 3.6"},
+      {:cachex, "~> 4.0"},
       {:certifi, "~> 2.4"},
       {:cloak_ecto, "~> 1.3.0"},
       {:contex, "~> 0.5.0"},
