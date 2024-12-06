@@ -56,15 +56,8 @@ config :kaffy,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`. We use the SMTP adapter for development.
 config :sentrypeer, Sentrypeer.Mailer,
-  adapter: Swoosh.Adapters.SMTP,
-  relay: System.get_env("SENTRYPEER_SMTP_RELAY"),
-  username: System.get_env("SENTRYPEER_SMTP_USERNAME"),
-  password: System.get_env("SENTRYPEER_SMTP_PASSWORD"),
-  tls: :always,
-  auth: :always,
-  port: System.get_env("SENTRYPEER_SMTP_PORT"),
-  retries: 2,
-  no_mx_lookups: false
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: System.get_env("SENTRYPEER_SENDGRID_API_KEY")
 
 # Configure esbuild (the version is required)
 config :esbuild,
