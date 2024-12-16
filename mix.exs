@@ -84,7 +84,7 @@ defmodule Sentrypeer.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20.3"},
+      {:phoenix_live_view, "~> 1.0.1"},
       {:phoenix_swoosh, "~> 1.0"},
       # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},
