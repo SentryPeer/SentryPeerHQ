@@ -23,7 +23,7 @@ defmodule SentrypeerWeb.ContactLive.FormComponent do
     ~H"""
     <div>
       <.header>
-        <%= @title %>
+        {@title}
         <:subtitle>Please use below to send us a message</:subtitle>
       </.header>
 

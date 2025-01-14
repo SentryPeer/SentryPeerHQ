@@ -3,8 +3,8 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
@@ -27,10 +27,10 @@
                   </div>
                   <div class="space-y-1">
                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                      <%= @current_user.name %>
+                      {@current_user.name}
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
+                      v{@app_version}
                       <a
                         href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
                         target="_blank"
@@ -38,7 +38,7 @@
                         title="Browse this deployed version of SentryPeerHQ"
                         class="ml-1"
                       >
-                        <%= @git_rev %>
+                        {@git_rev}
                       </a>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <%= in_app_menu(assigns) %>
+                {in_app_menu(assigns)}
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
             <h1 class="flex-1 text-lg font-medium dark:text-white">Team</h1>
           </div>
         </div>
-        <%= being_worked_on(assigns) %>
+        {being_worked_on(assigns)}
         <ul role="list" class="relative z-0 divide-y divide-gray-200 border-b border-gray-200">
           <li class="cursor-pointer">
             <div class="block hover:bg-gray-50 dark:hover:bg-slate-500">
@@ -76,14 +76,14 @@
                     <div>
                       <p class="text-sm font-medium truncate">
                         <span class="text-indigo-600 dark:text-white">
-                          <%= @current_user.name %>
+                          {@current_user.name}
                         </span>
                         <span class="mx-2 dark:text-white">·</span>
                         <span class="mr-2 dark:text-white">Admin</span>
                       </p>
                       <p class="mt-2 flex items-center text-sm dark:text-gray-400">
                         <span class="hero-envelope w-18 h-18 bg-gray-400 mr-1"></span>
-                        <span class="truncate"><%= @current_user.email %></span>
+                        <span class="truncate">{@current_user.email}</span>
                       </p>
                     </div>
                   </div>

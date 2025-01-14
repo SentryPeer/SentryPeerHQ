@@ -30,8 +30,8 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
     ~H"""
     <div>
       <.header>
-        <%= @title %>
-        <:subtitle>Give your <%= @client_desc %> some memorable details</:subtitle>
+        {@title}
+        <:subtitle>Give your {@client_desc} some memorable details</:subtitle>
       </.header>
 
       <.simple_form
@@ -45,7 +45,7 @@ defmodule SentrypeerWeb.Live.APIClientFormComponent do
         <.input field={@form[:client_name]} type="text" label="Name" />
         <.input field={@form[:client_description]} type="textarea" label="Description" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save <%= @client_desc %></.button>
+          <.button phx-disable-with="Saving...">Save {@client_desc}</.button>
         </:actions>
       </.simple_form>
     </div>

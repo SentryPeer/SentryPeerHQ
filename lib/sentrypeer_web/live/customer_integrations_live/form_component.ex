@@ -14,9 +14,9 @@ defmodule SentrypeerWeb.CustomerIntegrationsLive.FormComponent do
     ~H"""
     <div>
       <.header>
-        <%= @title %>
+        {@title}
         <:subtitle>
-          <%= @subtitle %>
+          {@subtitle}
         </:subtitle>
       </.header>
       <div class="mt-10 sm:mt-0 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-4">

@@ -3,8 +3,8 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
@@ -27,10 +27,10 @@
                   </div>
                   <div class="space-y-1">
                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                      <%= @current_user.name %>
+                      {@current_user.name}
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
+                      v{@app_version}
                       <a
                         href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
                         target="_blank"
@@ -38,7 +38,7 @@
                         title="Browse this deployed version of SentryPeerHQ"
                         class="ml-1"
                       >
-                        <%= @git_rev %>
+                        {@git_rev}
                       </a>
                     </div>
                   </div>
@@ -106,7 +106,7 @@
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <%= in_app_menu(assigns) %>
+                {in_app_menu(assigns)}
               </div>
             </div>
           </div>
@@ -175,7 +175,7 @@
                           title="View all details about this API client"
                         >
                           <span class="truncate absolute inset-0" aria-hidden="true"></span>
-                          <%= api_client.client_name %> <span class="sr-only">Running</span>
+                          {api_client.client_name} <span class="sr-only">Running</span>
                         </.link>
                       </h2>
                     </div>
@@ -186,7 +186,7 @@
                     >
                       <Heroicons.cube class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-900" />
                       <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900 dark:text-slate-400">
-                        <%= api_client.client_description %>
+                        {api_client.client_description}
                       </span>
                     </.link>
                   </div>
@@ -235,7 +235,7 @@
                       </button>
                     </p>
                     <p class="flex space-x-2 text-sm text-gray-500 dark:text-slate-400">
-                      <span><%= time_ago(api_client.client_created_at) %></span>
+                      <span>{time_ago(api_client.client_created_at)}</span>
                       <!-- Add more details later
                     <span aria-hidden="true">&middot;</span>
                     <span>Geoip etc.</span> -->
