@@ -45,8 +45,9 @@ defmodule Sentrypeer.MixProject do
   defp deps do
     [
       {:appsignal, "~> 2.6"},
-      {:appsignal_phoenix, "~> 2.5.0"},
+      {:appsignal_phoenix, "~> 2.6.0"},
       {:bandit, "~> 1.0"},
+      {:burnex, "~> 3.2.0"},
       {:cachex, "~> 4.0"},
       {:certifi, "~> 2.4"},
       {:cloak_ecto, "~> 1.3.0"},
@@ -54,7 +55,7 @@ defmodule Sentrypeer.MixProject do
       {:cors_plug, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:ecto_commons, "~> 0.3.3"},
+      {:ecto_commons, "~> 0.3.6"},
       {:ecto_psql_extras, "~> 0.7"},
       {:ecto_sql, "~> 3.10"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
@@ -63,7 +64,7 @@ defmodule Sentrypeer.MixProject do
       {:ex_cldr_numbers, "~> 2.0"},
       {:ex_rated, "~> 2.1"},
       {:finch, "~> 0.14"},
-      {:floki, "~> 0.36.0"},
+      {:floki, "~> 0.37.0"},
       {:fun_with_flags, "~> 1.12.0"},
       {:fun_with_flags_ui, "~> 1.0"},
       {:gen_smtp, "~> 1.1"},
@@ -83,7 +84,7 @@ defmodule Sentrypeer.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20.3"},
+      {:phoenix_live_view, "~> 1.0.1"},
       {:phoenix_swoosh, "~> 1.0"},
       # Required for kaffy - https://github.com/aesmail/kaffy/pull/263/files#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5
       {:phoenix_view, "~> 2.0.2"},

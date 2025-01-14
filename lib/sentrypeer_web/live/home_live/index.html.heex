@@ -1,5 +1,5 @@
 <div class="bg-white">
-  <%= home_page_header(assigns) %>
+  {home_page_header(assigns)}
   <main class="dark:bg-slate-800">
     <!-- Hero section -->
     <div class="relative">
@@ -55,8 +55,8 @@
             Live data
           </h2>
           <p class="mt-3 text-xl text-gray-500 dark:text-slate-800 sm:mt-4">
-            Watch data come in from our honeypots in realtime below for <%= Date.utc_today()
-            |> Calendar.strftime("%B") %>
+            Watch data come in from our honeypots in realtime below for {Date.utc_today()
+            |> Calendar.strftime("%B")}
           </p>
         </div>
       </div>
@@ -71,7 +71,7 @@
                     Total events
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= Sentrypeer.Cldr.Number.to_string!(@total_events) %>
+                    {Sentrypeer.Cldr.Number.to_string!(@total_events)}
                   </dd>
                 </div>
                 <div class="flex flex-col border-b border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -79,7 +79,7 @@
                     Unique phone numbers
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= Sentrypeer.Cldr.Number.to_string!(@total_unique_phone_numbers) %>
+                    {Sentrypeer.Cldr.Number.to_string!(@total_unique_phone_numbers)}
                   </dd>
                 </div>
                 <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -87,7 +87,7 @@
                     Unique IP addresses
                   </dt>
                   <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                    <%= Sentrypeer.Cldr.Number.to_string!(@total_unique_ip_addresses) %>
+                    {Sentrypeer.Cldr.Number.to_string!(@total_unique_ip_addresses)}
                   </dd>
                 </div>
               </dl>
@@ -483,5 +483,5 @@
     </div>
   </main>
 
-  <%= footer(assigns) %>
+  {footer(assigns)}
 </div>

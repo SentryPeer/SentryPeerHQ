@@ -3,8 +3,8 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div id="page_wrapper" class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
@@ -27,10 +27,10 @@
                   </div>
                   <div class="space-y-1">
                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                      <%= @current_user.name %>
+                      {@current_user.name}
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
+                      v{@app_version}
                       <a
                         href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
                         target="_blank"
@@ -38,7 +38,7 @@
                         title="Browse this deployed version of SentryPeerHQ"
                         class="ml-1"
                       >
-                        <%= @git_rev %>
+                        {@git_rev}
                       </a>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <%= in_app_menu(assigns) %>
+                {in_app_menu(assigns)}
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
             </span>
           </div>
         </div>
-        <%= being_worked_on(assigns) %>
+        {being_worked_on(assigns)}
 
         <div class="flex flex-col items-center flex-grow py-6">
           <span class="isolate inline-flex rounded-md shadow-sm">
@@ -165,7 +165,7 @@
         </div>
 
         <.modal id="phone_numbers_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @phone_numbers_top_5_graph %>
+          {@phone_numbers_top_5_graph}
         </.modal>
         <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
           <h3 class="text-base font-semibold leading-7 text-indigo-600 dark:text-white">
@@ -180,7 +180,7 @@
             phx-click={show_modal("phone_numbers_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @phone_numbers_top_5_graph %>
+            {@phone_numbers_top_5_graph}
           </div>
 
           <div class="bg-white space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
@@ -194,7 +194,7 @@
                         Total unique phone numbers
                       </dt>
                       <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                        <%= Sentrypeer.Cldr.Number.to_string!(@phone_numbers_total_unique) %>
+                        {Sentrypeer.Cldr.Number.to_string!(@phone_numbers_total_unique)}
                       </dd>
                     </div>
                   </dl>
@@ -205,7 +205,7 @@
         </div>
 
         <.modal id="source_ips_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @source_ips_top_5_graph %>
+          {@source_ips_top_5_graph}
         </.modal>
 
         <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
@@ -221,7 +221,7 @@
             phx-click={show_modal("source_ips_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @source_ips_top_5_graph %>
+            {@source_ips_top_5_graph}
           </div>
           <div class="bg-white space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2">
             <div class="relative">
@@ -234,7 +234,7 @@
                         Total unique source IP addresses
                       </dt>
                       <dd class="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-                        <%= Sentrypeer.Cldr.Number.to_string!(@source_ips_total_unique) %>
+                        {Sentrypeer.Cldr.Number.to_string!(@source_ips_total_unique)}
                       </dd>
                     </div>
                   </dl>
@@ -245,11 +245,11 @@
         </div>
 
         <.modal id="sip_methods_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @sip_methods_top_5_graph %>
+          {@sip_methods_top_5_graph}
         </.modal>
 
         <.modal id="user_agents_highest_top_5_graph_modal" on_cancel={JS.navigate(~p"/analytics")}>
-          <%= @user_agents_highest_top_5_graph %>
+          {@user_agents_highest_top_5_graph}
         </.modal>
 
         <div class="mt-6 ml-6 sm:px-0 border-b border-gray-200 pb-5">
@@ -265,13 +265,13 @@
             phx-click={show_modal("sip_methods_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @sip_methods_top_5_graph %>
+            {@sip_methods_top_5_graph}
           </div>
           <div
             phx-click={show_modal("user_agents_highest_top_5_graph_modal")}
             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800 hover:cursor-pointer"
           >
-            <%= @user_agents_highest_top_5_graph %>
+            {@user_agents_highest_top_5_graph}
           </div>
         </div>
       </div>

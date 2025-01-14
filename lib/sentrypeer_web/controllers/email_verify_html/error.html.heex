@@ -7,7 +7,7 @@
     <meta name="copyright" content="Gavin Henry, Ant Networks Limited." />
     <meta name="robots" content="index,follow" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <title><%= @page_title %>></title>
+    <title>{@page_title}></title>
     <!-- SPDX-License-Identifier: AGPL-3.0                      -->
     <!-- Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org> -->
     <!--   _____            _              _____                -->
@@ -59,10 +59,10 @@
       <div class="text-center">
         <p class="text-base font-semibold text-indigo-600">400</p>
         <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-          Token <%= @reason %>
+          Token {@reason}
         </h1>
         <p class="mt-6 text-base leading-7 text-gray-600 dark:text-white">
-          Sorry, your confirmation token is <%= @reason %>
+          Sorry, your confirmation token is {@reason}
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <a

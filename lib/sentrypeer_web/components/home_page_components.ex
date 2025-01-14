@@ -648,7 +648,7 @@ defmodule SentrypeerWeb.HomePageComponents do
             >
               Ant Networks Ltd.
             </a>
-            <%= DateTime.utc_now().year %>. SentryPeer is a trading name of
+            {DateTime.utc_now().year}. SentryPeer is a trading name of
             <a
               href="https://antnetworks.com/"
               class="hover:text-brand"

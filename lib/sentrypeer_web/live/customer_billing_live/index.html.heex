@@ -3,8 +3,8 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
@@ -27,10 +27,10 @@
                   </div>
                   <div class="space-y-1">
                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                      <%= @current_user.name %>
+                      {@current_user.name}
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
+                      v{@app_version}
                       <a
                         href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
                         target="_blank"
@@ -38,7 +38,7 @@
                         title="Browse this deployed version of SentryPeerHQ"
                         class="ml-1"
                       >
-                        <%= @git_rev %>
+                        {@git_rev}
                       </a>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <%= in_app_menu(assigns) %>
+                {in_app_menu(assigns)}
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
-                  <%= String.capitalize(@subscription.status) %>
+                  {String.capitalize(@subscription.status)}
                 </span>
                 <span class="ml-4 flex-shrink-0">
                   <.link
@@ -84,7 +84,7 @@
                 Plan
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
-                <span class="flex-grow"><%= @subscription_item.plan.nickname %></span>
+                <span class="flex-grow">{@subscription_item.plan.nickname}</span>
                 <span class="ml-4 flex-shrink-0">
                   <.link
                     phx-click="manage_billing"
@@ -102,9 +102,9 @@
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
                 <span class="flex-grow">
-                  <%= to_month_day(@subscription.billing_cycle_anchor) %>, <%= to_year(
+                  {to_month_day(@subscription.billing_cycle_anchor)}, {to_year(
                     @subscription.current_period_end
-                  ) %>
+                  )}
                 </span>
               </dd>
             </div>
@@ -114,7 +114,7 @@
                 Billing Email
               </dt>
               <dd class="mt-1 flex text-sm leading-6 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
-                <span class="flex-grow"><%= @billing_email %></span>
+                <span class="flex-grow">{@billing_email}</span>
                 <span class="ml-4 flex-shrink-0">
                   <.link
                     phx-click="manage_billing"
@@ -137,13 +137,13 @@
                   <% else %>
                     Card ending in
                     <span class="font-semibold">
-                      <%= List.first(@payment_methods.data).card.last4 %>.
+                      {List.first(@payment_methods.data).card.last4}.
                     </span>
                     Expires
                     <span class="font-semibold">
-                      <%= List.first(@payment_methods.data).card.exp_month %>/<%= List.first(
+                      {List.first(@payment_methods.data).card.exp_month}/{List.first(
                         @payment_methods.data
-                      ).card.exp_year %>
+                      ).card.exp_year}
                     </span>
                   <% end %>
                 </span>
@@ -170,21 +170,21 @@
               <div class="sm:pr-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Issued on</dt>
                 <dd class="inline text-gray-800 dark:text-white">
-                  <%= to_month_day(@upcoming_invoice.created) %>
+                  {to_month_day(@upcoming_invoice.created)}
                 </dd>
               </div>
               <div class="mt-2 sm:mt-0 sm:pl-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Due on</dt>
                 <dd class="inline text-gray-800 dark:text-white">
-                  <%= to_month_day(@upcoming_invoice.created) %>
+                  {to_month_day(@upcoming_invoice.created)}
                 </dd>
               </div>
               <div class="mt-2 sm:mt-0 sm:pl-4">
                 <dt class="inline text-gray-700 dark:text-slate-300">Period</dt>
                 <dd class="inline sm:inline-block text-gray-800 dark:text-white">
-                  <%= to_month_day(List.first(@upcoming_invoice.lines.data).period.start) %> &mdash; <%= to_month_day(
+                  {to_month_day(List.first(@upcoming_invoice.lines.data).period.start)} &mdash; {to_month_day(
                     List.first(@upcoming_invoice.lines.data).period.end
-                  ) %>, <%= to_year(List.first(@upcoming_invoice.lines.data).period.end) %>
+                  )}, {to_year(List.first(@upcoming_invoice.lines.data).period.end)}
                 </dd>
               </div>
             </dl>
@@ -210,11 +210,11 @@
                 <tr class="border-b border-gray-100">
                   <td class="max-w-0 px-0 py-5 align-top">
                     <div class="truncate font-medium text-gray-900 dark:text-white">
-                      <%= List.first(@upcoming_invoice.lines.data).description %>
+                      {List.first(@upcoming_invoice.lines.data).description}
                     </div>
                   </td>
                   <td class="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700 dark:text-white">
-                    <%= List.first(@upcoming_invoice.lines.data).price.unit_amount / 100 %>
+                    {List.first(@upcoming_invoice.lines.data).price.unit_amount / 100}
                   </td>
                 </tr>
               </tbody>
@@ -234,7 +234,7 @@
                     Subtotal
                   </th>
                   <td class="pb-0 pl-8 pr-0 pt-6 text-right tabular-nums text-gray-900 dark:text-white">
-                    <%= @upcoming_invoice.subtotal / 100 %>
+                    {@upcoming_invoice.subtotal / 100}
                   </td>
                 </tr>
                 <tr>
@@ -252,7 +252,7 @@
                     Tax
                   </th>
                   <td class="pb-0 pl-8 pr-0 pt-4 text-right tabular-nums text-gray-900 dark:text-white">
-                    <%= @upcoming_invoice.tax %>
+                    {@upcoming_invoice.tax}
                   </td>
                 </tr>
                 <tr>
@@ -270,7 +270,7 @@
                     Total
                   </th>
                   <td class="pb-0 pl-8 pr-0 pt-4 text-right font-semibold tabular-nums text-gray-900 dark:text-white">
-                    <%= @upcoming_invoice.amount_due / 100 %>
+                    {@upcoming_invoice.amount_due / 100}
                   </td>
                 </tr>
               </tfoot>
@@ -312,9 +312,9 @@
                           </a>
                           <div class="flex min-w-0 flex-1 justify-between space-x-3">
                             <p class="text-sm text-gray-900 dark:text-white">
-                              <%= to_month_day(List.first(invoice.lines.data).period.start) %> - <%= to_month_day(
+                              {to_month_day(List.first(invoice.lines.data).period.start)} - {to_month_day(
                                 List.first(invoice.lines.data).period.end
-                              ) %>, <%= to_year(List.first(invoice.lines.data).period.end) %>
+                              )}, {to_year(List.first(invoice.lines.data).period.end)}
                             </p>
                             <div class="whitespace-nowrap text-right text-sm text-gray-500 dark:text-white">
                               <a

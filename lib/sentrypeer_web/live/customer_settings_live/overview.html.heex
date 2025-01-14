@@ -3,15 +3,15 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
     <div class="min-w-0 flex-1 bg-white dark:bg-slate-800 xl:flex">
       <div class="border-b border-gray-200 dark:border-slate-400 bg-white dark:bg-slate-800 xl:w-64 xl:flex-shrink-0 xl:border-b-0 xl:border-r xl:border-gray-200 xl:dark:border-slate-400">
         <div class="h-full py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
-          <%= in_app_menu(assigns) %>
+          {in_app_menu(assigns)}
         </div>
       </div>
 
@@ -34,7 +34,7 @@
               >
                 <div id="api-logger-realtime" phx-update="stream">
                   <p :for={{dom_id, query} <- @streams.api_queries} id={dom_id}>
-                    Remote IP: <%= query.conn.remote_ip |> Tuple.to_list() |> Enum.join(".") %> Searched for: <%= query.query %>
+                    Remote IP: {query.conn.remote_ip |> Tuple.to_list() |> Enum.join(".")} Searched for: {query.query}
                   </p>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                   id="node-title"
                   class="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                 >
-                  <%= @client.client_name %>
+                  {@client.client_name}
                   <.link
                     patch={~p"/settings/#{@client.client_id}/edit"}
                     title="Edit the Name and Description of this API client"
@@ -58,7 +58,7 @@
                   </.link>
                 </h2>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-slate-400">
-                  <%= @client.client_description %>
+                  {@client.client_description}
                 </p>
               </div>
               <div class="border-t border-gray-200 dark:border-slate-400 px-4 py-5 sm:px-6">
@@ -66,7 +66,7 @@
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500 dark:text-white">Client ID</dt>
                     <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400">
-                      <%= @client.client_id %>
+                      {@client.client_id}
                     </dd>
                   </div>
                   <div class="sm:col-span-2">
@@ -131,7 +131,7 @@
                         rel="noopener noreferrer"
                         title="URL where you POST your client_id and client_secret to get a JWT bearer token"
                       >
-                        <%= @token_url %>
+                        {@token_url}
                       </a>
                     </dd>
                   </div>
@@ -139,18 +139,18 @@
                     <dt class="text-sm font-medium text-gray-500 dark:text-white">Created</dt>
                     <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400 has-tooltip">
                       <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-8">
-                        <%= @client.client_created_at %>
+                        {@client.client_created_at}
                       </span>
-                      <%= time_ago(@client.client_created_at) %>
+                      {time_ago(@client.client_created_at)}
                     </dd>
                   </div>
                   <div class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 dark:text-white">Updated</dt>
                     <dd class="mt-1 text-sm text-gray-900 dark:text-slate-400 has-tooltip">
                       <span class="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:from-brand hover:to-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 tooltip shadow-lg p-1 -mt-8">
-                        <%= @client.client_updated_at %>
+                        {@client.client_updated_at}
                       </span>
-                      <%= time_ago(@client.client_updated_at) %>
+                      {time_ago(@client.client_updated_at)}
                     </dd>
                   </div>
                 </dl>

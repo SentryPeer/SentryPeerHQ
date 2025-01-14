@@ -3,8 +3,8 @@
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50 dark:bg-slate-800" aria-hidden="true">
 </div>
 <div class="relative flex min-h-full flex-col">
-  <%= nav_top_menu(assigns) %>
-  <%= breadcrumbs(assigns) %>
+  {nav_top_menu(assigns)}
+  {breadcrumbs(assigns)}
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
     <!-- Left sidebar & main wrapper -->
@@ -27,10 +27,10 @@
                   </div>
                   <div class="space-y-1">
                     <div class="text-sm font-medium text-gray-900 dark:text-white">
-                      <%= @current_user.name %>
+                      {@current_user.name}
                     </div>
                     <div class="flex items-center space-x-2 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 text-brand">
-                      v<%= @app_version %>
+                      v{@app_version}
                       <a
                         href={"https://github.com/SentryPeer/SentryPeerHQ/tree/#{@git_rev}"}
                         target="_blank"
@@ -38,7 +38,7 @@
                         title="Browse this deployed version of SentryPeerHQ"
                         class="ml-1"
                       >
-                        <%= @git_rev %>
+                        {@git_rev}
                       </a>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <%= in_app_menu(assigns) %>
+                {in_app_menu(assigns)}
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
             <h1 class="flex-1 text-lg font-medium dark:text-white">Integrations</h1>
           </div>
         </div>
-        <%= being_worked_on(assigns) %>
+        {being_worked_on(assigns)}
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 p-6">
           <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white dark:bg-slate-900 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 dark:hover:bg-slate-800">
             <div class="flex-shrink-0">

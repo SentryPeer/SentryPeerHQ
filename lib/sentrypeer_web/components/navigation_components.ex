@@ -148,7 +148,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                   title="SentryPeer Node"
                   class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
                 >
-                  <%= @client.client_id %>
+                  {@client.client_id}
                 </.link>
               </div>
             </li>
@@ -268,7 +268,7 @@ defmodule SentrypeerWeb.NavigationComponents do
                 title="SentryPeer Node"
                 class="hidden md:block truncate ml-4 text-sm font-medium dark:text-white hover:text-gray-700"
               >
-                <%= @client.client_id %>
+                {@client.client_id}
               </.link>
             </div>
           </li>
