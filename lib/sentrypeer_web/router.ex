@@ -13,7 +13,7 @@
 
 defmodule SentrypeerWeb.Router do
   use SentrypeerWeb, :router
-
+  import Oban.Web.Router
   alias Sentrypeer.Auth.Permissions
 
   pipeline :browser do
@@ -217,6 +217,7 @@ defmodule SentrypeerWeb.Router do
   scope "/" do
     pipe_through [:browser, :admins_only]
     live_dashboard "/ops-dashboard", metrics: SentrypeerWeb.Telemetry
+    oban_dashboard "/oban"
   end
 
   scope path: "/flags" do

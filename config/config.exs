@@ -115,6 +115,7 @@ config :stripity_stripe,
 
 # Oban - https://hexdocs.pm/oban/Oban.html
 config :sentrypeer, Oban,
+  notifier: Oban.Notifiers.PG,
   repo: Sentrypeer.Repo,
   queues: [default: 10, mailers: 20, high: 50, low: 5],
   plugins: [
