@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0
-# Copyright (c) 2023 - 2024 Gavin Henry <ghenry@sentrypeer.org>
+# Copyright (c) 2023 - 2025 Gavin Henry <ghenry@sentrypeer.org>
 #
 #   _____            _              _____
 #  / ____|          | |            |  __ \
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2.3.4
+      - uses: gitleaks/gitleaks-action@v2.3.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
