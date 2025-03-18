@@ -205,7 +205,8 @@ defmodule SentrypeerWeb.Router do
   scope "/api", SentrypeerWeb do
     pipe_through [
       :rate_limit_per_hour,
-      :api]
+      :api
+    ]
 
     get "/webhook/example", WebhookController, :webhook_example
   end
