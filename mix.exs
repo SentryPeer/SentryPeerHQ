@@ -65,7 +65,7 @@ defmodule Sentrypeer.MixProject do
       {:ex_rated, "~> 2.1"},
       {:finch, "~> 0.14"},
       {:floki, "~> 0.37.0"},
-      {:fun_with_flags, "~> 1.12.0"},
+      {:fun_with_flags, "~> 1.13.0"},
       {:fun_with_flags_ui, "~> 1.0"},
       {:gen_smtp, "~> 1.1"},
       {:gettext, "~> 0.20"},
