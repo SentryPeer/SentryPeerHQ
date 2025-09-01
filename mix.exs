@@ -81,7 +81,7 @@ defmodule Sentrypeer.MixProject do
       {:oban, "~> 2.19.0"},
       {:oban_met, "~> 1.0"},
       {:oban_web, "~> 2.11"},
-      {:phoenix, "~> 1.7.10"},
+      {:phoenix, "~> 1.8.1"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_dashboard, "~> 0.8.0"},
