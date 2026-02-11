@@ -11,7 +11,7 @@
   "description": "SentryPeerHQ",
   "dependencies": {
     "cal-heatmap": "^4.2.4",
-    "npm": "^11.6.0"
+    "npm": "^11.9.0"
   },
   "devDependencies": {
     "eslint": "9.36.0",
