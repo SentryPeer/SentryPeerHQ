@@ -11,10 +11,10 @@
   "description": "SentryPeerHQ",
   "dependencies": {
     "cal-heatmap": "^4.2.4",
-    "npm": "^11.6.0"
+    "npm": "^11.10.1"
   },
   "devDependencies": {
-    "eslint": "9.36.0",
+    "eslint": "10.0.0",
     "eslint-plugin-mocha": "^11.1.0",
     "prettier": "3.6.2"
   }
