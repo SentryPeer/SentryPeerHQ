@@ -24,7 +24,7 @@
 #   - Ex: hexpm/elixir:1.14.5-erlang-25.3.2.2-debian-bullseye-20230522-slim
 #
 ARG ELIXIR_VERSION=1.19.6
-ARG OTP_VERSION=25.3.2.21
+ARG OTP_VERSION=27.3.4.18
 ARG DEBIAN_VERSION=bookworm-20261005-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
@@ -39,7 +39,7 @@ SHELL ["/bin/bash", "-c"]
 # install build dependencies
 RUN apt-get update -y && apt-get upgrade -y && \
     apt-get install -y build-essential git curl ca-certificates && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_26.x | bash - && \
     apt install nodejs -y && \
     /usr/sbin/update-ca-certificates && \
     npm install npm@latest -g && \
