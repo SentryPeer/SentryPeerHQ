@@ -22,6 +22,7 @@ defmodule Sentrypeer.SentrypeerEvents do
   alias Sentrypeer.Accounts.User
   alias Sentrypeer.Clients.Client
   alias Sentrypeer.SentrypeerEvents.SentrypeerEvent
+  alias Sentrypeer.SentrypeerEvents.SentrypeerEventDaily
   alias Sentrypeer.SentrypeerIpAddress
   alias Sentrypeer.SentrypeerPhoneNumber
 
@@ -185,13 +186,12 @@ defmodule Sentrypeer.SentrypeerEvents do
 
   def total_events_per_day!(start_date, end_date) do
     query =
-      from s in SentrypeerEvent,
-        where: s.event_timestamp >= ^start_date and s.event_timestamp <= ^end_date,
-        group_by: fragment("time_bucket('1 day', event_timestamp)"),
-        order_by: fragment("time_bucket('1 day', event_timestamp)"),
+      from s in SentrypeerEventDaily,
+        where: s.bucket >= ^start_date and s.bucket <= ^end_date,
+        order_by: [asc: s.bucket],
         select: %{
-          date: fragment("time_bucket('1 day', event_timestamp)"),
-          value: count(s.event_uuid)
+          date: s.bucket,
+          value: s.value
         }
 
     Repo.all(query)

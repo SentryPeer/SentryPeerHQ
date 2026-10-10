@@ -53,8 +53,8 @@ defmodule Sentrypeer.MixProject do
       {:cloak_ecto, "~> 1.3.0"},
       {:contex, "~> 0.5.0"},
       {:cors_plug, "~> 3.0"},
-      # This needs OTP 27 for local devl, but we're not there on Fedora 42 yet
-      {:cowlib, "~> 2.11.0", override: true},
+      # This needs OTP 27+ for local dev
+      {:cowlib, "~> 2.14", override: true},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:ecto_commons, "~> 0.3.6"},
