@@ -140,14 +140,14 @@ defmodule SentrypeerWeb.HomePageComponents do
               </.link>
             <% else %>
               <.link
-                navigate={~p"/login"}
+                href={~p"/login"}
                 title="Login to SentryPeer"
                 class="whitespace-nowrap text-base font-medium dark:text-slate-400 dark:hover:text-slate-200 text-gray-500 hover:text-gray-900 mr-4"
               >
                 Sign in
               </.link>
               <.link
-                navigate={~p"/signup"}
+                href={~p"/signup"}
                 title="Sign up for SentryPeer"
                 class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
               >
@@ -287,7 +287,7 @@ defmodule SentrypeerWeb.HomePageComponents do
               <% else %>
                 <div class="mt-6">
                   <.link
-                    navigate={~p"/login"}
+                    href={~p"/login"}
                     title="Login to SentryPeer"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >
@@ -296,7 +296,7 @@ defmodule SentrypeerWeb.HomePageComponents do
                 </div>
                 <div class="mt-6">
                   <.link
-                    navigate={~p"/signup"}
+                    href={~p"/signup"}
                     title="Sign up for SentryPeer"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-brand to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-brand hover:to-indigo-700"
                   >

@@ -20,13 +20,56 @@ if System.get_env("PHX_SERVER") do
   config :sentrypeer, SentrypeerWeb.Endpoint, server: true
 end
 
+auth0_domain =
+  System.get_env("AUTH0_DOMAIN") ||
+    if(config_env() == :test,
+      do: "test.auth0.com",
+      else: raise("The required environment variable AUTH0_DOMAIN is missing. Check ENV.")
+    )
+
+auth0_client_id =
+  System.get_env("AUTH0_CLIENT_ID") ||
+    if(config_env() == :test,
+      do: "test_client_id",
+      else: raise("The required environment variable AUTH0_CLIENT_ID is missing. Check ENV.")
+    )
+
+auth0_client_secret =
+  System.get_env("AUTH0_CLIENT_SECRET") ||
+    if(config_env() == :test,
+      do: "test_client_secret",
+      else: raise("The required environment variable AUTH0_CLIENT_SECRET is missing. Check ENV.")
+    )
+
+auth0_audience =
+  System.get_env("AUTH0_AUDIENCE") ||
+    if(config_env() == :test,
+      do: "https://test.sentrypeer.com",
+      else: raise("The required environment variable AUTH0_AUDIENCE is missing. Check ENV.")
+    )
+
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+  domain: auth0_domain,
+  client_id: auth0_client_id,
+  client_secret: auth0_client_secret
+
 config :sentrypeer,
-  auth0_domain:
-    System.get_env("AUTH0_DOMAIN") ||
-      raise("The required environment variable AUTH0_DOMAIN is missing. Check ENV."),
-  auth0_audience:
-    System.get_env("AUTH0_AUDIENCE") ||
-      raise("The required environment variable AUTH0_AUDIENCE is missing. Check ENV."),
+  auth0_domain: auth0_domain,
+  auth0_client_id: auth0_client_id,
+  auth0_client_secret: auth0_client_secret,
+  auth0_audience: auth0_audience,
+  auth0_logout_url:
+    auth0_domain
+    |> String.replace_suffix(".sentrypeer.com", ".sentrypeer.com/v2/logout")
+    |> String.replace_prefix("", "https://")
+    |> URI.new!()
+    |> URI.append_query(
+      URI.encode_query(%{
+        client_id: auth0_client_id,
+        returnTo: System.get_env("AUTH0_LOGOUT_REDIRECT_URL", "http://localhost:4000")
+      })
+    )
+    |> URI.to_string(),
   git_rev:
     System.get_env("GIT_REV") ||
       System.cmd("git", ["rev-parse", "--short", "HEAD"]) |> elem(0) |> String.trim()

@@ -52,6 +52,7 @@ defmodule SentrypeerWeb.CoreComponents do
   attr :show, :boolean, default: false
   attr :on_cancel, JS, default: %JS{}
   attr :on_confirm, JS, default: %JS{}
+  attr :confirm_href, :string, default: nil
 
   slot :inner_block, required: true
   slot :title
@@ -133,15 +134,26 @@ defmodule SentrypeerWeb.CoreComponents do
               :if={@confirm != [] or @cancel != []}
               class="dark:bg-slate-800 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
             >
-              <.button
-                :for={confirm <- @confirm}
-                id={"#{@id}-confirm"}
-                phx-click={@on_confirm}
-                phx-disable-with
-                class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-              >
-                {render_slot(confirm)}
-              </.button>
+              <%= if @confirm_href do %>
+                <.link
+                  :for={confirm <- @confirm}
+                  id={"#{@id}-confirm"}
+                  href={@confirm_href}
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  {render_slot(confirm)}
+                </.link>
+              <% else %>
+                <.button
+                  :for={confirm <- @confirm}
+                  id={"#{@id}-confirm"}
+                  phx-click={@on_confirm}
+                  phx-disable-with
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  {render_slot(confirm)}
+                </.button>
+              <% end %>
               <.link
                 :for={cancel <- @cancel}
                 phx-click={hide_modal(@on_cancel, @id)}

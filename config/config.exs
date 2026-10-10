@@ -21,19 +21,7 @@ import Config
 
 config :sentrypeer,
   ecto_repos: [Sentrypeer.Repo],
-  generators: [binary_id: true],
-  auth0_logout_url:
-    System.get_env("AUTH0_DOMAIN", "authz.sentrypeer.com")
-    |> String.replace_suffix(".sentrypeer.com", ".sentrypeer.com/v2/logout")
-    |> String.replace_prefix("", "https://")
-    |> URI.new!()
-    |> URI.append_query(
-      URI.encode_query(%{
-        client_id: System.get_env("AUTH0_CLIENT_ID") || raise("AUTH0_CLIENT_ID is not set"),
-        returnTo: System.get_env("AUTH0_LOGOUT_REDIRECT_URL", "http://localhost:4000")
-      })
-    )
-    |> URI.to_string()
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :sentrypeer, SentrypeerWeb.Endpoint,
@@ -94,12 +82,6 @@ config :ueberauth, Ueberauth,
   providers: [
     auth0: {Ueberauth.Strategy.Auth0, []}
   ]
-
-# Configures Ueberauth's Auth0 auth provider
-config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
-  domain: System.get_env("AUTH0_DOMAIN") || raise("AUTH0_DOMAIN is not set"),
-  client_id: System.get_env("AUTH0_CLIENT_ID") || raise("AUTH0_CLIENT_ID is not set"),
-  client_secret: System.get_env("AUTH0_CLIENT_SECRET") || raise("AUTH0_CLIENT_SECRET is not set")
 
 # Configure Cldr for localization and use of timeago/1
 config :ex_cldr,

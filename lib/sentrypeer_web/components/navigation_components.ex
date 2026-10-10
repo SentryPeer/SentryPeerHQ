@@ -799,7 +799,7 @@ defmodule SentrypeerWeb.NavigationComponents do
       <!-- Logout confirmation modal -->
       <.confirm_modal
         id="confirm_logout"
-        on_confirm={JS.navigate(~p"/logout")}
+        confirm_href={~p"/logout"}
         on_cancel={JS.hide(to: "#confirm_logout")}
       >
         <:title>Logout</:title>
