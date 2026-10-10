@@ -54,7 +54,7 @@ defmodule Sentrypeer.MixProject do
       {:contex, "~> 0.5.0"},
       {:cors_plug, "~> 3.0"},
       # This needs OTP 27+ for local dev
-      {:cowlib, "~> 2.11", override: true},
+      {:cowlib, "~> 2.11.0", override: true},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:ecto_commons, "~> 0.3.6"},
