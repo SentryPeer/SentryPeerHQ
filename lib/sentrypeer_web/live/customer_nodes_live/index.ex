@@ -53,13 +53,13 @@ defmodule SentrypeerWeb.CustomerNodesLive.Index do
 
   defp apply_action(socket, :edit, %{"client_id" => id}) do
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, id) do
-      nil ->
-        socket |> assign(:page_title, "Node not found")
-
       {:ok, client} ->
         socket
         |> assign(:page_title, "Edit Node")
         |> assign(:client, client)
+
+      {:error, _} ->
+        socket |> assign(:page_title, "Node not found")
     end
   end
 

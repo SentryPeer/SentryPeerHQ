@@ -39,9 +39,6 @@ defmodule SentrypeerWeb.CustomerSettingsLive.Overview do
     if connected?(socket), do: SentrypeerEvents.subscribe(client_id)
 
     case Auth0ManagementAPI.get_client_for_user(socket.assigns.current_user.id, client_id) do
-      nil ->
-        {:noreply, socket |> assign(:page_title, "Node not found")}
-
       {:ok, client} ->
         {:noreply,
          socket

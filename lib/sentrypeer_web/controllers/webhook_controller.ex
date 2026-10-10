@@ -32,7 +32,7 @@ defmodule SentrypeerWeb.WebhookController do
            Sentrypeer.Integrations.create_integration(webhook_params) do
       conn
       |> put_flash(:info, "Webhook subscription created successfully.")
-      |> redirect(to: Routes.integration_path(conn, :index))
+      |> redirect(to: ~p"/integrations")
     else
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
@@ -49,12 +49,12 @@ defmodule SentrypeerWeb.WebhookController do
 
         conn
         |> put_flash(:info, "Webhook subscription deleted successfully.")
-        |> redirect(to: Routes.integration_path(conn, :index))
+        |> redirect(to: ~p"/integrations")
 
       _ ->
         conn
         |> put_flash(:error, "Error deleting webhook subscription.")
-        |> redirect(to: Routes.integration_path(conn, :index))
+        |> redirect(to: ~p"/integrations")
     end
   end
 end

@@ -391,8 +391,6 @@ defmodule Sentrypeer.SentrypeerEvents do
     Phoenix.PubSub.subscribe(Sentrypeer.PubSub, "global:all_nodes")
   end
 
-  defp broadcast({:error, _reason} = error, _client_id), do: error
-
   defp broadcast({:ok, searched_for, conn}, client_id) do
     # Logger.debug(IEx.Info.info(client_id))
     Logger.debug("Broadcasting to: 'client_id:#{client_id}'")
@@ -405,8 +403,6 @@ defmodule Sentrypeer.SentrypeerEvents do
 
     {:ok, searched_for, conn}
   end
-
-  defp broadcast_all_nodes({:error, _reason} = error), do: error
 
   defp broadcast_all_nodes({:ok}) do
     Logger.debug("Broadcasting to: 'global:all_nodes'")

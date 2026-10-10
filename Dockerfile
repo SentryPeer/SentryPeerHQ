@@ -137,7 +137,7 @@ RUN --mount=type=secret,id=AUTH0_DOMAIN \
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
@@ -159,10 +159,6 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/sentrypeer ./
 USER nobody
 
 CMD ["/app/bin/server"]
-
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
 
 # Appended by flyctl
 ENV ECTO_IPV6 true

@@ -11,6 +11,14 @@
 #                             |___/
 #
 
+defmodule Sentrypeer.Auth.Auth0User do
+  @moduledoc """
+  The Auth0User struct.
+  """
+
+  defstruct [:id, :name, :avatar, :email, :latest_login, groups: []]
+end
+
 defimpl FunWithFlags.Actor, for: Sentrypeer.Auth.Auth0User do
   @moduledoc """
   Implement the FunWithFlags.Actor protocol for Auth0User.
@@ -23,12 +31,4 @@ end
 
 defimpl FunWithFlags.Group, for: Sentrypeer.Auth.Auth0User do
   def in?(%{groups: list}, group_name), do: group_name in list
-end
-
-defmodule Sentrypeer.Auth.Auth0User do
-  @moduledoc """
-  The Auth0User struct.
-  """
-
-  defstruct [:id, :name, :avatar, :email, :latest_login, groups: []]
 end
