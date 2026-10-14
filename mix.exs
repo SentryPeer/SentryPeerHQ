@@ -80,7 +80,7 @@ defmodule Sentrypeer.MixProject do
       {:libcluster, "~> 3.3"},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:net_address, "~> 0.3.0"},
-      {:oban, "~> 2.20.1"},
+      {:oban, "~> 2.24.1"},
       {:oban_met, "~> 1.0"},
       {:oban_web, "~> 2.11"},
       {:phoenix, "~> 1.8.1"},
