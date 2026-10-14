@@ -95,7 +95,7 @@ defmodule Sentrypeer.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:poison, "~> 6.0"},
       {:postgrex, ">= 0.0.0"},
-      {:premailex, "~> 0.3.0"},
+      {:premailex, "~> 1.0.1"},
       {:sobelow, "~> 0.11", only: [:dev, :test], runtime: false},
       {:ssl_verify_fun, "~> 1.1"},
       {:stripity_stripe, "~> 3.0"},
