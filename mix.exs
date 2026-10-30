@@ -74,7 +74,7 @@ defmodule Sentrypeer.MixProject do
       {:heroicons, "~> 0.5.3"},
       {:httpoison, "~> 2.0"},
       {:jason, "~> 1.3"},
-      {:joken, "~> 2.6.0"},
+      {:joken, "~> 2.7.0"},
       {:joken_jwks, "~> 1.7.0"},
       {:kaffy, "~> 0.10.0"},
       {:libcluster, "~> 3.3"},
