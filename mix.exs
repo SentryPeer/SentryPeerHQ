@@ -104,7 +104,7 @@ defmodule Sentrypeer.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:timex, "~> 3.0"},
-      {:ueberauth, "~> 0.10.3"},
+      {:ueberauth, "~> 0.11.0"},
       {:ueberauth_auth0, "~> 2.1.0"}
     ]
   end
